@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import xicon from '../Assets/xicon.png'
 import './SignUp.css';
-
-import { Link } from 'react-router-dom';
-
-// import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
 
 import Auth from '../../utils/auth'
@@ -17,6 +13,7 @@ function SignUp(props){
         password: '',
     });
     const [addUser, { error, data }] = useMutation(ADD_USER);
+    console.log(error, data);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -48,7 +45,7 @@ function SignUp(props){
                 <h2 id= "signUpHead">Sign Up</h2>
                  <button id='xbut' type="button" 
                     onClick={() => props.trigger=props.setTrigger(false)}>
-                    <img src={xicon}></img>
+                    <img src={xicon} alt="x button"></img>
                 </button>
                 <form onSubmit={handleFormSubmit} >
                             <label id="formSignUp">
@@ -93,7 +90,6 @@ function SignUp(props){
 export default SignUp;
 
 
-// onClick={()=> props.setTrigger(false)} 
 
 
 

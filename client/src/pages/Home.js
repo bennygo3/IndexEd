@@ -1,9 +1,11 @@
 import React from 'react';
+import './Home.css';
+// import indexCard from "../components/Assets/whiteIndex.png";
 import Navbar from '../components/Navbar'
 // import Header from "../components/Header_WIP/Header";
 // import Footer from "../components/Footer_WIP/Footer";
 // import NavBar from "../components/NavBar/NavBar";
-import Carousel_Home from "../components/Carousel_Home/index";
+import HomeBody from "../components/HomeBody/index";
 import SearchBar from "../components/SearchBar/index";
 
 
@@ -12,17 +14,14 @@ const Home = () => {
 
   return (
     <main>
+      {/* <img src={indexCard} alt='index card background'></img> */}
       <Navbar />
-      <div className="flex-row justify-center">
-        <div>
-
-
-          <h2>Decked-Out</h2>
-
-          <Carousel_Home/>
-          <SearchBar categories={categories}/>
-        </div>
+      <div>
+        <h2 id="homeHeader">Index<span style={{ marginLeft: "10px" }}></span>Ed</h2>
+        <HomeBody />
+        <SearchBar categories={categories} />
       </div>
+
     </main>
   );
 };

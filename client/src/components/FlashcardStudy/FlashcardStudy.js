@@ -36,7 +36,7 @@ function FlashcardStudy(props) {
     return (
         <div className="container row flashcard_study valign-wrapper">
             <div className="col s2 button_holder right-align">
-                <a className="waves-effect waves-light btn flow-text valign-wrapper" onClick={() => Prev_Card(props.flashcards.length, card_index)}><i className="material-icons">arrow_back</i></a>
+                <button className="waves-effect waves-light btn flow-text valign-wrapper" onClick={() => Prev_Card(props.flashcards.length, card_index)}><i className="material-icons">arrow_back</i></button>
             </div>
             <div className="col s8">
                 <div className="card">
@@ -44,19 +44,19 @@ function FlashcardStudy(props) {
                         <div className="Study center-align SideA" id="SideA">
                             <div>{props.flashcards.sideA}</div>
                             
-                            <a className="waves-effect waves-light btn flow-text" id="SideA_btn" onClick={() => FlipCard()}><i className="material-icons">autorenew</i></a>
+                            <button className="waves-effect waves-light btn flow-text" id="SideA_btn" onClick={() => FlipCard()}><i className="material-icons">autorenew</i></button>
 
                         </div>
                         <div className="Study center-align hide SideB" id="SideB">
                             <div>{props.flashcards.sideB}</div>
-                            <a className="waves-effect waves-light btn flow-text" id="SideB_btn" onClick={() => FlipCard()}><i className="material-icons ">autorenew</i></a>
+                            <button className="waves-effect waves-light btn flow-text" id="SideB_btn" onClick={() => FlipCard()}><i className="material-icons ">autorenew</i></button>
                         </div>
 
                     </div>
                 </div>
             </div>
             <div className="col s2 button_holder">
-                <a className="waves-effect waves-light btn flow-text valign-wrapper" onClick={() => Next_Card(props.flashcards.length, card_index)}><i className="material-icons">arrow_forward</i></a>
+                <button className="waves-effect waves-light btn flow-text valign-wrapper" onClick={() => Next_Card(props.flashcards.length, card_index)}><i className="material-icons">arrow_forward</i></button>
             </div>
         </div>
     )

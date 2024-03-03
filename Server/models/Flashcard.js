@@ -16,19 +16,23 @@ const flashcardSchema = new Schema(
         noteSideB: {
             type: String,
         },
-        // deck: [
-        //     {
-        //         type: Schema.Types.ObjectId,
-        //         ref: 'deck',
-        //     },
-        // ],
+
         deckTitle: {
-            type: String
+            type: String,
+        },
+
+        deck: {
+            type: Schema.Types.ObjectId,
+            ref: 'Deck'
+        },
+
+        creator: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
         }
-            //WOULD LIKE TO SHOW DECK TITLE HERE
     }
 );
 
-const Flashcard = model('flashcard', flashcardSchema);
+const Flashcard = model('Flashcard', flashcardSchema);
 
 module.exports = Flashcard;

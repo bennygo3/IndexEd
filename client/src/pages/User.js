@@ -2,7 +2,7 @@ import React from 'react';
 // import Header from "../components/Header_WIP/Header";
 // import Footer from "../components/Footer_WIP/Footer";
 import Navbar from '../components/Navbar/index'
-import Carousel_User from "../components/Carousel_User/index";
+// import CarouselUser from "../components/CarouselUser/index";
 import SearchBar from '../components/SearchBar/index'
 
 
@@ -16,7 +16,7 @@ const User = () => {
       <div className="flex-row justify-center">
         <div>
           <h2>User page</h2>
-          {/* <Carousel_User/> */}
+          {/* <CarouselUser/> */}
           <SearchBar categories={categories}/>
         </div>
         

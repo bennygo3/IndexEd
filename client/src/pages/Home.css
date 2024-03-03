@@ -1,0 +1,11 @@
+#homeHeader{
+    background-image: url(../components/Assets/whiteIndex.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 650px;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start ;
+}

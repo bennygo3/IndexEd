@@ -16,10 +16,11 @@ import Landing from "./components/Landing/Landing";
 import Home from "./pages/Home";
 import DeckCreate from "./components/DeckCreate";
 import NewDeck from "./pages/NewDeck";
-import Flashcard_Create from "./components/Flashcard_Create";
+import FlashcardCreate from "./components/Flashcard_Create";
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:3001/graphql',
+    // uri: 'http://localhost:3001/graphql',
+    uri: process.env.PORT,
 });
 
 
@@ -73,7 +74,7 @@ function App() {
                     />
                     <Route
                         path='/addFlashCard'
-                        element={<Flashcard_Create />}
+                        element={<FlashcardCreate />}
                     />
 
 

@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
-import "./initialize";
 
-import M from "materialize-css";
 import "./sideNav.css"
 
 class SearchBar extends Component {
     componentDidMount() {
-        const opt = {
-            edge: "right"
-        };
-        //M.SearchBar.init(this.SearchBar, opt);
-        M.AutoInit();
+        // const opt = {
+        //     edge: "right"
+        // };
+        // M.SearchBar.init(this.SearchBar, opt);
+        
     }
     
     render() {
-        const options = []
-        for (var i = 0; i < this.props.categories.length; i +=1){
-            options.push(<option value={this.props.categories[i]}>{this.props.categories[i]}</option>)
-        }
+        // below has been modified
+        // const options = []
+        // for (var i = 0; i < this.props.categories.length; i +=1){
+        //     options.push(<option value={this.props.categories[i]}>{this.props.categories[i]}</option>)
+        // }
+        const options = this.props.categories.map((category, index) => (
+            <option key={index} value={category}>{category}</option>
+        ));
         return (
             <div>
                 <ul id="slide-out" className="sidenav no-autoinit">
@@ -33,8 +35,8 @@ class SearchBar extends Component {
                     <li>
                         <div className="row">
                             <div className="input-field col s12">
-                                <select>
-                                    <option value="" disabled selected>Categories</option>
+                                <select defaultValue="">
+                                    <option value="" disabled>Categories</option>
                                     {options}
                                 </select>
                             </div>
@@ -48,7 +50,7 @@ class SearchBar extends Component {
                         </div>
                     </li>
                 </ul>
-                <a href="#" data-target="slide-out" className="sidenav-trigger right"><i className="side material-icons">search</i></a>
+                <button href="#" data-target="slide-out" className="sidenav-trigger right"><i className="side material-icons">search</i></button>
                 <script src="./initalize.js"></script>
             </div>
         );

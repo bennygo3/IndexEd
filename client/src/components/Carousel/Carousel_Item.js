@@ -1,7 +1,7 @@
 import React from 'react';
 // import "../carousel_item.css";
 
-function Carousel_Item(props) {
+function CarouselItem(props) {
     // Need to somehow link the buttons to the deck that is currently on that deck.
     // If we want the notes for the deck we need to get the text area on line 27 to display data that was previously stored. !!!!
     // !!! This will involve creating a new model that refrences the current user, the deck id, and then the text that the user inputs. !!!
@@ -14,9 +14,9 @@ function Carousel_Item(props) {
                         <p>{props.description}</p>
                     </div>
                     <div class="card-action">
-                        <a class="btn-floating btn-medium waves-effect waves-light light-blue "><i class="material-icons">edit</i></a>
-                        <a class="btn-floating btn-medium waves-effect waves-light red"><i class="material-icons">delete_forever</i></a>
-                        <a class="activator btn-floating btn-medium waves-effect waves-light green"><i class="material-icons">note_add</i></a>
+                        <button class="btn-floating btn-medium waves-effect waves-light light-blue "><i class="material-icons">edit</i></button>
+                        <button class="btn-floating btn-medium waves-effect waves-light red"><i class="material-icons">delete_forever</i></button>
+                        <button class="activator btn-floating btn-medium waves-effect waves-light green"><i class="material-icons">note_add</i></button>
                     </div>
                     <div class="card-reveal">
                         <span class="card-title grey-text text-darken-4">Notes<i class="material-icons right">check</i></span>
@@ -36,4 +36,4 @@ function Carousel_Item(props) {
     );
 }
 
-export default Carousel_Item;
+export default CarouselItem;

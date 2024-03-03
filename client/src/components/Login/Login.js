@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Login.css';
-import { Link, useNavigate } from 'react-router-dom';
+// import { Link, useNavigate } from 'react-router-dom';
 import xicon from '../Assets/xicon.png'
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
@@ -14,6 +14,7 @@ function Login(props) {
     });
     // let navigate = useNavigate()
     const [loginUser, { error, data }] = useMutation(LOGIN_USER);
+    console.log(error, data);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -51,7 +52,7 @@ function Login(props) {
                 <h2 id="loginHead">Login</h2>
                  <button id='xbut' type="button" 
                     onClick={() => props.trigger=props.setTrigger(false)}>
-                <img src={xicon}></img>
+                <img src={xicon} alt="x button"></img>
                 </button>
                 <form onSubmit={handleFormSubmit} >
                     <label id="formLogin">

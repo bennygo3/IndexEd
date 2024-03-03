@@ -5,6 +5,7 @@
 div.carousel {
     margin: 50px;
     height:500px;
+    width: auto;
 }
 
 

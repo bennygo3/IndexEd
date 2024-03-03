@@ -31,20 +31,6 @@ function Landing() {
                     <img id="highlit" alt="decorative" src={highlighterSignUp} />
                     <div id="signUp" onClick={() => setButtonPopup(true)}> Sign Up </div>
                     <SignUp trigger={buttonPopup} setTrigger={setButtonPopup} />
-                    {/* <form >
-                            <label id="formSignUp">
-                                Email:............ .....
-                                <input type="text"/>
-                                <br></br>
-                                Username:. . . ...
-                                <input type="text"/>
-                                <br></br>
-                                Password:... . .....
-                                <input type="text"/>
-                            </label>
-                            
-                        </form> */}
-                    {/* </SignUp>  */}
 
                 </div>
             </div>

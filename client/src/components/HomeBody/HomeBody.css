@@ -1,0 +1,30 @@
+.container{
+    height:650px;
+    position: relative;
+}
+
+.container img{
+    filter: drop-shadow(.3rem .3rem .3rem rgba(0, 0, 0, 0.584));
+}
+
+#homeCard{
+    position: absolute;
+    top: -5px;
+}
+
+#homeCard1{
+    position: absolute;
+    top: -5px;
+}
+
+#homeCard2{
+    position: absolute;
+    top: -5px;
+}
+
+div.carousel {
+    /* margin: 50px; */
+    height:500px;
+}
+
+

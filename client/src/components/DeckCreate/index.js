@@ -2,7 +2,18 @@ import React, { useState } from 'react';
 
 import { useMutation } from '@apollo/client';
 import { ADD_DECK } from '../../utils/mutations';
-import { HOME_DECKS } from '../../utils/queries';
+// import { HOME_DECKS } from '../../utils/queries';
+import { Link } from 'react-router-dom';
+
+function parseJwt (token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+};
 
 
 function DeckCreate(props) {
@@ -12,44 +23,39 @@ function DeckCreate(props) {
     for (let i = 0; i < props.categories.length; i++) {
         category_options.push(<option value={props.categories[i]}>{props.categories[i]}</option>);
     }
-    const [titleText, setTitleText] = useState('');
-    const [categoryText, setCategoryText] = useState('');
-
+    const [title, setTitleText] = useState('');
+    const [category, setCategoryText] = useState('');
+    const [description, setDescriptionText] = useState('');
+    const author = parseJwt(localStorage.getItem("id_token")).data._id.toString();
     // const [formState, setFormState] = useState({
     //     title: '',
     //     category: '',
     //     description: '',
     // });
 
-    const [addDeck, { error }] = useMutation(ADD_DECK, {
-        update(cache, { data: { addDeck } }) {
-            try {
-                const { newDeck } = cache.readQuery({ query: HOME_DECKS });
-
-                cache.writeQuery({
-                    query: HOME_DECKS,
-                    data: { newDeck: [addDeck, ...newDeck] },
-                })
-            } catch (e) {
-                console.log(e);
-            }
-        }
-    });
-
+    const [addDeck, { error }] = useMutation(ADD_DECK)
+    console.log(error);
+    
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(`this is the state of the form ${categoryText.category}`)
-
+        //console.log(`this is the state of the form ${category}`)
+        //console.log(title.title)
+        //console.log(author)
         try {
             const { data } = await addDeck({
-                variables: { titleText, categoryText },
+                variables: { title, category, description, author},
             });
-            setTitleText('');
-            setCategoryText('');
+            document.getElementById("Deck").classList.toggle("hide");
+            document.getElementById("Flashcard").classList.toggle("hide");
+            // return <Link push to='/addFlashCard' state = {{title: title }}></Link>
+            // setTitleText('');
+            // setCategoryText('');
+            // setDescritionText('');
+            console.log(data)
         } catch (err) {
             console.log(err);
         }
-        //clear form values after submit button
+         //clear form values after submit button
         // setFormState({
         //     title: '',
         //     category: '',
@@ -59,18 +65,14 @@ function DeckCreate(props) {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-
-        if( name === 'titleText' && value.length <= 15) {
-            setTitleText(value)
-            setCategoryText(value)
+        switch (name) {
+            case "title" : setTitleText(value); break;
+            case "category": setCategoryText(value); break;
+            case "description": setDescriptionText(value); break;
+            default: break;
         }
-
-        // setFormState({
-        //     ...formState,
-        //     [name]: value,
-        // });
     };
-
+   
     return (
         <div className="row">
             <div className="col s12 m6">
@@ -80,13 +82,13 @@ function DeckCreate(props) {
                             <form className="col s12" onSubmit={handleFormSubmit}>
                                 <span className="card-title">
                                     <div className="input-field col s12">
-                                        <input id="deck_title" value={titleText.title} type="text" name="title" className="validate" onChange={handleChange}></input>
+                                        <input id="deck_title" value={title.title} type="text" name="title" className="validate" onChange={handleChange}></input>
                                         <label htmlFor="deck_title">Deck Title</label>
                                     </div>
                                 </span>
 
                                 <div className="input-field col s12">
-                                    <select>
+                                <select className="col s12" value={category} type="text" name='category' onChange={handleChange}>
                                         <option value="" disabled selected>Choose category</option>
                                         {category_options}
                                     </select>
@@ -94,11 +96,12 @@ function DeckCreate(props) {
                                 </div>
 
                                 <div className="input-field col s12">
-                                    <textarea id="textarea1" className="materialize-textarea" value={categoryText.description} name="description" onChange={handleChange}></textarea>
+                                    <textarea id="textarea1" className="materialize-textarea" value={description} name="description" onChange={handleChange}></textarea>
                                     <label htmlFor="textarea1">Description</label>
                                 </div>
 
-                                <button className="btn waves-effect waves-light" type="submit" name="action">Create Cards</button>
+                                <button className="btn "id="Deck" type="submit" name="action">Finalize Deck</button>
+                                <button className="btn hide"id="Flashcard"><Link push to='/addFlashCard' state = {{title: title }}>Create Cards</Link></button>
                             </form>
                         </div>
                     </div>
@@ -109,3 +112,53 @@ function DeckCreate(props) {
 }
 
 export default DeckCreate;
+
+ // {
+    //     update(cache, { data: { addDeck } }) {
+    //         try {
+    //             const { newDeck } = cache.readQuery({ query: HOME_DECKS });
+
+    //             cache.writeQuery({
+    //                 query: HOME_DECKS,
+    //                 data: { newDeck: [addDeck, ...newDeck] },
+    //             })
+    //         } catch (e) {
+    //             console.log(e);
+    //         }
+    //     }
+    // });
+
+    // const handleFormSubmit = async (event) => {
+    //     event.preventDefault();
+    //     console.log(`this is the state of the form ${categoryText.category}`)
+
+    //     try {
+    //         const { data } = await addDeck({
+    //             variables: { titleText, categoryText },
+    //         });
+    //         setTitleText('');
+    //         setCategoryText('');
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    //     //clear form values after submit button
+    //     // setFormState({
+    //     //     title: '',
+    //     //     category: '',
+    //     //     description: '',
+    //     // });
+    // };
+
+    // const handleChange = (event) => {
+    //     const { name, value } = event.target;
+
+    //     if( name === 'titleText' && value.length <= 15) {
+    //         setTitleText(value)
+    //         setCategoryText(value)
+    //     }
+
+    //     // setFormState({
+    //     //     ...formState,
+    //     //     [name]: value,
+    //     // });
+    // };

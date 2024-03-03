@@ -1,11 +1,27 @@
 const mongoose = require('mongoose');
 
+require('dotenv').config();
+
 mongoose.connect(
-    process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/decked-out',
+    process.env.MONGODB_URI || 'mongodb://localhost:27017',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     }
 );
 
-module.exports = mongoose.connection;
+const connection = mongoose.connection;
+
+connection.on('connected', () => {
+    console.log('Mongoose successfully connected to the database.');
+});
+
+connection.on('error', (err) => {
+    console.log('Mongoose connection error: ' + err);
+});
+
+connection.on('disconnected', () => {
+    console.log('Mongoose disconnected.');
+});
+
+module.exports = connection;

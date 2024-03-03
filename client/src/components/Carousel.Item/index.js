@@ -3,7 +3,7 @@ import "./carousel_item.css";
 import { Link } from 'react-router-dom';
 
 
-function Carousel_Item(props) {
+function CarouselItem(props) {
     console.log(props.name)
     // Need to somehow link the buttons to the deck that is currently on that deck.
     // If we want the notes for the deck we need to get the text area on line 27 to display data that was previously stored. !!!!
@@ -22,11 +22,11 @@ function Carousel_Item(props) {
                     </div>
                     
                     <div className="card-action">
-                        <a className="moveIcon btn-floating btn waves-effect waves-light light-blue "><Link to='/study'><i className="material-icons">menu_book</i></Link></a>
+                        <button className="moveIcon btn-floating btn waves-effect waves-light light-blue "><Link to='/study' state={{deck: props.name._id}}><i className="material-icons">menu_book</i></Link></button>
                         <div class="divider"/>
-                        <a className="btn-floating btn- waves-effect waves-light red"><i className="material-icons">delete_forever</i></a>
+                        <button className="btn-floating btn- waves-effect waves-light red"><i className="material-icons">delete_forever</i></button>
                         <div class="divider"/>
-                        <a className="activator btn-floating btn- waves-effect waves-light green"><i className="material-icons">note_add</i></a>
+                        <button className="activator btn-floating btn- waves-effect waves-light green"><i className="material-icons">note_add</i></button>
                     </div>
                     <div className="card-reveal">
                         <span className="card-title grey-text text-darken-4">Notes<i className="material-icons right">check</i></span>
@@ -46,4 +46,4 @@ function Carousel_Item(props) {
     );
 }
 
-export default Carousel_Item;
+export default CarouselItem;
