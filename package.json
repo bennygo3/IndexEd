@@ -1,5 +1,5 @@
 {
-    "name": "deckedmeout",
+    "name": "deckmeout",
     "version": "1.0.0",
     "description": "A flashcard MERN stack app",
     "main": "server/server.js",
@@ -8,12 +8,12 @@
         "install-client": "cd client && npm install",
         "install-server": "cd server && npm install",
         "heroku-postbuild": "npm run install-client && npm run build",
-        "start": "nodemon server.js",
+        "start": "nodemon server/server.js",
         "develop": "concurrently --kill-others-on-fail \"npm start\"  \"npm run start --prefix client\""
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/clabel95/Decked-Out.git"
+        "url": "git+https://github.com/bennygo3/deckmeout"
     },
     "keywords": [],
     "author": "",
@@ -22,9 +22,11 @@
         "url": "https://github.com/clabel95/Decked-Out/issues"
     },
     "homepage": "https://clabel95.github.io/Decked-Out",
+    "type": "module",
     "dependencies": {
         "bcrypt": "^5.0.1",
         "concurrently": "^7.0.0",
+        "dotenv": "^16.4.5",
         "graphql": "^16.3.0",
         "jwt-decode": "^3.1.2"
     }

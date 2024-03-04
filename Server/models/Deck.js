@@ -1,7 +1,7 @@
-const { Schema, model } = require('mongoose');
-const userSchema = require('./User');
-const flashcardSchema = require('./Flashcard');
-const dateFormat = require('../utils/dateFormat');
+import { Schema, model } from 'mongoose';
+import userSchema from './User.js';
+import flashcardSchema from './Flashcard.js';
+import dateFormat from '../utils/dateFormat.js';
 
 const deckSchema = new Schema(
     {
@@ -42,4 +42,4 @@ const deckSchema = new Schema(
 
 const Deck = model('Deck', deckSchema);
 
-module.exports = Deck;
+export default Deck;

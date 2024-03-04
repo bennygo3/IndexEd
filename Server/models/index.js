@@ -1,5 +1,4 @@
-const User = require('./User');
-const Deck = require('./Deck');
-const Flashcard = require('./Flashcard');
-
-module.exports = { User, Deck, Flashcard };
+import User from './User.js';
+import Deck from './Deck.js';
+import Flashcard from './Flashcard.js';
+export { User, Deck, Flashcard };

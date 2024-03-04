@@ -1,7 +1,22 @@
-const { AuthenticationError, ForbiddenError } = require('apollo-server-express');
-const { Deck, Flashcard, User } = require('../models');
-const { signToken } = require('../utils/auth');
+// import { UserInputError, AuthenticationError, ForbiddenError } from '@apollo/server/errors';
+import { Deck, Flashcard, User } from '../models/index.js';
+import { signToken } from '../utils/auth.js';
 
+class AuthenticationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'AuthenticationError';
+    this.code = 'UNAUTHENTICATED';
+  }
+}
+
+class ForbiddenError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'ForbiddenError';
+    this.code = 'FORBIDDEN';
+  }
+}
 const resolvers = {
   Query: {
     decks: async () => {
@@ -173,53 +188,5 @@ const resolvers = {
     }
   }
 };
-module.exports = resolvers;
 
-
-    // If we wanted to include Stripe payment processing
-//--------------------------------------------------------------
-//     checkout: async (parent, args, context) => {
-//       const url = new URL(context.headers.referer).origin;
-//       const order = new Order({ products: args.products });
-//       const line_items = [];
-
-//       const { products } = await order.populate('products');
-
-//       for (let i = 0; i < products.length; i++) {
-//         const product = await stripe.products.create({
-//           name: products[i].name,
-//           description: products[i].description,
-//           images: [`${url}/images/${products[i].image}`]
-//         });
-
-//         const price = await stripe.prices.create({
-//           product: product.id,
-//           unit_amount: products[i].price * 100,
-//           currency: 'usd',
-//         });
-
-//         line_items.push({
-//           price: price.id,
-//           quantity: 1
-//         });
-//       }
-//       return { session: session.id };
-//     }
-// -----------------------------------------------------------------------
-// refactoring and removed context from arguments
-/*     updateDeck: async (parent, args, context) => {
-  if (context.deck) {
-    return await Deck.findByIdAndUpdate(context.deck._id, args, { new: true });
-  }
-},
-    updateFlashCard: async (parent, args, context) => {
-      if (context.deck) {
-        return await Flashcard.findByIdAndUpdate(context.flashcard._id, args, { new: true });
-      }
-    },
-        addDeck: async (parent, { title, category }) => {
-      const deck = await Deck.create({ title, category });
-      return deck;
-    },
-*/
-
+export default resolvers;

@@ -1,6 +1,4 @@
-const mongoose = require('mongoose');
-
-require('dotenv').config();
+import mongoose from 'mongoose';
 
 mongoose.connect(
     process.env.MONGODB_URI || 'mongodb://localhost:27017',
@@ -24,4 +22,4 @@ connection.on('disconnected', () => {
     console.log('Mongoose disconnected.');
 });
 
-module.exports = connection;
+export default connection;

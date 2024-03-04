@@ -1,11 +1,17 @@
-const express = require('express');
-const { ApolloServer } = require('@apollo/server');
-// const { ApolloServer } = require('apollo-server-express');
-const path = require('path');
-const { authMiddleware } = require('./utils/auth');
+import dotenv from 'dotenv/config';
+import { fileURLToPath } from 'url';
+import express from 'express';
+import { ApolloServer } from '@apollo/server';
+import { startStandaloneServer } from '@apollo/server/standalone';
+import { typeDefs, resolvers } from './schemas/index.js';
+import { authMiddleware } from './utils/auth.js';
+import db from './config/connection.js';
+import path from 'path';
 
-const { typeDefs, resolvers } = require('./schemas');
-const db = require('./config/connection');
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+
+// dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -27,16 +33,14 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'))
 });
 
-const startApolloServer = async (typeDefs, resolvers) => {
-    await server.start();
-    server.applyMiddleware({ app });
+startStandaloneServer(server, {
+    app,
+    appListenOptions: { port: PORT },
+}).then(({ url }) => {
+    console.log(`🚀 Server ready at ${url}`)
+});
 
-    db.once('open', () => {
-        app.listen(PORT, () => {
-            console.log(`API server running on Port ${PORT}`);
-            console.log(`Use graphql for back-end at http://localhost:${PORT}${server.graphqlPath}`);
-        })
-    })
-};
+db.once('open', () => {
+    console.log('MongoDB connected.')
+})
 
-startApolloServer(typeDefs, resolvers);

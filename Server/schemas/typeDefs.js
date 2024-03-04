@@ -1,6 +1,5 @@
-const { gql } = require('apollo-server-express');
-
-const typeDefs = gql`
+export const typeDefs = `#graphql
+  
   type Deck {
     _id: ID
     title: String!
@@ -47,7 +46,7 @@ const typeDefs = gql`
   }
 `;
 
-module.exports = typeDefs;
+
 
 // from Query { flashcardById(_id: ID: [Flashcard] } 
 // changed flashcard to retrieve a single Flashcard 
