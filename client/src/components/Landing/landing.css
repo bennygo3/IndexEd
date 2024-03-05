@@ -1,12 +1,5 @@
-body {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    
-}
-
 #mainBackground {
-    background-image: url("../Assets/pencilAndCard.png");
+    background-image: url("../../assets/pencilAndCard.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size:cover; 

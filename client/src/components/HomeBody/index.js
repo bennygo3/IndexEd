@@ -1,6 +1,6 @@
 import React from 'react';
 import "./HomeBody.css";
-import CardBckg from "../Assets/whiteIndex.png";
+import CardBckg from "../../assets/whiteIndex.png";
 import CarouselItem from '../Carousel.Item';
 import { useQuery } from '@apollo/client';
 import { HOME_DECKS } from '../../utils/queries';

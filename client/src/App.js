@@ -19,9 +19,12 @@ import NewDeck from "./pages/NewDeck";
 import FlashcardCreate from "./components/Flashcard_Create";
 
 const httpLink = createHttpLink({
-    // uri: 'http://localhost:3001/graphql',
-    uri: process.env.PORT,
+    // uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
+    uri: 'http://localhost:4000/graphql',
+    // uri: process.env.PORT,
 });
+
+// console.log("GraphQL Endpoint:", process.env.REACT_APP_GRAPHQL_ENDPOINT);
 
 
 const authLink = setContext((_, { headers }) => {

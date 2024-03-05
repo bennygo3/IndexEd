@@ -6,7 +6,7 @@
     "scripts": {
         "start": "nodemon server/server.js",
         "client": "cd client && npm start",
-        "develop": "concurrently --kill-others-on-fail \"npm start\"  \"npm run client\"",
+        "dev": "concurrently --kill-others-on-fail \"npm start\"  \"npm run client\"",
         "build": "cd client && npm run build",
         "install": "cd server && npm i && cd ../client && npm i",
         "seed": "cd server && npm run seed",

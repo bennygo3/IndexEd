@@ -6,7 +6,7 @@
     width: 476px;
     line-height: 69px;
     min-width: 468px;
-    background-image: url(../Assets/greenSticky.png);
+    background-image: url(../../assets/greenSticky.png);
     background-size: 476px 421px;
     display: flex;
     justify-content: flex-start;

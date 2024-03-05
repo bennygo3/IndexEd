@@ -13,7 +13,7 @@ h2{
      /* text-decoration: underline solid 2px; */
  }
  .index{
-     background-image: url('../Assets/IndexWhite.png') ;
+     background-image: url('../../assets/IndexWhite.png') ;
      background-position: center;
      background-repeat: no-repeat;
      background-size:566px 399px; 

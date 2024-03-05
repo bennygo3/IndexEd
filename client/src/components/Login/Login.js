@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 // import { Link, useNavigate } from 'react-router-dom';
-import xicon from '../Assets/xicon.png'
+import xicon from '../../assets/xicon.png'
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
 

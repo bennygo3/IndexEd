@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import xicon from '../Assets/xicon.png'
+import xicon from '../../assets/xicon.png';
 import './SignUp.css';
 import { ADD_USER } from '../../utils/mutations';
 

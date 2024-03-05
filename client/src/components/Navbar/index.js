@@ -1,8 +1,8 @@
 import React from 'react';
 import './Navbar.css';
-import navhome from '../Assets/navhome.png'
-import navprofile from '../Assets/navprofile.png'
-import navplus from '../Assets/navplus.png'
+import navhome from '../../assets/navhome.png';
+import navprofile from '../../assets/navprofile.png';
+import navplus from '../../assets/navplus.png';
 import { Link } from 'react-router-dom';
 import Home from "../../pages/Home";
 import User from "../../pages/User";
