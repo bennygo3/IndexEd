@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 // import { Link, useNavigate } from 'react-router-dom';
-import xicon from '../../assets/xicon.png'
+// import xicon from '../../assets/xicon.png'
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
 
@@ -52,7 +52,7 @@ function Login(props) {
                 <h2 id="loginHead">Login</h2>
                  <button id='xbut' type="button" 
                     onClick={() => props.trigger=props.setTrigger(false)}>
-                <img src={xicon} alt="x button"></img>
+                {/* <img src={xicon} alt="x button"></img> */}
                 </button>
                 <form onSubmit={handleFormSubmit} >
                     <label id="formLogin">

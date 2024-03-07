@@ -12,7 +12,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import NewCard from "./pages/NewCard"
 import Study from "./pages/Study"
 import User from "./pages/User"
-import Landing from "./components/Landing/Landing";
+import Landing from "./pages/Landing/Landing.js";
 import Home from "./pages/Home";
 import DeckCreate from "./components/DeckCreate";
 import NewDeck from "./pages/NewDeck";

@@ -21,9 +21,9 @@
     "author": "",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/clabel95/Decked-Out/issues"
+        "url": "https://github.com/bennygo3/deckmeout/issues"
     },
-    "homepage": "https://clabel95.github.io/Decked-Out",
+    "homepage": "https://github.com/bennygo3/deckmeout",
     "type": "module",
     "dependencies": {
         "bcrypt": "^5.0.1",
