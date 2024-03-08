@@ -38,5 +38,4 @@ startStandaloneServer(server, {
 
 db.once('open', () => {
     console.log('MongoDB connected.')
-})
-
+});
