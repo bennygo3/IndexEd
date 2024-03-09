@@ -16,7 +16,7 @@ import Landing from "./pages/Landing/Landing.js";
 import Home from "./pages/Home";
 import DeckCreate from "./components/DeckCreate";
 import NewDeck from "./pages/NewDeck";
-import FlashcardCreate from "./components/Flashcard_Create";
+import NotecardCreate from "./components/Flashcard_Create";
 
 const httpLink = createHttpLink({
     // uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
@@ -76,8 +76,8 @@ function App() {
                         element={<NewDeck />}
                     />
                     <Route
-                        path='/addFlashCard'
-                        element={<FlashcardCreate />}
+                        path='/addNotecard'
+                        element={<NotecardCreate />}
                     />
 
 
