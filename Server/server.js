@@ -2,6 +2,7 @@ import dotenv from 'dotenv/config';
 import { fileURLToPath } from 'url';
 import express from 'express';
 import { ApolloServer } from '@apollo/server';
+import cors from 'cors';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { typeDefs, resolvers } from './schemas/index.js';
 import { authMiddleware } from './utils/auth.js';
@@ -18,6 +19,9 @@ const server = new ApolloServer({
     context: authMiddleware,
 });
 
+app.use(cors());
+
+// Middleware for parsing request bodies
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 

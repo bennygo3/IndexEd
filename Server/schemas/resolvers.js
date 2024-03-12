@@ -17,6 +17,7 @@ class ForbiddenError extends Error {
     this.code = 'FORBIDDEN';
   }
 }
+
 const resolvers = {
   Query: {
     decks: async () => {
