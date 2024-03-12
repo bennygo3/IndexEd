@@ -10,13 +10,13 @@ import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // import NewCard from "./pages/NewCard"
-import Study from "./pages/Study"
+// import Study from "./pages/Study"
 import User from "./pages/User"
 import Landing from "./pages/Landing/Landing.js";
-import Home from "./pages/Home";
-import DeckCreate from "./components/DeckCreate";
+import Home from "./pages/Home/Home.js";
+// import DeckCreate from "./components/DeckCreate";
 import NewDeck from "./pages/NewDeck";
-import NotecardCreate from "./components/Flashcard_Create";
+// import NotecardCreate from "./components/Flashcard_Create";
 
 const httpLink = createHttpLink({
     // uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
@@ -58,27 +58,27 @@ function App() {
                         path='/home'
                         element={<Home />}
                     />
-                    <Route
+                    {/* <Route
                         path='/study'
                         element={<Study />}
-                    />
+                    /> */}
                     <Route
                         path='/user'
                         element={<User />}
                     />
-                    <Route
+                    {/* <Route
                         path='/deck_create'
                         element={<DeckCreate />}
 
-                    />
+                    /> */}
                     <Route
-                        path='/deck_create'
+                        path='/card-create'
                         element={<NewDeck />}
                     />
-                    <Route
+                    {/* <Route
                         path='/addNotecard'
                         element={<NotecardCreate />}
-                    />
+                    /> */}
 
 
 

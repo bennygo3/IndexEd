@@ -1,8 +1,8 @@
 import React from 'react';
-import Navbar from '../components/Navbar'
+import Navbar from '../components/Navbar/Navbar'
 // import Header from "../components/Header_WIP/Header";
 // import Footer from "../components/Footer_WIP/Footer";
-import DeckCreate from '../components/DeckCreate/index';
+// import DeckCreate from '../components/DeckCreate/index';
 import SearchBar from '../components/SearchBar/index';
 import { Link } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ const NewDeck = () => {
           <div>
             <h2>Decked-Out</h2>
 
-            <DeckCreate categories={categories}/>
+            {/* <DeckCreate categories={categories}/> */}
             <Link to='/addFlashCard'>createFlashcard</Link>
             
             

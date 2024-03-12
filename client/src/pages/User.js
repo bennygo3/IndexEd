@@ -1,7 +1,7 @@
 import React from 'react';
 // import Header from "../components/Header_WIP/Header";
 // import Footer from "../components/Footer_WIP/Footer";
-import Navbar from '../components/Navbar/index'
+import Navbar from '../components/Navbar/Navbar'
 // import CarouselUser from "../components/CarouselUser/index";
 import SearchBar from '../components/SearchBar/index'
 
