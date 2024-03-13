@@ -2,50 +2,91 @@
     background-color: rgb(112, 255, 112);
     min-height: 100vh;
     width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .home-header {
-    /* font-family: "Just Another Hand", cursive;
-    font-weight: 400;
-    font-style: normal; */
     text-align: center;
     font-size: 100px;
     margin-block-start: 0px;
     margin-block-end: 0px;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-    transform: translateY(15px);
-    
-
+    transform: translateY(5px);
 }
 
-.home-background{
+.home-container {
+    min-width: 700px;
+}
+
+.home-background {
+    background-color: white;
+    box-shadow: 0 -2px 10px rgab(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    
+}
+
+.navbar-home{
+    font-family: "Just Another Hand", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 50px;
+    position: absolute;
+    width: 100%;
+}
+
+.red-line {
+    width: 100%;
+    height: 2px;
+    background-color: rgba(251, 52, 52, 0.518);
+    margin-top: 65px;
+}
+
+.blue-line {
+    width: 100%;
+    height: 1.75px;
+    background-color: rgb(0, 115, 255, 0.3);
+    margin-top: 20px;
+}
+
+.line-container {
+    width: 100%;
+}
+
+
+/* .home-background{
     background-color: white;
     width: 70%;
     height: auto;
     margin: auto;
     position: fixed;
     top: 150px;
+
     bottom: 150px;
     left: 0;
     right: 0;
     box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
     
-}
+} */
 
-.red-line{
+/* .red-line{
     width: 100%;
     height: 2px;
     background-color: rgba(251, 52, 52, 0.518);
     margin-top: 75px;
     
-}
+} */
 
-.blue-line {
+/* .blue-line {
     position: absolute;
     
     width: 100%;
     height: 1.75px;
     background-color: rgb(0, 115, 255, 0.3);
-    /* margin-top: 15px; */
-}
+    
+} */
