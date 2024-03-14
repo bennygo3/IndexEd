@@ -1,29 +1,35 @@
-.navbar-home {
-  font-family: "Just Another Hand", cursive;
+.navbar-home{
+  /* font-family: "Just Another Hand", cursive; */
+  font-family: "Edu SA Beginner", cursive;
   font-weight: 400;
+  font-optical-sizing: auto;
   font-style: normal;
-  font-size: 50px;
+  font-size: 45px;
+  position: absolute;
+  width: 100%;
+  padding-inline-start: 15px;
 }
 
 .nav-list li:first-child {
-  margin-top: 75px;
+  margin-top: 80px;
 }
 .nav-list li{
+  list-style-type: decimal;
+  margin-bottom: 30px;
   
-  margin-bottom: 25px;
 }
 
-/* .navbarMain {
-  display: flex;
-  height: 1000px;
-  float: left;
-  width: 25%;
-  align-items: center;
-  position: fixed;
-  transform: translateX(-20%);
+a:-webkit-any-link {
+  color:black;
+}
+
+/* ul li::marker{
+  content: "✏️";
+  content: "📍";
 } */
 
-/* .marker:hover {
-  transition: 1.2s;
-  transform: translateX(50px);
+/* ul li:hover {
+  
+
 } */
+
