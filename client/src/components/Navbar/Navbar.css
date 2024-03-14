@@ -10,6 +10,12 @@
   padding-inline-start: 65px;
 }
 
+.nav-list {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+}
+
 .nav-list li:first-child {
   margin-top: 100px;
 }
