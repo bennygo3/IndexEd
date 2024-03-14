@@ -15,21 +15,21 @@ const Navbar = () => {
         <li>
           <Highlighted>
           <Link to="/card-create">
-            Create study card
+            Create study card:
           </Link>
           </Highlighted>
         </li>
         <li>
-          <Highlighted color="#00d3ffc7">
+          <Highlighted color="rgb(30, 196, 255)">
           <Link to="/my-cards">
-            My study cards
+            My study cards:
           </Link>
           </Highlighted>
         </li>
         <li>
           <Highlighted color="hotpink">
           <Link to='/study-random'>
-            Study random cards
+            Study random cards:
           </Link>
           </Highlighted>
         </li>
