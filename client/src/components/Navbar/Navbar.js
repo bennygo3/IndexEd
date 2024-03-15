@@ -8,20 +8,21 @@ const Navbar = () => {
   return (
     <div className="navbar-home">
       <ul className="nav-list">
+        {/* <div className="create-button"> */}
+      
         <li>
-          <HomeButtons color="yellow" to="/card-create"></HomeButtons> 
-          
-          
           <span>Create study card:</span>
+          <HomeButtons color="yellow" to="/card-create"></HomeButtons>
           
         </li>
+        {/* </div> */}
         <li>
-          <HomeButtons color="rgb(30, 196, 255)" to="/my-cards" />
           <span>My study cards:</span>
+          <HomeButtons color="rgb(30, 196, 255)" to="/my-cards" />
         </li>
         <li>
-          <HomeButtons color="hotpink" to="/study-random" />
           <span>Study random cards:</span>
+          <HomeButtons color="hotpink" to="/study-random" />
         </li>
       </ul>
     </div>
