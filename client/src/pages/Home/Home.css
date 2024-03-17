@@ -19,16 +19,13 @@
 }
 
 .emoji{
-    font-size: 33px;
-    margin-left: -16px;
-    
-
+    font-size: 35px;
 }
 
-.emojiT{
+/* .emojiT{
     font-size: 100px;
     position: absolute;
-}
+} */
 
 
 .home-container {

@@ -7,12 +7,14 @@ const Home = () => {
   return (
     <main className="home-body">
       <div className="home-container">
-        <h1 className="home-header">Index<span style={{ marginLeft: "10px" }}></span>Ed <span className="emoji">🤓</span></h1>
+        <h1 className="home-header">Index<span style={{ marginLeft: "10px" }}></span>Ed</h1>
          
         <div className="home-background">
+        
           <div className="red-line"></div>
           <LineGenerator amount={17} colorClass="blue-line" />
           <Navbar />
+          <div className="emoji">🤓</div>
         </div>
       </div>
     </main>
