@@ -6,8 +6,8 @@
   font-size: 40px;
   position: absolute;
   width: 100%;
-  padding-inline-start: 20px;
-
+  padding-inline-start: 10px;
+  margin-inline-start: 30px;
 }
 
 .nav-list {
@@ -22,7 +22,7 @@
 
 .nav-list li{
   list-style-type: decimal;
-  margin-bottom: 40px;
+  margin-bottom: 45px;
 }
 
 a:-webkit-any-link {
@@ -34,5 +34,5 @@ a:-webkit-any-link {
   background-color: yellow;
   padding: 6px 6px;
   border-radius: 10px;
-  border: 4px solid black;
+  border: 3px solid black;
 }

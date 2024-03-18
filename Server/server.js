@@ -1,4 +1,5 @@
 import dotenv from 'dotenv/config';
+
 import { fileURLToPath } from 'url';
 import express from 'express';
 import { ApolloServer } from '@apollo/server';
@@ -8,6 +9,8 @@ import { typeDefs, resolvers } from './schemas/index.js';
 import { authMiddleware } from './utils/auth.js';
 import db from './config/connection.js';
 import path from 'path';
+// const dotenv = require('dotenv');
+// dotenv.config({ path: `${__dirname}/config.env` });
 
 
 const PORT = process.env.PORT || 3001;
@@ -16,11 +19,14 @@ const app = express();
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: authMiddleware,
+    context: ({ req }) => {
+        const user = authMiddleware({ req }).user;
+        return { user };
+    }
+    // context: authMiddleware,
 });
 
 app.use(cors());
-
 // Middleware for parsing request bodies
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
