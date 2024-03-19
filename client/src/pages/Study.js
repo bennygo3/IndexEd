@@ -6,10 +6,8 @@ import FlashcardStudy from "../components/FlashcardStudy/FlashcardStudy";
 import { useQuery } from '@apollo/client';
 import { FLASHCARDS } from '../utils/queries';
 
-
-
 const Study = () => {
-  const {loading, data} = useQuery(FLASHCARDS);
+  const {data} = useQuery(FLASHCARDS);
   let home_flashcards;
   if(data) {
     home_flashcards = data
@@ -33,8 +31,7 @@ const Study = () => {
           (
             <h2>Loading</h2>
           )}
-          {/* <FlashscardStudy flashcards={home_flashcards}/> */}
-          {/* <SearchBar/> */}
+
         </div>
       </div>
     </main>
