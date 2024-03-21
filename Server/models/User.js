@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 
-import deckSchema from './Deck.js';
+import deckSchema from './Stacks.js';
 
 const userSchema = new Schema(
     {
@@ -21,10 +21,10 @@ const userSchema = new Schema(
             required: true,
             minlength: 8,
         },
-        decks: [
+        stacks: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Deck',
+                ref: 'Stack',
             }
         ],
         isNewUser: {

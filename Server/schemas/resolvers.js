@@ -1,4 +1,4 @@
-import { Deck, Flashcard, User } from '../models/index.js';
+import { Stack, Studycard, User } from '../models/index.js';
 import { signToken } from '../utils/auth.js';
 
 class AuthenticationError extends Error {
@@ -19,9 +19,9 @@ class ForbiddenError extends Error {
 
 const resolvers = {
   Query: {
-    decks: async () => {
+    stacks: async () => {
       //find all the decks for the homepage and populate the JUST THE DECKS
-      return await Deck.find({});//.populate('flashcards');
+      return await Stack.find({});//.populate('flashcards');
     },
     //populate one flashcard at a time from the corresponding deck by id
     flashcards: async (parent, args) => {
@@ -36,10 +36,10 @@ const resolvers = {
         throw new AuthenticationError('Not logged in');
       }
 
-      const user = await User.findById(context.user._id)
+      const user = await User.findById(context.user.id)
         .populate({
-          path: 'decks',
-          populate: 'flashcards'
+          path: 'stack',
+          populate: 'studycard'
         });
 
       if (!user) {
@@ -58,45 +58,45 @@ const resolvers = {
       return { token, user };
     },
     //adding a deck from the navbar on the side = on the plus sign on page 6 of wireframe, component is deck_create, associated with next button
-    addDeck: async (_, { title, category, description }, context) => {
+    addStack: async (_, { title, category, description }, context) => {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in to create a new deck.');
       }
       
-      const deck = await Deck.create({ 
+      const stack = await Stack.create({ 
         title, 
         category,
         description,
-        author: context.user._id 
+        author: context.user.id 
       });
       
-      // Add this deck to the user's deck/s
-      await User.findByIdAndUpdate(context.user._id, { $push: { decks: deck._id } });
+      // Add this stack to the user's stack/s
+      await User.findByIdAndUpdate(context.user.id, { $push: { stacks: stack.id } });
       
-      return deck;
+      return stack;
     },
     // this will be the 'plus' on the same 'next' page from the same component as the previous one
-    addFlashCard: async (_, { sideA, sideB, deckId }, context) => {
+    addFlashCard: async (_, { question, answer, stackId }, context) => {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in to create a flashcard');
       }
 
-      const deck = await Deck.findById(deckId);
-      if (!deck) {
-        throw new Error('Deck not found.');
+      const stack = await Stack.findById(stackId);
+      if (!stack) {
+        throw new Error('Stack not found.');
       }
       
-      const flashcard = await Flashcard.create({ 
-        sideA, 
-        sideB,
-        deck: deckId,
-        creator: context.user._id
+      const studycard = await Studycard.create({ 
+        question, 
+        answer,
+        stack: stackId,
+        creator: context.user.id
       });
 
-      // Store flashcards inside Deck model:
-      await Deck.findByIdAndUpdate(deckId, { $push: { flashcards: flashcard._id } });
+      // Store flashcards inside Stack model:
+      await Stack.findByIdAndUpdate(stackId, { $push: { studycards: studycard.id } });
       
-      return flashcard;
+      return studycard;
     },
     // NOT NECESSARILY FUNCTIONING IN THE CURRENT SETUP - OPTIONAL
     updateUser: async (parent, args, context) => {
@@ -106,7 +106,7 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
     //appends information to the deck, title, category, description should be called from slide 5 of wireframe
-    updateDeck: async (_, { deckId, title, category, description }, context) => {
+    updateStack: async (_, { stackId, title, category, description }, context) => {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in to update a deck.');
       }
@@ -117,11 +117,11 @@ const resolvers = {
         throw new ForbiddenError('In order to update this deck, you must be the original author.');
       }
 
-      return await Deck.findByIdAndUpdate(deckId, { title, category, description }, { new: true });
+      return await Stack.findByIdAndUpdate(stackId, { title, category, description }, { new: true });
     },
     //same thing as previous but updating a flashcard - NOT NECESSARILY BEING FUNCTIONAL WITH CURRENT WIREFRAME SETUP
-    updateFlashCard: async (_, { _id, sideA, sideB, noteSideA, noteSideB }, context) => {
-      if (!_id) {
+    updateStudycard: async (_, { id, question, answer, noteSideA, noteSideB }, context) => {
+      if (!id) {
         throw new Error('Flashcard ID is required to update')
       }
 
@@ -130,18 +130,18 @@ const resolvers = {
       }
 
       //Fetch the flashcard first to verify the owner
-      const flashcard = await Flashcard.findById(_id);
+      const studycard = await Studycard.findById(id);
       if (!flashcard) {
         throw new Error('Flashcard not found.');
       }
 
-      if (String(flashcard.creator) !== String(context.user._id)) {
+      if (String(studycard.creator) !== String(context.user.id)) {
         throw new ForbiddenError('You do not have permission to update this flashcard')
       }
 
       const updateFields = {
-        sideA,
-        sideB,
+        question,
+        answer,
         noteSideA,
         noteSideB
       };
@@ -153,13 +153,13 @@ const resolvers = {
         }
       }
 
-      const updatedFlashCard = await Flashcard.findByIdAndUpdate(_id, updateFields, { new: true});
+      const updatedStudycard = await Studycard.findByIdAndUpdate(_id, updateFields, { new: true});
         
-      if (!updatedFlashcard) {
+      if (!updatedStudycard) {
         throw new Error('Failed to update flashcard.');
       }
 
-      return updatedFlashcard;
+      return updatedStudycard;
     },
     // this doesn't exit yet - PASSWORD MUST BE LONGER THAN 8 CHARACTERS TO WORK
     login: async (parent, { username, password }) => {

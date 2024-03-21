@@ -1,31 +1,22 @@
 import { Schema, model } from 'mongoose';
 
-const flashcardSchema = new Schema(
+const StudycardSchema = new Schema(
     {
-        sideA: {
+        question: {
             type: String,
             required: true,
         },
-        sideB: {
+        answer: {
             type: String,
             required: true,
         },
-        noteSideA: {
+        stackTitle: {
             type: String,
         },
-        noteSideB: {
-            type: String,
-        },
-
-        deckTitle: {
-            type: String,
-        },
-
-        deck: {
+        stackId: {
             type: Schema.Types.ObjectId,
-            ref: 'Deck'
+            ref: 'Stacks'
         },
-
         creator: {
             type: Schema.Types.ObjectId,
             ref: 'User'
@@ -33,6 +24,6 @@ const flashcardSchema = new Schema(
     }
 );
 
-const Flashcard = model('Flashcard', flashcardSchema);
+const Studycard = model('Studycard', StudycardSchema);
 
-export default Flashcard;
+export default Studycard;

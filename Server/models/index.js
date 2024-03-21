@@ -1,4 +1,4 @@
 import User from './User.js';
-import Deck from './Deck.js';
-import Flashcard from './Flashcard.js';
-export { User, Deck, Flashcard };
+import Stack from './Stacks.js';
+import Studycard from './Studycard.js';
+export { User, Stack, Studycard };
