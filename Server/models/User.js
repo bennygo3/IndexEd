@@ -1,7 +1,6 @@
 import { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
-
-import deckSchema from './Stacks.js';
+import stackSchema from './Stacks.js';
 
 const userSchema = new Schema(
     {

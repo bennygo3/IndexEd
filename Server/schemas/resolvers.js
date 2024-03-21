@@ -24,11 +24,11 @@ const resolvers = {
       return await Stack.find({});//.populate('flashcards');
     },
     //populate one flashcard at a time from the corresponding deck by id
-    flashcards: async (parent, args) => {
-      return Flashcard.find({});
+    studycards: async (parent, args) => {
+      return Studycard.find({});
     },
-    flashcard: async (parent, { _id }) => {
-      return await Flashcard.findById(_id);
+    studycard: async (parent, { _id }) => {
+      return await Studycard.findById(id);
     },
     //find the user by ID, and populate flashcards and decks at the same time
     currentUser: async (_, __, context) => {
@@ -76,7 +76,7 @@ const resolvers = {
       return stack;
     },
     // this will be the 'plus' on the same 'next' page from the same component as the previous one
-    addFlashCard: async (_, { question, answer, stackId }, context) => {
+    addStudycard: async (_, { question, answer, stackId }, context) => {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in to create a flashcard');
       }
@@ -112,8 +112,8 @@ const resolvers = {
       }
 
       // Check if the user is the author of the deck
-      const deck = await Deck.findById(deckId);
-      if(String(deck.author) !== String(context.user._id)) {
+      const stack = await Stack.findById(stackId);
+      if(String(stack.author) !== String(context.user.id)) {
         throw new ForbiddenError('In order to update this deck, you must be the original author.');
       }
 

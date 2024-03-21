@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 import userSchema from './User.js';
-import flashcardSchema from './Studycard.js';
+import studycardSchema from './Studycard.js';
 import dateFormat from '../utils/dateFormat.js';
 
 const stackSchema = new Schema(

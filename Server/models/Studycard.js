@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-const StudycardSchema = new Schema(
+const studycardSchema = new Schema(
     {
         question: {
             type: String,
@@ -24,6 +24,6 @@ const StudycardSchema = new Schema(
     }
 );
 
-const Studycard = model('Studycard', StudycardSchema);
+const Studycard = model('Studycard', studycardSchema);
 
 export default Studycard;
