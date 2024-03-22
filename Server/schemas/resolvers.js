@@ -20,17 +20,17 @@ class ForbiddenError extends Error {
 const resolvers = {
   Query: {
     stacks: async () => {
-      //find all the decks for the homepage and populate the JUST THE DECKS
-      return await Stack.find({});//.populate('flashcards');
+      //find all the decks for the homepage and populate the just the stacks
+      return await Stack.find({});//.populate('studycards');
     },
-    //populate one flashcard at a time from the corresponding deck by id
     studycards: async (parent, args) => {
       return Studycard.find({});
     },
-    studycard: async (parent, { _id }) => {
+    //populate one flashcard at a time from the corresponding deck by id
+    studycard: async (parent, { id }) => {
       return await Studycard.findById(id);
     },
-    //find the user by ID, and populate flashcards and decks at the same time
+    //find the user by ID, and populate studycards and stacks at the same time
     currentUser: async (_, __, context) => {
       if (!context.user) {
         throw new AuthenticationError('Not logged in');

@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "",
     "main": "server.js",
+    "type": "module",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "watch": "nodemon server.js",
@@ -22,7 +23,6 @@
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^6.2.6"
     },
-    "type": "module",
     "devDependencies": {
         "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
         "nodemon": "^3.1.0"

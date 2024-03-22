@@ -31,7 +31,7 @@ type Auth {
 
 type Query {
   stacks: [Stack]
-  studycard(id: ID!): Studycard
+  studycard(id: ID!): [Studycard]
   studycardsByContent(question: String!, answer: String!): [Studycard]
   studycards: [Studycard]
   currentUser: User

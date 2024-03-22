@@ -23,7 +23,6 @@ const server = new ApolloServer({
         const user = authMiddleware({ req }).user;
         return { user };
     }
-    // context: authMiddleware,
 });
 
 app.use(cors());
