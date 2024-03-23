@@ -155,10 +155,9 @@ const resolvers = {
 
       return updatedStudycard;
     },
-    // NOT NECESSARILY FUNCTIONING IN THE CURRENT SETUP - OPTIONAL
     updateUser: async (parent, args, context) => {
       if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+        return await User.findByIdAndUpdate(context.user.id, args, { new: true });
       }
       throw new AuthenticationError('Not logged in');
     },
