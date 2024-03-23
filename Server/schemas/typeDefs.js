@@ -37,14 +37,26 @@ type Query {
   currentUser: User
 }
 
+input CreateStudycardInput {
+  question: String!
+  answer: String!
+  stackId: ID!
+}
+
+input CreateStackInput{
+  title: String!
+  category: String!
+  description: String
+}
+
 type Mutation {
   addUser(username: String!, email: String!, password: String!): Auth!
-  createCard(question: String!, answer: String!, stackId: ID!): StudyCard!
-
+  login(username: String!, password: String!): Auth!
+  createStudycard(input: CreateStudycardInput!): Studycard!
+  createStack(input: CreateStackInput!): Stack!
   updateStudycard(studycardId: ID!, question: String!, answer: String!, noteSideA: String, noteSideB: String): Studycard!
   updateUser(username: String, email: String, password: String): User!
   updateStack(title: String!, category: String!, description: String): Stack!
-  login(username: String!, password: String!): Auth!
   updateUserIsNewField(userId: ID!, isNewUser: Boolean!): User!
 }
 

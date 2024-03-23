@@ -17,7 +17,7 @@ const app = express();
 
 const server = new ApolloServer({
     typeDefs,
-    resolvers,
+    resolvers
 });
 
 app.use(cors());
@@ -38,7 +38,7 @@ await startStandaloneServer(server, {
     context: ({ req }) => {
         const user = authMiddleware({ req }).user;
         return { user };
-    }
+    },
     listen: { port: PORT },
 }).then(({ url }) => {
     console.log(`🚀 Server ready at ${url}`)

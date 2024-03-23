@@ -57,26 +57,24 @@ const resolvers = {
 
       return { token, user };
     },
-    //adding a deck from the navbar on the side = on the plus sign on page 6 of wireframe, component is deck_create, associated with next button
-    addStack: async (_, { title, category, description }, context) => {
-      if (!context.user) {
-        throw new AuthenticationError('You must be logged in to create a new deck.');
+    login: async (parent, { username, password }) => {
+      const user = await User.findOne({ username });
+
+      if (!user) {
+        throw new AuthenticationError('Incorrect credentials');
       }
-      
-      const stack = await Stack.create({ 
-        title, 
-        category,
-        description,
-        author: context.user.id 
-      });
-      
-      // Add this stack to the user's stack/s
-      await User.findByIdAndUpdate(context.user.id, { $push: { stacks: stack.id } });
-      
-      return stack;
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
+
+      const token = signToken(user);
+
+      return { token, user };
     },
-    // this will be the 'plus' on the same 'next' page from the same component as the previous one
-    addStudycard: async (_, { question, answer, stackId }, context) => {
+    createStudycard: async (_, { question, answer, stackId }, context) => {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in to create a flashcard');
       }
@@ -98,28 +96,24 @@ const resolvers = {
       
       return studycard;
     },
-    // NOT NECESSARILY FUNCTIONING IN THE CURRENT SETUP - OPTIONAL
-    updateUser: async (parent, args, context) => {
-      if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
-      }
-      throw new AuthenticationError('Not logged in');
-    },
-    //appends information to the deck, title, category, description should be called from slide 5 of wireframe
-    updateStack: async (_, { stackId, title, category, description }, context) => {
+    //adding a deck from the navbar on the side = on the plus sign on page 6 of wireframe, component is deck_create, associated with next button
+    createStack: async (_, { title, category, description }, context) => {
       if (!context.user) {
-        throw new AuthenticationError('You must be logged in to update a deck.');
+        throw new AuthenticationError('You must be logged in to create a new deck.');
       }
-
-      // Check if the user is the author of the deck
-      const stack = await Stack.findById(stackId);
-      if(String(stack.author) !== String(context.user.id)) {
-        throw new ForbiddenError('In order to update this deck, you must be the original author.');
-      }
-
-      return await Stack.findByIdAndUpdate(stackId, { title, category, description }, { new: true });
+      
+      const stack = await Stack.create({ 
+        title, 
+        category,
+        description,
+        author: context.user.id 
+      });
+      
+      // Add this stack to the user's stack/s
+      await User.findByIdAndUpdate(context.user.id, { $push: { stacks: stack.id } });
+      
+      return stack;
     },
-    //same thing as previous but updating a flashcard - NOT NECESSARILY BEING FUNCTIONAL WITH CURRENT WIREFRAME SETUP
     updateStudycard: async (_, { id, question, answer, noteSideA, noteSideB }, context) => {
       if (!id) {
         throw new Error('Flashcard ID is required to update')
@@ -161,23 +155,26 @@ const resolvers = {
 
       return updatedStudycard;
     },
-    // this doesn't exit yet - PASSWORD MUST BE LONGER THAN 8 CHARACTERS TO WORK
-    login: async (parent, { username, password }) => {
-      const user = await User.findOne({ username });
-
-      if (!user) {
-        throw new AuthenticationError('Incorrect credentials');
+    // NOT NECESSARILY FUNCTIONING IN THE CURRENT SETUP - OPTIONAL
+    updateUser: async (parent, args, context) => {
+      if (context.user) {
+        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+      }
+      throw new AuthenticationError('Not logged in');
+    },
+    //appends information to the deck, title, category, description should be called from slide 5 of wireframe
+    updateStack: async (_, { stackId, title, category, description }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('You must be logged in to update a deck.');
       }
 
-      const correctPw = await user.isCorrectPassword(password);
-
-      if (!correctPw) {
-        throw new AuthenticationError('Incorrect credentials');
+      // Check if the user is the author of the deck
+      const stack = await Stack.findById(stackId);
+      if(String(stack.author) !== String(context.user.id)) {
+        throw new ForbiddenError('In order to update this deck, you must be the original author.');
       }
 
-      const token = signToken(user);
-
-      return { token, user };
+      return await Stack.findByIdAndUpdate(stackId, { title, category, description }, { new: true });
     },
     updateUserIsNewField: async (_, { userId, isNewUser }) => {
       return await User.findByIdAndUpdate(

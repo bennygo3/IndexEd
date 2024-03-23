@@ -3,18 +3,18 @@ import { gql } from '@apollo/client';
 export const GET_CURRENT_USER = gql`
     query GetCurrentUser {
         currentUser {
-            _id
+            id
             username
             email
-            decks {
-                _id
+            stacks {
+                id
                 title
                 category
                 description
                 flashcards {
-                    _id
-                    sideA
-                    sideB
+                    id
+                    question
+                    answer
                 }
             }
         }

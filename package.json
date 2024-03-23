@@ -1,5 +1,5 @@
 {
-    "name": "deckmeout",
+    "name": "indexed",
     "version": "1.0.0",
     "description": "A flashcard MERN stack app",
     "main": "server/server.js",
