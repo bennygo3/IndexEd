@@ -1,7 +1,7 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
-import highlighterLogin from '../../assets/highlighterLogin.png';
-import highlighterSignUp from '../../assets/highlighterSignUp.png';
+// import highlighterLogin from '../../assets/highlighterLogin.png';
+// import highlighterSignUp from '../../assets/highlighterSignUp.png';
 
 import Login from '../../components/Login/Login.js';
 import SignUp from '../../components/SignUp/SignUp.js';

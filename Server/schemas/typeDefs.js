@@ -1,21 +1,21 @@
 export const typeDefs = `#graphql
 
 type User {
-  id: ID!
+  _id: ID!
   email: String!
   username: String!
   stacks: [Stack]
 }
 
 type Studycard {
-  id: ID!
+  _id: ID!
   question: String!
   answer: String!
   stackId: ID!
 }
 
 type Stack {
-  id: ID!
+  _id: ID!
   title: String!
   category: String!
   description: String
@@ -25,8 +25,8 @@ type Stack {
 }
 
 type Auth {
-  token: ID
-  user: User
+  token: ID!
+  user: User!
 }
 
 type Query {

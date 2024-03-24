@@ -27,8 +27,8 @@ const resolvers = {
       return Studycard.find({});
     },
     //populate one flashcard at a time from the corresponding deck by id
-    studycard: async (parent, { id }) => {
-      return await Studycard.findById(id);
+    studycard: async (parent, { _id }) => {
+      return await Studycard.findById(_id);
     },
     //find the user by ID, and populate studycards and stacks at the same time
     currentUser: async (_, __, context) => {
@@ -36,7 +36,7 @@ const resolvers = {
         throw new AuthenticationError('Not logged in');
       }
 
-      const user = await User.findById(context.user.id)
+      const user = await User.findById(context.user._id)
         .populate({
           path: 'stack',
           populate: 'studycard'
@@ -88,11 +88,11 @@ const resolvers = {
         question, 
         answer,
         stack: stackId,
-        creator: context.user.id
+        creator: context.user._id
       });
 
       // Store flashcards inside Stack model:
-      await Stack.findByIdAndUpdate(stackId, { $push: { studycards: studycard.id } });
+      await Stack.findByIdAndUpdate(stackId, { $push: { studycards: studycard._id } });
       
       return studycard;
     },
@@ -106,16 +106,16 @@ const resolvers = {
         title, 
         category,
         description,
-        author: context.user.id 
+        author: context.user._id 
       });
       
       // Add this stack to the user's stack/s
-      await User.findByIdAndUpdate(context.user.id, { $push: { stacks: stack.id } });
+      await User.findByIdAndUpdate(context.user._id, { $push: { stacks: stack._id } });
       
       return stack;
     },
-    updateStudycard: async (_, { id, question, answer, noteSideA, noteSideB }, context) => {
-      if (!id) {
+    updateStudycard: async (_, { _id, question, answer, noteSideA, noteSideB }, context) => {
+      if (!_id) {
         throw new Error('Flashcard ID is required to update')
       }
 
@@ -124,12 +124,12 @@ const resolvers = {
       }
 
       //Fetch the flashcard first to verify the owner
-      const studycard = await Studycard.findById(id);
+      const studycard = await Studycard.findById(_id);
       if (!flashcard) {
         throw new Error('Flashcard not found.');
       }
 
-      if (String(studycard.creator) !== String(context.user.id)) {
+      if (String(studycard.creator) !== String(context.user._id)) {
         throw new ForbiddenError('You do not have permission to update this flashcard')
       }
 
@@ -157,7 +157,7 @@ const resolvers = {
     },
     updateUser: async (parent, args, context) => {
       if (context.user) {
-        return await User.findByIdAndUpdate(context.user.id, args, { new: true });
+        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
       }
       throw new AuthenticationError('Not logged in');
     },
@@ -169,7 +169,7 @@ const resolvers = {
 
       // Check if the user is the author of the deck
       const stack = await Stack.findById(stackId);
-      if(String(stack.author) !== String(context.user.id)) {
+      if(String(stack.author) !== String(context.user._id)) {
         throw new ForbiddenError('In order to update this deck, you must be the original author.');
       }
 
