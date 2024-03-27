@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import './CardCreate.css';
-import Navbar from '../../components/Navbar/Navbar.js';
+import NavbarCC from '../../components/Navbar/NavbarCC';
+
 
 const CardCreate = () => {
-    const [value, setValue] = useState('');
+   
 
-    
     return(
         <>
             <header className="cardCreate-header">
-                <h1>Create A New Card</h1>
-                <Navbar className="navBar-CC" />
+                <h1>Create A <br></br>New Card</h1>
+                <NavbarCC />
             </header>
             
             <div className="redLine-CC"></div>

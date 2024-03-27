@@ -9,7 +9,7 @@ const Navbar = () => {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <div className={`navbar-home ${theme}`}>
+    <nav className={`navbar-home ${theme}`}>
       <ul className="nav-list">
       <li>
           <Highlighted color="rgb(30, 196, 255)">
@@ -34,7 +34,7 @@ const Navbar = () => {
           </Highlighted>
         </li>
       </ul>
-    </div>
+    </nav>
   );
 
 }
