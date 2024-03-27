@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import ThemeContext from '../../context/ThemeContext';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import Highlighted from '../Highlighter/Highlighter';
 // import HomeButtons from '../../components/HomeButtons/HomeButtons.js';
 
-const Navbar = ({ className }) => {
+const Navbar = () => {
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <div className={`navbar ${className}`}>
+    <div className={`navbar-home ${theme}`}>
       <ul className="nav-list">
       <li>
           <Highlighted color="rgb(30, 196, 255)">

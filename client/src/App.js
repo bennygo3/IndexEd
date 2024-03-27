@@ -1,12 +1,8 @@
 import React from "react";
-import {
-    ApolloClient,
-    InMemoryCache,
-    ApolloProvider,
-    createHttpLink,
-} from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ThemeProvider from './context/ThemeProvider.js';
 
 import Landing from "./pages/Landing/Landing.js";
 import Home from "./pages/Home/Home.js";
@@ -29,7 +25,6 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-
     link: authLink.concat(httpLink),
     cache: new InMemoryCache(),
 });
@@ -37,22 +32,24 @@ const client = new ApolloClient({
 function App() {
     return (
         <ApolloProvider client={client}>
-            <Router>
-                <Routes>
-                    <Route
-                        path="/"
-                        element={<Landing />}
-                    />
-                    <Route
-                        path='/home'
-                        element={<Home />}
-                    />
-                    <Route
-                        path='/card-create'
-                        element={<CardCreate />}
-                    />
-                </Routes>
-            </Router>
+            <ThemeProvider>
+                <Router>
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={<Landing />}
+                        />
+                        <Route
+                            path='/home'
+                            element={<Home />}
+                        />
+                        <Route
+                            path='/card-create'
+                            element={<CardCreate />}
+                        />
+                    </Routes>
+                </Router>
+            </ThemeProvider>
         </ApolloProvider>
     );
 
