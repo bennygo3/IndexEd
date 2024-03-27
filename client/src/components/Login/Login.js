@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Login.css';
-// import { Link, useNavigate } from 'react-router-dom';
-// import xicon from '../../assets/xicon.png'
+import xicon from '../../assets/xicon.png'
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
 
@@ -12,7 +11,7 @@ function Login(props) {
         username: '',
         password: '',
     });
-    // let navigate = useNavigate()
+
     const [loginUser, { error, data }] = useMutation(LOGIN_USER);
     console.log(error, data);
 
@@ -33,14 +32,11 @@ function Login(props) {
             const { data } = await loginUser({
                 variables: { ...formState },
             });
-            //change Auth.login for the SignUp .js??
             console.log(data);
             Auth.login(data.login.token);
-            // navigate('/home')
         } catch (err) {
             console.log(err);
         }
-        //clear form values after submit button
         setFormState({
             username: '',
             password: '',
@@ -50,9 +46,9 @@ function Login(props) {
         <div className="loginPopup">
             <div className='loginPopup-inner'>
                 <h2 id="loginHead">Login</h2>
-                 <button id='xbut' type="button" 
-                    onClick={() => props.trigger=props.setTrigger(false)}>
-                {/* <img src={xicon} alt="x button"></img> */}
+                <button id='xbut' type="button"
+                    onClick={() => props.trigger = props.setTrigger(false)}>
+                    <img src={xicon} alt="x button"></img>
                 </button>
                 <form onSubmit={handleFormSubmit} >
                     <label id="formLogin">
@@ -62,7 +58,6 @@ function Login(props) {
                             name="username"
                             onChange={handleChange}
                             type="text"
-                            // ref={this.textInput}
                         />
                         <br></br>
                         Password:
@@ -73,15 +68,15 @@ function Login(props) {
                             type="password"
                         />
                         <br></br>
-                        {/* <Link to='/home'> */}
-                            <button 
-                                type='submit' 
-                                className='login-btn'  >Enter</button>
-                        {/* </Link> */}
-                        {/* { props.children } */}
+
+                        <button
+                            type='submit'
+                            className='login-btn'>
+                            Enter
+                        </button>
+
                     </label>
-                    {/* <button type='submit' className='login-btn'  >Enter</button> */}
-                    {/* { props.children } */}
+
                 </form>
 
             </div>
@@ -92,5 +87,3 @@ function Login(props) {
 
 }
 export default Login;
-
-// onClick={() => props.setTrigger(false)}

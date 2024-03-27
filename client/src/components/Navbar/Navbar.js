@@ -4,10 +4,9 @@ import './Navbar.css';
 import Highlighted from '../Highlighter/Highlighter';
 // import HomeButtons from '../../components/HomeButtons/HomeButtons.js';
 
-const Navbar = () => {
-
+const Navbar = ({ className }) => {
   return (
-    <div className="navbar-home">
+    <div className={`navbar ${className}`}>
       <ul className="nav-list">
       <li>
           <Highlighted color="rgb(30, 196, 255)">
@@ -38,6 +37,8 @@ const Navbar = () => {
 }
 
 export default Navbar;
+
+//notes: adding className as props to allow for various styling of the navbar comp
 
 // const Navbar = () => {
 //   return (

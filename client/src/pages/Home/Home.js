@@ -13,7 +13,7 @@ const Home = () => {
         
           <div className="red-line"></div>
           <LineGenerator amount={17} colorClass="blue-line" />
-          <Navbar />
+          <Navbar className="navbar-home"/>
           {/* <span className="emoji">🤓</span> */}
         </div>
       </div>
