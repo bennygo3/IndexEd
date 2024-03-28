@@ -40,24 +40,18 @@
     margin-right: 0;
 }
 
-.redLine-CC{
+.redLine-cc{
     width: 100%;
     height: 2px;
     background-color: rgba(251, 52, 52, 0.518);
     margin-top: 0px;
 }
 
-/* .navBar-CC .navbar-home{
+.form-cc form{
     display: flex;
-    position: relative;
-    font-size: 20px;
-    
+    flex-direction: column;
 }
 
-.navBar-CC .navbar-home li:first-child{
-    margin-top: 5px;
+.input-class{
+    border: dashed black 2px !important;
 }
-
-.navBar-CC .navbar-home li{
-    margin: 5px;
-} */

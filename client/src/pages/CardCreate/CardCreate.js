@@ -63,21 +63,23 @@ const CardCreate = () => {
                 <NavbarCC />
             </header>
             
-            <div className="redLine-CC"></div>
-
+            <div className="redLine-cc"></div>
+            <div className="form-cc">
             <form onSubmit={handleSubmit}>
-                <label htmlFor="front">Front of the Studycard:</label>
+                <label htmlFor="front" className="label-class">Front of the Studycard:</label>
                 <input 
                     type="text"
                     id="front"
+                    className="input-class"
                     value={front}
                     onChange={(e) => setFront(e.target.value)}
                 />
 
-                <label htmlFor="back">Back of the Studycard:</label>
+                <label htmlFor="back" className="label-class">Back of the Studycard:</label>
                 <input
                     type="text"
                     id="back"
+                    className="input-class"
                     value={back}
                     onChange={(e) => setBack(e.target.value)}
                 />
@@ -110,6 +112,7 @@ const CardCreate = () => {
                     </div>
                 )}
             </form>
+            </div>
 
             <button type="submit" disabled={creatingStudycard}>Create!</button>
             {creatingCardError && <p>Error creating card: {creatingCardError.message}</p>}
