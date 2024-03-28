@@ -9,8 +9,8 @@ type User {
 
 type Studycard {
   _id: ID!
-  question: String!
-  answer: String!
+  front: String!
+  back: String!
   stackId: ID!
 }
 
@@ -38,8 +38,8 @@ type Query {
 }
 
 input CreateStudycardInput {
-  question: String!
-  answer: String!
+  front: String!
+  back: String!
   stackId: ID!
 }
 

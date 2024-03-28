@@ -7,14 +7,14 @@ export const GET_CURRENT_USER = gql`
             username
             email
             stacks {
-                id
+                _id
                 title
                 category
                 description
-                flashcards {
-                    id
-                    question
-                    answer
+                studycards {
+                    _id
+                    front
+                    back
                 }
             }
         }
@@ -22,37 +22,52 @@ export const GET_CURRENT_USER = gql`
 `;
 
 //user flashcards which is dependent on the deck they have
-export const HOME_DECKS = gql`
-query decks{
-    decks{
+export const HOME_STACKS = gql`
+query stacks{
+    stackss{
       _id
       title
       category
       description
-      flashcards {
+      studycards {
         _id
       }
     }
 }
 `
-export const USER_DECKS = gql`
-query userDecks{
-    decks{
-        _id
-        title
-        category
-        description
-        author
+// export const USER_STUDYCARDS = gql`
+// query userStacks{
+//     stacks{
+//         _id
+//         title
+//         category
+//         description
+//         author
+//     }
+// }`
+
+export const GET_USER_STACKS = gql`
+    query GetUserStacks {
+        currentUser {
+            _id
+            stacks {
+                _id
+                title
+                category
+                description
+                date_created
+            }
+        }
     }
-}`
+`
 
 
-export const FLASHCARDS = gql`
-query flashcards{
-    flashcards{
+export const STUDYCARDS = gql`
+query studycards{
+    studycards{
         _id
-        sideA
-        sideB
+        front
+        back
         noteSideA
         noteSideB
     }

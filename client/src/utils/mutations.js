@@ -24,26 +24,46 @@ export const ADD_USER = gql`
     }
 `;
 
-export const ADD_FLASHCARD = gql`
-    mutation addFlashcard($sideA: String!, $sideB: String!) {
-        addFlashCard(sideA: $sideA, sideB: $sideB, deck: $deck) {
+export const CREATE_STUDYCARD = gql`
+    mutation createStudycard($front: String!, $back: String!, $stackId: ID!) {
+        createStudycard(front: $front, back: $back, stackId: $stackId) {
             _id
-            sideA
-            sideB
-            
+            front
+            back
+            stack {
+                _id
+                title
+            }
+            creator {
+                _id
+                username
+            }        
         }
     }`
-
-export const ADD_DECK = gql`
-    mutation addDeck($title: String!, $category: String!, $description: String!, $author: String!) {
-        addDeck(title: $title, category: $category, description: $description, author: $author) {
+export const CREATE_STACK = gql`
+    mutation createStack($input: CreateStackInput!) {
+        createStack(input: $input) {
             _id
             title
-            category
+            categeory
             description
-            date_created
-            author
-            
+            author {
+                _id
+                username
+            }
         }
     }
 `;
+
+//  const ADD_DECK = 
+//     mutation addDeck($title: String!, $category: String!, $description: String!, $author: String!) {
+//         addDeck(title: $title, category: $category, description: $description, author: $author) {
+//             _id
+//             title
+//             category
+//             description
+//             date_created
+//             author
+            
+//         }
+//     }
