@@ -43,6 +43,7 @@ const CardCreate = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log("Form submitted with:", { front, back, stackId });
         createStudycard({
             variables:{
                 front,
@@ -56,7 +57,7 @@ const CardCreate = () => {
     // if(stacksError) return <p>Error loading: {stacksError.message}</p>
 
     return(
-        <>
+        <div className="cardCreate-container">
             <header className="cardCreate-header">
                 <h1>Create A <br></br>New Card</h1>
                 <NavbarCC />
@@ -64,7 +65,7 @@ const CardCreate = () => {
             
             <div className="redLine-cc"></div>
             <div className="background-lines">
-                <LineGenerator amount={40} colorClass="blue-line" />
+                <LineGenerator amount={25} colorClass="blue-line" />
             </div>
             
             <div className="form-cc">
@@ -114,12 +115,13 @@ const CardCreate = () => {
                         </button>
                     </div>
                 )}
+                <button type="submit" disabled={creatingStudycard}>Create!</button>
             </form>
             </div>
 
-            <button type="submit" disabled={creatingStudycard}>Create!</button>
+            
             {creatingCardError && <p>Error creating card: {creatingCardError.message}</p>}
-        </>
+        </div>
     )
 }
 
