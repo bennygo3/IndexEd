@@ -47,6 +47,24 @@
     margin-top: 0px;
 }
 
+/* .background-lines .line-container {
+    position: relative;
+} */
+
+.background-lines {
+    position: absolute;
+    /* margin-top: 20px; */
+    top: 130px;
+    left: 0;
+    right: 0;
+    z-index: 0;
+}
+
+.form-cc{
+    position: relative;
+    z-index: 1;
+}
+
 .form-cc form{
     display: flex;
     flex-direction: column;

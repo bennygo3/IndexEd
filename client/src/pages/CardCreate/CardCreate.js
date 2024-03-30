@@ -4,8 +4,7 @@ import { CREATE_STUDYCARD, CREATE_STACK } from '../../utils/mutations.js';
 import { GET_USER_STACKS } from '../../utils/queries.js';
 import './CardCreate.css';
 import NavbarCC from '../../components/Navbar/NavbarCC.js';
-
-
+import LineGenerator from '../../components/Lines/LineGenerator.js';
 
 const CardCreate = () => {
     const [front, setFront] = useState('');
@@ -64,6 +63,10 @@ const CardCreate = () => {
             </header>
             
             <div className="redLine-cc"></div>
+            <div className="background-lines">
+                <LineGenerator amount={40} colorClass="blue-line" />
+            </div>
+            
             <div className="form-cc">
             <form onSubmit={handleSubmit}>
                 <label htmlFor="front" className="label-class">Front of the Studycard:</label>

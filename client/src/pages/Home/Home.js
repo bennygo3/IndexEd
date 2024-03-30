@@ -1,7 +1,7 @@
 import React from 'react';
 import './Home.css';
 import Navbar from '../../components/Navbar/Navbar.js';
-import LineGenerator from '../../components/Lines/LineGenerator.js'
+import LineGenerator from '../../components/Lines/LineGenerator.js';
 
 const Home = () => {
   return (
