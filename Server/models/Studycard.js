@@ -2,11 +2,11 @@ import { Schema, model } from 'mongoose';
 
 const studycardSchema = new Schema(
     {
-        question: {
+        front: {
             type: String,
             required: true,
         },
-        answer: {
+        back: {
             type: String,
             required: true,
         },

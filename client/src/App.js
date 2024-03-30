@@ -9,7 +9,7 @@ import Home from "./pages/Home/Home.js";
 import CardCreate from "./pages/CardCreate/CardCreate.js";
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:4000/graphql',
+    uri: 'http://localhost:4000/',
 });
 
 const authLink = setContext((_, { headers }) => {
