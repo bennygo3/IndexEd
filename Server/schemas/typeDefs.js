@@ -11,7 +11,6 @@ type Studycard {
   _id: ID!
   front: String!
   back: String!
-  stackId: ID!
 }
 
 type Stack {
@@ -40,7 +39,6 @@ type Query {
 input CreateStudycardInput {
   front: String!
   back: String!
-  stackId: ID!
 }
 
 input CreateStackInput{

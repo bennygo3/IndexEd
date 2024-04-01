@@ -5,12 +5,25 @@ import { GET_USER_STACKS } from '../../utils/queries.js';
 import './CardCreate.css';
 import NavbarCC from '../../components/Navbar/NavbarCC.js';
 import LineGenerator from '../../components/Lines/LineGenerator.js';
+import AddToStackModal from '../../components/AddToStackModal/AddToStackModal.js';
 
 const CardCreate = () => {
     const [front, setFront] = useState('');
     const [back, setBack] = useState('');
     const [stackId, setStackId] = useState('');
     const [newStackTitle, setNewStackTitle] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleCreateCardSuccess = (data) => {
+        console.log("Card created successfully:", data);
+        setIsModalOpen(true);
+    };
+
+    const handleAddToStack = (stackId) => {
+        // Logic to add the card to the selected stack
+
+        setIsModalOpen(false);
+    }
 
     const { data: stacksData, loading: stacksLoading, error: stacksError, refetch: refetchStacks } = useQuery(GET_USER_STACKS);
 
@@ -33,23 +46,23 @@ const CardCreate = () => {
         }
     });
 
-    const handleCreateStack = () => {
+    const handleCreateStack = (title) => {
         createStack({
             variables: {
                 title: newStackTitle
             }
         });
+        setIsModalOpen(false);
     };
     console.log({ front, back, stackId });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Form submitted with:", { front, back, stackId });
+        console.log("Form submitted with:", { front, back });
         createStudycard({
             variables: {
                 front,
-                back,
-                stackId
+                back
             }
         });
     };
@@ -66,7 +79,7 @@ const CardCreate = () => {
 
             <div className="redLine-cc"></div>
             <div className="background-lines">
-                <LineGenerator amount={0} colorClass="blue-line" />
+                <LineGenerator amount={25} colorClass="blue-line" />
             </div>
 
             <div className="form-cc">
@@ -88,42 +101,59 @@ const CardCreate = () => {
                         value={back}
                         onChange={(e) => setBack(e.target.value)}
                     />
-
                     <button className="create-button" type="submit" disabled={creatingStudycard}>Create!</button>
-                    {stacksData && stacksData.stacks.length > 0 ? (
-                        <select
-                            id="stack"
-                            value={stackId}
-                            onChange={(e) => setStackId(e.target.value)}
-                        >
-                            <option value="">Select a stack</option>
-                            {stacksData.stacks.map((stack) => (
-                                <option key={stack._id} value={stack._id}>
-                                    {stack.title}
-                                </option>
-                            ))}
-                        </select>
-                    ) : (
-                        <div>
-                            <label htmlFor="newStackTitle">New Stack Title:</label>
-                            <input
-                                type="text"
-                                id="newStackTitle"
-                                value={newStackTitle}
-                                onChange={(e) => setNewStackTitle(e.target.value)}
-                            />
-                            <button type="button" onClick={handleCreateStack} disabled={creatingStack}>
-                                Create New Stack
-                            </button>
-                        </div>
-                    )}
+                    
                 </form>
             </div>
 
-
             {creatingCardError && <p>Error creating card: {creatingCardError.message}</p>}
+            
+            <AddToStackModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onCreateStack={handleCreateStack}
+                onAddToStack={handleAddToStack}
+                stacks={stacksData ? stacksData.stacks : []}
+            />
         </div>
     )
 }
 
-export default CardCreate
+export default CardCreate;
+
+// {/*  */}
+                    // {stacksData && stacksData.stacks.length > 0 ? (
+                    //     <select
+                    //         id="stack"
+                    //         value={stackId}
+                    //         onChange={(e) => setStackId(e.target.value)}
+                    //     >
+                    //         <option value="">Select a stack</option>
+                    //         {stacksData.stacks.map((stack) => (
+                    //             <option key={stack._id} value={stack._id}>
+                    //                 {stack.title}
+                    //             </option>
+                    //         ))}
+                    //     </select>
+                    // ) : (
+                    //     <div>
+                    //         <label htmlFor="newStackTitle">New Stack Title:</label>
+                    //         <input
+                    //             type="text"
+                    //             id="newStackTitle"
+                    //             value={newStackTitle}
+                    //             onChange={(e) => setNewStackTitle(e.target.value)}
+                    //         />
+                    //         <button type="button" onClick={handleCreateStack} disabled={creatingStack}>
+                    //             Create New Stack
+                    //         </button>
+                    //     </div>
+                    // )} 
+
+                    //    // const handleCreateStack = () => {
+    //     createStack({
+    //         variables: {
+    //             title: newStackTitle
+    //         }
+    //     });
+    // };

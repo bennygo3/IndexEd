@@ -74,7 +74,7 @@ const resolvers = {
 
       return { token, user };
     },
-    createStudycard: async (_, { front, back, stackId }, context) => {
+    createStudycard: async (_, { front, back }, context) => {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in to create a flashcard');
       }
@@ -86,9 +86,7 @@ const resolvers = {
       
       const studycard = await Studycard.create({ 
         front, 
-        back,
-        stack: stackId,
-        creator: context.user._id
+        back
       });
 
       // Store flashcards inside Stack model:
@@ -134,8 +132,8 @@ const resolvers = {
       }
 
       const updateFields = {
-        question,
-        answer,
+        front,
+        back,
         noteSideA,
         noteSideB
       };

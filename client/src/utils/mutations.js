@@ -25,19 +25,11 @@ export const ADD_USER = gql`
 `;
 
 export const CREATE_STUDYCARD = gql`
-    mutation createStudycard($front: String!, $back: String!, $stackId: ID!) {
-        createStudycard(front: $front, back: $back, stackId: $stackId) {
+    mutation createStudycard($front: String!, $back: String!) {
+        createStudycard(front: $front, back: $back) {
             _id
             front
-            back
-            stack {
-                _id
-                title
-            }
-            creator {
-                _id
-                username
-            }        
+            back      
         }
     }`
 export const CREATE_STACK = gql`
@@ -67,3 +59,20 @@ export const CREATE_STACK = gql`
             
 //         }
 //     }
+
+// export const CREATE_STUDYCARD = gql`
+//     mutation createStudycard($front: String!, $back: String!, $stackId: ID!) {
+//         createStudycard(front: $front, back: $back, stackId: $stackId) {
+//             _id
+//             front
+//             back
+//             stack {
+//                 _id
+//                 title
+//             }
+//             creator {
+//                 _id
+//                 username
+//             }        
+//         }
+//     }`
