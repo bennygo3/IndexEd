@@ -45,6 +45,7 @@ input CreateStackInput{
   title: String!
   category: String!
   description: String
+  author: ID!
 }
 
 type Mutation {

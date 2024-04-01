@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_STUDYCARD, CREATE_STACK } from '../../utils/mutations.js';
-import { GET_USER_STACKS } from '../../utils/queries.js';
+import { GET_USER_STACKS, GET_CURRENT_USER } from '../../utils/queries.js';
 import './CardCreate.css';
 import NavbarCC from '../../components/Navbar/NavbarCC.js';
 import LineGenerator from '../../components/Lines/LineGenerator.js';
@@ -26,6 +26,7 @@ const CardCreate = () => {
     }
 
     const { data: stacksData, loading: stacksLoading, error: stacksError, refetch: refetchStacks } = useQuery(GET_USER_STACKS);
+    const { data: currentUserData } = useQuery(GET_CURRENT_USER);
 
     const [createStudycard, { loading: creatingStudycard, error: creatingCardError }] = useMutation(CREATE_STUDYCARD, {
         onCompleted: (data) => {
@@ -39,7 +40,7 @@ const CardCreate = () => {
         }
     });
 
-    const [createStack, { loading: creatingStack, error: creatingStackError }] = useMutation(CREATE_STACK, {
+    const [createStack, { error: creatingStackError }] = useMutation(CREATE_STACK, {
         onCompleted: (data) => {
             setStackId(data.createStack._id); //Sets the newly created stack as the selected stack
             refetchStacks();
@@ -47,14 +48,21 @@ const CardCreate = () => {
     });
 
     const handleCreateStack = (title) => {
-        createStack({
-            variables: {
-                title: newStackTitle
-            }
-        });
-        setIsModalOpen(false);
+        if (currentUserData && currentUserData.currentUser) {
+            createStack({
+                variables: {
+                    input: {
+                        title: newStackTitle,
+                        category: "",
+                        description: "",
+                        author: currentUserData.currentUser._id
+                    }
+                }
+            });
+            setIsModalOpen(false);
+         }
+
     };
-    console.log({ front, back, stackId });
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -65,9 +73,12 @@ const CardCreate = () => {
                     front,
                     back
                 }
-            }
+            },
+            onCompleted: handleCreateCardSuccess,
         });
     };
+
+    console.log({ front, back, stackId });
 
     // if (stacksLoading) return <p>Loading ...</p>
     // if(stacksError) return <p>Error loading: {stacksError.message}</p>
@@ -122,40 +133,3 @@ const CardCreate = () => {
 }
 
 export default CardCreate;
-
-// {/*  */}
-// {stacksData && stacksData.stacks.length > 0 ? (
-//     <select
-//         id="stack"
-//         value={stackId}
-//         onChange={(e) => setStackId(e.target.value)}
-//     >
-//         <option value="">Select a stack</option>
-//         {stacksData.stacks.map((stack) => (
-//             <option key={stack._id} value={stack._id}>
-//                 {stack.title}
-//             </option>
-//         ))}
-//     </select>
-// ) : (
-//     <div>
-//         <label htmlFor="newStackTitle">New Stack Title:</label>
-//         <input
-//             type="text"
-//             id="newStackTitle"
-//             value={newStackTitle}
-//             onChange={(e) => setNewStackTitle(e.target.value)}
-//         />
-//         <button type="button" onClick={handleCreateStack} disabled={creatingStack}>
-//             Create New Stack
-//         </button>
-//     </div>
-// )}
-
-//    // const handleCreateStack = () => {
-//     createStack({
-//         variables: {
-//             title: newStackTitle
-//         }
-//     });
-// };
