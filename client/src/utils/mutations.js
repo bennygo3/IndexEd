@@ -46,33 +46,3 @@ export const CREATE_STACK = gql`
         }
     }
 `;
-
-//  const ADD_DECK = 
-//     mutation addDeck($title: String!, $category: String!, $description: String!, $author: String!) {
-//         addDeck(title: $title, category: $category, description: $description, author: $author) {
-//             _id
-//             title
-//             category
-//             description
-//             date_created
-//             author
-            
-//         }
-//     }
-
-// export const CREATE_STUDYCARD = gql`
-//     mutation createStudycard($front: String!, $back: String!, $stackId: ID!) {
-//         createStudycard(front: $front, back: $back, stackId: $stackId) {
-//             _id
-//             front
-//             back
-//             stack {
-//                 _id
-//                 title
-//             }
-//             creator {
-//                 _id
-//                 username
-//             }        
-//         }
-//     }`

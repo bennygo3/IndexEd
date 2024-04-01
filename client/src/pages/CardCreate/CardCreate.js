@@ -108,7 +108,7 @@ const CardCreate = () => {
                 </form>
             </div>
 
-            {creatingCardError && <p>Error creating card: {creatingCardError.message}</p>}
+            {/* {creatingCardError && <p>Error creating card: {creatingCardError.message}</p>} */}
 
             <AddToStackModal
                 isOpen={isModalOpen}

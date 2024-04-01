@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
 
-const AddToStackModal = ({ isOpen, onClose, onCreateStack, onAddToStack, stacks }) => {
+const AddToStackModal = ({ isOpen, onClose, onCreateStack, onAddToStack, stacks, cardId }) => {
     const [newStackTitle, setNewStackTitle] = useState('');
     const [selectedStackId, setSelectedStackId] = useState('');
+
+    const handleCreateStack = async () => {
+        const newStackId = await onCreateStack(newStackTitle);
+        if (newStackId) {
+            onAddToStack(newStackId, cardId);
+            onClose();
+        }
+    };
+
+    const handleAddToStack = () => {
+        onAddToStack(selectedStackId, cardId);
+        onClose();
+    };
 
     if(!isOpen) {
         return null;
@@ -24,7 +37,7 @@ const AddToStackModal = ({ isOpen, onClose, onCreateStack, onAddToStack, stacks 
                         </option>
                     ))}
                 </select>
-                <button onClick={() => onAddToStack(selectedStackId)}>Add to Selected Stack</button>
+                <button onClick={handleAddToStack}>Add to Selected Stack</button>
                 <hr />
                 <input
                     type="text"
@@ -32,7 +45,7 @@ const AddToStackModal = ({ isOpen, onClose, onCreateStack, onAddToStack, stacks 
                     onChange={(e) => setNewStackTitle(e.target.value)}
                     placeholder="New Stack Title"
                 />
-                <button onClick={() => onCreateStack(newStackTitle)}>Create New Stack</button>
+                <button onClick={handleCreateStack}>Create New Stack</button>
             </div>
         </div>
     );
