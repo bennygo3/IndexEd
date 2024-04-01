@@ -68,8 +68,6 @@ query studycards{
         _id
         front
         back
-        noteSideA
-        noteSideB
     }
 }`
 

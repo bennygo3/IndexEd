@@ -25,8 +25,8 @@ export const ADD_USER = gql`
 `;
 
 export const CREATE_STUDYCARD = gql`
-    mutation createStudycard($front: String!, $back: String!) {
-        createStudycard(front: $front, back: $back) {
+    mutation createStudycard($input: CreateStudycardInput!) {
+        createStudycard(input: $input) {
             _id
             front
             back      

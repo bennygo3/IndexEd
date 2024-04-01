@@ -74,23 +74,17 @@ const resolvers = {
 
       return { token, user };
     },
-    createStudycard: async (_, { front, back }, context) => {
+    createStudycard: async (_, { input }, context) => {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in to create a flashcard');
       }
 
-      const stack = await Stack.findById(stackId);
-      if (!stack) {
-        throw new Error('Stack not found.');
-      }
+      const { front, back } = input;
       
       const studycard = await Studycard.create({ 
         front, 
         back
       });
-
-      // Store flashcards inside Stack model:
-      await Stack.findByIdAndUpdate(stackId, { $push: { studycards: studycard._id } });
       
       return studycard;
     },

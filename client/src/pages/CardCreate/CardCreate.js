@@ -61,8 +61,10 @@ const CardCreate = () => {
         console.log("Form submitted with:", { front, back });
         createStudycard({
             variables: {
-                front,
-                back
+                input: {
+                    front,
+                    back
+                }
             }
         });
     };
@@ -102,12 +104,12 @@ const CardCreate = () => {
                         onChange={(e) => setBack(e.target.value)}
                     />
                     <button className="create-button" type="submit" disabled={creatingStudycard}>Create!</button>
-                    
+
                 </form>
             </div>
 
             {creatingCardError && <p>Error creating card: {creatingCardError.message}</p>}
-            
+
             <AddToStackModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
@@ -122,38 +124,38 @@ const CardCreate = () => {
 export default CardCreate;
 
 // {/*  */}
-                    // {stacksData && stacksData.stacks.length > 0 ? (
-                    //     <select
-                    //         id="stack"
-                    //         value={stackId}
-                    //         onChange={(e) => setStackId(e.target.value)}
-                    //     >
-                    //         <option value="">Select a stack</option>
-                    //         {stacksData.stacks.map((stack) => (
-                    //             <option key={stack._id} value={stack._id}>
-                    //                 {stack.title}
-                    //             </option>
-                    //         ))}
-                    //     </select>
-                    // ) : (
-                    //     <div>
-                    //         <label htmlFor="newStackTitle">New Stack Title:</label>
-                    //         <input
-                    //             type="text"
-                    //             id="newStackTitle"
-                    //             value={newStackTitle}
-                    //             onChange={(e) => setNewStackTitle(e.target.value)}
-                    //         />
-                    //         <button type="button" onClick={handleCreateStack} disabled={creatingStack}>
-                    //             Create New Stack
-                    //         </button>
-                    //     </div>
-                    // )} 
+// {stacksData && stacksData.stacks.length > 0 ? (
+//     <select
+//         id="stack"
+//         value={stackId}
+//         onChange={(e) => setStackId(e.target.value)}
+//     >
+//         <option value="">Select a stack</option>
+//         {stacksData.stacks.map((stack) => (
+//             <option key={stack._id} value={stack._id}>
+//                 {stack.title}
+//             </option>
+//         ))}
+//     </select>
+// ) : (
+//     <div>
+//         <label htmlFor="newStackTitle">New Stack Title:</label>
+//         <input
+//             type="text"
+//             id="newStackTitle"
+//             value={newStackTitle}
+//             onChange={(e) => setNewStackTitle(e.target.value)}
+//         />
+//         <button type="button" onClick={handleCreateStack} disabled={creatingStack}>
+//             Create New Stack
+//         </button>
+//     </div>
+// )}
 
-                    //    // const handleCreateStack = () => {
-    //     createStack({
-    //         variables: {
-    //             title: newStackTitle
-    //         }
-    //     });
-    // };
+//    // const handleCreateStack = () => {
+//     createStack({
+//         variables: {
+//             title: newStackTitle
+//         }
+//     });
+// };
