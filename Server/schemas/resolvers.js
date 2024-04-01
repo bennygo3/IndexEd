@@ -50,11 +50,18 @@ const resolvers = {
     },
   },
   Mutation: {
-    //this is creating a user from the sign up page
+    //this is creating a user from the sign up page and starting them with a misc stack of cards to save new cards to
     addUser: async (parent, args) => {
       const user = await User.create(args);
+      const miscStack = await Stack.create({
+        title: "Miscellaneous",
+        category: "General",
+        description: "A default stack for miscellaneous cards",
+        author: user._id
+      });
+      user.stacks.push(miscStack._id);
+      await user.save();
       const token = signToken(user);
-
       return { token, user };
     },
     login: async (parent, { username, password }) => {
