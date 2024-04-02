@@ -77,6 +77,20 @@ const resolvers = {
         throw new AuthenticationError('Incorrect credentials');
       }
 
+      const miscStack = await Stack.findOne({ title: "Miscellaneous", author: user._id });
+
+      if (!miscStack) {
+        // Creates a misc. stack for a user if it doesn't exist
+        const newMiscStack = await Stack.create({
+          title: "Miscellaneous",
+          category: "General",
+          description: "A default stack for miscellaneous cards",
+          author: user._id
+        });
+        user.stacks.push(newMiscStack._id);
+        await user.save();
+      }
+
       const token = signToken(user);
 
       return { token, user };
