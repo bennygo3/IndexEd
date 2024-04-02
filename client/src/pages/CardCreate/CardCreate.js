@@ -74,7 +74,7 @@ const CardCreate = () => {
                     back
                 }
             },
-            onCompleted: handleCreateCardSuccess,
+            onCompleted: handleCreateCardSuccess, // this opens the modal upon successful card creation
         });
     };
 
