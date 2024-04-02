@@ -100,14 +100,36 @@ const resolvers = {
         throw new AuthenticationError('You must be logged in to create a flashcard');
       }
 
-      const { front, back } = input;
-      
-      const studycard = await Studycard.create({ 
-        front, 
-        back
+      const { front, back, stackId } = input;
+
+      const miscStack = await Stack.findOne({
+        author: context.user._id,
+        title: "Miscellaneous"
       });
+
+      if (!miscStack) {
+        throw new Error("Miscellaneous stack not found");
+      }
+
+      // Use stackId if provided or default to the "Misc." stack
+      const assignedStackId = stackId || miscStack._id;
+
+      const studycardData = { front, back };
+      if (assignedStackId) {
+        studycardData.stack = assignedStackId;
+      }
+      
+      const studycard = await Studycard.create(studycardData);
+
+      // Add studycard to the stack if a stackId is provided
+      if (assignedStackId) {
+        await Stack.findByIdAndUpdate(assignedStackId, {
+          $push: { studycards: studycard._id }
+        });
+      }
       
       return studycard;
+
     },
     //adding a deck from the navbar on the side = on the plus sign on page 6 of wireframe, component is deck_create, associated with next button
     createStack: async (_, { title, category, description }, context) => {

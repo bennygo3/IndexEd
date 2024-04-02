@@ -9,6 +9,10 @@ const studycardSchema = new Schema(
         back: {
             type: String,
             required: true,
+        },
+        stack: {
+            type: Schema.Types.ObjectId,
+            ref: "stack"
         }
     }
 );
