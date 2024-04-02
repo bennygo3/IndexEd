@@ -7,6 +7,7 @@ import ThemeProvider from './context/ThemeProvider.js';
 import Landing from "./pages/Landing/Landing.js";
 import Home from "./pages/Home/Home.js";
 import CardCreate from "./pages/CardCreate/CardCreate.js";
+import MyCards from "./pages/MyCards/MyCards.js";
 
 const httpLink = createHttpLink({
     uri: 'http://localhost:4000/',
@@ -46,6 +47,10 @@ function App() {
                         <Route
                             path='/card-create'
                             element={<CardCreate />}
+                        />
+                        <Route
+                            path='/my-cards'
+                            element={<MyCards />}
                         />
                     </Routes>
                 </Router>
