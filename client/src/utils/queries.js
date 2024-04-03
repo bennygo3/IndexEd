@@ -22,22 +22,6 @@ export const GET_CURRENT_USER = gql`
     }
 `;
 
-export const GET_USER_STACKS = gql`
-    query GetUserStacks {
-        currentUser {
-            _id
-            stacks {
-                _id
-                title
-                category
-                description
-                date_created
-            }
-        }
-    }
-`
-
-
 export const STUDYCARDS = gql`
 query studycards{
     studycards{

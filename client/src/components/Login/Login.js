@@ -12,8 +12,8 @@ function Login(props) {
         password: '',
     });
 
-    const [loginUser, { error, data }] = useMutation(LOGIN_USER);
-    console.log(error, data);
+    const [loginUser] = useMutation(LOGIN_USER);
+    // console.log(error, data);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -32,8 +32,7 @@ function Login(props) {
             const { data } = await loginUser({
                 variables: { ...formState },
             });
-            console.log("Token:", data.login.token); // Log the token here
-            // console.log(data);
+            console.log("Token:", data.login.token);
             Auth.login(data.login.token);
         } catch (err) {
             console.log(err);

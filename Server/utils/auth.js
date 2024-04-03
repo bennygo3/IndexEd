@@ -5,7 +5,7 @@ if (!secret) {
     throw new Error("JWT_SECRET is not set");
 }
 
-const expiration = '3h';
+const expiration = '5h';
 
 const authMiddleware = ({ req }) => {
     let token = req.body.token || req.query.token || req.headers.authorization;

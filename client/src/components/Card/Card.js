@@ -8,9 +8,9 @@ const Card = ({ front, back }) => {
     };
 
     return (
-        <div className="card" onCLick={flipCard}>
+        <div className="card" onClick={flipCard}>
             {isFlipped ? <div className="card-back">{back}</div> :
-            <div className="crad-front">{front}</div>}
+            <div className="card-front">{front}</div>}
         </div>
     );
 };

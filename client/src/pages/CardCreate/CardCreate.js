@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_STUDYCARD, CREATE_STACK } from '../../utils/mutations.js';
-import { GET_USER_STACKS, GET_CURRENT_USER } from '../../utils/queries.js';
+import { GET_CURRENT_USER } from '../../utils/queries.js';
 import './CardCreate.css';
 import NavbarCC from '../../components/Navbar/NavbarCC.js';
 import LineGenerator from '../../components/Lines/LineGenerator.js';
@@ -25,7 +25,8 @@ const CardCreate = () => {
         setIsModalOpen(false);
     }
 
-    const { data: stacksData, loading: stacksLoading, error: stacksError, refetch: refetchStacks } = useQuery(GET_USER_STACKS);
+    const { data: stacksData, loading: stacksLoading, error: stacksError, refetch: refetchStacks } = useQuery(GET_CURRENT_USER);
+    console.log(stacksData);
     const { data: currentUserData } = useQuery(GET_CURRENT_USER);
 
     const [createStudycard, { loading: creatingStudycard, error: creatingCardError }] = useMutation(CREATE_STUDYCARD, {
@@ -78,10 +79,9 @@ const CardCreate = () => {
         });
     };
 
-    console.log({ front, back, stackId });
 
-    // if (stacksLoading) return <p>Loading ...</p>
-    // if(stacksError) return <p>Error loading: {stacksError.message}</p>
+    if (stacksLoading) return <p>Loading ...</p>
+    if(stacksError) return <p>Error loading: {stacksError.message}</p>
 
     return (
         <div className="cardCreate-container">
@@ -119,7 +119,7 @@ const CardCreate = () => {
                 </form>
             </div>
 
-            {/* {creatingCardError && <p>Error creating card: {creatingCardError.message}</p>} */}
+            {creatingCardError && <p>Error creating card: {creatingCardError.message}</p>}
 
             <AddToStackModal
                 isOpen={isModalOpen}
