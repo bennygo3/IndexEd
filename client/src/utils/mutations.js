@@ -12,6 +12,15 @@ export const ADD_USER = gql`
     }
 `;
 
+export const UPDATE_IS_NEW_USER = gql`
+    mutation updateUserIsNewField($userId: ID!, $isNewUser: Boolean!){
+        updateUserIsNewField(userId: $userId, isNewUser: $isNewUser) {
+            _id
+            isNewUser
+        }
+    }
+`
+
 export const LOGIN_USER = gql`
     mutation login($username: String!, $password: String!) {
         login (username: $username, password: $password) {

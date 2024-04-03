@@ -44,15 +44,6 @@ query studycards{
         front
         back
     }
-}`
-
-export const UPDATE_IS_NEW_USER = gql`
-    mutation updateUserIsNewField($userId: ID!, $isNewUser: Boolean!){
-        updateUserIsNewField(userId: $userId, isNewUser: $isNewUser) {
-            _id
-            isNewUser
-        }
-    }
-`;
+}`;
 
 

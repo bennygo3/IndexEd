@@ -38,8 +38,8 @@ const resolvers = {
 
       const user = await User.findById(context.user._id)
         .populate({
-          path: 'stack',
-          populate: 'studycard'
+          path: 'stacks',
+          populate: 'studycards'
         });
 
       if (!user) {

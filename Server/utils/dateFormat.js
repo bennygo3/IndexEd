@@ -1,7 +1,8 @@
 const addDateSuffix = (date) => {
+    
     let dateStr = date.toString();
 
-    const lastString = dateString.charAt(dateStr.length - 1);
+    const lastChar = dateStr.charAt(dateStr.length - 1);
 
     if (lastChar === '1' && dateStr !== '11') {
         dateStr = `${dateStr}st`;
