@@ -12,7 +12,7 @@ const studycardSchema = new Schema(
         },
         stack: {
             type: Schema.Types.ObjectId,
-            ref: "stack"
+            ref: "Stack"
         }
     }
 );

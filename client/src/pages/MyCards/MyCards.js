@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_USER_STACKS } from '../../utils/queries';
 import Card from '../../components/Card/Card';
 
 const MyCards = () => {
+    useEffect(() => {
+        const token = localStorage.getItem('id_token');
+        console.log("stored token:", token)
+    })
     const { loading, error, data } = useQuery(GET_USER_STACKS);
+    console.log(data);
+
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
