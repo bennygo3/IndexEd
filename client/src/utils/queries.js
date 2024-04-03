@@ -11,6 +11,7 @@ export const GET_CURRENT_USER = gql`
                 title
                 category
                 description
+                date_created
                 studycards {
                     _id
                     front

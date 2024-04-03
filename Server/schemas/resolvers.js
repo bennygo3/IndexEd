@@ -39,7 +39,7 @@ const resolvers = {
       const user = await User.findById(context.user._id)
         .populate({
           path: 'stacks',
-          populate: 'studycards'
+          populate: { path: 'studycards' }
         });
 
       if (!user) {

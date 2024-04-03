@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_USER_STACKS } from '../../utils/queries';
+import { GET_CURRENT_USER } from '../../utils/queries';
 import Card from '../../components/Card/Card';
 
 const MyCards = () => {
@@ -8,7 +8,7 @@ const MyCards = () => {
         const token = localStorage.getItem('id_token');
         console.log("stored token:", token)
     })
-    const { loading, error, data } = useQuery(GET_USER_STACKS);
+    const { loading, error, data } = useQuery(GET_CURRENT_USER);
     console.log(data);
 
 
