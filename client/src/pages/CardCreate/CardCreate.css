@@ -90,6 +90,9 @@ textarea{
     min-width: 290px;
     margin-bottom: 20px;
     margin-top: 10px;
+    font-size: 25px;
+    text-indent: 4px;
+    padding: 5px;
 }
 
 .create-button{
