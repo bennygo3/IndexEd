@@ -98,8 +98,7 @@ const CardCreate = () => {
             <div className="form-cc">
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="front" className="label-class">Front of the Studycard:</label>
-                    <input
-                        type="text"
+                    <textarea
                         id="front"
                         className="input-class"
                         value={front}
@@ -133,3 +132,11 @@ const CardCreate = () => {
 }
 
 export default CardCreate;
+
+// {/* <input
+// type="text"
+// id="front"
+// className="input-class"
+// value={front}
+// onChange={(e) => setFront(e.target.value)}
+// /> */}

@@ -68,11 +68,13 @@
 .form-cc{
     position: relative;
     z-index: 1;
+    top: 65px;
 }
 
 .form-cc form{
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .input-class{
@@ -87,3 +89,9 @@
 .create-button{
     width: 90px;
 }
+
+textarea{
+    background-color: rgb(255, 255, 153);
+    min-height: 100px;
+}
+
