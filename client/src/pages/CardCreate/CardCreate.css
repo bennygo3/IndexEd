@@ -47,13 +47,8 @@
     margin-top: 0px;
 }
 
-/* .background-lines .line-container {
-    position: relative;
-} */
-
 .background-lines {
     position: absolute;
-    /* margin-top: 20px; */
     top: 130px;
     left: 0;
     right: 0;
@@ -68,7 +63,7 @@
 .form-cc{
     position: relative;
     z-index: 1;
-    top: 65px;
+    top: 45px;
 }
 
 .form-cc form{
@@ -78,37 +73,15 @@
 }
 
 .input-class{
-    border: dashed black 1px !important;
+    border: solid black 1px !important;
 }
 
 .label-class{
-    font-size: 38px;
+    font-size: 40px;
     font-family: "Edu SA Beginner", cursive;
     font-weight: 400;
     font-optical-sizing: auto;
     font-style: normal;
-}
-
-.cardCreate-container{
-    /* display: flex; */
-    position: relative;
-}
-
-.create-button{
-    width: 90px;
-    font-family: "Edu SA Beginner", cursive;
-    font-weight: 400;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-size: 24px;
-    background-color:rgba(255, 255, 255, 0.857);
-    border-width: 3px;
-    border-radius: 5px;
-    border-color: rgb(21, 156, 252);
-    border-style: dotted;
-    cursor: pointer;
-    padding: 3px;
-    letter-spacing: 1px;
 }
 
 textarea{
@@ -119,3 +92,20 @@ textarea{
     margin-top: 10px;
 }
 
+.create-button{
+    width: auto;
+    font-family: "Edu SA Beginner", cursive;
+    font-weight: 400;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 28px;
+    background-color:rgba(255, 255, 255, 0.857);
+    border: solid 2px black;
+    border-radius: 5px;
+    outline: dotted 4px rgb(21, 156, 252);
+    cursor: pointer;
+    padding: 4px;
+    letter-spacing: 1px;
+    color: rgb(255, 0, 51);
+    
+}
