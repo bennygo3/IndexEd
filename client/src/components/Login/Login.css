@@ -1,36 +1,24 @@
 .loginPopup{ 
-    position: relative;
-    top: 24px;
-    right: 100px;
-    height: 360px;
-    width: 480px;
-    min-width: 480px;
+    height: 425px;
+    width: auto;
+    min-width: 430px;
     background-image: url(../../assets/dinoSticky.png);
-    background-size: 480px 360px;
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: space-around;
+    background-repeat: no-repeat;
+    background-size: contain;
 } 
 
 .loginPopup-inner{
-    position: relative;
-    right: 7px;
-    top: 2px;
-    line-height: 20px;
     padding: 3px;
 }
 
 #loginHead{
     font-family: 'Josefin Slab', serif;
     font-style: normal;
-    font-weight: 100;
+    
     font-size: 54px;
-    text-decoration: underline dotted black 2px;
+    text-decoration: overline underline dotted black 1px;
     position: relative;
-    left: 9px;
-    top: -37px;
+
 }
 
 #formLogin{
@@ -45,7 +33,7 @@
 }
 
 input {
-    background-color: white ;
+    background-color: white;
 }
 
 .login-btn{
@@ -55,23 +43,13 @@ input {
     top: -5px;
     text-decoration: underline dotted black 2px;
     font-size: 54px;
-    
+    cursor: pointer;
 }
 
 .login-btn:hover{
-    cursor: pointer;
     transform: scale(1.25);
 }
 
 input[type=text]:not(.browser-default) {
     border-bottom: 2px solid rgb(0, 0, 0);
 }
-
-/* #xbut {
-    background: transparent;
-    border: 0px;
-    height: 5%;
-    top: -10px;
-    left: 20px;
-    position: absolute;
-} */

@@ -45,10 +45,10 @@ function Login(props) {
     return (props.trigger) ? (
         <div className="loginPopup">
             <div className='loginPopup-inner'>
-                <h2 id="loginHead">Login</h2>
+                <h3 id="loginHead">Login</h3>
                 <button id='xbut' type="button"
                     onClick={() => props.trigger = props.setTrigger(false)}>
-                    <img src={xicon} alt="x button"></img>
+                    
                 </button>
                 <form onSubmit={handleFormSubmit} >
                     <label id="formLogin">

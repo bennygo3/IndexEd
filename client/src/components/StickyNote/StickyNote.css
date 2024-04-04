@@ -1,0 +1,32 @@
+.sticky-note {
+    width: 300px;
+    height: 300px;
+    background-color: #fff8b3;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    padding: 10px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.sticky-note:before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: linear-gradient(to bottom, rga(0, 0, 0, 0.1) 0%, rgba(0, 0 ,0, 0) 100%);
+}
+
+.sticky-note:after {
+    content: "";
+    position: absolute;
+    right: 10px;
+    top: -2px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #fff8b3;
+    transform: rotate(3deg);
+}
+
