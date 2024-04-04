@@ -62,7 +62,7 @@
 }
 
 .blue-line{
-    background-color: rgb(0 115 255 / 21%);
+    background-color: rgb(0 115 255 / 19%);
 }
 
 .form-cc{
@@ -78,7 +78,15 @@
 }
 
 .input-class{
-    border: dashed black 2px !important;
+    border: dashed black 1px !important;
+}
+
+.label-class{
+    font-size: 38px;
+    font-family: "Edu SA Beginner", cursive;
+    font-weight: 400;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
 
 .cardCreate-container{
@@ -88,10 +96,26 @@
 
 .create-button{
     width: 90px;
+    font-family: "Edu SA Beginner", cursive;
+    font-weight: 400;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 24px;
+    background-color:rgba(255, 255, 255, 0.857);
+    border-width: 3px;
+    border-radius: 5px;
+    border-color: rgb(21, 156, 252);
+    border-style: dotted;
+    cursor: pointer;
+    padding: 3px;
+    letter-spacing: 1px;
 }
 
 textarea{
     background-color: rgb(255, 255, 153);
-    min-height: 100px;
+    min-height: 130px;
+    min-width: 290px;
+    margin-bottom: 20px;
+    margin-top: 10px;
 }
 

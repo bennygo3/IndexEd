@@ -106,8 +106,7 @@ const CardCreate = () => {
                     />
 
                     <label htmlFor="back" className="label-class">Back of the Studycard:</label>
-                    <input
-                        type="text"
+                    <textarea
                         id="back"
                         className="input-class"
                         value={back}
