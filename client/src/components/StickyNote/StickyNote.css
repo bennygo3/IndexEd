@@ -6,7 +6,7 @@
     position: relative;
     padding: 10px;
     box-sizing: border-box;
-    font-family: sans-serif;
+    
 }
 
 .sticky-note:before {
@@ -15,24 +15,6 @@
     top: 0px;
     left: 0;
     right: 0;
-    height: 60px;
+    height: 65px;
     background:linear-gradient(to bottom, rgb(239 227 92 / 7%) 10%, rgba(101, 96, 30, 0.069) 100%);
 }
-
-/* .sticky-note:after {
-    content: "";
-    position: absolute;
-    right: -10px;
-    bottom: -10px;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-    background-color: white;
-    transform: rotate(45deg);
-    z-index: -1;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #fff8b3;
-} */
-

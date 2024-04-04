@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import './Login.css';
-import xicon from '../../assets/xicon.png'
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
-
-import Auth from '../../utils/auth'
+import Auth from '../../utils/auth';
+import StickyNote from '../StickyNote/StickyNote';
 
 function Login(props) {
     const [formState, setFormState] = useState({
@@ -44,6 +43,7 @@ function Login(props) {
     };
     return (props.trigger) ? (
         <div className="loginPopup">
+            <StickyNote>
             <div className='loginPopup-inner'>
                 <h3 id="loginHead">Login</h3>
                 <button id='xbut' type="button"
@@ -80,7 +80,9 @@ function Login(props) {
                 </form>
 
             </div>
+            </StickyNote>
         </div>
+        
 
     ) : "";
 

@@ -1,13 +1,12 @@
 import React from 'react';
 import "./StickyNote.css";
 
-const StickyNote = () => {
-    return(
-        <>
-          <div className="sticky-note">
+const StickyNote = (props) => {
+    return (
+        <div className="sticky-note">
+            {props.children}
+        </div>
 
-          </div>
-        </>
     )
 }
 
