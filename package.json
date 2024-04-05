@@ -24,7 +24,6 @@
     "bugs": {
         "url": "https://github.com/bennygo3/deckmeout/issues"
     },
-    "homepage": "https://github.com/bennygo3/IndexEd",
     "type": "module",
     "dependencies": {
         "concurrently": "^8.2.2",
