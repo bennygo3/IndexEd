@@ -1,7 +1,7 @@
 {
     "name": "indexed",
-    "version": "1.0.0",
     "description": "A flashcard MERN stack app",
+    "version": "1.0.0",
     "main": "server/server.js",
     "engines": {
         "node": "21.x"
@@ -12,7 +12,7 @@
         "dev": "concurrently --kill-others-on-fail \"npm start\"  \"npm run client\"",
         "build": "cd client && npm run build",
         "seed": "cd server && npm run seed",
-        "heroku-postbuild": "cd client && npm install && npm run build"
+        "heroku-postbuild": "cd client && npm run build"
 
     },
     "repository": {
