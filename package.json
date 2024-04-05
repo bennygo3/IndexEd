@@ -3,6 +3,9 @@
     "version": "1.0.0",
     "description": "A flashcard MERN stack app",
     "main": "server/server.js",
+    "engines": {
+        "node": "21.x"
+    },
     "scripts": {
         "start": "node server/server.js",
         "client": "cd client && npm start",
