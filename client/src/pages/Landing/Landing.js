@@ -9,10 +9,12 @@ function Landing() {
     const [buttonPopup, setButtonPopup] = useState(false);
 
     return (
+        <>
+        
+        <h1 className="landing-header">IndexEd</h1>
+      
         <div id="landing">
-            <h1 className="landing-header">IndexEd</h1>
-            <div className="landing-redLine"></div>
-            <div className='landing-background'>
+        <div className='landing-background'>
                 
                 <div id="login" onClick={() => setLoginPopup(true)}> Login </div>
                 <Login trigger={loginPopup} setTrigger={setLoginPopup} />
@@ -21,7 +23,9 @@ function Landing() {
                 <SignUp trigger={buttonPopup} setTrigger={setButtonPopup} />
             
             </div>
+            <div className="landing-redLine"></div>
         </div>
+        </>
     );
 }
 
