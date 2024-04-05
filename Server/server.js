@@ -8,9 +8,6 @@ import { typeDefs, resolvers } from './schemas/index.js';
 import { authMiddleware } from './utils/auth.js';
 import db from './config/connection.js';
 import path from 'path';
-// const dotenv = require('dotenv');
-// dotenv.config({ path: `${__dirname}/config.env` });
-
 
 const PORT = process.env.PORT || 3001;
 const app = express();
