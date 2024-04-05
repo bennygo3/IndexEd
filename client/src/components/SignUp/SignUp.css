@@ -1,75 +1,21 @@
-.signUpPopUp{
-    position: relative;
-    top: 111px;
-    right: 310px;
-    height: 421px;
-    width: 476px;
-    line-height: 69px;
-    min-width: 468px;
-    background-image: url(../../assets/greenSticky.png);
-    background-size: 476px 421px;
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: space-around;
-}
-
-.popup-inner{
-    position: relative;
-    left: 15px;
-}
-
-#signUpHead{
-    font-family: 'Josefin Slab', serif;
-    font-style: normal;
-    font-weight: 100;
-    font-size: 58px;
-    text-decoration: underline wavy black 1px;;
-    position: relative;
-    left: -9px;
-    top: -26px;
-    text-shadow: 2px 2px rgb(244, 135, 250);
-}
-
-#formSignUp{
-    line-height: 2.5;
-    font-family: 'Josefin Slab', serif;
-    text-decoration: underline dotted black 2px;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 33px;
-    position: relative;
-    top: -51px;
-    left: 9px;
-}
-
 label{
     color: black;
 }
 
-.popup-inner .submit-btn{
-    /* text-decoration: underline wavy black 1px; */
-    font-family: 'Josefin Slab', serif;
-    font-size: 50px;
+.submit-btn{
+   font-size: 30px;
     position: relative;
-    bottom: 42px;
-    left: 148px;
-    border: lightskyblue 6px dotted;
+    top: 42px;
+    border: black 2px solid;
+    outline: lightskyblue 3px dotted;
     text-shadow: 2px 2px lightskyblue;
-
-}
-
-.popup-inner .submit-btn:hover{
     cursor: pointer;
-    /* box-shadow: 0px 9px 7px -5px rgb(26, 26, 26); */
-    transform: scale(1.25);
 }
 
 input[type="text" i] {
-    /* padding: 1px 2px; */
-    line-height: 1.25;
-    font-size: 30px;
+
+    line-height: 1.05;
+    font-size: 20px;
 }
 
 input {
@@ -109,32 +55,3 @@ input {
     border-color: -internal-light-dark(rgb(222, 218, 218), rgb(133, 133, 133));
     border-image: initial;
 }
-
-input[type=text]:not(.browser-default),input[type=password]:not(.browser-default){
-    background-color: transparent;
-    border: none;
-    border-bottom: 2px solid #000000 important!;
-    border-radius: 0;
-    outline: none;
-    height: 3rem;
-    width: 300px;
-    font-size: 31px;
-    margin: 0 0 6px 0;
-    padding: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    -webkit-box-sizing: content-box;
-    box-sizing: content-box;
-    -webkit-transition: border .3s, -webkit-box-shadow .3s;
-    transition: border .3s, -webkit-box-shadow .3s;
-    transition: box-shadow .3s, border .3s;
-    transition: box-shadow .3s, border .3s, -webkit-box-shadow .3s;
-}
-#xbut {
-    background: transparent;
-    border: 0px;
-    height: 5%;
-    top: -5px;
-    left: 20px;
-    position: absolute;
-  }

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import xicon from '../../assets/xicon.png';
-import './SignUp.css';
 import { ADD_USER } from '../../utils/mutations';
-
 import Auth from '../../utils/auth'
+import StickyNote from '../StickyNote/StickyNote';
+
+import './SignUp.css';
 
 function SignUp(props){
     const [formState, setFormState] = useState({
@@ -40,13 +40,9 @@ function SignUp(props){
         }
     }
     return (props.trigger) ? (
-        <div className="signUpPopUp">
+        <div className="signUpPopup">
+            <StickyNote>
             <div className='popup-inner'>
-                <h2 id= "signUpHead">Sign Up</h2>
-                 <button id='xbut' type="button" 
-                    onClick={() => props.trigger=props.setTrigger(false)}>
-                    <img src={xicon} alt="x button"></img>
-                </button>
                 <form onSubmit={handleFormSubmit} >
                             <label id="formSignUp">
                                 Email:
@@ -73,14 +69,12 @@ function SignUp(props){
                                 type="password"
                                 />
                             </label>
-                            {/* <Link to='/home'> */}
+
                             <button type="submit" className='submit-btn'>Submit</button> 
-                            {/* </Link> */}
-                            
-                            {/* { props.children } */}
                         </form>
                 
             </div>
+            </StickyNote>
         </div>
         
     ) : "";

@@ -10,21 +10,23 @@ function Landing() {
 
     return (
         <>
-        
-        <h1 className="landing-header">IndexEd</h1>
-      
-        <div id="landing">
-        <div className='landing-background'>
-                
-                <div id="login" onClick={() => setLoginPopup(true)}> Login </div>
-                <Login trigger={loginPopup} setTrigger={setLoginPopup} />
 
-                <div id="signUp" onClick={() => setButtonPopup(true)}>Sign Up</div>
-                <SignUp trigger={buttonPopup} setTrigger={setButtonPopup} />
-            
+            <h1 className="landing-header">IndexEd</h1>
+
+            <div id="landing">
+                <div className='landing-background'>
+                    {/* added container to control corresponding popup */}
+                    <div className="login-container"> 
+                        <div id="login" onClick={() => setLoginPopup(true)}> Login </div>
+                        <Login trigger={loginPopup} setTrigger={setLoginPopup} />
+                    </div>
+                    <div className="signUp-container">
+                    <div id="signUp" onClick={() => setButtonPopup(true)}>Sign Up</div>
+                    <SignUp trigger={buttonPopup} setTrigger={setButtonPopup} />
+                    </div>
+                </div>
+                <div className="landing-redLine"></div>
             </div>
-            <div className="landing-redLine"></div>
-        </div>
         </>
     );
 }

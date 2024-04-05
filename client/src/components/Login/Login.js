@@ -45,11 +45,6 @@ function Login(props) {
         <div className="loginPopup">
             <StickyNote>
             <div className='loginPopup-inner'>
-                <h3 id="loginHead">Login</h3>
-                <button id='xbut' type="button"
-                    onClick={() => props.trigger = props.setTrigger(false)}>
-                    
-                </button>
                 <form onSubmit={handleFormSubmit} >
                     <label id="formLogin">
                         Username:
