@@ -13,8 +13,7 @@
         "build": "cd client && npm run build",
         "install": "cd server && npm i && cd ../client && npm i",
         "seed": "cd server && npm run seed",
-        "heroku-postbuild": "npm install && cd server && npm install && cd ../client && npm install && npm run build"
-
+        "heroku-postbuild": "npm install && npm run build --prefix client && npm install --prefix server"
     },
     "repository": {
         "type": "git",
