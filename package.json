@@ -12,7 +12,7 @@
         "dev": "concurrently --kill-others-on-fail \"npm start\"  \"npm run client\"",
         "build": "cd client && npm run build",
         "seed": "cd server && npm run seed",
-        "heroku-postbuild": "cd client && npm install && npm run build"
+        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
     },
     "repository": {
         "type": "git",
