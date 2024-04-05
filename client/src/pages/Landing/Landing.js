@@ -10,8 +10,9 @@ function Landing() {
 
     return (
         <div id="landing">
+            <h1 className="landing-header">IndexEd</h1>
+            <div className="landing-redLine"></div>
             <div className='landing-background'>
-                <h1 className="landing-header">IndexEd</h1>
                 
                 <div id="login" onClick={() => setLoginPopup(true)}> Login </div>
                 <Login trigger={loginPopup} setTrigger={setLoginPopup} />

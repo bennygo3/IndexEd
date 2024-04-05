@@ -1,20 +1,32 @@
 #landing {
-    height: 100dvh;
-}
-
-.landing-background{
+    height: 70dvh;
+    font-family: 'Fredericka the Great', cursive;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    font-family: 'Fredericka the Great', cursive;
-    height: 100%;
+    justify-content: space-evenly;
 }
 
 .landing-header{
     font-style: normal;
     font-weight: 100;
-    font-size: 105px;
+    font-size: 145px;
+    text-align: center;
+    position: relative;
+    letter-spacing: 2px;
+    color: rgb(60, 60, 60);
+    
+}
+
+.landing-redLine{
+    background-color: rgba(251, 52, 52, 0.818);
+    width: 100%;
+    height: 2px;
+    margin-top: 1px;
+}
+
+.landing-background{
+    margin-top: 10px;
 }
 
 #login{
@@ -23,11 +35,12 @@
     font-size: 78px;
     text-decoration: 2px underline dashed;
     cursor: pointer;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px lightskyblue;
 }
 
 #login:hover{
     transform: scale(1.25);
-    text-shadow: 2px 2px lightskyblue;
 }
 
 #signUp{
@@ -39,12 +52,11 @@
     border: none;
     text-decoration: 2px underline dashed;
     cursor: pointer;
+    text-shadow: 2px 2px rgb(96, 255, 114);
 }
 
 #signUp:hover{
     transform: scale(1.25);
-    text-shadow: 2px 2px rgb(96, 255, 114);
-    
 }
 
 @media (max-width: 1200px) {
