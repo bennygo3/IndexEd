@@ -4,17 +4,17 @@
     "description": "A flashcard MERN stack app",
     "main": "server/server.js",
     "scripts": {
-        "start": "nodemon server/server.js",
+        "start": "node server/server.js",
         "client": "cd client && npm start",
         "dev": "concurrently --kill-others-on-fail \"npm start\"  \"npm run client\"",
         "build": "cd client && npm run build",
         "install": "cd server && npm i && cd ../client && npm i",
         "seed": "cd server && npm run seed",
-        "heroku-postbuild": "npm run install-client && npm run build"
+        "heroku-postbuild": "npm install && cd client && npm install && npm run build"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/bennygo3/deckmeout"
+        "url": "git+https://github.com/bennygo3/IndexEd"
     },
     "keywords": [],
     "author": "",
@@ -22,7 +22,7 @@
     "bugs": {
         "url": "https://github.com/bennygo3/deckmeout/issues"
     },
-    "homepage": "https://github.com/bennygo3/deckmeout",
+    "homepage": "https://github.com/bennygo3/IndexEd",
     "type": "module",
     "dependencies": {
         "concurrently": "^8.2.2",
