@@ -1,5 +1,5 @@
 const db = require('../config/connection');
-const { Deck, Flashcard, User } = require('../models');
+const { Stack, Studycard, User } = require('../models');
 const pokeSeeds = require('./pokeSeeds.json');
 const codeSeeds = require('./codeSeeds.json');
 const geoSeeds = require('./geoSeeds.json');
@@ -48,16 +48,10 @@ db.once('open', async () => {
         }
         for (let i = 0; i < codeSeeds.length; i++) {
             const codeFlashcard = await Flashcard.create(codeSeeds[i]);
-            await Deck.findOneAndUpdate(
+            await Stack.findOneAndUpdate(
                 //this may return the _id of the flashcard and not user
                 { title: "Javascript Coding" }, { $push: { flashcards: codeFlashcard } }, { runValidators: true })
         }
-
-        //THIS LOGIC WAS IN AN ATTEMPT TO POPULATE EACH FLASHCARD DYNAMICALLY WITH THE DECK IT BELONGS TO
-        //const pokeDeck = await Deck.findOne({ title: "Pokemon Trivia" })
-        //console.log(pokeDeck);
-        // const deck1 = Flashcard.updateMany( {deck: ''}, {$addToSet: {deck: 'Pokemon Trivia'} }, { runValidators: true } )
-        // console.log(deck1)
         
 
 
