@@ -4,7 +4,8 @@
     "version": "1.0.0",
     "main": "server/server.js",
     "engines": {
-        "node": "21.x"
+        "node": "21.5.0",
+        "npm": "10.5.1"
     },
     "scripts": {
         "start": "node server/server.js",
