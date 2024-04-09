@@ -9,8 +9,12 @@ import Home from "./pages/Home/Home.js";
 import CardCreate from "./pages/CardCreate/CardCreate.js";
 import MyCards from "./pages/MyCards/MyCards.js";
 
+// const httpLink = createHttpLink({
+//     uri: process.env.REACT_APP_GRAPHQL_URI || 'http://localhost:4000/',
+// });
+
 const httpLink = createHttpLink({
-    uri: process.env.REACT_APP_GRAPHQL_URI || 'http://localhost:4000/',
+    uri: process.env.REACT_APP_GRAPHQL_URI || '/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {

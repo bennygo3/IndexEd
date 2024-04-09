@@ -60,16 +60,3 @@ type Mutation {
 }
 
 `;
-
-
-// type Deck {
-//   id: ID
-//   title: String!
-//   category: String!
-//   description: String
-//   date_created: String
-//   author: ID
-//   flashcards: [Flashcard]
-// }
-// from Query { flashcardById(_id: ID: [Flashcard] } 
-// changed flashcard to retrieve a single Flashcard 
