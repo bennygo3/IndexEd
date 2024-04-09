@@ -15,7 +15,7 @@ import MyCards from "./pages/MyCards/MyCards.js";
 
 const httpLink = createHttpLink({
     uri: process.env.REACT_APP_GRAPHQL_URI || '/graphql',
-});
+}); 
 
 const authLink = setContext((_, { headers }) => {
 

@@ -1,4 +1,4 @@
-import dotenv from 'dotenv/config';
+import 'dotenv/config';
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { fileURLToPath } from 'url';
