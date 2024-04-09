@@ -14,7 +14,11 @@ const app = express();
 
 const server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    context: ({ req }) => {
+        const user = authMiddleware({ req }).user;
+        return { user };
+    },
 });
 
 app.use(cors());
@@ -24,17 +28,6 @@ app.use(express.json());
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-await startStandaloneServer(server, {
-    app,
-    context: ({ req }) => {
-        const user = authMiddleware({ req }).user;
-        return { user };
-    },
-    listen: { port: PORT },
-}).then(({ url }) => {
-    console.log(`🚀 Server ready at ${url}`)
-});
-
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
     
@@ -43,6 +36,13 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.join(__dirname, '../client/build/index.html'))
     });
 }
+
+await startStandaloneServer(server, {
+    app,
+    listen: { port: PORT },
+}).then(({ url }) => {
+    console.log(`🚀 Server ready at ${url}`)
+});
 
 db.once('open', () => {
     console.log('MongoDB connected.')
