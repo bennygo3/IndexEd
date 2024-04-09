@@ -24,15 +24,6 @@ app.use(express.json());
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/build')));
-    
-    app.get('*', (req, res) => {
-        console.log('Serving index.html for path:', req.path);
-        res.sendFile(path.join(__dirname, '../client/build/index.html'))
-    });
-}
-
 await startStandaloneServer(server, {
     app,
     context: ({ req }) => {
@@ -43,6 +34,15 @@ await startStandaloneServer(server, {
 }).then(({ url }) => {
     console.log(`🚀 Server ready at ${url}`)
 });
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/build')));
+    
+    app.get('*', (req, res) => {
+        console.log('Serving index.html for path:', req.path);
+        res.sendFile(path.join(__dirname, '../client/build/index.html'))
+    });
+}
 
 db.once('open', () => {
     console.log('MongoDB connected.')
