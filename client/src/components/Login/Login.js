@@ -25,13 +25,12 @@ function Login(props) {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(`this is the state of the form ${formState.username}`)
 
         try {
             const { data } = await loginUser({
                 variables: { ...formState },
             });
-            console.log("Token:", data.login.token);
+
             Auth.login(data.login.token);
         } catch (err) {
             console.log(err);

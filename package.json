@@ -10,8 +10,8 @@
     "scripts": {
         "start": "node server/server.js",
         "client": "cd client && npm start",
-        "dev": "concurrently --kill-others-on-fail \"npm start\"  \"npm run client\"",
-        "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+        "dev": "concurrently \"npm start\"  \"npm run client\"",
+        "develop": "concurrently --kill-others-on-fail \"cd server && npm run watch\" \"cd client && npm start\"",
         "build": "cd client && npm run build",
         "seed": "cd server && npm run seed",
         "heroku-postbuild": "cd client && npm install && npm run build"
