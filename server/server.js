@@ -18,7 +18,6 @@ const server = new ApolloServer({
 });
 
 app.use(cors());
-// Middleware for parsing request bodies
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
