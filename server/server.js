@@ -14,11 +14,7 @@ const app = express();
 
 const server = new ApolloServer({
     typeDefs,
-    resolvers,
-    context: ({ req }) => {
-        const user = authMiddleware({ req }).user;
-        return { user };
-    },
+    resolvers
 });
 
 app.use(cors());
@@ -37,13 +33,12 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-// app.get('*', (req, res) => {
-//     console.log('Serving index.html for path:', req.path);
-//     res.sendFile(path.join(__dirname, '../client/build/index.html'))
-// });
-
 await startStandaloneServer(server, {
     app,
+    context: ({ req }) => {
+        const user = authMiddleware({ req }).user;
+        return { user };
+    },
     listen: { port: PORT },
 }).then(({ url }) => {
     console.log(`🚀 Server ready at ${url}`)
