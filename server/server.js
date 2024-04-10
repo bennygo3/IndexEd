@@ -11,10 +11,10 @@ import path from 'path';
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/build')));
+    app.use(express.static(path.join(__dirname, '../../client/build')));
 }
 
 app.use(cors());
@@ -40,7 +40,7 @@ await startStandaloneServer(server, {
 if (process.env.NODE_ENV === 'production') {
     app.get('*', (req, res) => {
         console.log('Serving index.html for path:', req.path);
-        res.sendFile(path.join(__dirname, '../client/build/index.html'));
+        res.sendFile(path.join(__dirname, '../../client/build/index.html'));
     });
 }
 
