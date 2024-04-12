@@ -7,15 +7,13 @@ label{
     position: relative;
     top: 42px;
     border: black 2px solid;
-    outline: lightskyblue 3px dotted;
-    text-shadow: 2px 2px lightskyblue;
+    text-shadow: 2px 1px rgb(96, 255, 114);
     cursor: pointer;
 }
 
 input[type="text" i] {
-
-    line-height: 1.05;
-    font-size: 20px;
+    line-height: 1.0;
+    font-size: 18px;
 }
 
 input {
@@ -24,7 +22,7 @@ input {
     
     font-style: normal;
     font-weight: 500;
-    font-size: 34px;
+    font-size: 30px;
     /* font-style: ;
     font-variant-ligatures: ;
     font-variant-caps: ;

@@ -3,7 +3,6 @@
     font-family: 'Fredericka the Great', cursive;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
 }
 
 .landing-header{
@@ -102,6 +101,8 @@ input[type=text]:not(.browser-default), input[type=password]:not(.browser-defaul
     position: relative;
     z-index: 2;
     cursor: pointer;
+    font-size: xx-large;
+    font-family: 'roboto';
 }
 
 #signUp:hover{
