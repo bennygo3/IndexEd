@@ -3,7 +3,6 @@ import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth'
 import StickyNote from '../StickyNote/StickyNote';
-
 import './SignUp.css';
 
 function SignUp(props){
@@ -12,6 +11,7 @@ function SignUp(props){
         username: '',
         password: '',
     });
+    
     const [addUser, { error, data }] = useMutation(ADD_USER);
     console.log(error, data);
 
@@ -28,7 +28,6 @@ function SignUp(props){
         event.preventDefault();
         console.log(`this is the state of the form ${formState.email}`)
         
-
         try {
             const { data } = await addUser({
                 variables: { ...formState },
@@ -38,11 +37,19 @@ function SignUp(props){
         } catch (err) {
             console.log(err);
         }
-    }
+    };
+
+
+    const handleClose = () => {
+        props.setTrigger(false);
+        setFormState({ email: '', username: '', password: '' });
+    };
+
     return (props.trigger) ? (
         <div className="signUpPopup">
             <StickyNote>
             <div className='popup-inner'>
+            <span className="close" onClick={handleClose}>&times;</span>
                 <form onSubmit={handleFormSubmit} >
                             <label id="formSignUp">
                                 Email:
@@ -78,9 +85,8 @@ function SignUp(props){
         </div>
         
     ) : "";
-    
-
 }
+
 export default SignUp;
 
 

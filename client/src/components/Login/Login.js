@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './Login.css';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 import StickyNote from '../StickyNote/StickyNote';
+import './Login.css';
 
 function Login(props) {
     const [formState, setFormState] = useState({
@@ -12,7 +12,6 @@ function Login(props) {
     });
 
     const [loginUser] = useMutation(LOGIN_USER);
-    // console.log(error, data);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -35,15 +34,18 @@ function Login(props) {
         } catch (err) {
             console.log(err);
         }
-        setFormState({
-            username: '',
-            password: '',
-        });
     };
+
+    const handleClose = () => {
+        props.setTrigger(false);
+        setFormState({ username: '', password: '' });
+    };
+
     return (props.trigger) ? (
         <div className="loginPopup">
             <StickyNote>
             <div className='loginPopup-inner'>
+            <span className="close" onClick={handleClose}>&times;</span>
                 <form onSubmit={handleFormSubmit} >
                     <label id="formLogin">
                         Username:
@@ -76,10 +78,7 @@ function Login(props) {
             </div>
             </StickyNote>
         </div>
-        
-
     ) : "";
-
-
 }
+
 export default Login;
