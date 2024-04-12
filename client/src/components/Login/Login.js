@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 import StickyNote from '../StickyNote/StickyNote';
-import './login.css';
+import './Login.css';
 
 function Login(props) {
     const [formState, setFormState] = useState({
