@@ -3,22 +3,22 @@
 }
 
 #formLogin, #formSignUp{
-    line-height: 1.5;
-    font-size: 34px;
+    line-height: 1.45;
+    font-size: 32px;
     position: relative;
-    top: 32px;
-    text-decoration: underline solid black 2px;
-    text-underline-offset: 4px;
+    top: 26px;
+    /* text-decoration: underline solid rgb(0, 0, 0) 1px; */
+    /* text-underline-offset: 4px; */
 }
 
 .login-btn{
     position: relative;
     top: 5px;
-    font-size: 30px;
+    font-size: 27px;
     cursor: pointer;
-    text-shadow: 2px 1px lightblue;
+    text-shadow: 1px 1px lightblue;
 }
 
 input[type=text]:not(.browser-default) {
-    border-bottom: 2px solid rgb(0, 0, 0);
+    border-bottom: none;
 }
