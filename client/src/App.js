@@ -8,6 +8,7 @@ import Landing from "./pages/Landing/Landing.js";
 import Home from "./pages/Home/Home.js";
 import CardCreate from "./pages/CardCreate/CardCreate.js";
 import MyCards from "./pages/MyCards/MyCards.js";
+import TriviaDecks from "./pages/TriviaDecks/TriviaDecks.js";
 
 // const httpLink = createHttpLink({
 //     uri: process.env.REACT_APP_GRAPHQL_URI || 'http://localhost:4000/',
@@ -55,6 +56,10 @@ function App() {
                         <Route
                             path='/my-cards'
                             element={<MyCards />}
+                        />
+                        <Route
+                            path='trivia-decks'
+                            element={<TriviaDecks />}
                         />
                     </Routes>
                 </Router>
