@@ -28,8 +28,8 @@ const Navbar = () => {
         <li>
 
           <Highlighted color="hotpink">
-            <Link to='/study-random'>
-            Study random cards
+            <Link to='/trivia-decks'>
+            Trivia studycards
             </Link>
           </Highlighted>
         </li>
