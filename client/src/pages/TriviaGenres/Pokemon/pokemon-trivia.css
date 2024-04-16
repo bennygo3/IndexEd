@@ -1,0 +1,47 @@
+.pokemon-decks-container {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    margin: auto;
+}
+
+.pokemon-decks {
+    display: flex;
+    will-change: transform; 
+    transition: transform 0.5s ease;
+}
+
+.card {
+    width: 100%;
+    
+    /* margin-right: -60%; */
+    transition: transform 0.3s ease;
+    margin: 0 10px;
+    transform: scale(0.8);
+    
+    border: 2px dashed black;
+    /* opacity: 1; */
+}
+
+.card-active {
+    transform: scale(1.2);
+    /* opacity: 1; */
+    cursor: pointer;
+}
+
+.card:not(.card-active) {
+    pointer-events: none;
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.carousel-controls button {
+    padding: 10px;
+}
