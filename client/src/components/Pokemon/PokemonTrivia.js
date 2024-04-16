@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Card from '../Card/Card.js';
 
 const PokemonTrivia = () => {
@@ -17,7 +17,7 @@ const PokemonTrivia = () => {
         };
     };
 
-    const loadPokemonCards = async () => {
+    const loadPokemonCards = useCallback (async () => {
         setLoading(true);
         const startId = offset * 20 + 1;
         const pokemonIds = Array.from({ length: 20}, (_, index) => startId + index);
@@ -25,11 +25,11 @@ const PokemonTrivia = () => {
         const pokemonData = await Promise.all(promises);
         setPokemonCards(pokemonData);
         setLoading(false);
-    };
+    }, [offset]);
 
     useEffect(() => {
         loadPokemonCards();
-    }, [offset]);
+    }, [loadPokemonCards]);
 
     if (loading) return <div>Loading...</div>;
 
