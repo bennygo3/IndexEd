@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
-import './TriviaCarousel.css';
+import './trivia-carousel.css';
 
 const TriviaItem = ({ genre, description, imageUrl, linkUrl }) => {
     return (
