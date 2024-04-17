@@ -1,0 +1,12 @@
+.trivia-decks {
+    background-color: lightblue;
+    height: 100dvh;
+}
+
+.trivia-decks-header {
+    display: flex;
+    font-family: "Jersey 20 Charted", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 140px;
+}

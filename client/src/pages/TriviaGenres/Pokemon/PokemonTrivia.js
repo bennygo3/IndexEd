@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Card from '../../../components/Card/Card.js';
 import { useSwipeable } from 'react-swipeable';
-import './pokemon-trivia.css';
+import './pokemonTrivia.css';
 
 export default function PokemonTrivia() {
     const [pokemonCards, setPokemonCards] = useState([]);

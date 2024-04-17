@@ -1,5 +1,6 @@
 import React from 'react';
 import TriviaCarousel from '../../components/TriviaCarousel/TriviaCarousel';
+import './triviaDecks.css';
 
 const genres = [
     { genre: 'Pokemon', description: 'Guess the name of Pokemon!', linkUrl: '/pokemon-trivia'}
@@ -7,11 +8,11 @@ const genres = [
 
 export default function TriviaDecks() {
     return (
-        <>
-        <h1>Trivia</h1>
-        <div className='trivia-decks'>
+        <section className='trivia-decks'>
+        <h1 className='trivia-decks-header'>Trivia:</h1>
+        <div className='trivia-decks-main'>
             <TriviaCarousel genres={genres} />
         </div>
-        </>
+        </section>
     );
 }

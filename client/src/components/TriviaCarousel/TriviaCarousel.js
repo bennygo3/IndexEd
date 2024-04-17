@@ -53,7 +53,7 @@ export default function TriviaCarousel({ genres }) {
                     <button
                         key={index}
                         className={index === activeIndex ? "active" : ""}
-                        onCLick={() => updateIndex(index)}>
+                        onClick={() => updateIndex(index)}>
                         {index + 1}
                     </button>
                 ))}
