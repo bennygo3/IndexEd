@@ -5,7 +5,7 @@ import Auth from '../../utils/auth';
 import StickyNote from '../StickyNote/StickyNote';
 import './Login.css';
 
-function Login(props) {
+export default function Login(props) {
     const [formState, setFormState] = useState({
         username: '',
         password: '',
@@ -80,5 +80,3 @@ function Login(props) {
         </div>
     ) : "";
 }
-
-export default Login;

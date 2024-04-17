@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
 import './trivia-carousel.css';
 
-const TriviaItem = ({ genre, description, imageUrl, linkUrl }) => {
+function TriviaItem({ genre, description, imageUrl, linkUrl }) {
     return (
         <>
             <div className="carousel-item">
@@ -19,7 +19,7 @@ const TriviaItem = ({ genre, description, imageUrl, linkUrl }) => {
     );
 };
 
-const TriviaCarousel = ({ genres }) => {
+export default function TriviaCarousel({ genres }) {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const updateIndex = (newIndex) => {
@@ -66,5 +66,3 @@ const TriviaCarousel = ({ genres }) => {
         </div>
     );
 };
-
-export default TriviaCarousel;

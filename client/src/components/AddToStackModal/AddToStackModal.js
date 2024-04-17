@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AddToStackModal = ({ isOpen, onClose, onCreateStack, onAddToStack, stacks, cardId }) => {
+export default function AddToStackModal({ isOpen, onClose, onCreateStack, onAddToStack, stacks, cardId }) {
     const [newStackTitle, setNewStackTitle] = useState('');
     const [selectedStackId, setSelectedStackId] = useState('');
 
@@ -50,5 +50,3 @@ const AddToStackModal = ({ isOpen, onClose, onCreateStack, onAddToStack, stacks,
         </div>
     );
 };
-
-export default AddToStackModal;

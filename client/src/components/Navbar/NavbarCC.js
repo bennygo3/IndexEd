@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Highlighted from '../Highlighter/Highlighter';
 
-const NavbarCC = () => {
+export default function NavbarCC(){
     return (
         <>
             <nav className='navbar-cc'>
@@ -33,7 +33,5 @@ const NavbarCC = () => {
 
             </nav>
         </>
-    )
+    );
 }
-
-export default NavbarCC;

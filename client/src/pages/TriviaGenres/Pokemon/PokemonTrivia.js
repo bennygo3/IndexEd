@@ -3,7 +3,7 @@ import Card from '../../../components/Card/Card.js';
 import { useSwipeable } from 'react-swipeable';
 import './pokemon-trivia.css';
 
-const PokemonTrivia = () => {
+export default function PokemonTrivia() {
     const [pokemonCards, setPokemonCards] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
     const [loading, setLoading] = useState(false);
@@ -70,8 +70,6 @@ const PokemonTrivia = () => {
     </div>
     ); 
 };
-
-export default PokemonTrivia;
 
 // return (
 //     <div className="pokemon-decks">

@@ -5,7 +5,7 @@ import './Navbar.css';
 import Highlighted from '../Highlighter/Highlighter';
 // import HomeButtons from '../../components/HomeButtons/HomeButtons.js';
 
-const Navbar = () => {
+export default function Navbar() {
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -39,7 +39,6 @@ const Navbar = () => {
 
 }
 
-export default Navbar;
 
 //notes: adding className as props to allow for various styling of the navbar comp
 

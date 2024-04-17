@@ -5,7 +5,7 @@ const genres = [
     { genre: 'Pokemon', description: 'Guess the name of Pokemon!', linkUrl: '/pokemon-trivia'}
 ]
 
-const TriviaDecks = () => {
+export default function TriviaDecks() {
     return (
         <>
         <h1>Trivia</h1>
@@ -13,7 +13,5 @@ const TriviaDecks = () => {
             <TriviaCarousel genres={genres} />
         </div>
         </>
-    )
+    );
 }
-
-export default TriviaDecks;

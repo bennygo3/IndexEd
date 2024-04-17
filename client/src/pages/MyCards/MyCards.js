@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { GET_CURRENT_USER } from '../../utils/queries';
 import Card from '../../components/Card/Card';
 
-const MyCards = () => {
+export default function MyCards() {
     const { loading, error, data } = useQuery(GET_CURRENT_USER);
     
     if (loading) return <p>Loading...</p>;
@@ -24,5 +24,3 @@ const MyCards = () => {
         </div>
     );
 };
-
-export default MyCards;

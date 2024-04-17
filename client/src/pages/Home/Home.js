@@ -3,7 +3,7 @@ import './Home.css';
 import Navbar from '../../components/Navbar/Navbar.js';
 import LineGenerator from '../../components/Lines/LineGenerator.js';
 
-const Home = () => {
+export default function Home(){
   return (
     <main className="home-body">
       <div className="home-container">
@@ -19,5 +19,3 @@ const Home = () => {
     </main>
   );
 };
-
-export default Home;

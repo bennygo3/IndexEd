@@ -7,7 +7,7 @@ import NavbarCC from '../../components/Navbar/NavbarCC.js';
 import LineGenerator from '../../components/Lines/LineGenerator.js';
 import AddToStackModal from '../../components/AddToStackModal/AddToStackModal.js';
 
-const CardCreate = () => {
+export default function CardCreate() {
     const [front, setFront] = useState('');
     const [back, setBack] = useState('');
     const [stackId, setStackId] = useState('');
@@ -127,10 +127,9 @@ const CardCreate = () => {
                 stacks={stacksData ? stacksData.stacks : []}
             />
         </div>
-    )
+    );
 }
 
-export default CardCreate;
 
 // {/* <input
 // type="text"

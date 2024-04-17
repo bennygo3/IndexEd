@@ -4,7 +4,7 @@ import SignUp from '../../components/SignUp/SignUp.js';
 import LineGenerator from '../../components/Lines/LineGenerator.js';
 import "./landing.css";
 
-function Landing() {
+export default function Landing() {
     const [loginPopup, setLoginPopup] = useState(false);
     const [signUpPopup, setButtonPopup] = useState(false);
 
@@ -39,5 +39,3 @@ function Landing() {
         </>
     );
 }
-
-export default Landing;

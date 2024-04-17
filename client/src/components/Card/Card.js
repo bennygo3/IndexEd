@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Card = ({ front, back }) => {
+export default function Card({ front, back }) {
     const [isFlipped, setIsFlipped] = useState(false);
 
     const flipCard = () => {
@@ -14,5 +14,3 @@ const Card = ({ front, back }) => {
         </div>
     );
 };
-
-export default Card;

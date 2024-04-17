@@ -5,7 +5,7 @@ import Auth from '../../utils/auth'
 import StickyNote from '../StickyNote/StickyNote';
 import './SignUp.css';
 
-function SignUp(props){
+export default function SignUp(props){
     const [formState, setFormState] = useState({
         email: '',
         username: '',
@@ -86,33 +86,3 @@ function SignUp(props){
         
     ) : "";
 }
-
-export default SignUp;
-
-
-
-
-
-// const e = React.createElement;
-
-// class SignUpButton extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = { liked: false };
-//     }
-
-//     render() {
-//         if (this.state.liked) {
-//             return 'You liked this.';
-//         }
-
-//         return e(
-//             'button',
-//             { onClick: () => this.setState({ liked: true }) },
-//             'Sign Up'
-            
-//         );
-//     }
-// } const domContainer = document.querySelector('#signUp');
-// ReactDOM.render(e(SignUpButton), domContainer);
-// }
