@@ -1,4 +1,70 @@
 .pokemon-decks-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100dvh;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.pokemon-decks-container h1{
+    font-size: 5rem;
+}
+
+.pokemon-decks-container h3{
+    font-size: 2rem;
+}
+
+.pokemon-decks-container h1, h3{
+    text-align: center;
+    margin-top: 0;
+    padding-top: 20px;
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.pokemon-decks{
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    min-height: 250px;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.pokemon-card {
+    flex: 1 0 33.33%;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.pokemon-card-active {
+    border: dashed 2px black;
+    border-radius: 100px;
+    padding: 10px;
+}
+
+.carousel-controls {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%; /* Ensure full width control panel */
+}
+
+.card {
+    cursor: pointer;
+    perspective: 1000px; /* For the flip effect */
+}
+
+
+
+/* .pokemon-decks-container {
     overflow: hidden;
     width: 100%;
     height: 100dvh;
@@ -17,13 +83,14 @@
     display: block;
     transition: transform 0.3s ease;
     margin: auto 15px;
-    border: 2px dashed black;
-    padding: 10px;
+    
+    
 }
 
 .pokemon-card-active {
-    transform: scale(1.2);
-    /* opacity: 1; */
+    border: 2px dashed black;
+    border-radius: 50px;
+    
     cursor: pointer;
 }
 
@@ -37,11 +104,9 @@
     left: 0;
     right: 0;
     display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    
+    justify-content: space-evenly;
 }
 
 .carousel-controls button {
     padding: 10px;
-}
+} */

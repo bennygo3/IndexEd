@@ -48,7 +48,7 @@ export default function PokemonTrivia() {
         <div className='pokemon-decks-container' {...handlers}>
             <h1>Pokémon</h1>
             <h3>... click on the pokemon to reveal the name!</h3>
-            <div className='pokemon-decks' style={{ transform: `translateX(-${activeIndex + 1} * 33.33%)` }}>
+            <div className='pokemon-decks' style={{ transform: `translateX(-${activeIndex * 100 / 3}%)` }}>
                 {pokemonCards.map((pokemon, index) => {
                     const isActive = index === activeIndex;
                     const cardClass = isActive ? 'pokemon-card-active' : 'pokemon-card';
