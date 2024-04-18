@@ -12,13 +12,15 @@ export default function PokemonTrivia() {
 
     // Swipe handlers for carousel functionality
     const handlers = useSwipeable({
-        onSwipedLeft: () => setActiveIndex(index => (index + 1) % pokemonCards.length),
-        onSwipedRight: () => setActiveIndex(index => (index - 1 + pokemonCards.length) % pokemonCards.length),
+        onSwipedLeft: () => moveNext(),
+        onSwipedRight: () => movePrev(),
     });
 
+    const moveNext = () => setActiveIndex((prevIndex) => (prevIndex + 1) % pokemonCards.length);
+    const movePrev = () => setActiveIndex((prevIndex) => (prevIndex - 1 + pokemonCards.length) % pokemonCards.length);
+
     const fetchPokemon = async (id) => {
-        const pokeUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
-        const response = await fetch(pokeUrl);
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         const data = await response.json();
         return {
             name: data.name,
@@ -41,35 +43,47 @@ export default function PokemonTrivia() {
     }, [loadPokemonCards]);
 
     if (loading) return <div>Loading...</div>;
-    return(
-    <div className='pokemon-decks-container' {...handlers}>
-        <div className='pokemon-decks' style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
-        {pokemonCards.map((pokemon, index) => {
-            const isActive = index === activeIndex;
-            const cardClass = isActive ? 'card-active' : 'card';
-            return (
-                <div className={cardClass} key={index} onClick={() => setActiveIndex(index)}>
-                    <Card key={index}
-                        front={<img src={pokemon.sprite} alt={pokemon.name} />}
-                        back={pokemon.name}
-                    />
-                </div>
-            );
-        })}
+
+    return (
+        <div className='pokemon-decks-container' {...handlers}>
+            <h1>Pokémon</h1>
+            <h3>... click on the pokemon to reveal the name!</h3>
+            <div className='pokemon-decks' style={{ transform: `translateX(-${activeIndex + 1} * 33.33%)` }}>
+                {pokemonCards.map((pokemon, index) => {
+                    const isActive = index === activeIndex;
+                    const cardClass = isActive ? 'pokemon-card-active' : 'pokemon-card';
+                return (
+                    <div className={cardClass} key={index} onClick={() => setActiveIndex(index)}>
+                        <Card key={index}
+                            front={<img src={pokemon.sprite} alt={pokemon.name} />}
+                            back={pokemon.name}
+                        />
+                    </div>
+                );
+                })}
+            </div>
+            <div className='carousel-controls'>
+                <button onClick={movePrev}>
+                    Previous
+                </button>
+                <button onClick={() => setOffset(oldOffset => oldOffset + 1)}>Load New Pokemon</button>
+                <button onClick={moveNext}>
+                    Next
+                </button>
+            </div>
         </div>
-        <div className='carousel-controls'>
-            <button onClick={() => setActiveIndex(index => (index - 1 + pokemonCards.length) % pokemonCards.length)}>
-                Previous
-            </button>
-            <button onClick={() => setActiveIndex(index => (index + 1) % pokemonCards.length)}>
-                Next
-            </button>
-        </div>
-        <button onClick={() => setOffset(oldOffset => + 1)}>Load New Pokemon</button>
-        {/* <button onClick={loadPokemonCards}>Load New Pokemon</button> */}
-    </div>
-    ); 
+    );
 };
+
+    // const fetchPokemon = async (id) => {
+    //     const pokeUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
+    //     const response = await fetch(pokeUrl);
+    //     const data = await response.json();
+    //     return {
+    //         name: data.name,
+    //         sprite: data.sprites.front_default
+    //     };
+    // };
 
 // return (
 //     <div className="pokemon-decks">

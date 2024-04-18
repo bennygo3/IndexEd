@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
 import './trivia-carousel.css';
@@ -8,28 +9,26 @@ function TriviaItem({ genre, description, imageUrl, linkUrl }) {
         <>
             <div className="carousel-item">
                 <div className="carousel-group">
-                    <h1 className="carousel-title">{genre}</h1>
-                    <p className="carousel-info">{description}</p>
+                    {/* <h1 className="carousel-title">{genre}</h1> */}
                     <Link to={linkUrl}>
                         <img src={imageUrl} alt={`snapshot of ${genre}`} />
                     </Link>
+                    <p className="carousel-info">{description}</p>
                 </div>
             </div>
         </>
     );
 };
 
-export default function TriviaCarousel({ genres }) {
-    const [activeIndex, setActiveIndex] = useState(0);
-
+export default function TriviaCarousel({ genres, activeIndex, setActiveIndex }) {
     const updateIndex = (newIndex) => {
-        if (newIndex < 0) {
-            newIndex = genres.length - 1;
-        } else if (newIndex >= genres.length) {
-            newIndex = 0;
-        }
-        setActiveIndex(newIndex);
-    };
+        const adjustedIndex = newIndex < 0
+            ? genres.length - 1
+            : newIndex>= genres.length
+                ? 0
+                : newIndex;
+        setActiveIndex(adjustedIndex);
+    }
 
     const handlers = useSwipeable({
         onSwipedLeft: () => updateIndex(activeIndex + 1),
@@ -66,3 +65,14 @@ export default function TriviaCarousel({ genres }) {
         </div>
     );
 };
+
+    // const [activeIndex, setActiveIndex] = useState(0);
+
+    // const updateIndex = (newIndex) => {
+    //     if (newIndex < 0) {
+    //         newIndex = genres.length - 1;
+    //     } else if (newIndex >= genres.length) {
+    //         newIndex = 0;
+    //     }
+    //     setActiveIndex(newIndex);
+    // };

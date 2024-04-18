@@ -1,3 +1,7 @@
 .trivia-carousel{
     overflow: hidden;
 }
+
+.carousel-group{
+    margin-top: 50px;
+}

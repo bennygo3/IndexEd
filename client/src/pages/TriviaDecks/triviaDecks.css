@@ -1,12 +1,30 @@
 .trivia-decks {
     background-color: lightblue;
     height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.trivia-decks-header-container{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    flex-direction: column;
 }
 
 .trivia-decks-header {
-    display: flex;
-    font-family: "Jersey 20 Charted", sans-serif;
-    font-weight: 400;
-    font-style: normal;
     font-size: 140px;
+    margin-left: 20px;
+    text-shadow: 
+    3px 2px 0px rgb(248, 255, 107);
+}
+
+.genre-title{
+    font-size: 68px;
+    margin-left: 48px;
+    /* text-shadow: -3px 2px 0px rgb(255, 255, 255); */
+    outline: dashed 4px white;
+    padding: 10px;  
 }
