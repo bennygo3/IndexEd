@@ -28,27 +28,20 @@
 
 .pokemon-decks{
     display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
     width: 100%;
     min-height: 250px;
-    justify-content: flex-start;
-    align-items: center;
     margin: 20px 0;
 }
 
 .pokemon-card {
-    flex: 1 0 33.33%;
-    transition: all 0.3s ease;
+    flex: 0 0 33.33%;
+    transition: all 0.3s ease-in-out;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.3s ease-in-out;
-}
-
-.pokemon-card-active {
-    border: dashed 2px black;
-    border-radius: 100px;
-    padding: 10px;
 }
 
 .carousel-controls {
@@ -64,49 +57,3 @@
 
 
 
-/* .pokemon-decks-container {
-    overflow: hidden;
-    width: 100%;
-    height: 100dvh;
-    position: relative;
-}
-
-.pokemon-decks {
-    display: flex;
-    will-change: transform; 
-    transition: transform 0.5s ease;
-}
-
-.pokemon-card {
-   
-    height: auto;
-    display: block;
-    transition: transform 0.3s ease;
-    margin: auto 15px;
-    
-    
-}
-
-.pokemon-card-active {
-    border: 2px dashed black;
-    border-radius: 50px;
-    
-    cursor: pointer;
-}
-
-.card:not(.pokemon-card-active) {
-    pointer-events: none;
-}
-
-.carousel-controls {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.carousel-controls button {
-    padding: 10px;
-} */
