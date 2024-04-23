@@ -52,10 +52,25 @@
 
 .card {
     cursor: pointer;
-    /* perspective: 1000px; For the flip effect */
+    perspective: 1000px; /* For the flip effect */
+    width: 270px;
+    height: 370px;
+    position: relative;
+    margin: auto;
+}
+
+.card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: transform 0.6s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .card-front{
+    background-color: #f17575;
     & img{
         image-rendering: pixelated;
         height: 270px;
@@ -64,5 +79,21 @@
     }
 }
 
+.card-back{
+    background-color: #4a74d6;
+    transform: rotateY(180deg);
+}
+
+.card.flipped .card-front {
+    transform: rotateY(180deg);
+}
+
+.card.flipped .card-back {
+    transform: rotateY(0deg);
+}
+
+.card-back div {
+    transform: rotateY(180deg);
+}
 
 
