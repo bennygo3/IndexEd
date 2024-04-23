@@ -55,5 +55,14 @@
     perspective: 1000px; /* For the flip effect */
 }
 
+.card-front{
+    & img{
+        image-rendering: pixelated;
+        height: 270px;
+        width: auto;
+
+    }
+}
+
 
 

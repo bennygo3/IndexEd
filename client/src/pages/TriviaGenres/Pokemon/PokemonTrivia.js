@@ -16,14 +16,6 @@ export default function PokemonTrivia() {
         onSwipedRight: () => setActiveIndex((activeIndex - 1 + pokemonCards.length) % pokemonCards.length),
     });
 
-    // const moveNext = () => {
-    //     setActiveIndex(prev => (prev + 1) % pokemonCards.length);
-    // }
-
-    // const movePrev = () => {
-    //     setActiveIndex(prev => (prev - 1 + pokemonCards.length) % pokemonCards.length);
-    // }
-
     const fetchPokemon = async (id) => {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         const data = await response.json();
@@ -55,7 +47,7 @@ export default function PokemonTrivia() {
             <h3>... click on the pokemon to reveal the name!</h3>
             <div className ='pokemon-decks'>
                 {pokemonCards.length > 0 && (
-                    <div className='pokemon-card' onCLick={() => setActiveIndex((activeIndex + 1) % pokemonCards.length)}>
+                    <div className='pokemon-card' onClick={() => setActiveIndex((activeIndex + 1) % pokemonCards.length)}>
                         <Card 
                             front={<img src={pokemonCards[activeIndex].sprite} alt={pokemonCards[activeIndex].name} />}
                             back={pokemonCards[activeIndex].name}
