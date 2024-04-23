@@ -30,19 +30,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
     width: 100%;
     min-height: 250px;
-    margin: 20px 0;
+    margin: 50px 0;
 }
 
-.pokemon-card {
-    flex: 0 0 33.33%;
-    transition: all 0.3s ease-in-out;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 
 .carousel-controls {
     display: flex;
@@ -50,16 +43,16 @@
     width: 100%; /* Ensure full width control panel */
 }
 
-.card {
+.pokemon-card .card {
     cursor: pointer;
     perspective: 1000px; /* For the flip effect */
-    width: 270px;
-    height: 370px;
+    width: 280px;
+    height: 280px;
     position: relative;
     margin: auto;
 }
 
-.card-front, .card-back {
+.pokemon-card .card-front, .pokemon-card .card-back {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -67,20 +60,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(to bottom, red 50%, white 50%);
+    border: 5px solid black;
 }
 
-.card-front{
-    background-color: #f17575;
+.pokemon-card .card-front{
     & img{
         image-rendering: pixelated;
-        height: 270px;
+        height: 300px;
         width: auto;
-
     }
 }
 
-.card-back{
-    background-color: #4a74d6;
+.pokemon-card .card-back{
     transform: rotateY(180deg);
 }
 
@@ -92,8 +86,14 @@
     transform: rotateY(0deg);
 }
 
+/* flips the back of the card to display the answer correctly */
 .card-back div {
     transform: rotateY(180deg);
+    font-family: Tahoma, sans-serif;
+    
+    font-size: 40px;
+    position: relative;
+    background-color: white;
+    border: 3px solid black;
+    padding: 5px;
 }
-
-
