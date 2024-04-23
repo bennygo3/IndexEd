@@ -52,7 +52,7 @@
 
 .card {
     cursor: pointer;
-    perspective: 1000px; /* For the flip effect */
+    /* perspective: 1000px; For the flip effect */
 }
 
 .card-front{
