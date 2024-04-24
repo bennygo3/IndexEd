@@ -19,21 +19,24 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const server = new ApolloServer({
     typeDefs,
     resolvers,
+    context: ({ req }) => ({ user: req.user }),
 });
 
 await server.start();
 
 // Apply middleware to the Express app
+app.use(cors());
+app.use(express.json());
+
+app.use((req, res, next) => {
+    authMiddleware({ req }); // This modifies request to add user
+    next(); // Proceed to next middleware
+});
+
+// Apply Apollo GraphQL middleware
 app.use(
     '/graphql',
-    cors(),
-    express.json(),
-    expressMiddleware(server, {
-        context: ({ req }) => {
-            const user = authMiddleware({ req }).user;
-            return { user };
-        },
-    }),
+    expressMiddleware(server)
 );
 
 // Serve static files and the React app
@@ -52,3 +55,16 @@ db.once('open', () => {
 // Start the HTTP server
 await new Promise(resolve => httpServer.listen({ port: PORT }, resolve));
 console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
+
+// Apply middleware to the Express app
+// app.use(
+//     '/graphql',
+//     cors(),
+//     express.json(),
+//     expressMiddleware(server, {
+//         context: ({ req }) => {
+//             const user = authMiddleware({ req }).user;
+//             return { user };
+//         },
+//     }),
+// );

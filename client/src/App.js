@@ -3,6 +3,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@ap
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ThemeProvider from './context/ThemeProvider.js';
+import AuthCheck from './utils/AuthCheck.js';
 
 import Landing from './pages/Landing/Landing.js';
 import Home from './pages/Home/Home.js';
@@ -10,15 +11,14 @@ import CardCreate from './pages/CardCreate/CardCreate.js';
 import MyCards from './pages/MyCards/MyCards.js';
 import TriviaDecks from './pages/TriviaDecks/TriviaDecks.js';
 import PokemonTrivia from './pages/TriviaGenres/Pokemon/PokemonTrivia.js';
+// import authService from './utils/auth.js';
 
 const httpLink = createHttpLink({
     uri: process.env.REACT_APP_GRAPHQL_URI || '/graphql',
 }); 
 
 const authLink = setContext((_, { headers }) => {
-
     const token = localStorage.getItem('id_token');
-
     return {
         headers: {
             ...headers,
@@ -37,6 +37,7 @@ function App() {
         <ApolloProvider client={client}>
             <ThemeProvider>
                 <Router>
+                    < AuthCheck />
                     <Routes>
                         <Route
                             path="/"

@@ -5,7 +5,7 @@ if (!secret) {
     throw new Error("JWT_SECRET is not set");
 }
 
-const expiration = '5h';
+const expiration = '1m';
 
 const authMiddleware = ({ req }) => {
     let token = req.body.token || req.query.token || req.headers.authorization;
@@ -18,11 +18,13 @@ const authMiddleware = ({ req }) => {
         return req;
     }
 
+    console.log("Token received:", token);
     try {
-        const { data } = jwt.verify(token, secret, { maxAge: expiration });
+        const { data } = jwt.verify(token, secret);
         console.log("Verification successful:", data); // Debugging log
         req.user = data;
-    } catch {
+    } catch (error) {
+        console.error('Token verification failed:', error.message);
         console.log('invalid token check back-end auth.js')
     }
     return req;
