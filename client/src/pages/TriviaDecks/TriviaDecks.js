@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import TriviaCarousel from '../../components/TriviaCarousel/TriviaCarousel';
 import './triviaDecks.css';
+import pokeSnapshot from '../../assets/pokeSnapshot.png'
 
 const genres = [
-    { genre: 'Pokemon', description: 'Guess the Pokemon!', linkUrl: '/pokemon-trivia' },
+    { 
+        genre: 'Pokemon', 
+        description: 'Guess the Pokemon!', 
+        linkUrl: '/pokemon-trivia', 
+        imageUrl: `${pokeSnapshot}`
+    },
     // { genre: 'Sports', description: 'Sports Trivia', linkUrl: '/sports-trivia' }
 ];
 
