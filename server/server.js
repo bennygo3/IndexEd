@@ -9,6 +9,7 @@ import path from 'path';
 import { typeDefs, resolvers } from './schemas/index.js';
 import { authMiddleware } from './utils/auth.js';
 import db from './config/connection.js';
+import nbaRouter from './routes/nbaRoutes.js';
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -33,6 +34,8 @@ app.use((req, res, next) => {
     next(); // Proceed to next middleware
 });
 
+app.use('/api', nbaRouter);
+
 // Apply Apollo GraphQL middleware
 app.use(
     '/graphql',
@@ -55,16 +58,3 @@ db.once('open', () => {
 // Start the HTTP server
 await new Promise(resolve => httpServer.listen({ port: PORT }, resolve));
 console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
-
-// Apply middleware to the Express app
-// app.use(
-//     '/graphql',
-//     cors(),
-//     express.json(),
-//     expressMiddleware(server, {
-//         context: ({ req }) => {
-//             const user = authMiddleware({ req }).user;
-//             return { user };
-//         },
-//     }),
-// );
