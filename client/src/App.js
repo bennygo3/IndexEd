@@ -11,6 +11,7 @@ import CardCreate from './pages/CardCreate/CardCreate.js';
 import MyCards from './pages/MyCards/MyCards.js';
 import TriviaDecks from './pages/TriviaDecks/TriviaDecks.js';
 import PokemonTrivia from './pages/TriviaGenres/Pokemon/PokemonTrivia.js';
+import NbaLogos from './pages/TriviaGenres/Sports/NBA/NbaLogos.js';
 // import authService from './utils/auth.js';
 
 const httpLink = createHttpLink({
@@ -62,6 +63,10 @@ function App() {
                         <Route
                             path='pokemon-trivia'
                             element={<PokemonTrivia />}
+                        />
+                        <Route
+                            path='nba-logos'
+                            element={<NbaLogos />}
                         />
                     </Routes>
                 </Router>

@@ -2,6 +2,8 @@ import fetch from 'node-fetch';
 
 const fetchNBATeamLogos = async () => {
     const nbaUrl = 'https://tank01-fantasy-stats.p.rapidapi.com/getNBATeams?schedules=true&rosters=true&topPerformers=true&teamStats=true&statsToGet=averages';
+    console.log("RapidAPI Key:", process.env.NBARAPIDAPI_KEY);
+    console.log('port')
     const nbaOptions = {
         method: 'GET',
         headers: {
@@ -17,7 +19,7 @@ const fetchNBATeamLogos = async () => {
         }
         return await nbaResponse.json();
     } catch (error) {
-        const.error('Failed to fetch NBA team logos:', error);
+        console.error('Failed to fetch NBA team logos:', error);
         throw error; // Rethrow to handle the error in the route
     }
 };
