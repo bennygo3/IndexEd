@@ -2,8 +2,6 @@ import fetch from 'node-fetch';
 
 const fetchNBATeamLogos = async () => {
     const nbaUrl = 'https://tank01-fantasy-stats.p.rapidapi.com/getNBATeams?schedules=true&rosters=true&topPerformers=true&teamStats=true&statsToGet=averages';
-    console.log("RapidAPI Key:", process.env.NBARAPIDAPI_KEY);
-    console.log('port')
     const nbaOptions = {
         method: 'GET',
         headers: {

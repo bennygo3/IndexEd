@@ -3,7 +3,7 @@ import fetchNBATeamLogos from '../services/fetchNBATeamLogos.js';
 
 const router = express.Router();
 
-router.get('/api/nba-logos', async (req, res) => {
+router.get('/nba-logos', async (req, res) => {
     console.log("Endpoint /api/nba-logos hit");
     try {
         const nbaData = await fetchNBATeamLogos();
