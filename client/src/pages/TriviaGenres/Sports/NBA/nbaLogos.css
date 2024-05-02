@@ -1,0 +1,10 @@
+.nba-card-logo {
+      height: 500px;
+      border: solid;
+    & img{
+    height: 420px;
+    border: dotted;
+    
+}
+}
+

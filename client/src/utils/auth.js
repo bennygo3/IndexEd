@@ -1,42 +1,67 @@
-import decode from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
 
 class AuthService {
-    getProfile() {
-        return decode(this.getToken());
+    getToken() {
+        // return localStorage.getItem('id_token');
+        const token = localStorage.getItem('id_token');
+        console.log("Retrieved token from storage:", token);
+        return token;
     }
 
-    loggedIn() {
-        const token = this.getToken();
-        return token && !this.isTokenExpired(token) ? true : false;
-    }
-
-    isTokenExpired() {
-        // added to take care of error 1:46 
-        const token = this.getToken();
-        const decoded = decode(token);
-        if (decoded.exp < Date.now() /1000 ) {
-            localStorage.removeItem('id_token');
+    isTokenExpired(token) {
+        try {
+            const profile = jwt_decode(token);
+            console.log("Decoded token:", profile);
+            return profile.exp < Date.now() / 1000;
+        } catch (err) {
+            console.error("Failed to decode token:", err)
             return true;
         }
-        return false;
     }
 
-    getToken() {
-        return localStorage.getItem('id_token');
+    getProfile() {
+        const token = this.getToken();
+        if (!token) return null;
+        try {
+            return jwt_decode(token);
+        } catch (error) {
+            console.error("Failed to decode token:", error);
+            return null;
+        }
+        
     }
 
     login(idToken) {
         localStorage.setItem('id_token', idToken);
-        //DO WE NEED TO CHANGE THE PATH HERE IN ORDER TO SHOW THE USER THE DASHBOARD AFTER LOGGING IN?
         window.location.assign('/home');
     }
 
-    logout() {
+    loggedIn() {
+        const token = this.getToken();
+        const isLoggedIn = !!token && !this.isTokenExpired(token);
+        console.log("Is logged in:", isLoggedIn);
+        // return token && !this.isTokenExpired(token) ? true : false;
+        return isLoggedIn;
+    }
+
+    logout(navigate) {
         localStorage.removeItem('id_token');
-        //DO WE WANT TO NAVIGATE THEM BACK TO THE LOGIN PAGE HERE?
-        window.location.reload();
+        navigate('/');
+        // window.location.assign('/');
+        // window.location.reload();
     }
 }
 
 const authService = new AuthService();
 export default authService;
+
+    // isTokenExpired() {
+    //     // added to take care of error 1:46 
+    //     const token = this.getToken();
+    //     const decoded = decode(token);
+    //     if (decoded.exp < Date.now() /1000 ) {
+    //         localStorage.removeItem('id_token');
+    //         return true;
+    //     }
+    //     return false;
+    // }

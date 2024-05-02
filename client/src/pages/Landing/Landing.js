@@ -32,7 +32,7 @@ export default function Landing() {
                 </div>
                 <hr className="landing-redLine"></hr>
                 <div className="landing-lines">
-                    <LineGenerator amount={25} colorClass="blue-line" />
+                    <LineGenerator amount={20} colorClass="blue-line" />
                 </div>
             </div>
 

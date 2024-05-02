@@ -1,7 +1,7 @@
 import React from 'react';
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
+// import { setContext } from '@apollo/client/link/context';
+import { Routes, Route } from 'react-router-dom';
 import ThemeProvider from './context/ThemeProvider.js';
 import AuthCheck from './utils/AuthCheck.js';
 
@@ -14,64 +14,45 @@ import PokemonTrivia from './pages/TriviaGenres/Pokemon/PokemonTrivia.js';
 import NbaLogos from './pages/TriviaGenres/Sports/NBA/NbaLogos.js';
 // import authService from './utils/auth.js';
 
-const httpLink = createHttpLink({
-    uri: process.env.REACT_APP_GRAPHQL_URI || '/graphql',
-}); 
-
-const authLink = setContext((_, { headers }) => {
-    const token = localStorage.getItem('id_token');
-    return {
-        headers: {
-            ...headers,
-            authorization: token ? `Bearer ${token}` : '',
-        },
-    };
-});
-
-const client = new ApolloClient({
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache(),
-});
-
 function App() {
     return (
-        <ApolloProvider client={client}>
-            <ThemeProvider>
-                <Router>
-                    < AuthCheck />
-                    <Routes>
-                        <Route
-                            path="/"
-                            element={<Landing />}
-                        />
-                        <Route
-                            path='/home'
-                            element={<Home />}
-                        />
-                        <Route
-                            path='/card-create'
-                            element={<CardCreate />}
-                        />
-                        <Route
-                            path='/my-cards'
-                            element={<MyCards />}
-                        />
-                        <Route
-                            path='trivia-decks'
-                            element={<TriviaDecks />}
-                        />
-                        <Route
-                            path='pokemon-trivia'
-                            element={<PokemonTrivia />}
-                        />
-                        <Route
-                            path='nba-logos'
-                            element={<NbaLogos />}
-                        />
-                    </Routes>
-                </Router>
-            </ThemeProvider>
-        </ApolloProvider>
+
+        <ThemeProvider>
+
+            < AuthCheck />
+            <Routes>
+                <Route
+                    path="/"
+                    element={<Landing />}
+                />
+                <Route
+                    path='/home'
+                    element={<Home />}
+                />
+                <Route
+                    path='/card-create'
+                    element={<CardCreate />}
+                />
+                <Route
+                    path='/my-cards'
+                    element={<MyCards />}
+                />
+                <Route
+                    path='trivia-decks'
+                    element={<TriviaDecks />}
+                />
+                <Route
+                    path='pokemon-trivia'
+                    element={<PokemonTrivia />}
+                />
+                <Route
+                    path='nba-logos'
+                    element={<NbaLogos />}
+                />
+            </Routes>
+           
+        </ThemeProvider>
+      
     );
 
 }

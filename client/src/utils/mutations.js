@@ -46,7 +46,7 @@ export const CREATE_STACK = gql`
         createStack(input: $input) {
             _id
             title
-            categeory
+            category
             description
             author {
                 _id
