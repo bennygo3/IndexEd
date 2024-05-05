@@ -1,4 +1,4 @@
-import jwt_decode from 'jwt-decode';
+import decode from 'jwt-decode';
 
 class AuthService {
     getToken() {
@@ -10,7 +10,7 @@ class AuthService {
 
     isTokenExpired(token) {
         try {
-            const profile = jwt_decode(token);
+            const profile = decode(token);
             console.log("Decoded token:", profile);
             return profile.exp < Date.now() / 1000;
         } catch (err) {
@@ -23,7 +23,7 @@ class AuthService {
         const token = this.getToken();
         if (!token) return null;
         try {
-            return jwt_decode(token);
+            return decode(token);
         } catch (error) {
             console.error("Failed to decode token:", error);
             return null;
@@ -54,14 +54,3 @@ class AuthService {
 
 const authService = new AuthService();
 export default authService;
-
-    // isTokenExpired() {
-    //     // added to take care of error 1:46 
-    //     const token = this.getToken();
-    //     const decoded = decode(token);
-    //     if (decoded.exp < Date.now() /1000 ) {
-    //         localStorage.removeItem('id_token');
-    //         return true;
-    //     }
-    //     return false;
-    // }

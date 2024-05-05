@@ -1,9 +1,11 @@
 import React from 'react';
+import { ApolloProvider } from '@apollo/client';
 // import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 // import { setContext } from '@apollo/client/link/context';
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import client from './utils/apolloClient.js';
 import ThemeProvider from './context/ThemeProvider.js';
-import AuthCheck from './utils/AuthCheck.js';
+// import AuthCheck from './utils/AuthCheck.js';
 
 import Landing from './pages/Landing/Landing.js';
 import Home from './pages/Home/Home.js';
@@ -19,7 +21,9 @@ function App() {
 
         <ThemeProvider>
 
-            < AuthCheck />
+        {/* < AuthCheck /> */}
+        <ApolloProvider client={client}>
+            <Router>
             <Routes>
                 <Route
                     path="/"
@@ -50,9 +54,10 @@ function App() {
                     element={<NbaLogos />}
                 />
             </Routes>
-           
-        </ThemeProvider>
-      
+            </Router>
+        </ApolloProvider>
+        </ThemeProvider> 
+
     );
 
 }

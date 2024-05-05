@@ -10,22 +10,22 @@ export default function Landing() {
 
     return (
         <>
-            <h1 className="landing-header">IndexEd</h1>
-            {/* <span className="emoji">🤓</span> */}
+            <h1 className="landing-header">Index-Ed</h1>
+            {/* <span className="emoji">🤓&#9998;</span> */}
             <div id="landing">
                 <div className='landing-background'>
                     {/* added container to control corresponding popup */}
                     <div className="login-container">
                         <div id="login" onClick={() => setLoginPopup(true)}
                             className={loginPopup ? 'login-active' : ''}> 
-                            Login 
+                            Login...
                         </div>
                         <Login trigger={loginPopup} setTrigger={setLoginPopup} />
                     </div>
                     <div className="signUp-container">
                         <div id="signUp" onClick={() => setButtonPopup(true)}
                             className={signUpPopup ? 'signup-active' : ''}>
-                            Sign Up
+                            Sign Up...
                         </div>
                         <SignUp trigger={signUpPopup} setTrigger={setButtonPopup} />
                     </div>

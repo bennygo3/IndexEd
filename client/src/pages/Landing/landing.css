@@ -1,8 +1,12 @@
 #landing {
-    height: 80dvh;
+    /* height: 80dvh; */
+    width: 96%;
     font-family: 'Fredericka the Great', cursive;
     display: flex;
     flex-direction: column;
+    margin: 50px auto;
+    padding-top: 20px;
+    border: 2px solid rgba(232, 232, 232, 0.697);
 }
 
 .landing-header{
@@ -19,6 +23,13 @@
 
 .landing-redLine{
     border-top: 2px solid rgba(251, 52, 52, 0.421);
+    position: relative;
+    top: -10px;
+    z-index: -1;
+}
+
+.landing-lines{
+    position: relative;
 }
 
 .landing-background{
@@ -29,9 +40,7 @@
 
 #login{
     font-style: normal;
-    font-weight: 100;
-    font-size: 78px;
-    text-decoration: 2px underline dashed;
+    font-size: 70px;
     cursor: pointer;
 }
 
@@ -85,17 +94,9 @@ input[type=text]:not(.browser-default), input[type=password]:not(.browser-defaul
 }
 
 #signUp{
-    font-size: 78px;
-    background-color:transparent;
-    border: none;
-    text-decoration: 2px underline dashed;
+    font-size: 70px;
     cursor: pointer;
 }
-
-/* .popup-inner{
-    position: relative;
-    bottom: 10px;
-} */
 
 .close {
     position: relative;
@@ -110,9 +111,7 @@ input[type=text]:not(.browser-default), input[type=password]:not(.browser-defaul
     transform: scale(1.25);
 }
 
-.landing-lines{
-    position: relative;
-}
+
 
 @media (max-width: 1200px) {
     .landing-header {
@@ -120,7 +119,7 @@ input[type=text]:not(.browser-default), input[type=password]:not(.browser-defaul
     }
 
     #login, #signUp {
-        font-size: 60px;
+        font-size: 55px;
     }
 }
 
@@ -143,18 +142,3 @@ input[type=text]:not(.browser-default), input[type=password]:not(.browser-defaul
         font-size: 40px;
     }
 }
-
-
-/* #landing {
-    background-image: url("../../assets/pencilAndCard.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative; 
-    height: 100vh;
-    width: auto;
-    background-size: 100vw ;
-} */
-
-
-

@@ -4,8 +4,8 @@ import { expressMiddleware } from '@apollo/server/express4';
 import express from 'express';
 import cors from 'cors';
 import http from 'http';
-import { fileURLToPath } from 'url';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { typeDefs, resolvers } from './schemas/index.js';
 import { authMiddleware } from './utils/auth.js';
 import db from './config/connection.js';
@@ -17,33 +17,34 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 app.use(cors());
 app.use(express.json());
-app.use(authMiddleware);
 
-// Create an instance of ApolloServer
+// const server = new ApolloServer({
+//     typeDefs,
+//     resolvers,
+//     context: authMiddleware,
+    
+// });
+
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: ({ req }) => ({ user: req.user }),
+    context: ({ req }) => {
+        authMiddleware(req, {}, () => {});
+        console.log("User after middleware", req.user);
+        return { user: req.user };
+    },
 });
 
 await server.start();
 
-
-
-
-// app.use((req, res, next) => {
-//     authMiddleware({ req, res, next }); 
-// This modifies request to add user
-// });
 // Apply Apollo GraphQL middleware
 app.use(
     '/graphql',
-    expressMiddleware(server, {path: '/'})
+    expressMiddleware(server)
+    // server.getMiddleware({ path: '/' })
 );
 
 app.use('/api', nbaRouter);
-
-
 
 // Serve static files and the React app
 if (process.env.NODE_ENV === 'production') {

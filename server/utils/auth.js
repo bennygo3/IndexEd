@@ -7,7 +7,7 @@ if (!secret) {
 
 const expiration = '5h';
 
-const authMiddleware = (req, res, next) => {
+const authMiddleware = (req) => {
     let token = req.body.token || req.query.token || req.headers.authorization;
 
     if (req.headers.authorization) {
@@ -15,27 +15,24 @@ const authMiddleware = (req, res, next) => {
     }
 
     if (!token) {
-        return next();
-        // return req;
+        // return next();
+        return res.status(401).send("Authorization failed. No access token");
     }
 
-    // console.log("Token received:", token);
+    
     try {
-        
         const { data } = jwt.verify(token, secret);
         console.log("Verification successful:", data); // Debugging log
-        req.user = data;
-        next();
+        // req.user = data;
+        return data;
     } catch (error) {
         console.error('Token verification failed:', error.message);
-        return res.status(401).json({ 
-            message: 'Invalid token', 
-            errors: error.message 
-        });
-        // console.error('Token verification failed:', error.message);
-        // console.log('invalid token check back-end auth.js')
+        // return res.status(401).json({ 
+        //     message: 'Invalid token', 
+        //     errors: error.message 
+        // });
+        return null;
     }
-    // return req;
 };
 
 const signToken = ({ email, username, _id }) => {

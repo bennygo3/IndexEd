@@ -20,13 +20,11 @@ class ForbiddenError extends Error {
 const resolvers = {
   Query: {
     stacks: async () => {
-      //find all the decks for the homepage and populate the just the stacks
       return await Stack.find({});//.populate('studycards');
     },
     studycards: async (parent, args) => {
       return Studycard.find({});
     },
-    //populate one flashcard at a time from the corresponding deck by id
     studycard: async (parent, { _id }) => {
       return await Studycard.findById(_id);
     },
