@@ -30,7 +30,7 @@ const stateImages = {
     newmexico: { image: require('../../assets/US-States/New-Mexico.jpg'), name: 'New Mexico', order: 47 },
     newyork: { image: require('../../assets/US-States/New-York.jpg'), name: 'New York', order: 11 },
     northcarolina: { image: require('../../assets/US-States/North-Carolina.jpg'), name: 'North Carolina', order: 12 },
-    northdakota: { image: require('../../assets/US-States/North-Dakota..jpg'), name: 'North Dakota', order: 39 },
+    northdakota: { image: require('../../assets/US-States/North-Dakota.jpg'), name: 'North Dakota', order: 39 },
     ohio: { image: require('../../assets/US-States/Ohio.jpg'), name: 'Ohio', order: 17 },
     oklahoma: { image: require('../../assets/US-States/Oklahoma.jpg'), name: 'Oklahoma', order: 46 },
     oregon: { image: require('../../assets/US-States/Oregon.jpg'), name: 'Oregon', order: 33 },
