@@ -1,8 +1,54 @@
 const stateImages = {
-    // alabama: require('./assets/states/alabama.png)
+    alabama: { image: require('../../assets/US-States/Alabama.jpg'), name: 'Alabama', order: 22 },
+    alaska: { image: require('../../assets/US-States/Alaska.jpg'), name: 'Alaska', order: 49 },
+    arizona: { image: require('../../assets/US-States/Arizona.jpg'), name: 'Arizona', order: 48 },
+    arkansas: { image: require('../../assets/US-States/Arkansas.png'), name: 'Arkansas', order: 25 },
+    california: { image: require('../../assets/US-States/California.jpg'), name: 'California', order: 31 },
+    colorado: { image: require('../../assets/US-States/Colorado.png'), name: 'Colorado', order: 38 },
+    delaware: { image: require('../../assets/US-States/Delaware.jpg'), name: 'Delaware', order: 1 },
+    florida: { image: require('../../assets/US-States/Florida.jpg'), name: 'Florida', order: 27 },
+    georgia: { image: require('../../assets/US-States/Georgia.jpg'), name: 'Georgia', order: 4 },
+    hawaii: { image: require('../../assets/US-States/Hawaii.jpg'), name: 'Hawaii', order: 50 },
+    idaho: { image: require('../../assets/US-States/Idaho.jpg'), name: 'Idaho', order: 43 },
+    illinois: { image: require('../../assets/US-States/Illinois.jpg'), name: 'Illinois', order: 21 },
+    indiana: { image: require('../../assets/US-States/Indiana.jpg'), name: 'Indiana', order: 19 },
+    iowa: { image: require('../../assets/US-States/Iowa.jpg'), name: 'Iowa', order: 29 },
+    kansas: { image: require('../../assets/US-States/Kansas.jpg'), name: 'Kansas', order: 34 },
+    kentucky: { image: require('../../assets/US-States/Kentucky.jpg'), name: 'Kentucky', order: 15 },
+    louisiana: { image: require('../../assets/US-States/Louisiana.jpg'), name: 'Louisiana', order: 18 },
+    maine: { image: require('../../assets/US-States/Maine.jpg'), name: 'Maine', order: 23 },
+    maryland: { image: require('../../assets/US-States/Maryland.jpg'), name: 'Maryland', order: 7 },
+    massachusetts: { image: require('../../assets/US-States/Massachusetts.jpg'), name: 'Massachusetts', order: 6 },
+    michigan: { image: require('../../assets/US-States/Michigan.jpg'), name: 'Michigan', order: 26 },
+    minnesota: { image: require('../../assets/US-States/Minnesota.jpg'), name: 'Minnesota', order: 32 },
+    mississippi: { image: require('../../assets/US-States/Mississippi.jpg'), name: 'Mississippi', order: 20 },
+    montana: { image: require('../../assets/US-States/Montana.jpg'), name: 'Montana', order: 41 },
+    nebraska: { image: require('../../assets/US-States/Nebraska.jpg'), name: 'Nebraska', order: 37 },
+    nevada: { image: require('../../assets/US-States/Nevada.jpg'), name: 'Nevada', order: 36 },
+    newhampshire: { image: require('../../assets/US-States/New-Hampshire.jpg'), name: 'New Hampshire', order: 9 },
+    newjersey: { image: require('../../assets/US-States/New-Jersey.jpg'), name: 'New Jersey', order: 3 },
+    newmexico: { image: require('../../assets/US-States/New-Mexico.jpg'), name: 'New Mexico', order: 47 },
+    newyork: { image: require('../../assets/US-States/New-York.jpg'), name: 'New York', order: 11 },
+    northcarolina: { image: require('../../assets/US-States/North-Carolina.jpg'), name: 'North Carolina', order: 12 },
+    northdakota: { image: require('../../assets/US-States/North-Dakota..jpg'), name: 'North Dakota', order: 39 },
+    ohio: { image: require('../../assets/US-States/Ohio.jpg'), name: 'Ohio', order: 17 },
+    oklahoma: { image: require('../../assets/US-States/Oklahoma.jpg'), name: 'Oklahoma', order: 46 },
+    oregon: { image: require('../../assets/US-States/Oregon.jpg'), name: 'Oregon', order: 33 },
+    pennsylvania: { image: require('../../assets/US-States/Pennsylvania.jpg'), name: 'Pennsylvania', order: 2 },
+    rhodeisland: { image: require('../../assets/US-States/Rhode-Island.jpg'), name: 'Rhode Island', order: 13 },
+    southcarolina: { image: require('../../assets/US-States/South-Carolina.jpg'), name: 'South Carolina', order: 8 },
+    southdakota: { image: require('../../assets/US-States/South-Dakota.jpg'), name: 'South Dakota', order: 40 },
+    tennessee: { image: require('../../assets/US-States/Tennessee.jpg'), name: 'Tennessee', order: 16 },
+    texas: { image: require('../../assets/US-States/Texas.jpg'), name: 'Texas', order: 28 },
+    utah: { image: require('../../assets/US-States/Utah.png'), name: 'Utah', order: 45 },
+    vermont: { image: require('../../assets/US-States/Vermont.jpg'), name: 'Vermont', order: 14 },
+    virginia: { image: require('../../assets/US-States/Virginia.jpg'), name: 'Virginia', order: 10 },
+    washington: { image: require('../../assets/US-States/Washington.jpg'), name: 'Washington', order: 42 },
+    westvirginia: { image: require('../../assets/US-States/West-Virginia.jpg'), name: 'West Virginia', order: 35 },
+    wisconsin: { image: require('../../assets/US-States/Wisconsin.png'), name: 'Wisconsin', order: 30 },
+    wyoming: { image: require('../../assets/US-States/Wyoming.png'), name: 'Wyoming', order: 44 }
 }
 
 export const statesData = Object.keys(stateImages).map((key) => ({
-    state: key.charAt(0).toUpperCase() + key.slice(1),
-    image: stateImages[key]
-}));
+    ...stateImages[key]
+})).sort((a, b) => a.order - b.order); // Sorting by the order in which a state became a state

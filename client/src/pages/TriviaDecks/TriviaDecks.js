@@ -15,6 +15,12 @@ const genres = [
         description: 'Name the NBA team based off the logo!', 
         linkUrl: '/nba-logos',
         imageUrl: ''
+    },
+    {
+        genre: 'USA States',
+        description: 'Name the state based on the outlined image',
+        linkUrl: '/usa-states',
+        imageUrl: ''
     }
 ];
 
