@@ -17,3 +17,10 @@
     transform: rotateY(180deg);
     margin-bottom: 50px;
 }
+
+.states-card .card-back div{
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}

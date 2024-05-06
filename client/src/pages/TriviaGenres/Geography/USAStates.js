@@ -16,6 +16,11 @@ export default function USAStates() {
         setIsFlipped(false);
     };
 
+    const prevCard = () => {
+        setCurrentIndex((currentIndex - 1 + statesData.length) % statesData.length);
+        setIsFlipped(false);
+    }
+
     return (
         <div className='usa-states-background'>
             <div className='states-card' onClick={handleFlip}>
@@ -27,6 +32,7 @@ export default function USAStates() {
             </div>
             <button onClick={handleFlip}>Flip Card</button>
             <button onClick={nextCard}>Next State</button>
+            <button onClick={prevCard}>Prev State</button>
         </div>
     );
 }
