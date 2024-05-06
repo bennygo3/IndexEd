@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import { ApolloServer } from '@apollo/server';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { expressMiddleware } from '@apollo/server/express4';
 import express from 'express';
 import cors from 'cors';
@@ -14,37 +15,37 @@ import nbaRouter from './routes/nbaRoutes.js';
 const PORT = process.env.PORT || 3001;
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-app.use(cors());
-app.use(express.json());
-
-// const server = new ApolloServer({
-//     typeDefs,
-//     resolvers,
-//     context: authMiddleware,
-    
-// });
+const httpServer = http.createServer(app);
 
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: ({ req }) => {
-        authMiddleware(req, {}, () => {});
-        console.log("User after middleware", req.user);
-        return { user: req.user };
-    },
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    // context: ({ req }) => {
+    //     authMiddleware(req, {}, () => {});
+    //     console.log("User after middleware", req.user);
+    //     return { user: req.user };
+    // },
 });
 
 await server.start();
 
+// app.use(cors());
+// app.use(express.json());
+
+app.use('/api', nbaRouter);
+
 // Apply Apollo GraphQL middleware
 app.use(
     '/graphql',
-    expressMiddleware(server)
-    // server.getMiddleware({ path: '/' })
+    cors(),
+    express.json(),
+    expressMiddleware(server, {
+        context: async ({ req }) => ({
+            token: req.headers.token 
+        }),
+    }),
 );
-
-app.use('/api', nbaRouter);
 
 // Serve static files and the React app
 if (process.env.NODE_ENV === 'production') {
@@ -59,7 +60,13 @@ db.once('open', () => {
     console.log('MongoDB connected.')
 });
 
-const httpServer = http.createServer(app);
 // Start the HTTP server
 await new Promise(resolve => httpServer.listen({ port: PORT }, resolve));
 console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
+
+// const server = new ApolloServer({
+//     typeDefs,
+//     resolvers,
+//     context: authMiddleware,
+    
+// });

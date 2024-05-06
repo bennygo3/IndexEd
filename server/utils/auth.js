@@ -14,25 +14,22 @@ const authMiddleware = (req) => {
         token = token.split(' ').pop().trim();
     }
 
+    console.log("incoming token:", token);
+
     if (!token) {
-        // return next();
-        return res.status(401).send("Authorization failed. No access token");
+        return req;
     }
 
-    
     try {
         const { data } = jwt.verify(token, secret);
         console.log("Verification successful:", data); // Debugging log
-        // req.user = data;
-        return data;
+        req.user = data;
+        
     } catch (error) {
         console.error('Token verification failed:', error.message);
-        // return res.status(401).json({ 
-        //     message: 'Invalid token', 
-        //     errors: error.message 
-        // });
-        return null;
+    
     }
+    return req;
 };
 
 const signToken = ({ email, username, _id }) => {
