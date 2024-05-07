@@ -6,7 +6,7 @@
     flex-direction: column;
     margin: 50px auto;
     padding-top: 20px;
-    border: 2px solid rgba(232, 232, 232, 0.697);
+    border: 3px solid rgba(232, 232, 232, 0.79);
 }
 
 .landing-header{
@@ -70,28 +70,6 @@
     transform: translateX(-51%);
     z-index: 3;
 } 
-
-/* input for the login and sign up forms */
-input[type=text]:not(.browser-default), input[type=password]:not(.browser-default) {
-    background-color: white;
-    border: none;
-    height: 2.6rem;
-    width: auto;
-    font-size: 30px;
-    margin: 0 0 5px 0;
-    padding: 0;
-    box-shadow: none;
-    box-sizing: content-box;
-    /* transition: box-shadow .3s, border .3s; */
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    -webkit-box-sizing: content-box;
-    box-sizing: content-box;
-    -webkit-transition: border .3s, -webkit-box-shadow .3s;
-    transition: border .3s, -webkit-box-shadow .3s;
-    transition: box-shadow .3s, border .3s;
-    transition: box-shadow .3s, border .3s, -webkit-box-shadow .3s;
-}
 
 #signUp{
     font-size: 70px;

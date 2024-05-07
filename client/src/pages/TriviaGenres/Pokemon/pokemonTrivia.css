@@ -17,7 +17,7 @@
     font-size: 2rem;
 }
 
-.pokemon-decks-container h1, h3{
+.pokemon-decks-container h1, .pokemon-decks-container h3{
     text-align: center;
     margin-top: 0;
     padding-top: 20px;
