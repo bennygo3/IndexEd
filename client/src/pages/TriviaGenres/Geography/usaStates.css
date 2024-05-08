@@ -1,12 +1,63 @@
 .usa-states-header{
-    height: 143.68px;
-    width: 273px;
+    height: 143px;
+    width: 271.7px;
+    border: solid 1px black;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
 }
+
+.usa-states-header h1 {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Align the center to the exact middle */
+    width: 100%; /* Ensure it spans the full header width */
+    text-align: center; /* Center the text inside */
+    z-index: 3; /* Higher z-index so it's above the stripes */
+    color: rgb(0, 0, 0); /* Adjust color for visibility */
+   
+}
+
+.stripe {
+    height: 11px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    
+}
+
+.stripe:nth-child(even) {
+    background-color: red;
+}
+
+.stripe:nth-child(odd) {
+    background-color: white;
+
+}
+
+.stripe:nth-child(0) { top: 0; }
+.stripe:nth-child(1) { top: 11px; }
+.stripe:nth-child(2) { top: 22px; }
+.stripe:nth-child(3) { top: 33px; }
+.stripe:nth-child(4) { top: 44px; }
+.stripe:nth-child(5) { top: 55px; }
+.stripe:nth-child(6) { top: 66px; }
+.stripe:nth-child(7) { top: 77px; }
+.stripe:nth-child(8) { top: 88px; }
+.stripe:nth-child(9) { top: 99px; }
+.stripe:nth-child(10) { top: 110px; }
+.stripe:nth-child(11) { top: 121px; }
+.stripe:nth-child(12) { top: 133px; }
+.stripe:nth-child(13) { top: 146px; }
 
 .usa-states-background {
     display:flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
     
 }
 
@@ -16,8 +67,8 @@
     border: 1px dotted dodgerblue;
     position: relative;
     overflow: hidden;
-    margin-bottom: 60px;
-    margin-top: 50px;
+    /* margin-bottom: 60px;
+    margin-top: 50px; */
 }
 
 

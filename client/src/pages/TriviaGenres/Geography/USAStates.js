@@ -40,10 +40,24 @@ export default function USAStates() {
     };
 
     return (
+        
         <>
             <header className='usa-states-header'>
+
                 <h1>United States<br></br>of America</h1>
-                {/* American Flag background? */}
+                <div className='stripe'></div>
+                <div className='stripe'></div>
+                <div className='stripe'></div>
+                <div className='stripe'></div>
+                <div className='stripe'></div>
+                <div className='stripe'></div>
+                <div className='stripe'></div>
+                <div className='stripe'></div>
+                <div className='stripe'></div>
+                <div className='stripe'></div>
+                <div className='stripe'></div>
+                <div className='stripe'></div>
+                <div className='stripe'></div>
             </header>
             <section className='usa-states-background'>
                 {/* <span class="material-symbols-outlined">•••psychology_alt</span> */}
