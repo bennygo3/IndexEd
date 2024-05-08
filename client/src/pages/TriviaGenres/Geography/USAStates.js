@@ -58,6 +58,8 @@ export default function USAStates() {
                 <div className='stripe'></div>
                 <div className='stripe'></div>
             </header>
+            <div className='five-pointed-star'></div>
+            <div className='star'>☆</div>
             <section className='usa-states-background'>
                 {/* <span class="material-symbols-outlined">•••psychology_alt</span> */}
                 <h3>Click the state or flip the card button to reveal the answer</h3>
