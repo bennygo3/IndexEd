@@ -40,10 +40,9 @@ export default function USAStates() {
     };
 
     return (
-        
         <>
             <header className='usa-states-header'>
-
+                <div className='union'></div>
                 <h1>United States<br></br>of America</h1>
                 <div className='stripe'></div>
                 <div className='stripe'></div>
