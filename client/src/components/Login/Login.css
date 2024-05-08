@@ -7,8 +7,6 @@
     font-size: 32px;
     position: relative;
     top: 26px;
-    /* text-decoration: underline solid rgb(0, 0, 0) 1px; */
-    /* text-underline-offset: 4px; */
 }
 
 .login-btn{
@@ -17,8 +15,4 @@
     font-size: 27px;
     cursor: pointer;
     text-shadow: 1px 1px lightblue;
-}
-
-input[type=text]:not(.browser-default) {
-    border-bottom: none;
 }

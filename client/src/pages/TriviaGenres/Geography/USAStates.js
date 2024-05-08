@@ -41,18 +41,22 @@ export default function USAStates() {
 
     return (
         <>
-        <h1 className='usa-states-header'>United States of America</h1>
-        <h2>Enter the name of the US state below</h2>
-        <h3>Click the flip card button or the state image to reveal the answer</h3>
-        
-            <div className='usa-states-background'>
+            <header className='usa-states-header'>
+                <h1>United States<br></br>of America</h1>
+                {/* American Flag background? */}
+            </header>
+            <section className='usa-states-background'>
+                {/* <span class="material-symbols-outlined">•••psychology_alt</span> */}
+                <h3>Click the state or flip the card button to reveal the answer</h3>
                 <div className='states-card' onClick={handleFlip}>
+
                     <Card
                         front={<img src={statesData[currentIndex].image} alt={statesData[currentIndex].name} />}
                         back={statesData[currentIndex].name}
                         isFlipped={isFlipped}
                     />
                 </div>
+                <h2>Enter the name of the US state below:</h2>
                 <div className='guess-section'>
                     <input
                         className='states-input'
@@ -65,23 +69,26 @@ export default function USAStates() {
                 </div>
                 <div>
                     <button onClick={handleFlip}>Flip Card</button>
-                    <button onClick={nextCard}>Next State</button>
                     <button onClick={prevCard}>Prev State</button>
+                    <button onClick={nextCard}>Next State</button>
                     <button onClick={checkGuess}>Submit</button>
                 </div>
-            </div>
+                <div className='state-counter'>
+                    {currentIndex + 1}/{statesData.length}
+                </div>
+            </section>
         </>
     );
 }
 
-                //      <span class="material-symbols-outlined">
-                //     cognition
-                //     web_traffic
-                //     release_alert
-                //     add_comment
-                //     edit_note
-                //     text_fields
-                //     text_fields_alt
-                //     text_add
-                //     psychology_alt
-                // </span> 
+//      <span class="material-symbols-outlined">
+//     cognition
+//     web_traffic
+//     release_alert
+//     add_comment
+//     edit_note
+//     text_fields
+//     text_fields_alt
+//     text_add
+//     psychology_alt
+// </span> 

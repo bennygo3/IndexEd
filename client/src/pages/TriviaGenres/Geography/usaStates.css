@@ -1,5 +1,6 @@
 .usa-states-header{
-    /* text-align: center; */
+    height: 143.68px;
+    width: 273px;
 }
 
 .usa-states-background {
@@ -36,12 +37,11 @@
     margin-bottom: 50px;
 }
 
-.states-card .card-back div{
+.states-card .card-back div {
     font-family: "Playfair Display", serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-
 }
 
 .states-input {
@@ -51,22 +51,30 @@
     font-style: normal;
 }
 
+.guess-section input[type=text] {
+    /* border-bottom: 2px solid rgba(251, 52, 52, 0.421);  */
+    border-bottom: 2px solid black;
+}
 
-
-.guess-section input[type=text]:not(.browser-default){
-    border-bottom: 2px solid rgba(251, 52, 52, 0.421); 
+.states-input:focus {
+    outline: none;
 }
 
 .states-input::placeholder{
-    color: rgb(158, 158, 158);
+    color: rgb(127, 127, 127);
 }
 
 .usa-states-background button {
-    margin: 5px;
+    margin: 10px;
     background-color: rgba(255, 250, 105, 0.457);
-    border-width: 3px;
-    border-style: dashed;
-    border-color: rgb(246, 28, 166);
+    border: 2px solid rgb(28, 217, 246);
+    /* border: none; */
+    /* outline: 2px solid rgb(28, 239, 246); */
+    outline: 2px dotted rgb(255, 148, 148);
+    outline-offset: 2px;
+    padding: 5px;
+    font-size: 19px;
+
 }
 
 .material-symbols-outlined{
