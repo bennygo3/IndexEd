@@ -52,7 +52,12 @@ export default function USAStates() {
 
                     <Card
                         front={<img src={statesData[currentIndex].image} alt={statesData[currentIndex].name} />}
-                        back={statesData[currentIndex].name}
+                        back={
+                            <div className='states-back-content'>
+                                <img src={statesData[currentIndex].image} alt={statesData[currentIndex].name} />
+                                <div className='states-back-text'>{statesData[currentIndex].name}</div>
+                            </div>
+                        }
                         isFlipped={isFlipped}
                     />
                 </div>
