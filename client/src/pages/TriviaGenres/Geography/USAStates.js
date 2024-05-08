@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { statesData } from '../../../components/StateImages/StateImages';
 import Card from '../../../components/Card/Card.js';
+import USFlag from '../../../components/StateImages/USFlag';
 import './usaStates.css';
 
 export default function USAStates() {
@@ -41,91 +42,8 @@ export default function USAStates() {
 
     return (
         <>
-            <header className='usa-states-header'>
-                <div className='union'>
-                    <div className='stars-row-six'>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                    </div>
-                    <div className='stars-row-five'>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                    </div>
-                    <div className='stars-row-six'>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                    </div>
-                    <div className='stars-row-five'>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                    </div>
-                    <div className='stars-row-six'>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                    </div>
-                    <div className='stars-row-five'>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                    </div>
-                    <div className='stars-row-six'>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                    </div>
-                    <div className='stars-row-five'>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                    </div>
-                    <div className='stars-row-six'>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                        <div className='star'>&#8902;</div>
-                    </div>
-                </div>
-                <h1>United States<br></br>of America</h1>
-                <div className='stripe'></div>
-                <div className='stripe'></div>
-                <div className='stripe'></div>
-                <div className='stripe'></div>
-                <div className='stripe'></div>
-                <div className='stripe'></div>
-                <div className='stripe'></div>
-                <div className='stripe'></div>
-                <div className='stripe'></div>
-                <div className='stripe'></div>
-                <div className='stripe'></div>
-                <div className='stripe'></div>
-                <div className='stripe'></div>
+            <header>
+                <USFlag />
             </header>
             <section className='usa-states-background'>
                 {/* <span class="material-symbols-outlined">•••psychology_alt</span> */}

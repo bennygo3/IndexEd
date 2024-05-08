@@ -1,0 +1,96 @@
+.usa-states-header{
+    height: 143px;
+    width: 271.7px;
+    border: solid 1px black;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.union {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 77px;
+    width: 40%;
+    background-color: rgb(10, 49, 97);
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    
+}
+
+.stars-row-six {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 8px;
+}
+
+.stars-row-five {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 90%;
+    height: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.star{
+    color: white;
+    font-size: 34px;
+    line-height: 1;
+}
+
+.usa-states-header h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    height: 95px;
+    line-height:46.5px;
+    text-align: center;
+    z-index: 3;
+    font-size: 34px;
+    color: rgb(250 212 0);
+    background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.65),
+    rgba(0, 0, 0, 0.72))
+      
+}
+
+.stripe {
+    height: 11px;
+    width: 100%;
+    position: absolute;
+}
+
+.stripe:nth-child(odd) {
+    background-color: rgb(179, 25, 66);
+}
+
+.stripe:nth-child(even) {
+    background-color: white;
+
+}
+
+.stripe:nth-child(1) { top: 0;}
+.stripe:nth-child(2) { top: 11px; }
+.stripe:nth-child(3) { top: 22px; }
+.stripe:nth-child(4) { top: 33px; }
+.stripe:nth-child(5) { top: 44px; }
+.stripe:nth-child(6) { top: 55px; }
+.stripe:nth-child(7) { top: 66px; }
+.stripe:nth-child(8) { top: 77px; }
+.stripe:nth-child(9) { top: 88px; }
+.stripe:nth-child(10) { top: 99px; }
+.stripe:nth-child(11) { top: 110px; }
+.stripe:nth-child(12) { top: 121px; }
+.stripe:nth-child(13) { top: 133px; }
