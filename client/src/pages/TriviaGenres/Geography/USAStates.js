@@ -42,7 +42,76 @@ export default function USAStates() {
     return (
         <>
             <header className='usa-states-header'>
-                <div className='union'></div>
+                <div className='union'>
+                    <div className='stars-row-six'>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                    </div>
+                    <div className='stars-row-five'>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                    </div>
+                    <div className='stars-row-six'>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                    </div>
+                    <div className='stars-row-five'>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                    </div>
+                    <div className='stars-row-six'>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                    </div>
+                    <div className='stars-row-five'>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                    </div>
+                    <div className='stars-row-six'>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                    </div>
+                    <div className='stars-row-five'>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                    </div>
+                    <div className='stars-row-six'>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                        <div className='star'>&#8902;</div>
+                    </div>
+                </div>
                 <h1>United States<br></br>of America</h1>
                 <div className='stripe'></div>
                 <div className='stripe'></div>
@@ -58,8 +127,6 @@ export default function USAStates() {
                 <div className='stripe'></div>
                 <div className='stripe'></div>
             </header>
-            <div className='five-pointed-star'></div>
-            <div className='star'>☆</div>
             <section className='usa-states-background'>
                 {/* <span class="material-symbols-outlined">•••psychology_alt</span> */}
                 <h3>Click the state or flip the card button to reveal the answer</h3>
