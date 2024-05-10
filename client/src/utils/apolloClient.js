@@ -10,7 +10,6 @@ const authLink = setContext((_, { headers }) => {
     // Retrieve the authentication token from local storage
     const token = localStorage.getItem('id_token');
     // Return the headers to the context so httpLink can read them
-    console.log("Setting authorization header with token:", token);
     return {
         headers: {
             ...headers,
