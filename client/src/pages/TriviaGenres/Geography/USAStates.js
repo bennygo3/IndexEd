@@ -3,6 +3,7 @@ import { statesData } from '../../../components/StateImages/StateImages';
 import Card from '../../../components/Card/Card.js';
 import USFlag from '../../../components/StateImages/USFlag';
 import FunFacts from '../../../components/Facts/FunFacts';
+import NavbarTD from '../../../components/Navbar/NavbarTD';
 import './usaStates.css';
 
 export default function USAStates() {
@@ -45,10 +46,11 @@ export default function USAStates() {
         <>
             <header className='usa-page-header'>
                 <USFlag />
+                <NavbarTD />
                 <FunFacts />
             </header>
             <section className='usa-states-background'>
-                <h3>Click the state or flip the card button to reveal the answer</h3>
+                <h3>Click the state or flip card button to reveal the answer</h3>
                 <div className='states-card' onClick={handleFlip}>
 
                     <Card

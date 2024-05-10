@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Highlighted from '../Highlighter/Highlighter';
 
-export default function NavbarCC(){
+export default function NavbarTD(){
     return (
         <>
-            <nav className='navbar-cc'>
+            <nav className='navbar-td'>
                 <ul>
                     <li>
                         <Highlighted>
@@ -24,8 +24,8 @@ export default function NavbarCC(){
                     </li>
                     <li>
                         <Highlighted color="hotpink">
-                            <Link to='/trivia-decks'>
-                                Study trivia cards
+                            <Link to='/card-create'>
+                                Create a new card
                             </Link>
                         </Highlighted>
                     </li>
