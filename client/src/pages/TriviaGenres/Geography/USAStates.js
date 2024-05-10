@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { statesData } from '../../../components/StateImages/StateImages';
 import Card from '../../../components/Card/Card.js';
 import USFlag from '../../../components/StateImages/USFlag';
+import FunFacts from '../../../components/Facts/FunFacts';
 import './usaStates.css';
 
 export default function USAStates() {
@@ -42,11 +43,11 @@ export default function USAStates() {
 
     return (
         <>
-            <header>
+            <header className='usa-page-header'>
                 <USFlag />
+                <FunFacts />
             </header>
             <section className='usa-states-background'>
-                {/* <span class="material-symbols-outlined">•••psychology_alt</span> */}
                 <h3>Click the state or flip the card button to reveal the answer</h3>
                 <div className='states-card' onClick={handleFlip}>
 

@@ -1,3 +1,32 @@
+.usa-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ff-container {
+    margin-right: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ff-container .material-symbols-outlined {
+    outline: 3px dashed black; 
+    outline-offset: -3px;
+    border-radius: 50px;
+    background-color: rgb(171,255,50);
+    cursor: pointer;
+}
+
+/* .ff-container .material-symbols-outlined {
+    margin-right: 10px;
+    
+    transform: scaleX(-1); 
+
+} */
+
 .usa-states-background {
     display:flex;
     flex-direction: column;
@@ -31,26 +60,26 @@
     margin-bottom: 50px;
 }
 
-.states-back-content {
+/* .states-back-content {
     position: relative;
     width: 100%;
     height: 100%;
-}
+} */
 
-.states-back-content img {
+/* .states-back-content img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-}
+} */
 
 .states-back-text {
-    position: absolute;
-    top: 50%;  /* Center vertically */
-    left: 50%;  /* Center horizontally */
-    transform: translate(-50%, -50%);  /* Ensure it is centered */
-    color: white;  /* Assuming white text for visibility */
-    font-size: 20px;  /* Adjust size as needed */
-    text-shadow: 0px 0px 3px #000;  /* Text shadow for readability */
+    /* position: absolute;
+    top: 50%;  
+    left: 50%;  
+    transform: translate(-50%, -50%);   */
+    color: rgb(0, 0, 0); 
+    font-size: 20px;  
+    /* text-shadow: 0px 0px 3px #000;   */
 }
 
 .states-card .card-back div {
