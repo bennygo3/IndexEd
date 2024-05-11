@@ -50,6 +50,7 @@ export default function USAStates() {
                 <FunFacts />
             </header>
             <section className='usa-states-background'>
+                <div className='states-display'>
                 <h3>Click the state or flip card button to reveal the answer</h3>
                 <div className='states-card' onClick={handleFlip}>
 
@@ -64,25 +65,28 @@ export default function USAStates() {
                         isFlipped={isFlipped}
                     />
                 </div>
-                <h2>Enter the name of the US state below:</h2>
-                <div className='guess-section'>
-                    <input
-                        className='states-input'
-                        type='text'
-                        value={guess}
-                        placeholder='Answer'
-                        onChange={(e) => setGuess(e.target.value)}
-                    />
-                    <div>{feedback}</div>
                 </div>
-                <div>
-                    <button onClick={handleFlip}>Flip Card</button>
-                    <button onClick={prevCard}>Prev State</button>
-                    <button onClick={nextCard}>Next State</button>
-                    <button onClick={checkGuess}>Submit</button>
-                </div>
-                <div className='state-counter'>
-                    {currentIndex + 1}/{statesData.length}
+                <div className='usa-studycard-section'>
+                    <h2>Enter the name of the US state below:</h2>
+                    <div className='guess-section'>
+                        <input
+                            className='states-input'
+                            type='text'
+                            value={guess}
+                            placeholder='Answer'
+                            onChange={(e) => setGuess(e.target.value)}
+                        />
+                        <div>{feedback}</div>
+                    </div>
+                    <div>
+                        <button onClick={handleFlip}>Flip Card</button>
+                        <button onClick={prevCard}>Prev State</button>
+                        <button onClick={nextCard}>Next State</button>
+                        <button onClick={checkGuess}>Submit</button>
+                    </div>
+                    <div className='state-counter'>
+                        {currentIndex + 1}/{statesData.length}
+                    </div>
                 </div>
             </section>
         </>
