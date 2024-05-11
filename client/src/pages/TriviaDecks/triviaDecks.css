@@ -6,26 +6,16 @@
     align-items: center;
 }
 
-.trivia-decks-header-container{
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100%;
-    flex-direction: column;
-}
-
 .trivia-decks-header {
     font-size: 140px;
-    margin-left: 20px;
-    text-shadow: 
-    3px 2px 0px rgb(248, 255, 107);
+    text-shadow: 3px 2px 0px rgb(248, 255, 107);
 }
 
 .genre-title{
     font-size: 68px;
     margin-left: 48px;
-    /* text-shadow: -3px 2px 0px rgb(255, 255, 255); */
-    outline: dashed 4px white;
+    text-shadow: 3px 2px 0px rgb(255, 255, 255);
+    
     padding: 10px;  
 }
 

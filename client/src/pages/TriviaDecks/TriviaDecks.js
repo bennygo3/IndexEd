@@ -35,8 +35,8 @@ export default function TriviaDecks() {
     return (
         <section className='trivia-decks'>
             <div className='trivia-decks-header-container'>
-                <h1 className='trivia-decks-header'>Trivia:</h1>
-                <h2 className='genre-title'>{genres[activeIndex].genre}</h2>
+                <h1 className='trivia-decks-header'>Trivia</h1>
+                {/* <h2 className='genre-title'>{genres[activeIndex].genre}</h2> */}
             </div>
             <div className='trivia-decks-main'>
                 <TriviaCarousel genres={genres} activeIndex={activeIndex} setActiveIndex={handleSetActiveIndex} />

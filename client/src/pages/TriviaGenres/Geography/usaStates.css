@@ -1,7 +1,7 @@
 .usa-page-header {
     display: flex;
     justify-content: space-around;
-    margin-top: 10px;
+    border-top: transparent solid 20px;
     align-items: center;
 }
 
@@ -22,8 +22,7 @@
 }
 
 .navbar-td li {
-    margin-bottom: 10px;
-    margin-top: 10px;
+    border-bottom: solid transparent 25px;
 }
 
 .usa-states-background {
@@ -43,49 +42,50 @@
 }
 
 
+
+
 .states-card img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     position: absolute;
-    top: 0;
-    left: 0;
     cursor: pointer;
+}
+
+.states-back-content {
+    position: relative;
+    width: 400px;
+    height: 500px;
+}
+
+.states-back-content img {
+
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
     
 }
 
-.states-card .card-back{
-    transform: rotateY(180deg);
-    margin-bottom: 50px;
-}
-
-/* .states-back-content {
-    position: relative;
-    width: 100%;
-    height: 100%;
-} */
-
-/* .states-back-content img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-} */
-
 .states-back-text {
-    /* position: absolute;
-    top: 50%;  
-    left: 50%;  
-    transform: translate(-50%, -50%);   */
-    color: rgb(0, 0, 0); 
-    font-size: 20px;  
-    /* text-shadow: 0px 0px 3px #000;   */
+    
+    color: rgb(0, 0, 0); /* Ensuring text is visible, choose color based on your image */
+    font-size: 24px; /* Adjust size as needed */
+
+    text-align: center;
+    background-color: transparent !important;
+
+
+    border-radius: 5px; /* Optional: rounded corners */
 }
 
 .states-card .card-back div {
+    transform: rotateY(360deg);
+
     font-family: "Playfair Display", serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
+    border: none;
 }
 
 .states-input {
@@ -96,8 +96,8 @@
 }
 
 .guess-section input[type=text] {
-    /* border-bottom: 2px solid rgba(251, 52, 52, 0.421);  */
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid rgba(251, 52, 52, 0.421); 
+    /* border-bottom: 2px solid black; */
 }
 
 .states-input:focus {
@@ -105,7 +105,7 @@
 }
 
 .states-input::placeholder{
-    color: rgb(127, 127, 127);
+    color: rgb(132, 132, 132);
 }
 
 .usa-states-background button {
