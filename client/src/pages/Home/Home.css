@@ -7,8 +7,15 @@
     align-items: center;
 }
 
-.home-header button{
-    float: right;
+.home-logout{
+    border: black dashed 1px;
+    padding: 5px;
+    border-radius: 50px;
+    background-color: rgb(255, 255, 255);
+    height: 59px;
+    width: 59px;
+    font-size: 28px;
+    letter-spacing: 2px;
 }
 
 .home-header {

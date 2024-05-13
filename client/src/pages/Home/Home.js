@@ -8,7 +8,6 @@ export default function Home(){
   return (
     <main className="home-body">
       <h1 className="home-header">Index<span style={{ marginLeft: "10px" }}></span>Ed</h1>
-      <LogoutButton />
       <div className="home-container">
         <div className="home-background">
           
@@ -17,6 +16,7 @@ export default function Home(){
           <Navbar className="navbar-home"/>
         </div>
       </div>
+      <LogoutButton className='home-logout' />
     </main>
   );
 };

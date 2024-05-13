@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import authService from '../../utils/auth';
 
-export default function LogoutButton() {
+export default function LogoutButton({ className }) {
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -10,6 +10,6 @@ export default function LogoutButton() {
     };
 
     return (
-        <button onClick={handleLogout}>Logout</button>
+        <button className={className} onClick={handleLogout}>Logout</button>
     )
 }
