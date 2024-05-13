@@ -7,9 +7,9 @@ import LogoutButton from '../../components/Logout/LogoutButton.js';
 export default function Home(){
   return (
     <main className="home-body">
+      <h1 className="home-header">Index<span style={{ marginLeft: "10px" }}></span>Ed</h1>
+      <LogoutButton />
       <div className="home-container">
-        <h1 className="home-header">Index<span style={{ marginLeft: "10px" }}></span>Ed</h1>
-        <LogoutButton />
         <div className="home-background">
           
           <div className="red-line"></div>

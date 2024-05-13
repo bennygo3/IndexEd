@@ -7,6 +7,10 @@
     align-items: center;
 }
 
+.home-header button{
+    float: right;
+}
+
 .home-header {
     text-align: center;
     font-size: 96px;
