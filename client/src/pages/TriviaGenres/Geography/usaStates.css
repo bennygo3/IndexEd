@@ -1,6 +1,5 @@
 .usa-page-header {
     display: flex;
-    justify-content: space-around;
     border-top: transparent solid 20px;
     justify-content: space-around;
     align-items: flex-end;
@@ -51,9 +50,7 @@
     margin: auto;
     display: block;
     object-fit: contain;
-    /* position: absolute; */
     cursor: pointer;
-   
 }
 
 .states-back-content {
@@ -73,15 +70,11 @@
 }
 
 .states-back-text {
-    
-    color: rgb(0, 0, 0); /* Ensuring text is visible, choose color based on your image */
-    font-size: 24px; /* Adjust size as needed */
-
+    color: rgb(0, 0, 0); 
+    font-size: 24px; 
     text-align: center;
     background-color: transparent !important;
-
-
-    border-radius: 5px; /* Optional: rounded corners */
+    border-radius: 5px; 
 }
 
 .states-card .card-back div {
@@ -101,9 +94,15 @@
     font-style: normal;
 }
 
+.usa-studycard-section {
+    height: 330px;
+    width: 460px;
+    outline: solid black 1px;
+    outline-offset: 10px;
+}
+
 .guess-section input[type=text] {
     border-bottom: 2px solid rgba(251, 52, 52, 0.421); 
-    /* border-bottom: 2px solid black; */
 }
 
 .states-input:focus {
@@ -118,8 +117,6 @@
     margin: 10px;
     background-color: rgba(255, 250, 105, 0.457);
     border: 2px solid rgb(28, 217, 246);
-    /* border: none; */
-    /* outline: 2px solid rgb(28, 239, 246); */
     outline: 2px dotted rgb(255, 148, 148);
     outline-offset: 2px;
     padding: 5px;

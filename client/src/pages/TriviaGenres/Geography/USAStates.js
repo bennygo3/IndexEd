@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { statesData } from '../../../components/StateImages/StateImages';
 import Card from '../../../components/Card/Card.js';
 import USFlag from '../../../components/StateImages/USFlag';
@@ -11,6 +11,22 @@ export default function USAStates() {
     const [isFlipped, setIsFlipped] = useState(false);
     const [guess, setGuess] = useState('');
     const [feedback, setFeedback] = useState('');
+
+    const nextCard = useCallback(() => {
+        // setCurrentIndex((currentIndex + 1) % statesData.length);
+        setCurrentIndex(prevIndex => (prevIndex + 1) % statesData.length);
+        setIsFlipped(false);
+        setFeedback('');
+        setGuess('');
+    }, []);
+
+    const prevCard = useCallback(() => {
+        // setCurrentIndex((currentIndex - 1 + statesData.length) % statesData.length);
+        setCurrentIndex(prevIndex => (prevIndex - 1 + statesData.length) % statesData.length);
+        setIsFlipped(false);
+        setFeedback('');
+        setGuess('');
+    },[]);
 
     useEffect(() => {
         const handleKeyPress = (event) => {
@@ -25,26 +41,12 @@ export default function USAStates() {
         return () => {
             window.removeEventListener('keydown', handleKeyPress);
         }
-    }, []);
+    }, [nextCard, prevCard]);
 
     // function to flip card
     const handleFlip = () => {
         setIsFlipped(!isFlipped);
     };
-
-    const nextCard = () => {
-        setCurrentIndex((currentIndex + 1) % statesData.length);
-        setIsFlipped(false);
-        setFeedback('');
-        setGuess('');
-    };
-
-    const prevCard = () => {
-        setCurrentIndex((currentIndex - 1 + statesData.length) % statesData.length);
-        setIsFlipped(false);
-        setFeedback('');
-        setGuess('');
-    }
 
     // function to check user's guess
     const checkGuess = () => {
@@ -65,30 +67,16 @@ export default function USAStates() {
                 <FunFacts />
             </header>
             <section className='usa-states-background'>
-                <div className='states-display'>
-                    <h3>Click the state or flip card button to reveal the answer</h3>
-                    <div className='states-card' onClick={handleFlip}>
-
-                        <Card
-                            front={<img src={statesData[currentIndex].image} alt={statesData[currentIndex].name} />}
-                            back={
-                                <div className='states-back-content'>
-                                    <img src={statesData[currentIndex].image} alt={statesData[currentIndex].name} />
-                                    <div className='states-back-text'>{statesData[currentIndex].name}</div>
-                                </div>
-                            }
-                            isFlipped={isFlipped}
-                        />
-                    </div>
-                </div>
-                <div className='usa-studycard-section'>
-                    <h2>Enter the name of the US state below:</h2>
+            <div className='usa-studycard-section'>
+                    {/* <h2>Enter the name of the US state below:</h2> */}
                     <form onSubmit={(e) => {
                         e.preventDefault();
                         checkGuess();
                     }}>
                         <div className='guess-section'>
+                            <label htmlFor='stateInput' className='state-label'>US State:</label>
                             <input
+                                id='stateInput'
                                 className='states-input'
                                 type='text'
                                 value={guess}
@@ -106,6 +94,22 @@ export default function USAStates() {
                     </div>
                     <div className='state-counter'>
                         {currentIndex + 1}/{statesData.length}
+                    </div>
+                </div>
+                <div className='states-display'>
+                    <h3>Click the state or flip card button to reveal the answer</h3>
+                    <div className='states-card' onClick={handleFlip}>
+
+                        <Card
+                            front={<img src={statesData[currentIndex].image} alt={statesData[currentIndex].name} />}
+                            back={
+                                <div className='states-back-content'>
+                                    <img src={statesData[currentIndex].image} alt={statesData[currentIndex].name} />
+                                    <div className='states-back-text'>{statesData[currentIndex].name}</div>
+                                </div>
+                            }
+                            isFlipped={isFlipped}
+                        />
                     </div>
                 </div>
             </section>
