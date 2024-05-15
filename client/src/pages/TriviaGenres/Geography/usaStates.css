@@ -33,10 +33,15 @@
     margin-top: 20px;
 }
 
+.guess-section {
+    display: flex;
+}
+
+
 .states-card .card-front, .card-back{
     width: 475px;
     height: 475px;
-    border: 1px dotted dodgerblue;
+    border: 1px dotted rgb(179, 25, 66);
     position: relative;
     overflow: hidden;
     display: flex; 
@@ -61,7 +66,6 @@
 }
 
 .states-back-content img {
-
     width: 80%;
     height: 80%;
     display: block;
@@ -79,7 +83,6 @@
 
 .states-card .card-back div {
     transform: rotateY(360deg);
-
     font-family: "Playfair Display", serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -97,9 +100,13 @@
 .usa-studycard-section {
     height: 330px;
     width: 460px;
-    outline: solid black 1px;
+    outline: dotted rgb(10, 49, 97) 1px; 
     outline-offset: 10px;
+    /* border: 1px solid transparent;
+    border-image: linear-gradient(138deg, rgb(10, 49, 97), white 25%, white 29%, rgb(179, 25, 66), rgb(179, 25, 66)) 1; */
+    padding: 10px;
 }
+
 
 .guess-section input[type=text] {
     border-bottom: 2px solid rgba(251, 52, 52, 0.421); 
@@ -110,14 +117,14 @@
 }
 
 .states-input::placeholder{
-    color: rgb(132, 132, 132);
+    color: rgb(193, 193, 193);
 }
 
 .usa-states-background button {
     margin: 10px;
     background-color: rgba(255, 250, 105, 0.457);
     border: 2px solid rgb(28, 217, 246);
-    outline: 2px dotted rgb(255, 148, 148);
+    /* outline: 2px dotted rgb(255, 148, 148); */
     outline-offset: 2px;
     padding: 5px;
     font-size: 19px;

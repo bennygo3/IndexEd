@@ -26,7 +26,7 @@ export default function USAStates() {
         setIsFlipped(false);
         setFeedback('');
         setGuess('');
-    },[]);
+    }, []);
 
     useEffect(() => {
         const handleKeyPress = (event) => {
@@ -67,8 +67,8 @@ export default function USAStates() {
                 <FunFacts />
             </header>
             <section className='usa-states-background'>
-            <div className='usa-studycard-section'>
-                    {/* <h2>Enter the name of the US state below:</h2> */}
+
+                <div className='usa-studycard-section'>
                     <form onSubmit={(e) => {
                         e.preventDefault();
                         checkGuess();
@@ -83,11 +83,12 @@ export default function USAStates() {
                                 placeholder='Answer'
                                 onChange={(e) => setGuess(e.target.value)}
                             />
+                            <button onClick={checkGuess}>Submit</button>
                             <div>{feedback}</div>
                         </div>
                     </form>
                     <div>
-                        <button onClick={checkGuess}>Submit</button>
+                        {/* <button onClick={checkGuess}>Submit</button> */}
                         <button onClick={handleFlip}>Flip Card</button>
                         <button onClick={prevCard}>Prev State</button>
                         <button onClick={nextCard}>Next State</button>
@@ -96,8 +97,8 @@ export default function USAStates() {
                         {currentIndex + 1}/{statesData.length}
                     </div>
                 </div>
+
                 <div className='states-display'>
-                    <h3>Click the state or flip card button to reveal the answer</h3>
                     <div className='states-card' onClick={handleFlip}>
 
                         <Card
