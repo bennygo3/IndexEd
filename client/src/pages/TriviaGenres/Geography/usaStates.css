@@ -35,13 +35,14 @@
 
 .guess-section {
     display: flex;
+    align-items: baseline;
 }
 
 
 .states-card .card-front, .card-back{
     width: 475px;
     height: 475px;
-    border: 1px dotted rgb(179, 25, 66);
+    border: 1px dotted rgb(10, 49, 97);
     position: relative;
     overflow: hidden;
     display: flex; 

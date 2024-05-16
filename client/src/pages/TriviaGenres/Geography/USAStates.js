@@ -62,8 +62,8 @@ export default function USAStates() {
     return (
         <>
             <header className='usa-page-header'>
-                <USFlag />
                 <NavbarTD />
+                <USFlag />
                 <FunFacts />
             </header>
             <section className='usa-states-background'>
@@ -83,12 +83,11 @@ export default function USAStates() {
                                 placeholder='Answer'
                                 onChange={(e) => setGuess(e.target.value)}
                             />
-                            <button onClick={checkGuess}>Submit</button>
                             <div>{feedback}</div>
                         </div>
                     </form>
                     <div>
-                        {/* <button onClick={checkGuess}>Submit</button> */}
+                        <button onClick={checkGuess}>Submit</button>
                         <button onClick={handleFlip}>Flip Card</button>
                         <button onClick={prevCard}>Prev State</button>
                         <button onClick={nextCard}>Next State</button>
