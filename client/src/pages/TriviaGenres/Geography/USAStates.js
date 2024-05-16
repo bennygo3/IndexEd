@@ -83,6 +83,9 @@ export default function USAStates() {
                                 placeholder='Answer'
                                 onChange={(e) => setGuess(e.target.value)}
                             />
+                            <div className='state-counter'>
+                                {currentIndex + 1}/{statesData.length}
+                            </div>
                             <div>{feedback}</div>
                         </div>
                     </form>
@@ -92,9 +95,7 @@ export default function USAStates() {
                         <button onClick={prevCard}>Prev State</button>
                         <button onClick={nextCard}>Next State</button>
                     </div>
-                    <div className='state-counter'>
-                        {currentIndex + 1}/{statesData.length}
-                    </div>
+
                 </div>
 
                 <div className='states-display'>

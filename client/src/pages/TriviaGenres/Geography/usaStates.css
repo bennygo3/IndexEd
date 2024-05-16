@@ -2,7 +2,12 @@
     display: flex;
     border-top: transparent solid 20px;
     justify-content: space-around;
-    align-items: flex-end;
+    align-items: center;
+}
+.navbar-td li {
+    /* border-top: solid transparent 20px; */
+    margin-top: 25px;
+    margin-bottom: 20px;
 }
 
 .ff-container {
@@ -21,10 +26,6 @@
     cursor: pointer;
 }
 
-.navbar-td li {
-    border-bottom: solid transparent 25px;
-}
-
 .usa-states-background {
     display:flex;
     flex-direction: row;
@@ -33,9 +34,21 @@
     margin-top: 20px;
 }
 
+.usa-studycard-section {
+    height: 330px;
+    width: 460px;
+    outline: dotted rgb(10, 49, 97) 1px; 
+    outline-offset: 10px;
+    /* border: 1px solid transparent;
+    border-image: linear-gradient(138deg, rgb(10, 49, 97), white 25%, white 29%, rgb(179, 25, 66), rgb(179, 25, 66)) 1; */
+    padding: 10px;
+}
+
 .guess-section {
     display: flex;
+    justify-content: space-between;
     align-items: baseline;
+    margin-bottom: 10px;
 }
 
 
@@ -97,17 +110,6 @@
     font-weight: 400;
     font-style: normal;
 }
-
-.usa-studycard-section {
-    height: 330px;
-    width: 460px;
-    outline: dotted rgb(10, 49, 97) 1px; 
-    outline-offset: 10px;
-    /* border: 1px solid transparent;
-    border-image: linear-gradient(138deg, rgb(10, 49, 97), white 25%, white 29%, rgb(179, 25, 66), rgb(179, 25, 66)) 1; */
-    padding: 10px;
-}
-
 
 .guess-section input[type=text] {
     border-bottom: 2px solid rgba(251, 52, 52, 0.421); 
