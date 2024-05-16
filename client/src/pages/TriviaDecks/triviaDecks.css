@@ -22,6 +22,7 @@
 .carousel-group img{
     height: 300px;
     width: 400px;
+    object-fit: contain;
 }
 
 .trivia-decks-main .carousel{

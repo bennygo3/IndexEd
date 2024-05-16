@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import TriviaCarousel from '../../components/TriviaCarousel/TriviaCarousel';
 import './triviaDecks.css';
-import pokeSnapshot from '../../assets/pokeSnapshot.png'
+import pokeSnapshot from '../../assets/pokeSnapshot.png';
+import usaPage from '../../assets/usa-states-page.png';
 
 const genres = [
     { 
@@ -20,7 +21,8 @@ const genres = [
         genre: 'USA States',
         description: 'Name the state based on the outlined image',
         linkUrl: '/usa-states',
-        imageUrl: ''
+        imageUrl: `${usaPage}`,
+        
     }
 ];
 
