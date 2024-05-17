@@ -1,0 +1,56 @@
+.basketball {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    background-color: orange;
+    border-radius: 50%;
+    box-shadow: inset 0 0 10px rgb(0, 0, 0);
+    overflow: hidden;
+    margin: auto;
+    margin-top: 10%;
+    transform: rotate(90deg);
+}
+
+.line {
+    position: absolute;
+    background-color: black;
+}
+
+.horizontal {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    transform: translateY(-50%);
+}
+
+.vertical {
+    top: 0;
+    left: 50%;
+    width: 10px;
+    height: 100%;
+    transform: translateX(-50%);
+}
+
+.curveR {
+    position: relative;
+    border: 10px solid black;
+    border-radius: 36%;
+    top: 50%;
+    left: 50%;
+    width: 97%;
+    height: 97%;
+    transform: translate(-50%, -117%) rotate(45deg);
+    transform-origin: center;
+}
+
+.curveL {
+    position: relative;
+    border: 10px solid black;
+    border-radius: 36%;
+    top: 50%;
+    left: 50%;
+    width: 97%;
+    height: 97%;
+    transform: translate(-50%, -84%) rotate(45deg);
+}
