@@ -11,7 +11,6 @@ class AuthService {
     }
 
     isTokenExpired() {
-        // added to take care of error 1:46 
         const token = this.getToken();
         const decoded = decode(token);
         if (decoded.exp < Date.now() /1000 ) {
@@ -27,14 +26,12 @@ class AuthService {
 
     login(idToken) {
         localStorage.setItem('id_token', idToken);
-        //DO WE NEED TO CHANGE THE PATH HERE IN ORDER TO SHOW THE USER THE DASHBOARD AFTER LOGGING IN?
         window.location.assign('/home');
     }
 
     logout(navigate) {
         localStorage.removeItem('id_token');
         navigate('/');
-        // window.location.reload();
     }
 }
 
