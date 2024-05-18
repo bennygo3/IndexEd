@@ -9,6 +9,24 @@
     margin: auto;
     margin-top: 10%;
     transform: rotate(90deg);
+
+    animation-name: bounce;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+
+}
+
+@keyframes bounce {
+    0% {left: 0px; top: 0px;}
+    25% {left: 100px; top: 200px; rotate: 90deg;}
+    50% {left: 180px; top: 120px; rotate: 180deg;}
+    75%{left: 250px; top: 90px; rotate: 270deg;}
+    100%{left: 350px; top: 10px; rotate: 360deg;}
+
+    
+    /* 50% {left: 200px; top: 300px; rotate: 180deg;}
+    75% {left: 250px; top: 400px; rotate: 270deg;}
+    100%{left: 40px; top: 38px; rotate: 360deg;} */
 }
 
 .line {
