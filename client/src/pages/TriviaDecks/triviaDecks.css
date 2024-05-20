@@ -1,13 +1,16 @@
 .trivia-decks {
     background-color: lightblue;
-    height: 100dvh;
+    height: 100%;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: baseline;
+    justify-content: space-evenly;
 }
 
+
+
 .trivia-decks-header {
-    font-size: 140px;
+    font-size: 130px;
     text-shadow: 3px 2px 0px rgb(248, 255, 107);
 }
 
@@ -15,17 +18,10 @@
     font-size: 68px;
     margin-left: 48px;
     text-shadow: 3px 2px 0px rgb(255, 255, 255);
-    
     padding: 10px;  
 }
 
 .carousel-group img{
-    height: 300px;
-    width: 400px;
-    object-fit: contain;
-}
-
-.trivia-decks-main {
-
-    margin: 30px;
+    height: 100%;
+    width: 100%;
 }

@@ -70,14 +70,3 @@ export default function TriviaCarousel({ genres, activeIndex, setActiveIndex }) 
         </div>
     );
 };
-
-    // const [activeIndex, setActiveIndex] = useState(0);
-
-    // const updateIndex = (newIndex) => {
-    //     if (newIndex < 0) {
-    //         newIndex = genres.length - 1;
-    //     } else if (newIndex >= genres.length) {
-    //         newIndex = 0;
-    //     }
-    //     setActiveIndex(newIndex);
-    // };

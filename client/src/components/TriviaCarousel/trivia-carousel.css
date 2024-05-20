@@ -1,9 +1,9 @@
-.trivia-carousel {
-    overflow: hidden;
+.carousel-item {
+    margin-top: 50px;
 }
 
 .carousel-group {
-    margin-top: 50px;
-    height: 300px;
-    width: 400px;
+    height: 400px;
+    position: relative;
+    border: solid black 5px;
 }
