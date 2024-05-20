@@ -4,14 +4,19 @@ import { Link } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
 import './trivia-carousel.css';
 
-function TriviaItem({ genre, description, imageUrl, linkUrl }) {
+function TriviaItem({ genre, description, imageUrl, linkUrl, component }) {
     return (
         <>
             <div className="carousel-item">
                 <div className="carousel-group">
                     {/* <h1 className="carousel-title">{genre}</h1> */}
                     <Link to={linkUrl}>
-                        <img src={imageUrl} alt={`snapshot of ${genre}`} />
+                        {/* <img src={imageUrl} alt={`snapshot of ${genre}`} /> */}
+                        {imageUrl ? (
+                            <img src={imageUrl} alt={`snapshot of ${genre}`} />
+                        ) : component ? (
+                            component
+                        ) : null}
                     </Link>
                     <p className="carousel-info">{description}</p>
                 </div>
