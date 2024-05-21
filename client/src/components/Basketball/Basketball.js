@@ -12,16 +12,16 @@ export default function Basketball() {
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
 
-        let x = Math.floor(Math.random() * (containerWidth - 100));
-        let y = Math.floor(Math.random() * (containerHeight - 100));
-        let vx = Math.random() * 1.5;
-        let vy = Math.random() * 1.5;
+        let x = Math.floor(Math.random() * (containerWidth));
+        let y = Math.floor(Math.random() * (containerHeight));
+        let vx = Math.random() * 2 + 1;
+        let vy = Math.random() * 2 + 1;
 
         function movement() {
             requestAnimationFrame(movement);
 
-            if (x + 100 > containerWidth || x < 0) vx = -vx;
-            if (y + 100 > containerHeight || y < 0) vy = -vy;
+            if (x + 200 > containerWidth || x < 0) vx = -vx;
+            if (y + 200 > containerHeight || y < 0) vy = -vy;
 
             x += vx;
             y += vy;
