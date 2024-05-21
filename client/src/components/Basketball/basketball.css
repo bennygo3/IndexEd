@@ -1,28 +1,55 @@
 .basketball {
-    position: absolute;
+    /* position: absolute;
     width: 200px;
     height: 200px;
     background-color: orange;
     border-radius: 50%;
     box-shadow: inset 0 0 10px rgb(0, 0, 0);
     overflow: hidden;
-    margin: auto;
+    margin: auto; */
     /* margin-top: 75px; */
     transform: rotate(90deg);
 
-    animation-name: bounce;
-    animation-duration: 8s;
+    /* animation-name: bounce;
+    animation-duration: 8s; */
     /* animation-iteration-count: infinite; */
 
+
+    overflow: hidden;
+    height: 200px;
+    width: 200px;
+    background-color: orange;
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: inset 0 0 10px rgb(0, 0, 0);
 }
 
-@keyframes bounce {
+/* @keyframes bounce {
     0% {left: 0px; top: 0px;}
     25% {left: 100px; top: 200px; rotate: 90deg;}
     50% {left: 200px; top: 100px; rotate: 180deg;}
     75%{left: 300px; top: 0px; rotate: 270deg;}
     100%{left: 200px; top: 100px; rotate: 0deg;}
-}
+} */
+
+/* .basketball-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+} */
+
+
+
+
+
+/* .basketball-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; 
+} */
 
 .line {
     position: absolute;
@@ -66,4 +93,4 @@
     width: 97%;
     height: 97%;
     transform: translate(-50%, -84%) rotate(45deg);
-}
+} 

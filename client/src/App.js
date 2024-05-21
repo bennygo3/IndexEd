@@ -11,7 +11,7 @@ import TriviaDecks from './pages/TriviaDecks/TriviaDecks.js';
 import PokemonTrivia from './pages/TriviaGenres/Pokemon/PokemonTrivia.js';
 import NbaLogos from './pages/TriviaGenres/Sports/NBA/NbaLogos.js';
 import USAStates from './pages/TriviaGenres/Geography/USAStates.js';
-// import Basketball from './pages/TriviaGenres/Sports/NBA/Basketball.js';
+import Basketball from './components/Basketball/Basketball.js';
 
 
 function App() {
@@ -53,10 +53,10 @@ function App() {
                             path='usa-states'
                             element={<USAStates />}
                         />
-                        {/* <Route
+                        <Route
                             path='basketball'
                             element={<Basketball />}
-                        /> */}
+                        />
                     </Routes>
                 </Router>
             </ApolloProvider>
