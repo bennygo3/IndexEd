@@ -12,8 +12,8 @@ export default function Basketball() {
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
 
-        let x = Math.floor(Math.random() * (containerWidth));
-        let y = Math.floor(Math.random() * (containerHeight));
+        let x = Math.floor(Math.random() * (containerWidth - 200));
+        let y = Math.floor(Math.random() * (containerHeight - 200));
         let vx = Math.random() * 2 + 1;
         let vy = Math.random() * 2 + 1;
 
@@ -42,12 +42,3 @@ export default function Basketball() {
         </div>
     )
 }
-
-
-
-// <div className='basketball'>
-//     <div className='line horizontal'></div>
-//     <div className='line vertical'></div>
-//     <div className='curveR'></div>
-//     <div className='curveL'></div>
-// </div>
