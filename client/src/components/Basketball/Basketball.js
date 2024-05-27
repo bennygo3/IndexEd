@@ -30,8 +30,10 @@ export default function Basketball() {
             x += vx;
             y += vy;
 
-            // Applies new position to the ball element
-            ball.style.transform = `translate(${x}px, ${y}px)`;
+            const rotAngle = (Date.now() % 3600) / 20;
+ 
+            // Continuously created new position of the ball element
+            ball.style.transform = `translate(${x}px, ${y}px) rotate(${rotAngle}deg)`;
         }
         movement();
     }, []);
@@ -45,5 +47,5 @@ export default function Basketball() {
                 <div className='curveL'></div>
             </div>
         </div>
-    )
+    );
 }

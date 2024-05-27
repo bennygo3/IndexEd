@@ -10,7 +10,18 @@
     /* animation-name: bounce;
     animation-duration: 8s; */
     /* animation-iteration-count: infinite; */
+    /* animation: rotate 100s linear infinite; */
 }
+
+/* @keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(360deg);
+    }
+} */
+
+
 
 .basketball-container {
     width: 100%;
