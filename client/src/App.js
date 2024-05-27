@@ -12,6 +12,7 @@ import PokemonTrivia from './pages/TriviaGenres/Pokemon/PokemonTrivia.js';
 import NbaLogos from './pages/TriviaGenres/Sports/NBA/NbaLogos.js';
 import USAStates from './pages/TriviaGenres/Geography/USAStates.js';
 import Basketball from './components/Basketball/Basketball.js';
+import Snake from './components/Snake/Snake.js';
 
 
 function App() {
@@ -56,6 +57,10 @@ function App() {
                         <Route
                             path='basketball'
                             element={<Basketball />}
+                        />
+                        <Route
+                            path='snake'
+                            element={<Snake />}
                         />
                     </Routes>
                 </Router>
