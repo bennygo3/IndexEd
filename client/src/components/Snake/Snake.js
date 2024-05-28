@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './snake.css';
 
 export default function Snake() {
@@ -12,7 +12,7 @@ export default function Snake() {
     const [direction, setDirection] = useState({ x: 0, y: 1 });
     const [gameOver, setGameOver] = useState(false);
     
-    const boardSize = 80;
+    const boardSize = 10;
 
     // This updated the game state every 200ms
     useInterval(() => {
@@ -62,7 +62,7 @@ export default function Snake() {
         return newFood;
     };
 
-    const handleKeyDown = (e) => {
+    const handleKeyDown = useCallback((e) => {
         switch (e.key) {
             case 'ArrowUp':
                 if(direction.y === 0) setDirection({ x: 0, y: -1 });
@@ -76,18 +76,17 @@ export default function Snake() {
             case 'ArrowRight':
                 if(direction.x === 0) setDirection({ x: 1, y: 0});
                 break;
-                default:
+            default:
                 break;
         }
-    };
+    }, [direction]);
 
-    // Listens for key presses
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, [direction]);
+    }, [handleKeyDown]);
 
     function useInterval(callback, delay) {
         const savedCallback = useRef();
@@ -106,27 +105,50 @@ export default function Snake() {
             }
         }, [delay]);
     }
-
     return (
         <div className='snake-game'>
-            <div className='snake-board'>
-                {Array.from({ length: boardSize }).map((_, row) => (
-                    <div key={row} className='row'>
-                        {Array.from({ length: boardSize }).map((_, col) => {
-                            <div key= {col} className={
-                                `cell ${
-                                    snake.some(segment => segment.x === col && segment.y === row)
-                                    ? 'snake'
-                                    : food.x === col && food.y === row
-                                    ? 'food'
-                                    : ''
-                                }`}
-                            />
-                        })}
-                    </div>
-                ))}
-            </div>
-            {gameOver && <div className='game-over'>Game Over</div>}
+        <div className='snake-board'>
+            {Array.from({ length: boardSize }).map((_, row) => (
+                <div key={row} className='row'>
+                    {Array.from({ length: boardSize }).map((_, col) => (
+                        <div key= {col} className={
+                            `cell ${
+                                snake.some(segment => segment.x === col && segment.y === row)
+                                ? 'snake'
+                                : food.x === col && food.y === row
+                                ? 'food'
+                                : ''
+                            }`}
+                        />
+                    ))}
+                </div>
+            ))}
         </div>
+        {gameOver && <div className='game-over'>Game Over</div>}
+    </div>
     );
+
+    // return (
+    //     <div className='snake-game'>
+    //     <div className='snake-board'>
+    //         {Array.from({ length: boardSize * boardSize }).map((_, index) => {
+    //             const row = Math.floor(index / boardSize);
+    //             const col = index % boardSize;
+    //             return (
+    //                 <div key={index} className={
+    //                     `cell ${
+    //                         snake.some(segment => segment.x === col && segment.y === row)
+    //                         ? 'snake'
+    //                         : food.x === col && food.y === row
+    //                         ? 'food'
+    //                         : ''
+    //                     }`
+    //                 } />
+    //             );
+    //         })}
+    //     </div>
+    //     {gameOver && <div className='game-over'>Game Over</div>}
+    // </div>
+    // );
 };
+
