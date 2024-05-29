@@ -11,11 +11,12 @@ export default function Snake() {
     const [food, setFood] = useState({ x: 5, y: 5 });
     const [direction, setDirection] = useState({ x: 0, y: 1 });
     const [gameOver, setGameOver] = useState(false);
+    const [gameStarted, setGameStarted] = useState(false);
     
     const boardSize = 20;
 
     useInterval(() => {
-        if (!gameOver) {
+        if (!gameOver && gameStarted) {
             moveSnake();
         }
     }, 200);
@@ -112,28 +113,18 @@ export default function Snake() {
             }
         }, [delay]);
     }
-    // return (
-    //     <div className='snake-game'>
-    //     <div className='snake-board'>
-    //         {Array.from({ length: boardSize }).map((_, row) => (
-    //             <div key={row} className='row'>
-    //                 {Array.from({ length: boardSize }).map((_, col) => (
-    //                     <div key= {col} className={
-    //                         `cell ${
-    //                             snake.some(segment => segment.x === col && segment.y === row)
-    //                             ? 'snake'
-    //                             : food.x === col && food.y === row
-    //                             ? 'food'
-    //                             : ''
-    //                         }`}
-    //                     />
-    //                 ))}
-    //             </div>
-    //         ))}
-    //     </div>
-    //     {gameOver && <div className='game-over'>Game Over</div>}
-    // </div>
-    // );
+
+    const startGame = () => {
+        setGameStarted(true);
+        setGameOver(false);
+        setSnake([
+            { x: 2, y: 2 },
+            { x: 2, y: 1 },
+        ]);
+        setFood({ x: 5, y: 5 });
+        setDirection({ x: 0, y: 1 });
+    };
+
     return (
         <div className='snake-game'>
             <div className='snake-board'>
@@ -155,6 +146,11 @@ export default function Snake() {
                 ))}
             </div>
             {gameOver && <div className='game-over'>Game Over</div>}
+            {(!gameStarted || gameOver) && (
+                <button className='start-button' onClick={startGame}>
+                    Start Game
+                </button>
+            )}
         </div>
     );
 
