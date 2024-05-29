@@ -62,32 +62,46 @@ export default function Snake() {
         return newFood;
     };
 
+    const startGame = useCallback(() => {
+        setGameStarted(true);
+        setGameOver(false);
+        setSnake([
+            { x: 2, y: 2 },
+            { x: 2, y: 1 },
+        ]);
+        setFood({ x: 5, y: 5 });
+        setDirection({ x: 0, y: 1 });
+    }, []);
+
+    const toggleGame = useCallback(() => {
+        if (gameOver) {
+            startGame();
+        } else {
+            setGameStarted(prev => !prev);
+        }
+    }, [gameOver, startGame]);
+
     const handleKeyDown = useCallback((e) => {
         switch (e.key) {
             case 'ArrowUp':
                 if(direction.y === 0) setDirection({ x: 0, y: -1 });
-
-                // if(direction.y === 0 && direction.x !== 0) setNextDirection({ x: 0, y: -1 });
                 break;
             case 'ArrowDown':
                 if(direction.y === 0) setDirection({ x: 0, y: 1 });
-
-                // if(direction.y === 0 && direction.x !== 0) setNextDirection({ x: 0, y: 1 });
                 break;
             case 'ArrowLeft':
                 if(direction.x === 0) setDirection({ x: -1, y: 0 });
-
-                // if(direction.x === 0 && direction.y !== 0) setNextDirection({ x: -1, y: 0 });
                 break;
             case 'ArrowRight':
                 if(direction.x === 0) setDirection({ x: 1, y: 0});
-
-                // if(direction.x === 0 && direction.y !== 0) setNextDirection({ x: 1, y: 0});
+                break;
+            case ' ':
+                toggleGame();
                 break;
             default:
                 break;
         }
-    }, [direction]);
+    }, [direction, toggleGame]);
 
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
@@ -114,16 +128,7 @@ export default function Snake() {
         }, [delay]);
     }
 
-    const startGame = () => {
-        setGameStarted(true);
-        setGameOver(false);
-        setSnake([
-            { x: 2, y: 2 },
-            { x: 2, y: 1 },
-        ]);
-        setFood({ x: 5, y: 5 });
-        setDirection({ x: 0, y: 1 });
-    };
+
 
     return (
         <div className='snake-game'>
