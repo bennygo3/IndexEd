@@ -12,9 +12,8 @@ export default function Snake() {
     const [direction, setDirection] = useState({ x: 0, y: 1 });
     const [gameOver, setGameOver] = useState(false);
     
-    const boardSize = 10;
+    const boardSize = 20;
 
-    // This updated the game state every 200ms
     useInterval(() => {
         if (!gameOver) {
             moveSnake();
@@ -66,15 +65,23 @@ export default function Snake() {
         switch (e.key) {
             case 'ArrowUp':
                 if(direction.y === 0) setDirection({ x: 0, y: -1 });
+
+                // if(direction.y === 0 && direction.x !== 0) setNextDirection({ x: 0, y: -1 });
                 break;
             case 'ArrowDown':
                 if(direction.y === 0) setDirection({ x: 0, y: 1 });
+
+                // if(direction.y === 0 && direction.x !== 0) setNextDirection({ x: 0, y: 1 });
                 break;
             case 'ArrowLeft':
                 if(direction.x === 0) setDirection({ x: -1, y: 0 });
+
+                // if(direction.x === 0 && direction.y !== 0) setNextDirection({ x: -1, y: 0 });
                 break;
             case 'ArrowRight':
                 if(direction.x === 0) setDirection({ x: 1, y: 0});
+
+                // if(direction.x === 0 && direction.y !== 0) setNextDirection({ x: 1, y: 0});
                 break;
             default:
                 break;
@@ -128,27 +135,4 @@ export default function Snake() {
     </div>
     );
 
-    // return (
-    //     <div className='snake-game'>
-    //     <div className='snake-board'>
-    //         {Array.from({ length: boardSize * boardSize }).map((_, index) => {
-    //             const row = Math.floor(index / boardSize);
-    //             const col = index % boardSize;
-    //             return (
-    //                 <div key={index} className={
-    //                     `cell ${
-    //                         snake.some(segment => segment.x === col && segment.y === row)
-    //                         ? 'snake'
-    //                         : food.x === col && food.y === row
-    //                         ? 'food'
-    //                         : ''
-    //                     }`
-    //                 } />
-    //             );
-    //         })}
-    //     </div>
-    //     {gameOver && <div className='game-over'>Game Over</div>}
-    // </div>
-    // );
-};
-
+ };
