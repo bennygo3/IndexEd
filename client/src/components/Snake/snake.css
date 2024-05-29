@@ -17,8 +17,11 @@
 .cell {
     width: 30px;
     height: 30px;
-    background-color: rgb(157, 157, 157);
+    background-color: rgb(178, 178, 178);
     border: black solid 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
    
 }
 
@@ -29,8 +32,9 @@
 }
 
 .cell.food {
-    background-color: #f00;
-    z-index: 3;
+    background-color: rgb(255, 206, 206);
+    /* z-index: 3; */
+    font-size: x-large;
     
     
 }

@@ -112,27 +112,50 @@ export default function Snake() {
             }
         }, [delay]);
     }
+    // return (
+    //     <div className='snake-game'>
+    //     <div className='snake-board'>
+    //         {Array.from({ length: boardSize }).map((_, row) => (
+    //             <div key={row} className='row'>
+    //                 {Array.from({ length: boardSize }).map((_, col) => (
+    //                     <div key= {col} className={
+    //                         `cell ${
+    //                             snake.some(segment => segment.x === col && segment.y === row)
+    //                             ? 'snake'
+    //                             : food.x === col && food.y === row
+    //                             ? 'food'
+    //                             : ''
+    //                         }`}
+    //                     />
+    //                 ))}
+    //             </div>
+    //         ))}
+    //     </div>
+    //     {gameOver && <div className='game-over'>Game Over</div>}
+    // </div>
+    // );
     return (
         <div className='snake-game'>
-        <div className='snake-board'>
-            {Array.from({ length: boardSize }).map((_, row) => (
-                <div key={row} className='row'>
-                    {Array.from({ length: boardSize }).map((_, col) => (
-                        <div key= {col} className={
-                            `cell ${
-                                snake.some(segment => segment.x === col && segment.y === row)
-                                ? 'snake'
-                                : food.x === col && food.y === row
-                                ? 'food'
-                                : ''
-                            }`}
-                        />
-                    ))}
-                </div>
-            ))}
+            <div className='snake-board'>
+                {Array.from({ length: boardSize }).map((_, row) => (
+                    <div key={row} className='row'>
+                        {Array.from({ length: boardSize }).map((_, col) => {
+                            const isSnakeSegment = snake.some(segment => segment.x === col && segment.y === row);
+                            const isFood = food.x === col && food.y === row;
+                            return (
+                                <div
+                                    key={col}
+                                    className={`cell ${isSnakeSegment ? 'snake' : isFood ? 'food' : ''}`}
+                                >
+                                    {isFood && '🍎'}
+                                </div>
+                            );
+                        })}
+                    </div>
+                ))}
+            </div>
+            {gameOver && <div className='game-over'>Game Over</div>}
         </div>
-        {gameOver && <div className='game-over'>Game Over</div>}
-    </div>
     );
 
- };
+};
