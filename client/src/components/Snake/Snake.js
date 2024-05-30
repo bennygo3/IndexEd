@@ -4,14 +4,15 @@ import './snake.css';
 export default function Snake() {
     
     const [snake, setSnake] = useState([
-        { x: 2, y: 2 },
-        { x: 2, y: 1 },
+        { x: 1, y: 2 },
+        { x: 1, y: 1 },
     ]);
 
     const [food, setFood] = useState({ x: 5, y: 5 });
     const [direction, setDirection] = useState({ x: 0, y: 1 });
     const [gameOver, setGameOver] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
+    const [score, setScore] = useState(0);
     
     const boardSize = 20;
 
@@ -66,8 +67,8 @@ export default function Snake() {
         setGameStarted(true);
         setGameOver(false);
         setSnake([
-            { x: 2, y: 2 },
-            { x: 2, y: 1 },
+            { x: 1, y: 2 },
+            { x: 1, y: 1 },
         ]);
         setFood({ x: 5, y: 5 });
         setDirection({ x: 0, y: 1 });
@@ -138,10 +139,20 @@ export default function Snake() {
                         {Array.from({ length: boardSize }).map((_, col) => {
                             const isSnakeSegment = snake.some(segment => segment.x === col && segment.y === row);
                             const isFood = food.x === col && food.y === row;
+                            const isSnakeHead = snake[0].x === col && snake[0].y === row;
+                            const snakeHeadDirection = isSnakeHead
+                                ? direction.x === 1
+                                ? 'right'
+                                : direction.x === -1
+                                ? 'left'
+                                : direction.y === 1
+                                ? 'down'
+                                : 'up'
+                                : '';
                             return (
                                 <div
                                     key={col}
-                                    className={`cell ${isSnakeSegment ? 'snake' : isFood ? 'food' : ''}`}
+                                    className={`cell ${isSnakeHead ? `head ${snakeHeadDirection}` : isSnakeSegment ? 'snake' : isFood ? 'food' : ''}`}
                                 >
                                     {isFood && '🍎'}
                                 </div>
