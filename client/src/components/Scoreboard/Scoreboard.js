@@ -40,7 +40,7 @@ export default function Scoreboard({ currentScore }) {
     return (
         <div className="scoreboard">
             <div className='score-section'>
-                <div className='label'>CURRENT</div>
+                <div className='label'>SCORE</div>
                 <div className='score'>
                     {String(currentScore).split('').map((digit, index) => (
                         <div key={index} className='digit-container'>

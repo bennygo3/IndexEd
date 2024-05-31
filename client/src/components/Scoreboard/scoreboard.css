@@ -4,7 +4,7 @@
     align-items: center;
     width: 100%; */
     background-color: #333;
-    padding: 20px;
+    padding: 14px;
     border-radius: 10px;
     color: white;
     font-family: 'Courier New', Courier, monospace;
@@ -17,8 +17,8 @@
 }
 
 .label {
-    font-size: 1.5em;
-    margin-bottom: 10px;
+    font-size: 1.15em;
+    margin-bottom: 4px;
 }
 
 .score {
@@ -35,7 +35,8 @@
 .segment {
     position: absolute;
     background-color: #444;
-    border-radius: 2px;
+    /* border-radius: 2px; */
+    transition: background-color 0.2s;
 }
 
 .segment.on {
@@ -45,48 +46,57 @@
 .segment-0 {
     top: 0;
     left: 5px;
-    right: 5px;
-    height: 10px;
+    /* right: 0px; */
+    height: 7px;
+    width: 32px;
+    clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%);
 }
 
 .segment-1 {
-    top: 5px;
-    right: 0;
-    width: 10px;
-    height: 30px;
+    top: 4px;
+    right: 0px;
+    width: 7px;
+    height: 32px;
+    clip-path: polygon(0% 20%,100% 0%,100% 100%,0% 80%);
 }
 
 .segment-2 {
-    bottom: 5px;
+    bottom: 6px;
     right: 0;
-    width: 10px;
-    height: 30px;
+    width: 7px;
+    height: 32px;
+    clip-path: polygon(0% 20%,100% 0%,100% 100%,0% 80%);
 }
 
 .segment-3 {
-    bottom: 0;
-    left: 5px;
-    right: 5px;
-    height: 10px;
+    bottom: -1px;
+    left: 4px;
+    /* right: 0px; */
+    width: 32px;
+    height: 7px;
+    clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
 }
 
 .segment-4 {
-    bottom: 5px;
+    bottom: 6px;
     left: 0;
-    width: 10px;
-    height: 30px;
+    width: 7px;
+    height: 32px;
+    clip-path: polygon(0% 0%, 100% 20%, 100% 80%, 0% 100%);
 }
 
 .segment-5 {
-    top: 5px;
-    left: 0;
-    width: 10px;
-    height: 30px;
+    top: 4px;
+    left: 0px;
+    width: 7px;
+    height: 32px;
+    clip-path: polygon(0% 0%, 100% 20%, 100% 80%, 0% 100%);
 }
 
 .segment-6 {
-    top: 35px;
+    top: 37px;
     left: 5px;
-    right: 5px;
-    height: 10px;
+    width: 32px;
+    height: 7px;
+    clip-path: polygon(0% 50%, 20% 0%, 80% 0%, 100% 50%, 80% 100%, 20% 100%);
 }
