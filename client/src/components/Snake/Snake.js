@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './snake.css';
+import Scoreboard from '../Scoreboard/Scoreboard.js';
 
 export default function Snake() {
 
@@ -136,7 +137,8 @@ export default function Snake() {
 
     return (
         <div className='snake-game'>
-            <div className='score-board'>Score: {score}</div>
+            {/* <div className='score-board'>Score: {score}</div> */}
+            <Scoreboard currentScore={score} />
             <div className='snake-board'>
                 {Array.from({ length: boardSize }).map((_, row) => (
                     <div key={row} className='row'>
@@ -166,13 +168,13 @@ export default function Snake() {
                 ))}
             </div>
             {gameOver && <div className='game-over'>Game Over</div>}
-            {/* {(!gameStarted || gameOver) && ( */}
+            
                 <button
                     className={`start-button ${gameStarted && !gameOver ? 'hidden' : ''}`}
                     onClick={startGame}>
                     Start Game
                 </button>
-             {/* )} */}
+             
         </div>
     );
 
