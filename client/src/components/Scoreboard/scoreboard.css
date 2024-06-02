@@ -52,43 +52,42 @@
     position: relative; */
     height: 7px;
     width: 32px;
-    clip-path: polygon(-2% 0%, 101% 0%, 79% 100%, 20.98% 100%);
+    clip-path: polygon(0% 0%, 100% 0%, 78% 100%, 22% 100%);
     /*clip-path: (top-left, top-right, bottom-right, bottom-left)*/
 }
 
 .segment-1 {
     top: 1px;
-    right: 2.9px;
+    right: 2.99px;
     width: 7px;
     height: 32px;
-    clip-path: polygon(0% 20%, 99% 0%, 100% 100%, 0% 80%);
+    clip-path: polygon(0% 22%, 100% 0%, 100% 100%, 0% 78%);    
     /*clip-path: (top-left, top-right, bottom-right, bottom-left)*/
 }
 
 .segment-2 {
-    bottom: 6px;
-    right: 0;
+    top: 34px;
+    right: 2.99px;
     width: 7px;
     height: 32px;
-    clip-path: polygon(0% 20%,97% 0%,100% 100%,0% 80%);
+    clip-path: polygon(0% 22%, 100% 0%, 100% 100%, 0% 78%);
 }
 
 .segment-3 {
-    bottom: 8px;
-
-    left: 4px;
+    bottom: 13px;
+    left: 4.5px;
     /* right: 0px; */
     width: 32px;
     height: 7px;
-    clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+    clip-path: polygon(22% 0%, 78% 0%, 100% 100%, 0% 100%);
 }
 
 .segment-4 {
-    bottom: 6px;
-    left: 0;
+    top: 34px;
+    left: 4px;
     width: 7px;
     height: 32px;
-    clip-path: polygon(0% 0%, 100% 20%, 100% 80%, 0% 100%);
+    clip-path: polygon(0% 0%, 100% 22%, 100% 78%, 0% 100%);
 }
 
 .segment-5 {
@@ -96,13 +95,24 @@
     left: 4px;
     width: 7px;
     height: 32px;
-    clip-path: polygon(0% 0%, 100% 20.5%, 100% 80%, 0% 100%);
+    clip-path: polygon(0% 0%, 100% 22%, 100% 78%, 0% 100%);
 }
 
 .segment-6 {
-    top: 30px;
-    left: 5px;
+    top: 29px;
+    left: 4.5px;
     width: 32px;
-    height: 7px;
-    clip-path: polygon(0% 50%, 20% 0%, 80% 0%, 100% 50%, 80% 100%, 20% 100%);
+    height: 9px;
+    clip-path: polygon(0% 50%, 25% -10%, 75% -10%, 100% 50%, 74% 110%, 26% 110%);
+    clip-path: polygon(1% 50%, 25% -25%, 75% -10%, 99% 50%, 72% 110%, 27% 110%);
+    /*clip-path: (middle-left, top-left, top-right, middle-right, bottom-right, bottom-left)*/
+}
+
+.segment-6 {
+    top: 29px;
+    left: 4.5px;
+    width: 32px;
+    height: 9px;
+    
+    clip-path: polygon(2% 50%, 20% 0%, 80% 0%, 98% 50%, 80% 100%, 20% 100%);
 }
