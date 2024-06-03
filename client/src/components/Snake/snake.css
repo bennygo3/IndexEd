@@ -43,6 +43,61 @@
     z-index: 4; 
 }
 
+.cell.head::before{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.cell.head.right::before,
+.cell.head.left::before,
+.cell.head.up::before,
+.cell.head.down::before {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell.head.right::before {
+    right: 3px;
+    top: 5px;
+}
+
+.cell.head.left::before {
+    left: 3px;
+    top: 5px;
+}
+
+.cell.head.up::before {
+    top: 3px;
+    left: 5px;
+}
+
+.cell.head.down::before {
+    bottom: 3px;
+    left: 5px;
+}
+
+.cell.head::after {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.cell.head.right::after,
+.cell.head.left::after,
+.cell.head.up::after,
+.cell.head.down::after {
+    position: absolute;
+}
+
 .cell.head::after {
     content: '';
     position: absolute;
@@ -52,6 +107,14 @@
     height: 2px;
     background-color: red;
     /* transform: rotate(90deg); */
+}
+
+.cell.head.tongue::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 2px;
+    background-color: red;
 }
 
 .cell.head.right::after {
@@ -79,6 +142,26 @@
     transform: rotate(90deg);
     /* left: 50%; */
     /* transform: translateY(50%); */
+}
+
+.cell.head.tongue.right::after {
+    right: -7px;
+    transform: translateY(50%);
+}
+
+.cell.head.tongue.left::after {
+    left: -7px;
+    transform: translateY(50%);
+}
+
+.cell.head.tongue.up::after {
+    top: 0px;
+    transform: rotate(90deg);
+}
+
+.cell.head.tongue.down::after {
+    bottom: 0px;
+    transform: rotate(90deg);
 }
 
 .cell.food {
