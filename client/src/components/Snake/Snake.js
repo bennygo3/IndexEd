@@ -160,7 +160,8 @@ export default function Snake() {
                                     key={col}
                                     className={`cell ${isSnakeHead ? `head ${snakeHeadDirection}` : isSnakeSegment ? 'snake' : isFood ? 'food' : ''}`}
                                 >
-                                    {isFood && '🍎'}
+                                    {isSnakeHead && <><div className='eye'></div> <div className='eyeTwo'></div></>}
+                                    {isFood && '🌭'}
                                 </div>
                             );
                         })}

@@ -39,134 +39,12 @@
 
 .cell.head {
     background-color: rgb(0, 255, 34);
-    /* outline: solid 1px black; */
     z-index: 4; 
-}
-
-.cell.head::before{
-    content: '';
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: white;
-    border-radius: 50%;
-}
-
-.cell.head.right::before,
-.cell.head.left::before,
-.cell.head.up::before,
-.cell.head.down::before {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.cell.head.right::before {
-    right: 3px;
-    top: 5px;
-}
-
-.cell.head.left::before {
-    left: 3px;
-    top: 5px;
-}
-
-.cell.head.up::before {
-    top: 3px;
-    left: 5px;
-}
-
-.cell.head.down::before {
-    bottom: 3px;
-    left: 5px;
-}
-
-.cell.head::after {
-    content: '';
-    position: absolute;
-    width: 5px;
-    height: 5px;
-    background-color: black;
-    border-radius: 50%;
-}
-
-.cell.head.right::after,
-.cell.head.left::after,
-.cell.head.up::after,
-.cell.head.down::after {
-    position: absolute;
-}
-
-.cell.head::after {
-    content: '';
-    position: absolute;
-    /* top: 50%; */
-    /*left: 100%; */
-    width: 15px;
-    height: 2px;
-    background-color: red;
-    /* transform: rotate(90deg); */
-}
-
-.cell.head.tongue::after {
-    content: '';
-    position: absolute;
-    width: 15px;
-    height: 2px;
-    background-color: red;
-}
-
-.cell.head.right::after {
-    right: -7px;
-    /* transform: rotate(90deg); */
-    transform: translateY(50%);
-}
-
-.cell.head.left::after {
-    left: -7px;
-    /* left: -10%; */
-    transform: translateY(50%);
-}
-
-.cell.head.up::after {
-    top: 0px;
-    transform: rotate(90deg);
-    /* bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%); */
-}
-
-.cell.head.down::after {
-    bottom: 0px;
-    transform: rotate(90deg);
-    /* left: 50%; */
-    /* transform: translateY(50%); */
-}
-
-.cell.head.tongue.right::after {
-    right: -7px;
-    transform: translateY(50%);
-}
-
-.cell.head.tongue.left::after {
-    left: -7px;
-    transform: translateY(50%);
-}
-
-.cell.head.tongue.up::after {
-    top: 0px;
-    transform: rotate(90deg);
-}
-
-.cell.head.tongue.down::after {
-    bottom: 0px;
-    transform: rotate(90deg);
+    position: relative;
 }
 
 .cell.food {
     background-color: rgb(255, 206, 206);
-    /* z-index: 3; */
     font-size: x-large; 
 }
 
@@ -187,3 +65,98 @@
 .start-button.hidden {
     visibility: hidden;
 }
+
+/* tongue is created with pseudo before */
+
+.cell.head::before {
+    content: '';
+    position: absolute;
+    height: 15px;
+    width: 2px;
+    background-color:red;
+}
+
+.cell.head.up::before {
+    top: -7px;
+}
+
+.cell.head.right::before {
+    height: 2px;
+    width: 15px;
+    right: -7px;
+    bottom: 12px;
+}
+
+.cell.head.down::before {
+    bottom: -9px;
+}
+
+.cell.head.left::before {
+    height: 2px;
+    width: 15px;
+    left: -7px;
+    bottom: 12px;
+}
+
+.eye, .eyeTwo {
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: 0px 1px 15px 1px #636363;
+}
+
+.eye::after, .eyeTwo::after{
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 7px;
+    background-color: black;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cell.head.up .eye {
+    top: 8px;
+    left: 2px;
+}
+
+.cell.head.right .eye {
+    top: -2px;
+    right: 2px;
+}
+
+.cell.head.left .eye {
+    top: -2px;
+    left: 2px;
+}
+
+.cell.head.down .eye {
+    left: 2px;
+    bottom: 8px;
+}
+
+.cell.head.up .eyeTwo {
+    top: 8px;
+    right: 2px;
+}
+
+.cell.head.right .eyeTwo {
+    top: -2px;
+    right: 13px;
+}
+
+.cell.head.left .eyeTwo {
+    top: -2px;
+    left: 13px;
+}
+
+.cell.head.down .eyeTwo {
+    bottom: 8px;
+    right: 2px;
+}
+
+
