@@ -19,7 +19,7 @@ export const UPDATE_IS_NEW_USER = gql`
             isNewUser
         }
     }
-`
+`;
 
 export const LOGIN_USER = gql`
     mutation login($username: String!, $password: String!) {
@@ -40,7 +40,8 @@ export const CREATE_STUDYCARD = gql`
             front
             back      
         }
-    }`
+    }
+`;
 export const CREATE_STACK = gql`
     mutation createStack($input: CreateStackInput!) {
         createStack(input: $input) {
@@ -52,6 +53,14 @@ export const CREATE_STACK = gql`
                 _id
                 username
             }
+        }
+    }
+`;
+
+export const UPDATE_HIGH_SCORE = gql`
+    mutation UpdateHighScore($userId: ID!, $newScore: Int!) {
+        updateHighScore(userId: $userId, newScore: $newScore) {
+            highScore
         }
     }
 `;

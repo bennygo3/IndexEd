@@ -1,4 +1,4 @@
-import { Stack, Studycard, User } from '../models/index.js';
+import { Stack, Studycard, User, SnakeScore } from '../models/index.js';
 import { signToken } from '../utils/auth.js';
 
 class AuthenticationError extends Error {
@@ -46,6 +46,10 @@ const resolvers = {
 
       return user;
     },
+    getHighScore: async(_, { userId }) => {
+      const score = await Score.findOne({ userId });
+      return score || { userId, highScore: 0 };
+    }
   },
   Mutation: {
     //this is creating a user from the sign up page and starting them with a misc stack of cards to save new cards to
@@ -214,6 +218,19 @@ const resolvers = {
         { isNewUser },
         { new: true }
       );
+    },
+    updateHighScore: async (_, { userId, newScore }) => {
+      let score = await Score.findOne({ userId });
+      if (score) {
+        if (newScore > score.highScore) {
+          score.highScore = newScore;
+          await score.save();
+        } else {
+          score = new Score({ userId, highScore: newScore });
+          await score.save();
+        }
+        return score;
+      }
     }
   }
 };

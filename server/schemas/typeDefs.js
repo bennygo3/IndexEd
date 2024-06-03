@@ -28,12 +28,18 @@ type Auth {
   user: User!
 }
 
+type SnakeScore {
+  userId: ID!
+  highScore: Int!
+}
+
 type Query {
   stacks: [Stack]
   studycard(id: ID!): [Studycard]
   studycardsByContent(question: String!, answer: String!): [Studycard]
   studycards: [Studycard]
   currentUser: User
+  getHighScore(userId: ID!): SnakeScore
 }
 
 input CreateStudycardInput {
@@ -57,6 +63,7 @@ type Mutation {
   updateUser(username: String, email: String, password: String): User!
   updateStack(title: String!, category: String!, description: String): Stack!
   updateUserIsNewField(userId: ID!, isNewUser: Boolean!): User!
+  updateHighSnakeScore(userId: ID!, newScore: Int!): SnakeScore
 }
 
 `;

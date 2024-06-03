@@ -31,4 +31,12 @@ query studycards{
     }
 }`;
 
+export const GET_HIGH_SCORE = gql`
+    query GetHighScore($userId: ID!) {
+        getHighScore(userId: $userId) {
+            highScore
+        }
+    }
+`;
+
 
