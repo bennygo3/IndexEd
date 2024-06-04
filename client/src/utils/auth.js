@@ -33,6 +33,20 @@ class AuthService {
         localStorage.removeItem('id_token');
         navigate('/');
     }
+
+    getUserIdFromToken() {
+        const token = this.getToken();
+        if (!token) return null;
+
+        try {
+            const decoded = decode(token);
+            console.log(decoded);
+            return decoded.data._id;
+        } catch (error) {
+            console.error('Failed to decode token:', error);
+            return null;
+        }
+    }
 }
 
 const authService = new AuthService();

@@ -1,19 +1,29 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
+import { GET_HIGH_SNAKE_SCORE } from '../../utils/queries';
+import { UPDATE_HIGH_SNAKE_SCORE } from '../../utils/mutations';
+import authService from '../../utils/auth';
 import './snake.css';
 import Scoreboard from '../Scoreboard/Scoreboard.js';
 
 export default function Snake() {
-
-    const [snake, setSnake] = useState([
-        { x: 1, y: 2 },
-        { x: 1, y: 1 },
-    ]);
-
+    const userId = authService.getUserIdFromToken();
+    const { data, refetch } = useQuery(GET_HIGH_SNAKE_SCORE, {
+        variables: { userId },
+        skip: !userId,
+    });
+    const [updateHighSnakeScore] = useMutation(UPDATE_HIGH_SNAKE_SCORE);
+    
     const [food, setFood] = useState({ x: 5, y: 5 });
     const [direction, setDirection] = useState({ x: 0, y: 1 });
     const [gameOver, setGameOver] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
     const [score, setScore] = useState(0);
+    const [highScore, setHighScore] = useState(0);
+    const [snake, setSnake] = useState([
+        { x: 1, y: 2 },
+        { x: 1, y: 1 },
+    ]);
 
     const boardSize = 20;
 
@@ -22,6 +32,18 @@ export default function Snake() {
             moveSnake();
         }
     }, 200);
+
+    const startGame = useCallback(() => {
+        setGameStarted(true);
+        setGameOver(false);
+        setScore(0);
+        setSnake([
+            { x: 1, y: 2 },
+            { x: 1, y: 1 },
+        ]);
+        setFood({ x: 5, y: 5 });
+        setDirection({ x: 0, y: 1 });
+    }, []);
 
     const moveSnake = () => {
         const newSnake = [...snake];
@@ -48,11 +70,27 @@ export default function Snake() {
     const ateItself = (head, snake) => {
         for (const segment of snake) {
             if (head.x === segment.x && head.y === segment.y) {
+                handleGameOver();
                 return true;
             }
         }
         return false;
     };
+
+    const handleGameOver = async () => {
+        setGameOver(true);
+        setGameStarted(false);
+        if (userId) {
+            await updateHighSnakeScore({ variables: { userId, newScore: score } });
+            refetch();
+        }
+    };
+
+    useEffect(() => {
+        if (data) {
+            setHighScore(data.getHighSnakeScore.highScore);
+        }
+    }, [data]);
 
     const generateFood = (snake) => {
         let newFood;
@@ -65,18 +103,6 @@ export default function Snake() {
         }
         return newFood;
     };
-
-    const startGame = useCallback(() => {
-        setGameStarted(true);
-        setGameOver(false);
-        setScore(0);
-        setSnake([
-            { x: 1, y: 2 },
-            { x: 1, y: 1 },
-        ]);
-        setFood({ x: 5, y: 5 });
-        setDirection({ x: 0, y: 1 });
-    }, []);
 
     const toggleGame = useCallback(() => {
         if (gameOver) {
@@ -139,6 +165,9 @@ export default function Snake() {
         <div className='snake-game'>
             {/* <div className='score-board'>Score: {score}</div> */}
             <Scoreboard currentScore={score} />
+            <div className='high-score'>
+                High Score: {highScore}
+            </div>
             <div className='snake-board'>
                 {Array.from({ length: boardSize }).map((_, row) => (
                     <div key={row} className='row'>

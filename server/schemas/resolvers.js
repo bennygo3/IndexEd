@@ -46,9 +46,9 @@ const resolvers = {
 
       return user;
     },
-    getHighScore: async(_, { userId }) => {
-      const score = await Score.findOne({ userId });
-      return score || { userId, highScore: 0 };
+    getHighSnakeScore: async(_, { userId }) => {
+      const snakeScore = await SnakeScore.findOne({ userId });
+      return snakeScore || { userId, highScore: 0 };
     }
   },
   Mutation: {

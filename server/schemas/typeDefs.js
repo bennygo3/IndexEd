@@ -39,7 +39,7 @@ type Query {
   studycardsByContent(question: String!, answer: String!): [Studycard]
   studycards: [Studycard]
   currentUser: User
-  getHighScore(userId: ID!): SnakeScore
+  getHighSnakeScore(userId: ID!): SnakeScore
 }
 
 input CreateStudycardInput {
