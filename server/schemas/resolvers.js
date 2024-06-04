@@ -219,17 +219,17 @@ const resolvers = {
         { new: true }
       );
     },
-    updateHighScore: async (_, { userId, newScore }) => {
-      let score = await Score.findOne({ userId });
-      if (score) {
-        if (newScore > score.highScore) {
-          score.highScore = newScore;
-          await score.save();
+    updateHighSnakeScore: async (_, { userId, newSnakeScore }) => {
+      let snakeScore = await SnakeScore.findOne({ userId });
+      if (snakeScore) {
+        if (newSnakeScore > snakeScore.highSnakeScore) {
+          snakeScore.highSnakeScore = newSnakeScore;
+          await snakeScore.save();
         } else {
-          score = new Score({ userId, highScore: newScore });
-          await score.save();
+          snakeScore = new SnakeScore({ userId, highSnakeScore: newSnakeScore });
+          await snakeScore.save();
         }
-        return score;
+        return snakeScore;
       }
     }
   }

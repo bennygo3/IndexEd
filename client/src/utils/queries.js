@@ -31,10 +31,10 @@ query studycards{
     }
 }`;
 
-export const GET_HIGH_SCORE = gql`
-    query GetHighScore($userId: ID!) {
-        getHighScore(userId: $userId) {
-            highScore
+export const GET_HIGH_SNAKE_SCORE = gql`
+    query GetHighSnakeScore($userId: ID!) {
+        getHighSnakeScore(userId: $userId) {
+            highSnakeScore
         }
     }
 `;

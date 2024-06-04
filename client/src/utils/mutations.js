@@ -57,10 +57,10 @@ export const CREATE_STACK = gql`
     }
 `;
 
-export const UPDATE_HIGH_SCORE = gql`
-    mutation UpdateHighScore($userId: ID!, $newScore: Int!) {
-        updateHighScore(userId: $userId, newScore: $newScore) {
-            highScore
+export const UPDATE_HIGH_SNAKE_SCORE = gql`
+    mutation UpdateHighSnakeScore($userId: ID!, $newScore: Int!) {
+        updateHighSnakeScore(userId: $userId, newScore: $newScore) {
+            highSnakeScore
         }
     }
 `;
