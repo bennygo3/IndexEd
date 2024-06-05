@@ -58,8 +58,8 @@ export const CREATE_STACK = gql`
 `;
 
 export const UPDATE_HIGH_SNAKE_SCORE = gql`
-    mutation UpdateHighSnakeScore($userId: ID!, $newScore: Int!) {
-        updateHighSnakeScore(userId: $userId, newScore: $newScore) {
+    mutation UpdateHighSnakeScore($userId: ID!, $newSnakeScore: Int!) {
+        updateHighSnakeScore(userId: $userId, newSnakeScore: $newSnakeScore) {
             highSnakeScore
         }
     }

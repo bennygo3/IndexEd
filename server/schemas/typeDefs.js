@@ -30,7 +30,7 @@ type Auth {
 
 type SnakeScore {
   userId: ID!
-  highScore: Int!
+  highSnakeScore: Int!
 }
 
 type Query {
@@ -63,7 +63,7 @@ type Mutation {
   updateUser(username: String, email: String, password: String): User!
   updateStack(title: String!, category: String!, description: String): Stack!
   updateUserIsNewField(userId: ID!, isNewUser: Boolean!): User!
-  updateHighSnakeScore(userId: ID!, newScore: Int!): SnakeScore
+  updateHighSnakeScore(userId: ID!, newSnakeScore: Int!): SnakeScore
 }
 
 `;

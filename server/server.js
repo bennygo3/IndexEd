@@ -11,7 +11,8 @@ import { authMiddleware } from './utils/auth.js';
 import db from './config/connection.js';
 
 import nbaRouter from './routes/nbaRoutes.js';
-
+console.log(process.env.JWT_SECRET);
+console.log(process.env.MONGODB_URI);
 const PORT = process.env.PORT || 3001;
 const app = express();
 const httpServer = http.createServer(app);

@@ -1,17 +1,18 @@
 import { Schema, model } from 'mongoose';
 
-const snakeSchema = new Schema({
+const snakeScoreSchema = new Schema({
     userId: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: 'User'
     },
-    highScore: {
+    highSnakeScore: {
         type: Number,
+        default: 0,
         required: true
     }
 });
 
-const SnakeScore = model('SnakeScore', snakeSchema);
+const SnakeScore = model('SnakeScore', snakeScoreSchema);
 
 export default SnakeScore;
