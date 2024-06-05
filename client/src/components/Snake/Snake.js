@@ -7,13 +7,14 @@ import './snake.css';
 import Scoreboard from '../Scoreboard/Scoreboard.js';
 
 export default function Snake() {
-    const userId = authService.getUserIdFromToken();
+    // const userId = authService.getUserIdFromToken();
+    const [userId, setUserId] = useState(null);
     const { data, refetch } = useQuery(GET_HIGH_SNAKE_SCORE, {
         variables: { userId },
         skip: !userId,
     });
     const [updateHighSnakeScore] = useMutation(UPDATE_HIGH_SNAKE_SCORE);
-    
+
     const [food, setFood] = useState({ x: 5, y: 5 });
     const [direction, setDirection] = useState({ x: 0, y: 1 });
     const [gameOver, setGameOver] = useState(false);
@@ -81,10 +82,20 @@ export default function Snake() {
         setGameOver(true);
         setGameStarted(false);
         if (userId) {
-            await updateHighSnakeScore({ variables: { userId, newScore: score } });
-            refetch();
+            try {
+                console.log('Updating high score with userId:', userId, 'and newScore:', score);
+                await updateHighSnakeScore({ variables: { userId, newScore: score } });
+                refetch();
+            } catch (error) {
+                console.error('Error updating high score:', error);
+            }
         }
     };
+
+    useEffect(() => {
+        const id = authService.getUserIdFromToken();
+        setUserId(id);
+    }, []);
 
     useEffect(() => {
         if (data) {
@@ -198,13 +209,13 @@ export default function Snake() {
                 ))}
             </div>
             {gameOver && <div className='game-over'>Game Over</div>}
-            
-                <button
-                    className={`start-button ${gameStarted && !gameOver ? 'hidden' : ''}`}
-                    onClick={startGame}>
-                    Start Game
-                </button>
-             
+
+            <button
+                className={`start-button ${gameStarted && !gameOver ? 'hidden' : ''}`}
+                onClick={startGame}>
+                Start Game
+            </button>
+
         </div>
     );
 

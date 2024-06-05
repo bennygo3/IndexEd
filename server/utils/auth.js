@@ -5,6 +5,8 @@ if (!secret) {
     throw new Error("JWT_SECRET is not set");
 }
 
+console.log(process.env.JWT_SECRET);
+
 const expiration = '5h';
 
 const authMiddleware = ({ req }) => {
@@ -31,10 +33,5 @@ const signToken = ({ email, username, _id }) => {
     const payload = { email, username, _id };
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration })
 }
-
-// const setToken = (token) => {
-//     local
-// }
-
 
 export { authMiddleware, signToken };
