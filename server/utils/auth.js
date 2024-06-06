@@ -17,14 +17,17 @@ const authMiddleware = ({ req }) => {
     }
 
     if (!token) {
-        return req;
+        return { user: null };
+        // return req;
     }
 
     try {
         const { data } = jwt.verify(token, secret, { maxAge: expiration });
         req.user = data;
-    } catch {
-        console.log('invalid token check back-end auth.js', error.message)
+    } catch (err) {
+        // console.log('invalid token check back-end auth.js', error.message);
+        console.error('Invalid token:', err);
+        return { user: null };
     }
     return req;
 };

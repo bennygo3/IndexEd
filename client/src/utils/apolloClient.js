@@ -7,12 +7,13 @@ console.log('GraphQL Endpoint:', graphqlEndpoint);
 
 
 const httpLink =  createHttpLink({
+    uri: graphqlEndpoint,
     // uri: process.env.REACT_APP_GRAPHQL_ENDPOINT || '/graphql' || 'http://localhost:4000/graphql',
-    uri: process.env.REACT_APP_GRAPHQL_ENDPOINT || 'http://localhost:4000/graphql',
+    // uri: process.env.REACT_APP_GRAPHQL_ENDPOINT || 'http://localhost:4000/graphql',
 });
 
-// console.log(`${process.env.REACT_APP_GRAPHQL_ENDPOINT}`);
 console.log(process.env.REACT_APP_GRAPHQL_ENDPOINT);
+console.log(httpLink)
 
 const authLink = setContext((_, { headers }) => {
     // Retrieve the authentication token from local storage

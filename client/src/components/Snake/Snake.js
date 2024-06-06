@@ -84,7 +84,7 @@ export default function Snake() {
         if (userId) {
             try {
                 console.log('Updating high score with userId:', userId, 'and newScore:', score);
-                await updateHighSnakeScore({ variables: { userId, newScore: score } });
+                await updateHighSnakeScore({ variables: { userId, newSnakeScore: score } });
                 refetch();
             } catch (error) {
                 console.error('Error updating high score:', error);
@@ -99,7 +99,7 @@ export default function Snake() {
 
     useEffect(() => {
         if (data) {
-            setHighScore(data.getHighSnakeScore.highScore);
+            setHighScore(data.getHighSnakeScore.highSnakeScore);
         }
     }, [data]);
 
