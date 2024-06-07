@@ -24,12 +24,18 @@ const userSchema = new Schema(
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Stack',
-            }
+            },
+        ],
+        snakeScores: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'SnakeScore',
+            },
         ],
         isNewUser: {
             type: Boolean,
             default: true
-        }
+        },
     },
 );
 

@@ -13,7 +13,7 @@ const httpLink =  createHttpLink({
 });
 
 console.log(process.env.REACT_APP_GRAPHQL_ENDPOINT);
-console.log(httpLink)
+console.log('httpLink', httpLink);
 
 const authLink = setContext((_, { headers }) => {
     // Retrieve the authentication token from local storage

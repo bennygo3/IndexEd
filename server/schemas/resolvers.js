@@ -228,11 +228,12 @@ const resolvers = {
         } else {
           snakeScore = new SnakeScore({ userId, highSnakeScore: newSnakeScore });
           await snakeScore.save();
+          await User.findByIdAndUpdate(userId, { $push: { snakeScores: snakeScore._id } });
         }
         return snakeScore;
       }
-    }
-  }
+    },
+  },
 };
 
 export default resolvers;

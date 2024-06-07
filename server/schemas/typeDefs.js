@@ -5,6 +5,7 @@ type User {
   email: String!
   username: String!
   stacks: [Stack]
+  snakeScores: [SnakeScore]
 }
 
 type Studycard {
@@ -29,6 +30,7 @@ type Auth {
 }
 
 type SnakeScore {
+  _id: ID!
   userId: ID!
   highSnakeScore: Int!
 }

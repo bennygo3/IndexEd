@@ -3,13 +3,13 @@ import { Schema, model } from 'mongoose';
 const snakeScoreSchema = new Schema({
     userId: {
         type: Schema.Types.ObjectId,
+        ref: 'User',
         required: true,
-        ref: 'User'
     },
     highSnakeScore: {
         type: Number,
         default: 0,
-        required: true
+        required: true,
     }
 });
 
