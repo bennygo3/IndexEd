@@ -46,7 +46,7 @@ const resolvers = {
 
       return user;
     },
-    getHighSnakeScore: async(_, { userId }) => {
+    getHighSnakeScore: async (_, { userId }) => {
       const snakeScore = await SnakeScore.findOne({ userId });
       return snakeScore || { userId, highSnakeScore: 0 };
     }
@@ -120,7 +120,7 @@ const resolvers = {
       if (assignedStackId) {
         studycardData.stack = assignedStackId;
       }
-      
+
       const studycard = await Studycard.create(studycardData);
 
       // Add studycard to the stack if a stackId is provided
@@ -129,7 +129,7 @@ const resolvers = {
           $push: { studycards: studycard._id }
         });
       }
-      
+
       return studycard;
 
     },
@@ -138,17 +138,17 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in to create a new deck.');
       }
-      
-      const stack = await Stack.create({ 
-        title, 
+
+      const stack = await Stack.create({
+        title,
         category,
         description,
-        author: context.user._id 
+        author: context.user._id
       });
-      
+
       // Add this stack to the user's stack/s
       await User.findByIdAndUpdate(context.user._id, { $push: { stacks: stack._id } });
-      
+
       return stack;
     },
     updateStudycard: async (_, { _id, question, answer, noteSideA, noteSideB }, context) => {
@@ -184,8 +184,8 @@ const resolvers = {
         }
       }
 
-      const updatedStudycard = await Studycard.findByIdAndUpdate(_id, updateFields, { new: true});
-        
+      const updatedStudycard = await Studycard.findByIdAndUpdate(_id, updateFields, { new: true });
+
       if (!updatedStudycard) {
         throw new Error('Failed to update flashcard.');
       }
@@ -206,7 +206,7 @@ const resolvers = {
 
       // Check if the user is the author of the deck
       const stack = await Stack.findById(stackId);
-      if(String(stack.author) !== String(context.user._id)) {
+      if (String(stack.author) !== String(context.user._id)) {
         throw new ForbiddenError('In order to update this deck, you must be the original author.');
       }
 
@@ -220,20 +220,46 @@ const resolvers = {
       );
     },
     updateHighSnakeScore: async (_, { userId, newSnakeScore }) => {
-      let snakeScore = await SnakeScore.findOne({ userId });
-      if (snakeScore) {
-        if (newSnakeScore > snakeScore.highSnakeScore) {
-          snakeScore.highSnakeScore = newSnakeScore;
-          await snakeScore.save();
+      try {
+        let snakeScore = await SnakeScore.findOne({ userId });
+        if (snakeScore) {
+          if (newSnakeScore > snakeScore.highSnakeScore) {
+            snakeScore.highSnakeScore = newSnakeScore;
+            await snakeScore.save();
+            console.log(`Resolvers Updated high score for userId: ${userId} to ${newSnakeScore}`);
+          }
         } else {
           snakeScore = new SnakeScore({ userId, highSnakeScore: newSnakeScore });
           await snakeScore.save();
           await User.findByIdAndUpdate(userId, { $push: { snakeScores: snakeScore._id } });
+          console.log(`Created new high score for userId: ${userId} with score ${newSnakeScore}`);
         }
         return snakeScore;
+      } catch (error) {
+        console.error(`Resolvers Error updating high score: ${error.message}`);
+        throw new Error('Failed to update high score');
       }
     },
+
   },
 };
 
 export default resolvers;
+
+
+// updateHighSnakeScore: async (_, { userId, newSnakeScore }) => {
+//   let snakeScore = await SnakeScore.findOne({ userId });
+//   if (snakeScore) {
+//     if (newSnakeScore > snakeScore.highSnakeScore) {
+//       snakeScore.highSnakeScore = newSnakeScore;
+//       await snakeScore.save();
+//       console.log(`Resolvers Updated high score for userId: ${userId} to ${newSnakeScore}`);
+//     } else {
+//       snakeScore = new SnakeScore({ userId, highSnakeScore: newSnakeScore });
+//       await snakeScore.save();
+//       await User.findByIdAndUpdate(userId, { $push: { snakeScores: snakeScore._id } });
+//       console.log(`Created new high score for userId: ${userId} with score ${newSnakeScore}`);
+//     }
+//     return snakeScore;
+//   }
+// },
