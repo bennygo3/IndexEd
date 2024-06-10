@@ -19,16 +19,6 @@ class ForbiddenError extends Error {
 
 const resolvers = {
   Query: {
-    stacks: async () => {
-      return await Stack.find({});//.populate('studycards');
-    },
-    studycards: async (parent, args) => {
-      return Studycard.find({});
-    },
-    studycard: async (parent, { _id }) => {
-      return await Studycard.findById(_id);
-    },
-    //find the user by ID, and populate studycards and stacks at the same time
     currentUser: async (_, __, context) => {
       if (!context.user) {
         throw new AuthenticationError('Not logged in');
@@ -49,7 +39,17 @@ const resolvers = {
     getHighSnakeScore: async (_, { userId }) => {
       const snakeScore = await SnakeScore.findOne({ userId });
       return snakeScore || { userId, highSnakeScore: 0 };
-    }
+    },
+    stacks: async () => {
+      return await Stack.find({});//.populate('studycards');
+    },
+    studycards: async (parent, args) => {
+      return Studycard.find({});
+    },
+    studycard: async (parent, { _id }) => {
+      return await Studycard.findById(_id);
+    },
+    //find the user by ID, and populate studycards and stacks at the same time
   },
   Mutation: {
     //this is creating a user from the sign up page and starting them with a misc stack of cards to save new cards to
@@ -245,21 +245,3 @@ const resolvers = {
 };
 
 export default resolvers;
-
-
-// updateHighSnakeScore: async (_, { userId, newSnakeScore }) => {
-//   let snakeScore = await SnakeScore.findOne({ userId });
-//   if (snakeScore) {
-//     if (newSnakeScore > snakeScore.highSnakeScore) {
-//       snakeScore.highSnakeScore = newSnakeScore;
-//       await snakeScore.save();
-//       console.log(`Resolvers Updated high score for userId: ${userId} to ${newSnakeScore}`);
-//     } else {
-//       snakeScore = new SnakeScore({ userId, highSnakeScore: newSnakeScore });
-//       await snakeScore.save();
-//       await User.findByIdAndUpdate(userId, { $push: { snakeScores: snakeScore._id } });
-//       console.log(`Created new high score for userId: ${userId} with score ${newSnakeScore}`);
-//     }
-//     return snakeScore;
-//   }
-// },

@@ -1,6 +1,7 @@
 node_modules
 /client/build
 .DS_Store
+config.js
 
 # Logs
 logs
