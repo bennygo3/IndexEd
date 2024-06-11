@@ -26,10 +26,16 @@ export default function Navbar() {
           </Highlighted>
         </li>
         <li>
-
           <Highlighted color="hotpink">
             <Link to='/trivia-decks'>
             Trivia studycards
+            </Link>
+          </Highlighted>
+        </li>
+        <li>
+          <Highlighted color="rgb(243, 149, 57)">
+            <Link to='/snake'>
+            Games
             </Link>
           </Highlighted>
         </li>

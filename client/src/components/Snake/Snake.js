@@ -182,10 +182,16 @@ export default function Snake() {
 
     return (
         <div className='snake-game'>
-            {/* <div className='score-board'>Score: {score}</div> */}
+            <div className='snake-scoreboard'>
+            <button
+                className={`start-button ${gameStarted && !gameOver ? 'hidden' : ''}`}
+                onClick={startGame}>
+                Start Game
+            </button>
             <Scoreboard currentScore={score} />
             <div className='high-score'>
                 High Score: {highScore}
+            </div>
             </div>
             <div className='snake-board'>
                 {Array.from({ length: boardSize }).map((_, row) => (
@@ -217,12 +223,6 @@ export default function Snake() {
                 ))}
             </div>
             {gameOver && <div className='game-over'>Game Over</div>}
-
-            <button
-                className={`start-button ${gameStarted && !gameOver ? 'hidden' : ''}`}
-                onClick={startGame}>
-                Start Game
-            </button>
 
         </div>
     );

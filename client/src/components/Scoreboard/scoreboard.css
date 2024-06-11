@@ -1,13 +1,9 @@
 .scoreboard {
-    /* display: flex; */
-    /* justify-content: space-around;
-    align-items: center;
-    width: 100%; */
     background-color: #333;
-    padding: 14px;
+    padding: 11px;
     border-radius: 10px;
     color: white;
-    font-family: 'Courier New', Courier, monospace;
+    /* font-family: 'Courier New', Courier, monospace; */
 }
 
 .score-section {
@@ -18,24 +14,24 @@
 
 .label {
     font-size: 1.15em;
-    margin-bottom: 4px;
+    margin-bottom: 1px;
 }
 
 .score {
     display: flex;
+    width: auto;
 }
+
 
 .digit {
     position: relative;
-    width: 40px;
-    height: 80px;
-    margin: 0 5px;
+    width: 36px;
+    height: 65px;
 }
 
 .segment {
     position: absolute;
     background-color: #444;
-    /* border-radius: 2px; */
     transition: background-color 0.2s;
 }
 
@@ -46,12 +42,8 @@
 .segment-0 {
     top: 0;
     left: 4.5px;
-    /* right: 0px; */
-    /* margin-right: auto;
-    margin-left: auto;
-    position: relative; */
-    height: 7px;
-    width: 32px;
+    height: 5px;
+    width: 28px;
     clip-path: polygon(0% 0%, 100% 0%, 78% 100%, 22% 100%);
     /*clip-path: (top-left, top-right, bottom-right, bottom-left)*/
 }
@@ -59,60 +51,49 @@
 .segment-1 {
     top: 1px;
     right: 2.99px;
-    width: 7px;
-    height: 32px;
+    width: 5px;
+    height: 28px;
     clip-path: polygon(0% 22%, 100% 0%, 100% 100%, 0% 78%);    
     /*clip-path: (top-left, top-right, bottom-right, bottom-left)*/
 }
 
 .segment-2 {
-    top: 34px;
+    top: 31px;
     right: 2.99px;
-    width: 7px;
-    height: 32px;
+    width: 5px;
+    height: 28px;
     clip-path: polygon(0% 22%, 100% 0%, 100% 100%, 0% 78%);
 }
 
 .segment-3 {
-    bottom: 13px;
+    bottom: 5px;
     left: 4.5px;
-    /* right: 0px; */
-    width: 32px;
-    height: 7px;
+    width: 28px;
+    height: 5px;
     clip-path: polygon(22% 0%, 78% 0%, 100% 100%, 0% 100%);
 }
 
 .segment-4 {
-    top: 34px;
+    top: 31px;
     left: 4px;
-    width: 7px;
-    height: 32px;
+    width: 5px;
+    height: 28px;
     clip-path: polygon(0% 0%, 100% 22%, 100% 78%, 0% 100%);
 }
 
 .segment-5 {
     top: 1px;
     left: 4px;
-    width: 7px;
-    height: 32px;
+    width: 5px;
+    height: 28px;
     clip-path: polygon(0% 0%, 100% 22%, 100% 78%, 0% 100%);
 }
 
 .segment-6 {
-    top: 29px;
+    top: 27px;
     left: 4.5px;
-    width: 32px;
-    height: 9px;
-    clip-path: polygon(0% 50%, 25% -10%, 75% -10%, 100% 50%, 74% 110%, 26% 110%);
-    clip-path: polygon(1% 50%, 25% -25%, 75% -10%, 99% 50%, 72% 110%, 27% 110%);
-    /*clip-path: (middle-left, top-left, top-right, middle-right, bottom-right, bottom-left)*/
-}
-
-.segment-6 {
-    top: 29px;
-    left: 4.5px;
-    width: 32px;
-    height: 9px;
+    width: 28px;
+    height: 7px;
     
     clip-path: polygon(2% 50%, 20% 0%, 80% 0%, 98% 50%, 80% 100%, 20% 100%);
 }
