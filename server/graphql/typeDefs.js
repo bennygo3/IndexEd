@@ -14,5 +14,6 @@ export const typeDefs = `#graphql
     }
     type Mutation {
         register(registerInput: RegisterInput): User!
+        login(username: Sting!, password: String!): User!
     }
 `

@@ -49,10 +49,11 @@ export default function Snake() {
     const moveSnake = () => {
         const newSnake = [...snake];
         const head = { x: newSnake[0].x + direction.x, y: newSnake[0].y + direction.y };
-
+        console.log(`Snake head position: (${head.x}, ${head.y})`);
         if (head.x < 0 || head.x >= boardSize || head.y < 0 || head.y >= boardSize || ateItself(head, newSnake)) {
-            setGameOver(true);
-            setGameStarted(false);
+            // setGameOver(true);
+            // setGameStarted(false);
+            handleGameOver();
             return;
         }
 
@@ -71,7 +72,8 @@ export default function Snake() {
     const ateItself = (head, snake) => {
         for (const segment of snake) {
             if (head.x === segment.x && head.y === segment.y) {
-                handleGameOver();
+                // handleGameOver();
+                console.log(`Self-collision detected at position: (${head.x}, ${head.y})`);
                 return true;
             }
         }
@@ -79,13 +81,18 @@ export default function Snake() {
     };
 
     const handleGameOver = async () => {
+        console.log('Game over. Final score:', score, 'High score:', highScore);
         setGameOver(true);
         setGameStarted(false);
         if (userId) {
             try {
-                console.log('Updating high score with userId:', userId, 'and newScore:', score);
-                await updateHighSnakeScore({ variables: { userId, newSnakeScore: score } });
-                refetch();
+                if (score > highScore) {
+                    console.log('Updating high score with userId:', userId, 'and newScore:', score);
+                    await updateHighSnakeScore({ variables: { userId, newSnakeScore: score } });
+                    refetch();
+                } else {
+                    console.log('Score:', score, 'is not higher than the current high score:', highScore);
+                }
             } catch (error) {
                 console.error('Error updating high score:', error);
             }
@@ -99,6 +106,7 @@ export default function Snake() {
 
     useEffect(() => {
         if (data) {
+            console.log(`Fetched high score from server: ${data.getHighSnakeScore.highSnakeScore}`);
             setHighScore(data.getHighSnakeScore.highSnakeScore);
         }
     }, [data]);
