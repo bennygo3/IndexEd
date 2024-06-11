@@ -73,7 +73,7 @@ export default function Snake() {
         for (const segment of snake) {
             if (head.x === segment.x && head.y === segment.y) {
                 // handleGameOver();
-                console.log(`Self-collision detected at position: (${head.x}, ${head.y})`);
+                // console.log(`Self-collision detected at position: (${head.x}, ${head.y})`);
                 return true;
             }
         }

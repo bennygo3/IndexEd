@@ -8,14 +8,20 @@
 }
 
 .home-logout{
-    border: black dashed 1px;
-    padding: 5px;
+    /* outline: rgb(255, 0, 0) dashed 3px;
+    outline-offset: 0px; */
+    /* border: rgb(0, 0, 0) solid 1px; */
+    border: none;
+    padding: 0px;
     border-radius: 50px;
-    background-color: rgb(255, 255, 255);
-    height: 59px;
-    width: 59px;
+    background-color: rgb(255, 0, 0);
+    height: 50px;
+    width: 50px;
     font-size: 28px;
     letter-spacing: 2px;
+    position: absolute;
+    top: 15px; 
+    right: 15px;
 }
 
 .home-header {
@@ -47,6 +53,7 @@
     position: relative;
     margin-top: 10%;
     margin-bottom: 10px;
+    position: relative;
 }
 
 .home-background button{
