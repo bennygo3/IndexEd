@@ -22,7 +22,6 @@
     border: 1px solid #000;
     width: 130px;
     height: 50px;
-    z-index: 2;
     line-height: 50px;
 }
 
@@ -34,7 +33,7 @@
     height: 30px;
     width: 5px;
     background-color: rgb(125, 90, 38);
-    z-index: 1;
+    
 }
 
 .high-score::after {
@@ -45,7 +44,7 @@
     height: 30px;
     width: 5px;
     background-color: rgb(125, 90, 38);
-    z-index: 1;
+    
 }
  
 .snake-board{
@@ -60,7 +59,7 @@
     width: 30px;
     height: 30px;
     background-color: rgb(178, 178, 178);
-    border: black solid 1px;
+    /* border: black dotted 0.5px; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -68,19 +67,56 @@
 }
 
 .cell.snake {
-    background-color: rgb(0, 255, 34);
-    outline: solid 1px black;
-    z-index: 3;
+    /* background-color: rgb(0, 255, 34); */
+    /* background: radial-gradient(rgb(0, 255, 34), yellow); */
+    /* z-index: 3; */
+    
+    /* background-clip: padding-box; */
+    /* position: relative; */
+    /* outline: 1px black solid; */
+    /* outline: solid 1px black; */
+    /* border: 0.5px black solid; */
 }
 
-.cell.head {
-    background-color: rgb(0, 255, 34);
-    z-index: 4; 
-    position: relative;
+.cell.snake::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(rgb(0, 179, 255),rgb(0, 255, 34));
+    border: 0.75px solid black; 
+    box-sizing: border-box; 
+    z-index: 1;
+}
+
+/* .cell.head { */
+    /* background-color: rgb(0, 255, 34); */
+    /* background: radial-gradient(rgb(0, 255, 34), yellow); */
+    /* z-index: 4;  */
+    /* position: relative; */
+    /* background-clip: padding-box; */
+    /* outline: 1px black solid; */
+    /* border: 0.5px black solid; */
+    /* outline: solid 1px black; */
+/* } */
+
+.cell.head::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(rgb(0, 179, 255), rgb(0, 255, 34));
+    border: 0.75px solid black; 
+    box-sizing: border-box; 
+    z-index: 1;
 }
 
 .cell.food {
-    background-color: rgb(255, 206, 206);
+    /* background-color: rgb(255, 219, 219); */
     font-size: x-large; 
 }
 
@@ -91,7 +127,6 @@
 }
 
 .start-button {
-    margin-top: 10px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
@@ -104,30 +139,31 @@
 
 /* tongue is created with pseudo before */
 
-.cell.head::before {
+.cell.head::after {
     content: '';
     position: absolute;
     height: 15px;
     width: 2px;
     background-color:red;
+    z-index: 4;
 }
 
-.cell.head.up::before {
+.cell.head.up::after {
     top: -7px;
 }
 
-.cell.head.right::before {
+.cell.head.right::after {
     height: 2px;
     width: 15px;
     right: -7px;
     bottom: 12px;
 }
 
-.cell.head.down::before {
+.cell.head.down::after {
     bottom: -9px;
 }
 
-.cell.head.left::before {
+.cell.head.left::after {
     height: 2px;
     width: 15px;
     left: -7px;
@@ -141,6 +177,7 @@
     border-radius: 50%;
     position: absolute;
     box-shadow: 0px 1px 15px 1px #636363;
+    z-index: 4;
 }
 
 .eye::after, .eyeTwo::after{
@@ -153,26 +190,31 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 4;
 }
 
 .cell.head.up .eye {
     top: 8px;
     left: 2px;
+    z-index: 4;
 }
 
 .cell.head.right .eye {
     top: -2px;
     right: 2px;
+    z-index: 4;
 }
 
 .cell.head.left .eye {
     top: -2px;
     left: 2px;
+    z-index: 4;
 }
 
 .cell.head.down .eye {
     left: 2px;
     bottom: 8px;
+    z-index: 4;
 }
 
 .cell.head.up .eyeTwo {

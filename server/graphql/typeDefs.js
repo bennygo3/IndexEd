@@ -2,9 +2,10 @@ export const typeDefs = `#graphql
     type User {
         id: ID!
         email: String!
-        token: String!
         username: String!
+        token: String!
         createdAt: String!
+        snakeScores: [SnakeScore]
     }
     input RegsiterInput {
         username: String!
@@ -14,6 +15,7 @@ export const typeDefs = `#graphql
     }
     type Mutation {
         register(registerInput: RegisterInput): User!
-        login(username: Sting!, password: String!): User!
+        login(username: String!, password: String!): User!
+        updateHighSnakeScore(user: ID!, newSnakeHighScore: Int!): SnakeScore
     }
 `
