@@ -59,60 +59,30 @@
     width: 30px;
     height: 30px;
     background-color: rgb(178, 178, 178);
-    /* border: black dotted 0.5px; */
+    border: black dotted 0.5px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    box-sizing: border-box;
 }
 
 .cell.snake {
-    /* background-color: rgb(0, 255, 34); */
-    /* background: radial-gradient(rgb(0, 255, 34), yellow); */
-    /* z-index: 3; */
-    
-    /* background-clip: padding-box; */
-    /* position: relative; */
-    /* outline: 1px black solid; */
-    /* outline: solid 1px black; */
-    /* border: 0.5px black solid; */
+    background-color: rgb(0, 255, 34);
+    background: radial-gradient(circle at top, rgb(0, 179, 255),rgb(0, 255, 34) 30%);
+    border: solid 1px rgb(0, 0, 0);
+    box-sizing: border-box;
 }
 
-.cell.snake::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(rgb(0, 179, 255),rgb(0, 255, 34));
-    border: 0.75px solid black; 
-    box-sizing: border-box; 
-    z-index: 1;
+.cell.snake.down {
+    background: radial-gradient(circle at bottom, rgb(0, 179, 255),rgb(0, 255, 34) 30%);
 }
 
-/* .cell.head { */
-    /* background-color: rgb(0, 255, 34); */
-    /* background: radial-gradient(rgb(0, 255, 34), yellow); */
-    /* z-index: 4;  */
-    /* position: relative; */
-    /* background-clip: padding-box; */
-    /* outline: 1px black solid; */
-    /* border: 0.5px black solid; */
-    /* outline: solid 1px black; */
-/* } */
-
-.cell.head::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(rgb(0, 179, 255), rgb(0, 255, 34));
-    border: 0.75px solid black; 
-    box-sizing: border-box; 
-    z-index: 1;
+.cell.head {
+    /* background: radial-gradient(circle, rgb(0, 179, 255) 3%,rgb(0, 255, 34) 45%); */
+    background-color: rgb(0, 255, 34);
+    border: solid 1px rgb(0, 0, 0); 
+    box-sizing: border-box;
 }
 
 .cell.food {
@@ -236,3 +206,52 @@
     bottom: 8px;
     right: 2px;
 }
+
+/* .cell.snake { */
+    /* background-color: rgb(0, 255, 34); */
+    /* background: radial-gradient(rgb(0, 255, 34), yellow); */
+    /* z-index: 3; */
+    
+    /* background-clip: padding-box; */
+    /* position: relative; */
+    /* outline: 1px black solid; */
+    /* outline: solid 1px black; */
+    /* border: 0.5px black solid; */
+/* } */
+
+/* .cell.snake::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(rgb(0, 179, 255),rgb(0, 255, 34));
+    border: 0.75px solid black; 
+    box-sizing: border-box; 
+    z-index: 1;
+} */
+
+/* .cell.head { */
+    /* background-color: rgb(0, 255, 34); */
+    /* background: radial-gradient(rgb(0, 255, 34), yellow); */
+    /* z-index: 4;  */
+    /* position: relative; */
+    /* background-clip: padding-box; */
+    /* outline: 1px black solid; */
+    /* border: 0.5px black solid; */
+    /* outline: solid 1px black; */
+/* } */
+
+/* .cell.head::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(rgb(0, 179, 255), rgb(0, 255, 34));
+    border: 0.75px solid black; 
+    box-sizing: border-box; 
+    z-index: 1;
+} */

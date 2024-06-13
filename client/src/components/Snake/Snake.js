@@ -212,9 +212,10 @@ export default function Snake() {
                             return (
                                 <div
                                     key={col}
-                                    className={`cell ${isSnakeHead ? `head ${snakeHeadDirection}` : isSnakeSegment ? 'snake' : isFood ? 'food' : ''}`}
+                                    className={`cell ${isSnakeHead ? `head ${snakeHeadDirection}` : isSnakeSegment ? `snake ${snakeHeadDirection}` : isFood ? 'food' : ''}`}
                                 >
                                     {isSnakeHead && <><div className='eye'></div> <div className='eyeTwo'></div></>}
+                                    {/* {isFood && '🌭'} */}
                                     {isFood && '🌭'}
                                 </div>
                             );
