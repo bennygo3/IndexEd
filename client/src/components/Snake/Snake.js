@@ -44,7 +44,7 @@ export default function Snake() {
         if (!gameOver && gameStarted) {
             moveSnake();
         }
-    }, 170);
+    }, 150);
 
     const startGame = useCallback(() => {
         setGameStarted(true);
