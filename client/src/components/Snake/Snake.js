@@ -26,13 +26,25 @@ export default function Snake() {
         { x: 1, y: 1 },
     ]);
 
+    useEffect(() => {
+        const id = authService.getUserIdFromToken();
+        setUserId(id);
+    }, []);
+
+    useEffect(() => {
+        if (data) {
+            console.log(`Fetched high score from server: ${data.getHighSnakeScore.highSnakeScore}`);
+            setHighScore(data.getHighSnakeScore.highSnakeScore);
+        }
+    }, [data]);
+
     const boardSize = 20;
 
     useInterval(() => {
         if (!gameOver && gameStarted) {
             moveSnake();
         }
-    }, 200);
+    }, 170);
 
     const startGame = useCallback(() => {
         setGameStarted(true);
@@ -49,10 +61,8 @@ export default function Snake() {
     const moveSnake = () => {
         const newSnake = [...snake];
         const head = { x: newSnake[0].x + direction.x, y: newSnake[0].y + direction.y };
-        console.log(`Snake head position: (${head.x}, ${head.y})`);
+        // console.log(`Snake head position: (${head.x}, ${head.y})`);
         if (head.x < 0 || head.x >= boardSize || head.y < 0 || head.y >= boardSize || ateItself(head, newSnake)) {
-            // setGameOver(true);
-            // setGameStarted(false);
             handleGameOver();
             return;
         }
@@ -72,8 +82,6 @@ export default function Snake() {
     const ateItself = (head, snake) => {
         for (const segment of snake) {
             if (head.x === segment.x && head.y === segment.y) {
-                // handleGameOver();
-                // console.log(`Self-collision detected at position: (${head.x}, ${head.y})`);
                 return true;
             }
         }
@@ -98,18 +106,6 @@ export default function Snake() {
             }
         }
     };
-
-    useEffect(() => {
-        const id = authService.getUserIdFromToken();
-        setUserId(id);
-    }, []);
-
-    useEffect(() => {
-        if (data) {
-            console.log(`Fetched high score from server: ${data.getHighSnakeScore.highSnakeScore}`);
-            setHighScore(data.getHighSnakeScore.highSnakeScore);
-        }
-    }, [data]);
 
     const generateFood = (snake) => {
         let newFood;
@@ -183,15 +179,15 @@ export default function Snake() {
     return (
         <div className='snake-game'>
             <div className='snake-scoreboard'>
-            <button
-                className={`start-button ${gameStarted && !gameOver ? 'hidden' : ''}`}
-                onClick={startGame}>
-                Start Game
-            </button>
-            <Scoreboard currentScore={score} />
-            <div className='high-score'>
-                High Score: {highScore}
-            </div>
+                <button
+                    className={`start-button ${gameStarted && !gameOver ? 'hidden' : ''}`}
+                    onClick={startGame}>
+                    Start Game
+                </button>
+                <Scoreboard currentScore={score} />
+                <div className='high-score'>
+                    High Score: {highScore}
+                </div>
             </div>
             <div className='snake-board'>
                 {Array.from({ length: boardSize }).map((_, row) => (
@@ -200,19 +196,29 @@ export default function Snake() {
                             const isSnakeSegment = snake.some(segment => segment.x === col && segment.y === row);
                             const isFood = food.x === col && food.y === row;
                             const isSnakeHead = snake[0].x === col && snake[0].y === row;
+                            // const isSnakeNeck = snake[]
                             const snakeHeadDirection = isSnakeHead
                                 ? direction.x === 1
                                     ? 'right'
                                     : direction.x === -1
-                                        ? 'left'
-                                        : direction.y === 1
-                                            ? 'down'
-                                            : 'up'
+                                    ? 'left'
+                                    : direction.y === 1
+                                    ? 'down'
+                                    : 'up'
+                                : '';
+                            const snakeBodyDirection = isSnakeSegment && !isSnakeHead
+                                ? direction.x === 1
+                                    ? 'right'
+                                    : direction.x === -1
+                                    ? 'left'
+                                    : direction.y === 1
+                                    ? 'down'
+                                    : 'up'
                                 : '';
                             return (
                                 <div
                                     key={col}
-                                    className={`cell ${isSnakeHead ? `head ${snakeHeadDirection}` : isSnakeSegment ? `snake ${snakeHeadDirection}` : isFood ? 'food' : ''}`}
+                                    className={`cell ${isSnakeHead ? `head ${snakeHeadDirection}` : isSnakeSegment ? `snake ${snakeBodyDirection}` : isFood ? 'food' : ''}`}
                                 >
                                     {isSnakeHead && <><div className='eye'></div> <div className='eyeTwo'></div></>}
                                     {/* {isFood && '🌭'} */}
