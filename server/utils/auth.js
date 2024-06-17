@@ -5,8 +5,6 @@ if (!secret) {
     throw new Error("JWT_SECRET is not set");
 }
 
-console.log(process.env.JWT_SECRET);
-
 const expiration = '5h';
 
 const authMiddleware = ({ req }) => {

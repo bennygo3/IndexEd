@@ -69,14 +69,14 @@
 
 .cell.snake {
     background-color: rgb(0, 255, 34);
-    background: radial-gradient(circle, rgb(0, 179, 255),rgb(0, 255, 34) 30%);
+    background: radial-gradient( rgb(0, 179, 255),rgb(0, 255, 34) 30%);
     border: solid .75px rgb(0, 0, 0);
     box-sizing: border-box;
 }
 
-.snake.down, .snake.right, .snake.left, .snake.up {
+/* .snake.down, .snake.right, .snake.left, .snake.up {
     background-image: radial-gradient(circle at top, rgb(0, 179, 255) 3px,rgb(0, 255, 34) 40%);
-}
+} */
 
 .cell.head {
     /* background: radial-gradient(circle, rgb(0, 179, 255) 3%,rgb(0, 255, 34) 45%); */

@@ -28,7 +28,12 @@ const resolvers = {
         .populate({
           path: 'stacks',
           populate: { path: 'studycards' }
-        });
+        })
+        .populate({
+          path: 'snakeScores',
+          select: 'highSnakeScore'
+        })
+        ;
 
       if (!user) {
         throw new Error('User not found');
