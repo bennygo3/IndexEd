@@ -8,7 +8,6 @@ const snakeScoreSchema = new Schema({
     },
     highSnakeScore: {
         type: Number,
-        // default: 0,
         required: true,
     }
 });

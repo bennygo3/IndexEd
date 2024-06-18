@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import UserInputError from '@apollo/server';
+import { UserInputError } from '@apollo/server';
 
 import { validateRegisterInput, validateLoginInput } from '../../utils/validators';
 import { SECRET_KEY } from '../../../config';
@@ -32,7 +32,7 @@ export const Mutation = {
             throw new UserInputError('User not found', { errors });
         }
 
-        const match = bcrypt.compare(password, user.password);
+        const match = await bcrypt.compare(password, user.password);
         if (!match) {
             errors.general = 'Wrong credentials';
             throw new UserInputError('Wrong credentials', { errors });
@@ -50,13 +50,14 @@ export const Mutation = {
     async register(
         _,
         {
-            registerInput: username, password, confirmPassword, email
+            registerInput: { username, email, password, confirmPassword }
         },
     ) {
-        const { valid, errors } = validateRegisterInput(username, password, confirmPassword, email);
+        const { valid, errors } = validateRegisterInput(username, email, password, confirmPassword);
         if (!valid) {
             throw new UserInputError('Errors', { errors });
         }
+        // if user/username already exists throw error
         const user = await User.findOne({ username });
         if (user) {
             throw new UserInputError('Username is taken', {
@@ -69,8 +70,8 @@ export const Mutation = {
 
         const newUser = new User({
             username,
-            password,
             email,
+            password,
             createdAt: new Date().toISOString()
         });
 
@@ -82,12 +83,7 @@ export const Mutation = {
             ...res._doc,
             id: res._id,
             token
-        }
+        };
     }
 };
 
-        // const token = jwt.sign({
-        //     id: res.id,
-        //     email: res.email,
-        //     username: res.username
-        // }, SECRET_KEY, { expiresIn: '3h' });
