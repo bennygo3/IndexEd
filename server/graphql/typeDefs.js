@@ -26,6 +26,6 @@ export const typeDefs = `#graphql
     type Mutation {
         register(registerInput: RegisterInput): User!
         login(username: String!, password: String!): User!
-        updateHighScoreSnake(user: ID!, newHighScoreSnake: Int!): HighScoreSnake!
+        updateHighScoreSnake(username: ID!, newHighScoreSnake: Int!): HighScoreSnake!
     }
 `
