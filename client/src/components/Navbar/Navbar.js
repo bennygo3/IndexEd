@@ -3,7 +3,6 @@ import ThemeContext from '../../context/ThemeContext';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import Highlighted from '../Highlighter/Highlighter';
-// import HomeButtons from '../../components/HomeButtons/HomeButtons.js';
 
 export default function Navbar() {
   const { theme } = useContext(ThemeContext);
