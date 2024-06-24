@@ -13,6 +13,7 @@ import NbaLogos from './pages/TriviaGenres/Sports/NBA/NbaLogos.js';
 import USAStates from './pages/TriviaGenres/Geography/USAStates.js';
 import Basketball from './components/Basketball/Basketball.js';
 import Snake from './components/Snake/Snake.js';
+import TTT from './components/TTT/TTT.js';
 
 
 function App() {
@@ -61,6 +62,10 @@ function App() {
                         <Route
                             path='snake'
                             element={<Snake />}
+                        />
+                        <Route 
+                            path='ttt'
+                            element={<TTT />}
                         />
                     </Routes>
                 </Router>
