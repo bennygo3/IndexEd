@@ -1,13 +1,26 @@
-import React from 'react';
+import { useState } from 'react';
 import './ttt.css';
 
 function Square() {
-    return <button className='square'>1</button>
+    const [value, setValue] = useState(null);
+    
+    function handleClick() {
+        setValue('X');
+    }
+    
+    return (
+        <button
+            className='square'
+            onClick={handleClick}
+        >
+            {value}
+        </button>
+    );
 }
 
 export default function Board() {
     return (
-        <>
+        <section className = 'board-body'>
             <div className='board-row'>
                 <Square />
                 <Square />
@@ -23,6 +36,6 @@ export default function Board() {
                 <Square />
                 <Square />
             </div>
-        </>
+        </section>
     )
 }

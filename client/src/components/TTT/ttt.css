@@ -1,0 +1,29 @@
+.board-body {
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.square {
+    background: #fff;
+    border: 1px solid #999;
+    float: left;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 34px;
+    height: 94px;
+    margin-right: -1px;
+    margin-top: -1px;
+    padding: 0;
+    text-align: center;
+    width: 94px;
+}
+
+.board-row:after {
+    clear: both;
+    content: '';
+    display: table;
+}
+
