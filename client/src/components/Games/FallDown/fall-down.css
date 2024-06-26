@@ -1,0 +1,21 @@
+.fd-game {
+    position: relative;
+    width: 400px;
+    height: 90vh;
+    background-color: #000;
+}
+
+.ball {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: rgb(255, 0, 0);
+    border-radius: 50%;
+}
+
+.floor {
+    position: absolute;
+    width: 400px;
+    height: 10px;
+    background-color: white;
+}

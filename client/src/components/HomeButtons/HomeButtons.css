@@ -1,5 +1,4 @@
 .home-buttons {
-    
     border-radius: 50%;
     height: 60px;
     width: 60px;
@@ -7,7 +6,6 @@
     justify-content: center;
     align-items: center;
     outline: 1px solid black;
-
 }
 
 .home-button-link {
@@ -16,7 +14,6 @@
 }
 
 .inner-button {
-    
     border-radius: 50%;
     height: 40px;
     width: 40px;

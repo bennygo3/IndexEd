@@ -13,7 +13,8 @@ import NbaLogos from './pages/TriviaGenres/Sports/NBA/NbaLogos.js';
 import USAStates from './pages/TriviaGenres/Geography/USAStates.js';
 import Basketball from './components/Trivia/Basketball/Basketball.js';
 import Snake from './components/Games/Snake/Snake.js';
-import TTT from './components/Games/TTT/TTT.js'
+import TTT from './components/Games/TTT/TTT.js';
+import FallDown from './components/Games/FallDown/FallDown.js';
 
 
 function App() {
@@ -66,6 +67,10 @@ function App() {
                         <Route 
                             path='ttt'
                             element={<TTT />}
+                        />
+                        <Route
+                            path='falldown'
+                            element={<FallDown />}
                         />
                     </Routes>
                 </Router>
