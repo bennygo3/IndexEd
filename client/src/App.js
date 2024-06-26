@@ -11,9 +11,9 @@ import TriviaDecks from './pages/TriviaDecks/TriviaDecks.js';
 import PokemonTrivia from './pages/TriviaGenres/Pokemon/PokemonTrivia.js';
 import NbaLogos from './pages/TriviaGenres/Sports/NBA/NbaLogos.js';
 import USAStates from './pages/TriviaGenres/Geography/USAStates.js';
-import Basketball from './components/Basketball/Basketball.js';
-import Snake from './components/Snake/Snake.js';
-import TTT from './components/TTT/TTT.js';
+import Basketball from './components/Trivia/Basketball/Basketball.js';
+import Snake from './components/Games/Snake/Snake.js';
+import TTT from './components/Games/TTT/TTT.js'
 
 
 function App() {

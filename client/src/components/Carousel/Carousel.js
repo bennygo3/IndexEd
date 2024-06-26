@@ -1,6 +1,6 @@
-import React, { useState } from 'React';
+// import React, { useState } from 'React';
 
-const Carousel = () => {
-    const [index, setIndex] = useState(0);
-    const length
-}
+// const Carousel = () => {
+//     const [index, setIndex] = useState(0);
+//     const length
+// }

@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import ThemeContext from '../../context/ThemeContext';
+import { useContext } from 'react';
+import ThemeContext from '../../../context/ThemeContext'
 import { Link } from 'react-router-dom';
+import Highlighted from '../Highlighter/Highlighter.js';
 import './Navbar.css';
-import Highlighted from '../Highlighter/Highlighter';
 
 export default function Navbar() {
   const { theme } = useContext(ThemeContext);

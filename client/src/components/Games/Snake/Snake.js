@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_HIGH_SNAKE_SCORE } from '../../utils/queries';
-import { UPDATE_HIGH_SNAKE_SCORE } from '../../utils/mutations';
-import authService from '../../utils/auth';
+import { GET_HIGH_SNAKE_SCORE } from '../../../utils/queries.js';
+import { UPDATE_HIGH_SNAKE_SCORE } from '../../../utils/mutations.js';
+import authService from '../../../utils/auth.js';
 import './snake.css';
 import Scoreboard from '../Scoreboard/Scoreboard.js';
 

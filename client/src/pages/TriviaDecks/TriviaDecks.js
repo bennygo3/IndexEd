@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import TriviaCarousel from '../../components/TriviaCarousel/TriviaCarousel';
+import { useState } from 'react';
+import TriviaCarousel from '../../components/Trivia/TriviaCarousel/TriviaCarousel';
 import './triviaDecks.css';
 import pokeSnapshot from '../../assets/pokeSnapshot.png';
-import Basketball from '../../components/Basketball/Basketball';
+import Basketball from '../../components/Trivia/Basketball/Basketball';
 import usaPage from '../../assets/usa-states-page.png';
 
 const genres = [
