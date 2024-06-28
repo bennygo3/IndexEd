@@ -2,20 +2,31 @@ import { useState, useEffect } from 'react';
 import './fall-down.css';
 
 function Ball({ x, y }) {
-    return <div className='ball' style={{ left:`${x}%`, top: `${y}%` }} />;
+    return <div className='ball' style={{ left: `${x}%`, top: `${y}%` }} />;
 }
 
-function Floor({ x, y }) {
-    return <div className='floor' style={{ left: x, top: y }} />
+function Floor({ x, y, holeX }) {
+    return (
+        <div className='floor' style={{ left: `${x}%`, top: `${y}%` }}>
+            <div className='hole' style={{ left: `${holeX}%` }}></div>
+        </div>
+    );
 }
 
 export default function FallDown() {
     const [ballX, setBallX] = useState(50);
-    const [ballY, setBallY] = useState(1);
+    const [ballY, setBallY] = useState(90);
     const [moveLeft, setMoveLeft] = useState(false);
     const [moveRight, setMoveRight] = useState(false);
-    const [floors, setFloor] = useState([{ x: 0, y: 100 }, { x: 50, y: 200 }]);
+    const [floors, setFloors] = useState([]);
     const [gameOver, setGameOver] = useState(false);
+    const [onFloor, setOnFloor] = useState(false);
+
+    const generateRandomFloor = () => {
+        //sets a random hole position between 0% and 90%
+        const holeX = Math.floor(Math.random() * 90);
+        return { x: 0, y: 100, holeX };
+    };
 
     useEffect(() => {
         const handleKeyDown = (e) => {
@@ -32,9 +43,12 @@ export default function FallDown() {
         window.addEventListener('keyup', handleKeyUp);
 
         const interval = setInterval(() => {
-            //setBallY function is using a function to simulate falling
-            setBallY((prev) => prev + 2);
-            
+            if (onFloor) {
+                setBallY((prev) => prev - 2);
+            } else {
+                setBallY((prev) => prev + 2);
+            }
+
             if (moveLeft) {
                 setBallX((prev) => Math.max(0, prev - 2))
             }
@@ -42,13 +56,27 @@ export default function FallDown() {
                 setBallX((prev) => Math.min(90, prev + 2))
             }
 
-            setFloor((prev) => 
-            prev.map((floor) => ({ ...floor, y: floor.y - 2 }))
-        );
+            setFloors((prev) => {
+                const newFloors = prev.map((floor) => ({ ... floor, y: floor.y - 2 }));
+                if (newFloors.length === 0 || newFloors[newFloors.length - 1].y < 90) {
+                    newFloors.push(generateRandomFloor());
+                }
+                return newFloors.filter((floor) => floor.y > 0);
+            });
 
-        // implement if ball collides with barriers here
+            setOnFloor(false);
+            floors.forEach((floor) => {
+                if (
+                    ballY >= floor.y - 2 &&
+                    ballY <= floor.y &&
+                    ballX >= floor.holeX &&
+                    ballX <= floor.holeX + 20
+                ) {
+                    setOnFloor(true);
+                }
+            });
 
-        if (ballY <= 0) setGameOver(true);
+            if (ballY <= 0) setGameOver(true);
         }, 50);
 
         return () => {
@@ -56,7 +84,7 @@ export default function FallDown() {
             window.removeEventListener('keyup', handleKeyUp);
             clearInterval(interval);
         };
-    }, [moveLeft, moveRight]);
+    }, [moveLeft, moveRight, onFloor, floors, ballX, ballY]);
 
     if (gameOver) return <div>Game Over</div>;
 
@@ -64,14 +92,10 @@ export default function FallDown() {
         <div className='fd-game'>
             <Ball x={ballX} y={ballY} />
             {floors.map((floor, index) => (
-                <Floor key={index} x={floor.x} y={floor.y} />
+                <Floor key={index} x={floor.x} y={floor.y} holeX={floor.holeX} />
             ))}
         </div>
     );
 }
 
-        // const handleKeyDown = (e) => {
-        //     if (e.key === 'ArrowLeft') setBallX((prev) => Math.max(0, prev - 2));
-        //     if (e.key === 'ArrowRight') setBallX((prev) => Math.min(90, prev + 2));
-        // };
 
