@@ -18,7 +18,7 @@ export default function FallDown() {
     const [ballY, setBallY] = useState(90);
     const [moveLeft, setMoveLeft] = useState(false);
     const [moveRight, setMoveRight] = useState(false);
-    const [floors, setFloors] = useState([]);
+    const [floors, setFloors] = useState([{ x: 0, y: 100, holeX: 50 }]);
     const [gameOver, setGameOver] = useState(false);
     const [onFloor, setOnFloor] = useState(false);
 
@@ -43,22 +43,22 @@ export default function FallDown() {
         window.addEventListener('keyup', handleKeyUp);
 
         const interval = setInterval(() => {
-            if (onFloor) {
-                setBallY((prev) => prev - 2);
-            } else {
-                setBallY((prev) => prev + 2);
-            }
-
+            setBallY((prev) => {
+                if (onFloor) return Math.max(0, prev - 2);
+                return Math.min(90, prev + 2);
+            });
             if (moveLeft) {
-                setBallX((prev) => Math.max(0, prev - 2))
+                setBallX((prev) => Math.max(0, prev - 2));
             }
             if (moveRight) {
-                setBallX((prev) => Math.min(90, prev + 2))
+                setBallX((prev) => Math.min(90, prev + 2));
             }
 
             setFloors((prev) => {
-                const newFloors = prev.map((floor) => ({ ... floor, y: floor.y - 2 }));
-                if (newFloors.length === 0 || newFloors[newFloors.length - 1].y < 90) {
+                const newFloors = prev.map((floor) => ({
+                    ...floor, y: floor.y - 2
+                }));
+                if (newFloors.length === 0 || newFloors[newFloors.length - 1].y < 80) {
                     newFloors.push(generateRandomFloor());
                 }
                 return newFloors.filter((floor) => floor.y > 0);
@@ -68,7 +68,7 @@ export default function FallDown() {
             floors.forEach((floor) => {
                 if (
                     ballY >= floor.y - 2 &&
-                    ballY <= floor.y &&
+                    ballY <= floor.y + 2 &&
                     ballX >= floor.holeX &&
                     ballX <= floor.holeX + 20
                 ) {
@@ -97,5 +97,40 @@ export default function FallDown() {
         </div>
     );
 }
+
+
+        // const interval = setInterval(() => {
+        //     if (onFloor) {
+        //         setBallY((prev) => prev - 2);
+        //     } else {
+        //         setBallY((prev) => prev + 2);
+        //     }
+
+        //     if (moveLeft) {
+        //         setBallX((prev) => Math.max(0, prev - 2))
+        //     }
+        //     if (moveRight) {
+        //         setBallX((prev) => Math.min(90, prev + 2))
+        //     }
+
+        //     setFloors((prev) => {
+        //         const newFloors = prev.map((floor) => ({ ... floor, y: floor.y - 2 }));
+        //         if (newFloors.length === 0 || newFloors[newFloors.length - 1].y < 90) {
+        //             newFloors.push(generateRandomFloor());
+        //         }
+        //         return newFloors.filter((floor) => floor.y > 0);
+        //     });
+
+        //     setOnFloor(false);
+        //     floors.forEach((floor) => {
+        //         if (
+        //             ballY >= floor.y - 2 &&
+        //             ballY <= floor.y &&
+        //             ballX >= floor.holeX &&
+        //             ballX <= floor.holeX + 20
+        //         ) {
+        //             setOnFloor(true);
+        //         }
+        //     });
 
 
