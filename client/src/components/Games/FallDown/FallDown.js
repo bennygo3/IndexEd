@@ -18,13 +18,12 @@ export default function FallDown() {
     const [ballY, setBallY] = useState(90);
     const [moveLeft, setMoveLeft] = useState(false);
     const [moveRight, setMoveRight] = useState(false);
-    const [floors, setFloors] = useState([{ x: 0, y: 100, holeX: 50 }]);
+    const [floors, setFloors] = useState([{ x: 0, y: 98, holeX: 50 }]);
     const [gameOver, setGameOver] = useState(false);
     const [onFloor, setOnFloor] = useState(false);
     const [startFall, setPauseFall] = useState(false);
 
     const generateRandomFloor = () => {
-        //sets a random hole position between 0% and 90%
         const holeX = Math.floor(Math.random() * 80);
         return { x: 0, y: 100, holeX };
     };
@@ -72,8 +71,7 @@ export default function FallDown() {
                     if (
                         ballY >= floor.y - 2 &&
                         ballY <= floor.y + 2 &&
-                        ballX >= floor.holeX &&
-                        ballX <= floor.holeX + 20
+                        !(ballX >= floor.holeX && ballX <= floor.holeX + 20)
                     ) {
                         setOnFloor(true);
                     }
@@ -123,39 +121,14 @@ export default function FallDown() {
     );
 }
 
-
-// const interval = setInterval(() => {
-//     if (onFloor) {
-//         setBallY((prev) => prev - 2);
-//     } else {
-//         setBallY((prev) => prev + 2);
+// setOnFloor(false);
+// floors.forEach((floor) => {
+//     if (
+//         ballY >= floor.y - 2 &&
+//         ballY <= floor.y + 2 &&
+//         ballX >= floor.holeX &&
+//         ballX <= floor.holeX + 20
+//     ) {
+//         setOnFloor(true);
 //     }
-
-//     if (moveLeft) {
-//         setBallX((prev) => Math.max(0, prev - 2))
-//     }
-//     if (moveRight) {
-//         setBallX((prev) => Math.min(90, prev + 2))
-//     }
-
-//     setFloors((prev) => {
-//         const newFloors = prev.map((floor) => ({ ... floor, y: floor.y - 2 }));
-//         if (newFloors.length === 0 || newFloors[newFloors.length - 1].y < 90) {
-//             newFloors.push(generateRandomFloor());
-//         }
-//         return newFloors.filter((floor) => floor.y > 0);
-//     });
-
-//     setOnFloor(false);
-//     floors.forEach((floor) => {
-//         if (
-//             ballY >= floor.y - 2 &&
-//             ballY <= floor.y &&
-//             ballX >= floor.holeX &&
-//             ballX <= floor.holeX + 20
-//         ) {
-//             setOnFloor(true);
-//         }
-//     });
-
-
+// });

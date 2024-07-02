@@ -1,13 +1,14 @@
 .fd-game {
-    /* position: relative; */
+    position: relative;
     width: 400px;
     height: 700px;
-    background-color: #675f5f;
+    background-color: #6f6f6f;
+    outline: 2px solid black;
     margin: auto;
 }
 
 .ball {
-    position: relative;
+    position: absolute;
     width: 10px;
     height: 10px;
     background-color: rgb(255, 0, 0);
@@ -18,7 +19,14 @@
     position: absolute;
     width: 400px;
     height: 10px;
-    background-color: white;
+    background-color: rgb(169, 125, 63);
+}
+
+.hole {
+    position: absolute;
+    width: 40px;
+    height: 10px;
+    background-color: rgb(0, 0, 0);
 }
 
 /* .fd-game {
