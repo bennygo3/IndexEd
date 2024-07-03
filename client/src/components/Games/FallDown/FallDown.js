@@ -14,7 +14,7 @@ function Floor({ x, y, holeX }) {
 }
 
 export default function FallDown() {
-    const [ballX, setBallX] = useState(50);
+    const [ballX, setBallX] = useState(20);
     const [ballY, setBallY] = useState(90);
     const [moveLeft, setMoveLeft] = useState(false);
     const [moveRight, setMoveRight] = useState(false);
@@ -110,7 +110,7 @@ export default function FallDown() {
 
     const startGame = () => {
         setFloors([generateRandomFloor()]);
-        setBallX(50);
+        setBallX(30);
         setBallY(90);
         setGameOver(false);
         setPaused(false);
@@ -156,20 +156,3 @@ function useInterval(callback, delay) {
         }
     }, [delay]);
 }
-
-// setOnFloor(false);
-    //     setFloors((prevFloors) => {
-    //         prevFloors.forEach((floor) => {
-    //             if (
-    //                 ballY >= floor.y - 2 &&
-    //                 ballY <= floor.y + 2 &&
-    //                 !(ballX >= floor.holeX && ballX <= floor.holeX + 20)
-    //             ) {
-    //                 setOnFloor(true);
-    //             }
-    //         });
-    //         return prevFloors;
-    //     });
-
-    //     if (ballY <= 0) setGameOver(true);
-// }, [ballX, ballY]);
