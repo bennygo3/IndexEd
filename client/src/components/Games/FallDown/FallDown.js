@@ -36,17 +36,13 @@ export default function FallDown() {
                 !(ballX >= floor.holeX && ballX <= floor.holeX + 10)
             );
             if (onFloor) {
-                return Math.max(0, prev - 2); //ball rises if on floor
+                return Math.max(0, prev - 1); //ball rises if on floor
             }
-            return Math.min(90, prev + 2); //ball should fall otherwise
+            return Math.min(90, prev + 1); //ball should fall otherwise
         });
-            // if (floors.some(floor => ballY >= floor.y - 2 && ballY <= floor.y + 2)){
-            //     return Math.min(90, prev - 2); 
-            // }
-            // return Math.min(90, prev + 2); 
         setBallX((prev) => {
-            if (moveLeft) return Math.max(0, prev - 4);
-            if (moveRight) return Math.min(90, prev + 4);
+            if (moveLeft) return Math.max(0, prev - 2);
+            if (moveRight) return Math.min(100 - 3, prev + 2);
             return prev;
         });
     }, [moveLeft, moveRight, ballX, ballY, floors]);
@@ -54,7 +50,7 @@ export default function FallDown() {
     const moveFloors = useCallback(() => {
         setFloors((prevFloors) => {
             const newFloors = prevFloors.map((floor) => ({
-                ...floor, y: floor.y - 2
+                ...floor, y: floor.y - 1 
             }));
             if (newFloors.length === 0 || newFloors[newFloors.length - 1].y < 80) {
                 newFloors.push(generateRandomFloor());
@@ -72,7 +68,7 @@ export default function FallDown() {
         }
     }, [paused, moveBall, moveFloors])
 
-    useInterval(gameLoop, !paused ? 120 : null);
+    useInterval(gameLoop, !paused ? 37 : null);
 
     const handleKeyDown = useCallback((e) => {
         switch (e.key) {
