@@ -52,7 +52,7 @@ export default function FallDown() {
     const moveFloors = useCallback(() => {
         setFloors((prevFloors) => {
             const newFloors = prevFloors.map((floor) => ({
-                ...floor, y: floor.y - 1 
+                ...floor, y: floor.y - 1
             }));
             if (newFloors.length === 0 || newFloors[newFloors.length - 1].y < 80) {
                 newFloors.push(generateRandomFloor());
@@ -60,7 +60,7 @@ export default function FallDown() {
             return newFloors.filter((floor) => floor.y > -10)
         });
 
-        if (ballY <=0) setGameOver(true);
+        if (ballY <= 0) setGameOver(true);
     }, [ballY]);
 
     const gameLoop = useCallback(() => {
@@ -112,13 +112,13 @@ export default function FallDown() {
 
     useEffect(() => {
         if (!paused && !gameOver) {
-        const timer = setInterval(() => {
-            setElapsedTime(prev => prev + 1);
-            setScore(prev => prev + 1);
-        }, 1000);
-        return () => clearInterval(timer);
-    }
-    })
+            const timer = setInterval(() => {
+                setElapsedTime(prev => prev + 1);
+                setScore(prev => prev + 1);
+            }, 1000);
+            return () => clearInterval(timer);
+        }
+    }, [paused, gameOver]);
 
     const startGame = () => {
         setFloors([generateRandomFloor()]);
@@ -126,6 +126,8 @@ export default function FallDown() {
         setBallY(90);
         setGameOver(false);
         setPaused(false);
+        setElapsedTime(0);
+        setScore(0);
     };
 
     const stopGame = () => {
@@ -141,6 +143,9 @@ export default function FallDown() {
 
     return (
         <div className='fd'>
+            <div className='score'>
+                Score: {score}
+            </div>
             <button onClick={startGame} disabled={!paused}>Start</button>
             <button onClick={stopGame} disabled={paused}>Stop</button>
             <div className='fd-game'>
