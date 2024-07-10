@@ -22,6 +22,8 @@ export default function FallDown() {
     const [gameOver, setGameOver] = useState(false);
     // const [onFloor, setOnFloor] = useState(false);
     const [paused, setPaused] = useState(false);
+    const [score, setScore] = useState(0);
+    const [elapsedTime, setElapsedTime] = useState(0);
 
     const generateRandomFloor = () => {
         const holeX = Math.floor(Math.random() * 90);
@@ -107,6 +109,16 @@ export default function FallDown() {
             window.removeEventListener('keyup', handleKeyUp);
         };
     }, [handleKeyDown, handleKeyUp]);
+
+    useEffect(() => {
+        if (!paused && !gameOver) {
+        const timer = setInterval(() => {
+            setElapsedTime(prev => prev + 1);
+            setScore(prev => prev + 1);
+        }, 1000);
+        return () => clearInterval(timer);
+    }
+    })
 
     const startGame = () => {
         setFloors([generateRandomFloor()]);
