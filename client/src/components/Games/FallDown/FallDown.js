@@ -120,6 +120,12 @@ export default function FallDown() {
         }
     }, [paused, gameOver]);
 
+    useEffect(() => {
+        if (elapsedTime > 0 && !paused && !gameOver) {
+            setScore(elapsedTime);
+        }
+    }, [elapsedTime, paused, gameOver]);
+
     const startGame = () => {
         setFloors([generateRandomFloor()]);
         setBallX(30);
