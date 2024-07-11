@@ -20,7 +20,6 @@ export default function FallDown() {
     const [moveRight, setMoveRight] = useState(false);
     const [floors, setFloors] = useState([{ x: 0, y: 98, holeX: 50 }]);
     const [gameOver, setGameOver] = useState(false);
-    // const [onFloor, setOnFloor] = useState(false);
     const [paused, setPaused] = useState(false);
     const [score, setScore] = useState(0);
     const [elapsedTime, setElapsedTime] = useState(0);
@@ -152,15 +151,17 @@ export default function FallDown() {
             <div className='score'>
                 Score: {score}
             </div>
-            <button onClick={startGame} disabled={!paused}>Start</button>
-            <button onClick={stopGame} disabled={paused}>Stop</button>
+            <div>
             <div className='fd-game'>
                 <Ball x={ballX} y={ballY} />
                 {floors.map((floor, index) => (
                     <Floor key={index} x={floor.x} y={floor.y} holeX={floor.holeX} />
                 ))}
             </div>
-            <div>{paused ? 'Paused' : 'Running'}</div>
+            <button onClick={startGame} disabled={!paused}>Start</button>
+            <button onClick={stopGame} disabled={paused}>Stop</button>
+            </div>
+            {/* <div>{paused ? 'Paused' : 'Running'}</div> */}
         </div>
     );
 }
