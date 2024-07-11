@@ -17,6 +17,14 @@
     color: rgb(0, 0, 0);
 }
 
+.timer {
+    font-size: 24px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
 .ball {
     position: absolute;
     width: 13px;

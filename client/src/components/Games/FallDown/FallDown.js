@@ -151,6 +151,9 @@ export default function FallDown() {
             <div className='score'>
                 Score: {score}
             </div>
+            <div className='timer'>
+                Time: {elapsedTime} s
+            </div>
             <div>
             <div className='fd-game'>
                 <Ball x={ballX} y={ballY} />
