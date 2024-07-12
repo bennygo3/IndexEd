@@ -21,7 +21,7 @@ export default function FallDown() {
     const [floors, setFloors] = useState([{ x: 0, y: 98, holeX: 50 }]);
     const [gameOver, setGameOver] = useState(false);
     const [paused, setPaused] = useState(false);
-    const [score, setScore] = useState(0);
+    // const [score, setScore] = useState(0);
     const [elapsedTime, setElapsedTime] = useState(0);
 
     const generateRandomFloor = () => {
@@ -110,20 +110,43 @@ export default function FallDown() {
     }, [handleKeyDown, handleKeyUp]);
 
     useEffect(() => {
-        if (!paused && !gameOver) {
+        if(!paused && !gameOver) {
+            const startTime = Date.now() - elapsedTime;
             const timer = setInterval(() => {
-                setElapsedTime(prev => prev + 1);
-                setScore(prev => prev + 1);
-            }, 1000);
+                setElapsedTime(Date.now() - startTime);
+            }, 10);
             return () => clearInterval(timer);
         }
-    }, [paused, gameOver]);
+    }, [paused, gameOver, elapsedTime]);
 
-    useEffect(() => {
-        if (elapsedTime > 0 && !paused && !gameOver) {
-            setScore(elapsedTime);
-        }
-    }, [elapsedTime, paused, gameOver]);
+    const formatTime = (time) => {
+        const milliseconds = Math.floor((time % 1000) / 10);
+        const seconds = Math.floor((time / 1000) % 60);
+        const minutes = Math.floor((time / (1000 * 60)) % 60);
+        const hours = Math.floor((time / (1000 * 60 * 60)) % 24);
+
+        return `${hours}:
+        ${minutes.toString().padStart(2, '0')}:
+        ${seconds.toString().padStart(2, '0')}:
+        ${milliseconds.toString().padStart(2, '0')}`
+    }
+
+    // below is to set the score based off of time:
+    // useEffect(() => {
+    //     if (!paused && !gameOver) {
+    //         const timer = setInterval(() => {
+    //             setElapsedTime(prev => prev + 1);
+    //             setScore(prev => prev + 1);
+    //         }, 1000);
+    //         return () => clearInterval(timer);
+    //     }
+    // }, [paused, gameOver]);
+
+    // useEffect(() => {
+    //     if (elapsedTime > 0 && !paused && !gameOver) {
+    //         setScore(elapsedTime);
+    //     }
+    // }, [elapsedTime, paused, gameOver]);
 
     const startGame = () => {
         setFloors([generateRandomFloor()]);
@@ -132,7 +155,7 @@ export default function FallDown() {
         setGameOver(false);
         setPaused(false);
         setElapsedTime(0);
-        setScore(0);
+        // setScore(0);
     };
 
     const stopGame = () => {
@@ -148,11 +171,11 @@ export default function FallDown() {
 
     return (
         <div className='fd'>
-            <div className='score'>
+            {/* <div className='score'>
                 Score: {score}
-            </div>
+            </div> */}
             <div className='timer'>
-                Time: {elapsedTime} s
+                Time: {formatTime(elapsedTime)}
             </div>
             <div>
             <div className='fd-game'>
