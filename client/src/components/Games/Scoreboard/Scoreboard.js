@@ -7,7 +7,7 @@ import './scoreboard.css';
 // 4|   |5
 //  |_6_|
 
-export default function Scoreboard({ currentScore }) {
+export default function Scoreboard({ currentScore, label }) {
     const segmentPatterns = {
         '0': [true, true, true, true, true, true, false],
         '1': [false, true, true, false, false, false, false],
@@ -19,10 +19,12 @@ export default function Scoreboard({ currentScore }) {
         '7': [true, true, true, false, false, false, false],
         '8': [true, true, true, true, true, true, true],
         '9': [true, true, true, true, false, true, true],
+        ':': [false, false, false, true, false, false, true],
+        '.': [false, false, false, false, false, false, true]
     };
 
     const renderDigit = (digit) => {
-        const scoreSegments = segmentPatterns[digit];
+        const scoreSegments = segmentPatterns[digit] || Array(7).fill(false);
 
         return (
             <div className='digit'>
@@ -41,14 +43,27 @@ export default function Scoreboard({ currentScore }) {
         <div className="scoreboard">
             <div className='score-section'>
                 <div className='score'>
-                    {String(currentScore).split('').map((digit, index) => (
+                    {currentScore.split('').map((digit, index) => (
                         <div key={index} className='digit-container'>
                             {renderDigit(digit)}
                         </div>
                     ))}
                 </div>
-                <div className='label'>SCORE</div>
+                <div className='label'>{label}</div>
             </div>
         </div>
     );
 }
+
+        // <div className="scoreboard">
+        //     <div className='score-section'>
+        //         <div className='score'>
+        //             {String(currentScore).split('').map((digit, index) => (
+        //                 <div key={index} className='digit-container'>
+        //                     {renderDigit(digit)}
+        //                 </div>
+        //             ))}
+        //         </div>
+        //         <div className='label'>SCORE</div>
+        //     </div>
+        // </div>
