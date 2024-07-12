@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import './fall-down.css';
+import Scoreboard from '../Scoreboard/Scoreboard';
 
 function Ball({ x, y }) {
     return <div className='ball' style={{ left: `${x}%`, top: `${y}%` }} />;
@@ -125,10 +126,7 @@ export default function FallDown() {
         const minutes = Math.floor((time / (1000 * 60)) % 60);
         const hours = Math.floor((time / (1000 * 60 * 60)) % 24);
 
-        return `${hours}:
-        ${minutes.toString().padStart(2, '0')}:
-        ${seconds.toString().padStart(2, '0')}.
-        ${milliseconds.toString().padStart(2, '0')}`
+        return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(2, '0')}`
     }
 
     // below is to set the score based off of time:
@@ -174,9 +172,6 @@ export default function FallDown() {
             {/* <div className='score'>
                 Score: {score}
             </div> */}
-            <div className='timer'>
-                Time: {formatTime(elapsedTime)}
-            </div>
             <div>
             <div className='fd-game'>
                 <Ball x={ballX} y={ballY} />
@@ -186,6 +181,10 @@ export default function FallDown() {
             </div>
             <button onClick={startGame} disabled={!paused}>Start</button>
             <button onClick={stopGame} disabled={paused}>Stop</button>
+            </div>
+            <div className='timer'>
+                <Scoreboard className='scoreboardTimer' currentScore={formatTime(elapsedTime)} label="TIME" />
+                {/* Time: {formatTime(elapsedTime)} */}
             </div>
             {/* <div>{paused ? 'Paused' : 'Running'}</div> */}
         </div>
