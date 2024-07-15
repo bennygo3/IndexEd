@@ -23,11 +23,13 @@ export default function Scoreboard({ currentScore, label }) {
         '.': [false, false, false, false, false, false, true]
     };
 
-    const renderDigit = (digit) => {
+    const renderDigit = (digit, type) => {
+        // Array(7).fill(false) fallback creates a backup pattern
         const scoreSegments = segmentPatterns[digit] || Array(7).fill(false);
+        const digitClass = type === 'short' ? 'digit short' : 'digit';
 
         return (
-            <div className='digit'>
+            <div className={digitClass}>
                 <div className={`segment segment-0 ${scoreSegments[0] ? 'on' : ''}`}></div>
                 <div className={`segment segment-1 ${scoreSegments[1] ? 'on' : ''}`}></div>
                 <div className={`segment segment-2 ${scoreSegments[2] ? 'on' : ''}`}></div>
