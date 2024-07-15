@@ -19,8 +19,6 @@ export default function Scoreboard({ currentScore, label }) {
         '7': [true, true, true, false, false, false, false],
         '8': [true, true, true, true, true, true, true],
         '9': [true, true, true, true, false, true, true],
-        ':': [false, false, false, true, false, false, true],
-        '.': [false, false, false, false, false, false, true]
     };
 
     const renderDigit = (digit, type) => {
