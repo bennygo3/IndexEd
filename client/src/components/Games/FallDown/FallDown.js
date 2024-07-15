@@ -126,7 +126,7 @@ export default function FallDown() {
         const minutes = Math.floor((time / (1000 * 60)) % 60);
         const hours = Math.floor((time / (1000 * 60 * 60)) % 24);
 
-        return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(2, '0')}`
+        return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}${milliseconds.toString().padStart(2, '0')}`
     }
 
     // below is to set the score based off of time:

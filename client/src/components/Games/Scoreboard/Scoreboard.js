@@ -2,10 +2,10 @@ import React from 'react';
 import './scoreboard.css';
 
 //   _0_
-// 1|   |2
-//  |_3_|
-// 4|   |5
+// 5|   |1
 //  |_6_|
+// 4|   |2
+//  |_3_|
 
 export default function Scoreboard({ currentScore, label }) {
     const segmentPatterns = {
@@ -47,7 +47,7 @@ export default function Scoreboard({ currentScore, label }) {
                 <div className='score'>
                     {currentScore.split('').map((digit, index) => (
                         <div key={index} className='digit-container'>
-                            {renderDigit(digit)}
+                            {renderDigit(digit, index >= currentScore.length - 2 ? 'short' : 'normal')}
                         </div>
                     ))}
                 </div>
@@ -57,15 +57,3 @@ export default function Scoreboard({ currentScore, label }) {
     );
 }
 
-        // <div className="scoreboard">
-        //     <div className='score-section'>
-        //         <div className='score'>
-        //             {String(currentScore).split('').map((digit, index) => (
-        //                 <div key={index} className='digit-container'>
-        //                     {renderDigit(digit)}
-        //                 </div>
-        //             ))}
-        //         </div>
-        //         <div className='label'>SCORE</div>
-        //     </div>
-        // </div>
