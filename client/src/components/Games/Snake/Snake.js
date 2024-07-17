@@ -184,7 +184,7 @@ export default function Snake() {
                     onClick={startGame}>
                     Start Game
                 </button>
-                <Scoreboard currentScore={score} />
+                <Scoreboard currentScore={score} label='SCORE'/>
                 <div className='high-score'>
                     High Score: {highScore}
                 </div>
@@ -221,7 +221,6 @@ export default function Snake() {
                                     className={`cell ${isSnakeHead ? `head ${snakeHeadDirection}` : isSnakeSegment ? `snake ${snakeBodyDirection}` : isFood ? 'food' : ''}`}
                                 >
                                     {isSnakeHead && <><div className='eye'></div> <div className='eyeTwo'></div></>}
-                                    {/* {isFood && '🌭'} */}
                                     {isFood && '🌭'}
                                 </div>
                             );

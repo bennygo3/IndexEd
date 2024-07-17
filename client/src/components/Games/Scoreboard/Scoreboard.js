@@ -47,18 +47,19 @@ export default function Scoreboard({ currentScore, label }) {
         );
     };
 
+    const scoreString = typeof currentScore === 'string' ? currentScore : String(currentScore);
+
     return (
         <div className="scoreboard">
             <div className='score-section'>
             <div className='label'>{label}</div>
                 <div className='score'>
-                    {currentScore.split('').map((digit, index) => (
+                    {scoreString.split('').map((digit, index) => (
                         <div key={index} className='digit-container'>
                             {renderDigit(digit, index >= currentScore.length - 2 ? 'short' : 'normal')}
                         </div>
                     ))}
                 </div>
-                {/* <div className='label'>{label}</div> */}
             </div>
         </div>
     );
