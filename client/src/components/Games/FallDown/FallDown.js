@@ -126,7 +126,7 @@ export default function FallDown() {
         const minutes = Math.floor((time / (1000 * 60)) % 60);
         // const hours = Math.floor((time / (1000 * 60 * 60)) % 24); ... ${hours}:
 
-        return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(2, '0')}`
+        return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}${milliseconds.toString().padStart(2, '0')}`
     }
 
     const startGame = () => {
@@ -152,6 +152,7 @@ export default function FallDown() {
 
     return (
         <div className='fd'>
+            <Scoreboard className='scoreboardTimer' currentScore={formatTime(elapsedTime)} label="TIME" />
             <div>
             <div className='fd-game'>
                 <Ball x={ballX} y={ballY} />
@@ -163,7 +164,7 @@ export default function FallDown() {
             <button onClick={stopGame} disabled={paused}>Stop</button>
             </div>
             <div className='timer'>
-                <Scoreboard className='scoreboardTimer' currentScore={formatTime(elapsedTime)} label="TIME" />
+                {/* <Scoreboard className='scoreboardTimer' currentScore={formatTime(elapsedTime)} label="TIME" /> */}
                 {/* Time: {formatTime(elapsedTime)} */}
             </div>
         </div>
