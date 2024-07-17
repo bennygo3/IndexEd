@@ -163,10 +163,6 @@ export default function FallDown() {
             <button onClick={startGame} disabled={!paused}>Start</button>
             <button onClick={stopGame} disabled={paused}>Stop</button>
             </div>
-            <div className='timer'>
-                {/* <Scoreboard className='scoreboardTimer' currentScore={formatTime(elapsedTime)} label="TIME" /> */}
-                {/* Time: {formatTime(elapsedTime)} */}
-            </div>
         </div>
     );
 }

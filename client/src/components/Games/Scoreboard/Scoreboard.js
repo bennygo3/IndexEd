@@ -50,6 +50,7 @@ export default function Scoreboard({ currentScore, label }) {
     return (
         <div className="scoreboard">
             <div className='score-section'>
+            <div className='label'>{label}</div>
                 <div className='score'>
                     {currentScore.split('').map((digit, index) => (
                         <div key={index} className='digit-container'>
@@ -57,7 +58,7 @@ export default function Scoreboard({ currentScore, label }) {
                         </div>
                     ))}
                 </div>
-                <div className='label'>{label}</div>
+                {/* <div className='label'>{label}</div> */}
             </div>
         </div>
     );
