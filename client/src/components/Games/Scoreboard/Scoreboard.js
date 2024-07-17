@@ -22,6 +22,14 @@ export default function Scoreboard({ currentScore, label }) {
     };
 
     const renderDigit = (digit, type) => {
+        if (digit === ':' || digit === '.') {
+            return (
+                <div className={`digit ${digit === ':' ? 'colon' : 'period'}`}>
+                    <div className= 'dot'></div>
+                    {digit === ':' && <div className='dot dot-bottom'></div>}
+                </div>
+            )
+        }
         // Array(7).fill(false) fallback creates a backup pattern
         const scoreSegments = segmentPatterns[digit] || Array(7).fill(false);
         const digitClass = type === 'short' ? 'digit short' : 'digit';

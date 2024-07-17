@@ -129,23 +129,6 @@ export default function FallDown() {
         return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(2, '0')}`
     }
 
-    // below is to set the score based off of time:
-    // useEffect(() => {
-    //     if (!paused && !gameOver) {
-    //         const timer = setInterval(() => {
-    //             setElapsedTime(prev => prev + 1);
-    //             setScore(prev => prev + 1);
-    //         }, 1000);
-    //         return () => clearInterval(timer);
-    //     }
-    // }, [paused, gameOver]);
-
-    // useEffect(() => {
-    //     if (elapsedTime > 0 && !paused && !gameOver) {
-    //         setScore(elapsedTime);
-    //     }
-    // }, [elapsedTime, paused, gameOver]);
-
     const startGame = () => {
         setFloors([generateRandomFloor()]);
         setBallX(30);
@@ -169,9 +152,6 @@ export default function FallDown() {
 
     return (
         <div className='fd'>
-            {/* <div className='score'>
-                Score: {score}
-            </div> */}
             <div>
             <div className='fd-game'>
                 <Ball x={ballX} y={ballY} />
@@ -186,7 +166,6 @@ export default function FallDown() {
                 <Scoreboard className='scoreboardTimer' currentScore={formatTime(elapsedTime)} label="TIME" />
                 {/* Time: {formatTime(elapsedTime)} */}
             </div>
-            {/* <div>{paused ? 'Paused' : 'Running'}</div> */}
         </div>
     );
 }
@@ -205,3 +184,20 @@ function useInterval(callback, delay) {
         }
     }, [delay]);
 }
+
+    // below is to set the score based off of time:
+    // useEffect(() => {
+    //     if (!paused && !gameOver) {
+    //         const timer = setInterval(() => {
+    //             setElapsedTime(prev => prev + 1);
+    //             setScore(prev => prev + 1);
+    //         }, 1000);
+    //         return () => clearInterval(timer);
+    //     }
+    // }, [paused, gameOver]);
+
+    // useEffect(() => {
+    //     if (elapsedTime > 0 && !paused && !gameOver) {
+    //         setScore(elapsedTime);
+    //     }
+    // }, [elapsedTime, paused, gameOver]);
