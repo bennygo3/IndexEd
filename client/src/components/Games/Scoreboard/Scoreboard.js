@@ -47,7 +47,8 @@ export default function Scoreboard({ currentScore, label }) {
         );
     };
 
-    const scoreString = typeof currentScore === 'string' ? currentScore : String(currentScore);
+    // const scoreString = typeof currentScore === 'string' ? currentScore : String(currentScore);
+    const scoreString = String(currentScore).padStart(2, '0');
 
     return (
         <div className="scoreboard">

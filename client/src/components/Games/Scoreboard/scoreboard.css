@@ -6,11 +6,6 @@
     /* font-family: 'Courier New', Courier, monospace; */
 }
 
-.label {
-    font-size: 1.05em;
-    margin-bottom: 1px;
-}
-
 .score {
     display: flex;
     align-items: flex-end;
@@ -20,6 +15,7 @@
 
 .digit {
     position: relative;
+    right: -2px;
     width: 36px;
     height: 60px;
 }
