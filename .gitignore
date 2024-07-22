@@ -2,6 +2,7 @@ node_modules
 /client/build
 .DS_Store
 config.js
+client/src/config.js
 process.env
 
 # Logs

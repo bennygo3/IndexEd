@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import config from '../../config';
+import config from '../../config.js';
 
 const fetchNBATeamLogos = async () => {
     const nbaUrl = 'https://tank01-fantasy-stats.p.rapidapi.com/getNBATeams?schedules=true&rosters=true&topPerformers=true&teamStats=true&statsToGet=averages';
