@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import config from '../config.js';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import express from 'express';
@@ -12,7 +13,8 @@ import db from './config/connection.js';
 
 import nbaRouter from './routes/nbaRoutes.js';
 
-const PORT = process.env.PORT || 3001;
+// const PORT = process.env.PORT || 3001;
+const PORT = config.PORT || 3001;
 const app = express();
 const httpServer = http.createServer(app);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

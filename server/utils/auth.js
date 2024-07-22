@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
+import config from '../../config';
 
-const secret = process.env.JWT_SECRET;
+// const secret = process.env.JWT_SECRET;
+const secret = config.JWT_SECRET;
 if (!secret) {
     throw new Error("JWT_SECRET is not set");
 }
