@@ -38,8 +38,24 @@ export default function SimonSays() {
 
     const checkUserSequence = () => {
         if (userSequence.join('') === sequence.join('')) {
-            
+            setMessage('On to the next round!')
+            setTimeout(addToSequence, 1000);
+        } else {
+            setMessage('Wrong sequence! Click start to try again.')
         }
-    }
+        setIsUserTurn(false);
+    };
+
+    const playSequence = async () => {
+        setIsUserTurn(false);
+        for (let i = 0; i < sequence.length; i++) {
+            await new Promise((resolve) => setTimeout(resolve, 600));
+            highlightColor(sequence[i]);
+            await new Promise((resolve) => setTimeout(resolve, 600));
+            unhighlightColor(sequence[i]);
+        }
+        setIsUserTurn(true);
+        setMessage('Your turn!');
+    };
 
 }
