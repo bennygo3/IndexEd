@@ -58,4 +58,23 @@ export default function SimonSays() {
         setMessage('Your turn!');
     };
 
+    const highlightColor = (color) => {
+        document.getElementById(color).classList.add('active');
+    };
+
+    const unhighlightColor = (color) => {
+        document.getElementById(color).classList.remove('active');
+    };
+
+    useEffect(() => {
+        if (sequence.length > 0) {
+            playSequence();
+        }
+    }, [sequence]);
+
+    return (
+        <>
+        </>
+    )
+
 }
