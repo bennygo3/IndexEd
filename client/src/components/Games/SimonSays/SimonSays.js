@@ -20,7 +20,7 @@ export default function SimonSays() {
     const addToSequence = useCallback(() => {
         const newColor = colors[Math.floor(Math.random() * 4)];
         const newSequence = [...sequence, newColor];
-        setSequence([newSequence]);
+        setSequence(newSequence);
         setUserSequence([]);
         setIsUserTurn(false);
         setMessage('Simon says:');
@@ -61,11 +61,17 @@ export default function SimonSays() {
     }, [sequence]);
 
     const highlightColor = (color) => {
-        document.getElementById(color).classList.add('active');
+        const elements = document.getElementsByClassName(color);
+        for (const element of elements) {
+            element.classList.add('active');
+        }
     };
 
     const unhighlightColor = (color) => {
-        document.getElementById(color).classList.remove('active');
+        const elements = document.getElementsByClassName(color);
+        for (const element of elements) {
+            element.classList.remove('active');
+        }
     };
 
     useEffect(() => {
@@ -80,7 +86,7 @@ export default function SimonSays() {
                 {colors.map((color) => (
                     <div 
                         key={color}
-                        id={color}
+            
                         className={`color${color}`}
                         onClick={() => handleColorClick(color)}
                     ></div>
