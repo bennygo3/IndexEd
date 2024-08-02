@@ -1,0 +1,55 @@
+.simon-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.color-container {
+    display: grid;
+    grid-template-columns: repeat(2, 150px);
+    grid-template-rows: repeat(2, 150px);
+    gap: 10px;
+}
+
+.color {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.colorgreen {
+    background-color: rgba(0, 128, 0, 0.9);
+}
+
+.colorred {
+    background-color: rgba(255, 0, 0, 0.9);
+}
+
+.coloryellow {
+    background-color: rgba(255, 255, 0, 0.9);
+}
+
+.colorblue {
+    background-color: rgba(0, 0, 255, 0.9);
+}
+
+.coloractive {
+    filter: brightness(2.5);
+}
+
+.controls {
+    margin-top: 20px;
+}
+
+.controls button {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.controls p {
+    margin-top: 10px;
+    font-size: 18px;
+}

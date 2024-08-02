@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './simon-says.css';
 
 const colors = ['yellow', 'blue', 'green', 'red'];
@@ -10,12 +10,6 @@ export default function SimonSays() {
     const [isUserTurn, setIsUserTurn] = useState(false);
     const [message, setMessage] = useState('Push start to play Simon Says!')
 
-    useEffect(() => {
-        if (sequence.length > 0 && userSequence.length === sequence.length) {
-            checkUserSequence();
-        }
-    }, [userSequence]);
-
     const startGame = () => {
         setSequence([]);
         setUserSequence([]);
@@ -23,20 +17,22 @@ export default function SimonSays() {
         addToSequence();
     };
 
-    const addToSequence = () => {
+    const addToSequence = useCallback(() => {
         const newColor = colors[Math.floor(Math.random() * 4)];
-        setSequence([...sequence, newColor]);
+        const newSequence = [...sequence, newColor];
+        setSequence([newSequence]);
         setUserSequence([]);
         setIsUserTurn(false);
         setMessage('Simon says:');
-    };
+        console.log('New sequence:', newSequence);
+    },[sequence]);
 
     const handleColorClick = (color) => {
         if (!isUserTurn) return;
         setUserSequence([...userSequence, color]);
     }
 
-    const checkUserSequence = () => {
+    const checkUserSequence = useCallback(() => {
         if (userSequence.join('') === sequence.join('')) {
             setMessage('On to the next round!')
             setTimeout(addToSequence, 1000);
@@ -44,9 +40,15 @@ export default function SimonSays() {
             setMessage('Wrong sequence! Click start to try again.')
         }
         setIsUserTurn(false);
-    };
+    },[userSequence, addToSequence, sequence]);
 
-    const playSequence = async () => {
+    useEffect(() => {
+        if (sequence.length > 0 && userSequence.length === sequence.length) {
+            checkUserSequence();
+        }
+    }, [userSequence, sequence.length, checkUserSequence]);
+
+    const playSequence = useCallback(async () => {
         setIsUserTurn(false);
         for (let i = 0; i < sequence.length; i++) {
             await new Promise((resolve) => setTimeout(resolve, 600));
@@ -56,7 +58,7 @@ export default function SimonSays() {
         }
         setIsUserTurn(true);
         setMessage('Your turn!');
-    };
+    }, [sequence]);
 
     const highlightColor = (color) => {
         document.getElementById(color).classList.add('active');
@@ -70,11 +72,25 @@ export default function SimonSays() {
         if (sequence.length > 0) {
             playSequence();
         }
-    }, [sequence]);
+    }, [sequence, playSequence]);
 
     return (
-        <>
-        </>
+        <div className = 'simon-game'>
+            <div className = 'color-container'>
+                {colors.map((color) => (
+                    <div 
+                        key={color}
+                        id={color}
+                        className={`color${color}`}
+                        onClick={() => handleColorClick(color)}
+                    ></div>
+                ))}
+            </div>
+            <div className = 'controls'>
+                <button onClick = {startGame}>Start</button>
+                <p>{message}</p>
+            </div>
+        </div>
     )
 
 }

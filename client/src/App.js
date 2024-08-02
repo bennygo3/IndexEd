@@ -15,6 +15,7 @@ import Basketball from './components/Trivia/Basketball/Basketball.js';
 import Snake from './components/Games/Snake/Snake.js';
 import TTT from './components/Games/TTT/TTT.js';
 import FallDown from './components/Games/FallDown/FallDown.js';
+import SimonSays from './components/Games/SimonSays/SimonSays.js';
 
 
 function App() {
@@ -71,6 +72,10 @@ function App() {
                         <Route
                             path='falldown'
                             element={<FallDown />}
+                        />
+                        <Route
+                            path='simonsays'
+                            element={<SimonSays />}
                         />
                     </Routes>
                 </Router>
