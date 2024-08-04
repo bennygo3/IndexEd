@@ -86,7 +86,6 @@ export default function SimonSays() {
                 {colors.map((color) => (
                     <div 
                         key={color}
-            
                         className={`color${color}`}
                         onClick={() => handleColorClick(color)}
                     ></div>
