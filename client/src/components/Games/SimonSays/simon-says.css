@@ -20,21 +20,30 @@
     transition: background-color 0.3s;
 }
 
-.color .green {
-    background-color: rgba(0, 128, 0, 0.9);
+.coloryellow {
+    background-color: rgba(255, 255, 0);
+    filter: brightness(0.9);
 }
 
-.color .red {
-    background-color: rgba(255, 0, 0, 0.9);
+.colorblue {
+    background-color: rgba(0, 0, 255);
+    filter: brightness(0.9);
 }
 
-.color .yellow {
-    background-color: rgba(255, 255, 0, 0.9);
+.colorgreen {
+    background-color: rgba(0, 128, 0);
+    filter: brightness(0.8);
 }
 
-.color blue {
-    background-color: rgba(0, 0, 255, 0.9);
-    filter: brightness(0.7);
+.colorred {
+    background-color: rgba(255, 0, 0);
+    filter: brightness(0.8);
+}
+.coloryellow:hover,
+.colorblue:hover,
+.colorgreen:hover,
+.colorred:hover {
+    filter: brightness(2);
 }
 
 .coloractive {
