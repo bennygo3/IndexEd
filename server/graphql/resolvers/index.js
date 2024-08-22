@@ -1,7 +1,7 @@
 import usersResolvers from './users';
 
-export { 
+export default { 
     Mutation: {
-        ...usersResolvers.Mutation
-    }
+        ...usersResolvers.Mutation,
+    },
 }; 
