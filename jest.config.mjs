@@ -34,6 +34,14 @@ const config = {
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: "v8",
 
+  // Use this to handle imports with .js extensions in your ESM code
+  moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
+
+  // Set the test environment
+  testEnvironment: "jest-environment-node",
+
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
   //   "json",

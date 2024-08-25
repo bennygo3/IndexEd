@@ -5,7 +5,6 @@
     "main": "server.js",
     "type": "module",
     "scripts": {
-        "test": "jest",
         "watch": "nodemon server.js",
         "seed": "node seeders/seed.js",
         "start": "node server.js"

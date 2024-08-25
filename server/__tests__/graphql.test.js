@@ -1,6 +1,6 @@
-const { ApolloServer, createTestClient } = require('@apollo/server');
-const { typeDefs } = require('../graphql/typeDefs.js');
-const resolvers = require('../graphql/resolvers/index.js');
+import { ApolloServer, createTestClient } from '@apollo/server';
+import { typeDefs } from '../graphql/typeDefs.js';
+import resolvers from '../graphql/resolvers/index.js';
 
 const server = newApolloServer({ 
     typeDefs,
