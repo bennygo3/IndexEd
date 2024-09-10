@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Login from '../../components/Global/Landing/Login/Login.js';
-import SignUp from '../../components/Global/Landing/SignUp/SignUp.js';
+import Login from './Login/Login.js';
+import SignUp from './SignUp/SignUp.js';
 import LineGenerator from '../../components/Global/Lines/LineGenerator.js';
 import "./landing.css";
 
