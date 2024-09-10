@@ -84,7 +84,7 @@ export default function CardCreate() {
     if(stacksError) return <p>Error loading: {stacksError.message}</p>
 
     return (
-        <div className="cardCreate-container">
+        <main>
             <header className="cardCreate-header">
                 <h1>Create A <br></br>New Card</h1>
                 <NavbarCC />
@@ -126,7 +126,8 @@ export default function CardCreate() {
                 onAddToStack={handleAddToStack}
                 stacks={stacksData ? stacksData.stacks : []}
             />
-        </div>
+        
+        </main>
     );
 }
 

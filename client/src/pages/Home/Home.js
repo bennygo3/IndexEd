@@ -15,7 +15,6 @@ export default function Home(){
           <Navbar className="navbar-home"/>
         </div>
       </div>
-      {/* <LogoutButton className='home-logout' /> */}
     </main>
   );
 };

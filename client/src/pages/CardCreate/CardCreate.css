@@ -44,12 +44,12 @@
     width: 100%;
     height: 2px;
     background-color: rgba(251, 52, 52, 0.518);
-    margin-top: 0px;
+    margin-top: 14px;
 }
 
 .background-lines {
     position: absolute;
-    top: 130px;
+    top: 164px;
     left: 0;
     right: 0;
     bottom: 0;
