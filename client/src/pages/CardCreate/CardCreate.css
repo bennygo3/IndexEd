@@ -5,6 +5,12 @@
     align-items: center;
 }
 
+.home-link{
+    text-decoration: underline;
+    text-decoration-color: red;
+    text-decoration-style: dashed;
+}
+
 .cardCreate-header h1{
     font-size: 2.25rem;
 }

@@ -1,9 +1,12 @@
 import "./Games.css";
+import NavbarG from '../../components/Global/Navbar/NavbarG.js';
 
 export default function Games() {
     return (
-      <main className="cardCreate-container">
-        
+      <main>
+        <header id="games-header">
+            <NavbarG />
+        </header>
       </main>
     );
 }

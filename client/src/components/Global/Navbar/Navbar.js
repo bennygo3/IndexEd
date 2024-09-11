@@ -32,7 +32,8 @@ export default function Navbar() {
           </Highlighted>
         </li>
         <li>
-          <Highlighted color="rgb(243, 149, 57)">
+          {/* <Highlighted color="rgb(243, 149, 57)"> */}
+          <Highlighted color="rgb(57, 255, 20)">
             <Link to='/games'>
             Games
             </Link>
