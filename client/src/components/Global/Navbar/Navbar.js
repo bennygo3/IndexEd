@@ -32,7 +32,6 @@ export default function Navbar() {
           </Highlighted>
         </li>
         <li>
-          {/* <Highlighted color="rgb(243, 149, 57)"> */}
           <Highlighted color="rgb(57, 255, 20)">
             <Link to='/games'>
             Games
@@ -48,6 +47,7 @@ export default function Navbar() {
 
 //notes: adding className as props to allow for various styling of the navbar comp
 
+//<Highlighted color="rgb(243, 149, 57)"> this is a highlighter orange colored 
 // const Navbar = () => {
 //   return (
 //     <div className="navbar-home">

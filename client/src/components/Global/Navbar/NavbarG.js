@@ -7,7 +7,12 @@ export default function NavbarG(){
             <nav className='navbar-cc'>
                 <ul>
                     <li>
-                        <Highlighted color="">
+                        <Highlighted 
+                          color="white"
+                          border="solid yellow 4px"
+                          underline="underline red dashed 3px"
+                          underlineOffset="5px"
+                        >
                             <Link to="/home">
                                 Home
                             </Link>

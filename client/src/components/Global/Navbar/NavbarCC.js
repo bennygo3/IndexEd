@@ -10,7 +10,9 @@ export default function NavbarCC(){
                     <li>
                         <Highlighted 
                           color="white"
-                          underline="underline"
+                          border="solid yellow 4px"
+                          underline="underline red dashed 3px"
+                          underlineOffset="5px"
                         >
                             <Link to="/home">
                                 Home
@@ -27,8 +29,15 @@ export default function NavbarCC(){
                     </li>
                     <li>
                         <Highlighted color="hotpink">
-                            <Link to='/trivia-decks'>
+                            <Link to="/trivia-decks">
                                 Study trivia cards
+                            </Link>
+                        </Highlighted>
+                    </li>
+                    <li>
+                        <Highlighted color="rgb(57, 255, 20)">
+                            <Link to='/games'>
+                                Games
                             </Link>
                         </Highlighted>
                     </li>
