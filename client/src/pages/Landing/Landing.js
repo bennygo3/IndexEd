@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Login from './Login/Login.js';
 import SignUp from './SignUp/SignUp.js';
-import LineGenerator from '../../components/Global/Lines/LineGenerator.js';
+import LineGenerator from '../../components/Lines/LineGenerator.js';
 import "./landing.css";
 
 export default function Landing() {

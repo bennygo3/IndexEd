@@ -1,20 +1,20 @@
 import { useState } from 'react';
-import TriviaCarousel from '../../components/Trivia/TriviaCarousel/TriviaCarousel';
+import TriviaCarousel from '../TriviaCarousel/TriviaCarousel';
 import './triviaDecks.css';
-import pokeSnapshot from '../../assets/pokeSnapshot.png';
-import Basketball from '../../components/Trivia/Basketball/Basketball';
-import usaPage from '../../assets/usa-states-page.png';
+import pokeSnapshot from '../../../assets/pokeSnapshot.png';
+import Basketball from '../Basketball/Basketball';
+import usaPage from '../../../assets/usa-states-page.png';
 
 const genres = [
-    { 
-        genre: 'Pokemon', 
-        description: 'Guess the Pokemon!', 
-        linkUrl: '/pokemon-trivia', 
+    {
+        genre: 'Pokemon',
+        description: 'Guess the Pokemon!',
+        linkUrl: '/pokemon-trivia',
         imageUrl: `${pokeSnapshot}`
     },
-    { 
-        genre: 'NBA', 
-        description: 'Name the NBA team based off the logo!', 
+    {
+        genre: 'NBA',
+        description: 'Name the NBA team based off the logo!',
         linkUrl: '/nba-logos',
         component: <Basketball />
     },
@@ -23,7 +23,7 @@ const genres = [
         description: 'Name the state based on the outlined image',
         linkUrl: '/usa-states',
         imageUrl: `${usaPage}`,
-        
+
     }
 ];
 
@@ -42,7 +42,11 @@ export default function TriviaDecks() {
                 {/* <h2 className='genre-title'>{genres[activeIndex].genre}</h2> */}
             </div>
             <div className='trivia-decks-main'>
-                <TriviaCarousel genres={genres} activeIndex={activeIndex} setActiveIndex={handleSetActiveIndex} />
+                <TriviaCarousel
+                    genres={genres}
+                    activeIndex={activeIndex}
+                    setActiveIndex={handleSetActiveIndex}
+                />
             </div>
         </section>
     );

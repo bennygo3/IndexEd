@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
-import { statesData } from '../../../components/Trivia/StateImages/StateImages';
-import Card from '../../../components/Card/Card.js';
-import USFlag from '../../../components/Trivia/StateImages/USFlag';
-import FunFacts from '../../../components/Facts/FunFacts';
-import NavbarTD from '../../../components/Global/Navbar/NavbarTD';
+import { statesData } from '../../StateImages/StateImages';
+import Card from '../../../../components/Card/Card.js';
+import USFlag from '../../StateImages/USFlag.js';
+import FunFacts from '../../../../components/Facts/FunFacts.js';
+import NavbarTD from '../../../../components/Navbar/NavbarTD.js';
 import './usaStates.css';
 
 export default function USAStates() {

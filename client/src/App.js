@@ -10,11 +10,12 @@ import MyCards from './pages/MyCards/MyCards.js';
 import CardCreate from './pages/CardCreate/CardCreate.js';
 import Games from './pages/Games/Games.js';
 
-import TriviaDecks from './pages/TriviaDecks/TriviaDecks.js';
-import PokemonTrivia from './pages/TriviaGenres/Pokemon/PokemonTrivia.js';
-import NbaLogos from './pages/TriviaGenres/Sports/NBA/NbaLogos.js';
-import USAStates from './pages/TriviaGenres/Geography/USAStates.js';
-import Basketball from './components/Trivia/Basketball/Basketball.js';
+import TriviaDecks from './pages/Trivia/TriviaDecks/TriviaDecks.js';
+import Trivia from './pages/Trivia/Trivia.js';
+import PokemonTrivia from './pages/Trivia/TriviaGenres/Pokemon/PokemonTrivia.js';
+import NbaLogos from './pages/Trivia/TriviaGenres/Sports/NBA/NbaLogos.js';
+import USAStates from './pages/Trivia/TriviaGenres/Geography/USAStates.js';
+import Basketball from './pages/Trivia/Basketball/Basketball.js';
 import Snake from './pages/Games/Snake/Snake.js';
 import TTT from './pages/Games/TTT/TTT.js';
 import FallDown from './pages/Games/FallDown/FallDown.js';
@@ -43,6 +44,10 @@ function App() {
                         <Route
                             path='/my-cards'
                             element={<MyCards />}
+                        />
+                        <Route 
+                            path='/trivia'
+                            element={<Trivia />}
                         />
                         <Route
                             path='trivia-decks'

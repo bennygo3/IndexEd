@@ -1,7 +1,7 @@
 import './Home.css';
-import Navbar from '../../components/Global/Navbar/Navbar';
-import LineGenerator from '../../components/Global/Lines/LineGenerator.js';
-import LogoutButton from '../../components/Global/Logout/LogoutButton.js';
+import Navbar from '../../components/Navbar/Navbar';
+import LineGenerator from '../../components/Lines/LineGenerator.js';
+import LogoutButton from '../../components/Logout/LogoutButton.js';
 
 export default function Home(){
   return (

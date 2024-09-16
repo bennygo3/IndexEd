@@ -3,8 +3,8 @@ import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_STUDYCARD, CREATE_STACK } from '../../utils/mutations.js';
 import { GET_CURRENT_USER } from '../../utils/queries.js';
 import './CardCreate.css';
-import NavbarCC from '../../components/Global/Navbar/NavbarCC.js';
-import LineGenerator from '../../components/Global/Lines/LineGenerator.js';
+import NavbarCC from '../../components/Navbar/NavbarCC.js';
+import LineGenerator from '../../components/Lines/LineGenerator.js';
 import AddToStackModal from '../../components/AddToStackModal/AddToStackModal.js';
 
 export default function CardCreate() {

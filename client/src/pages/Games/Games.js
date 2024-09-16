@@ -1,5 +1,5 @@
 import "./Games.css";
-import NavbarG from '../../components/Global/Navbar/NavbarG.js';
+import NavbarG from '../../components/Navbar/NavbarG.js';
 
 export default function Games() {
     return (

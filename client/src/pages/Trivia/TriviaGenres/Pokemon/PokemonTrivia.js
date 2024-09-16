@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import Card from '../../../components/Card/Card.js';
+import Card from '../../../../components/Card/Card.js';
 import { useSwipeable } from 'react-swipeable';
 import './pokemonTrivia.css';
 
