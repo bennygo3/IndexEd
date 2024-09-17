@@ -13,12 +13,12 @@ const genres = [
         linkUrl: '/pokemon-trivia',
         imageUrl: pokeSnapshot
     },
-    {
-        genre: 'NBA',
-        desc: 'Name the NBA team based off their logo!',
-        linkUrl: '/nba-logos',
-        component: <Basketball />
-    },
+    // {
+    //     genre: 'NBA',
+    //     desc: 'Name the NBA team based off their logo!',
+    //     linkUrl: '/nba-logos',
+    //     component: <Basketball />
+    // },
     {
         genre: 'USA States',
         desc: 'Name the state based on the outlined image',
@@ -41,7 +41,7 @@ export default function Trivia() {
                 <h1>Trivia</h1>
                 {/* <Navbar /> */}
             </header>
-            <section className='trivia-carousel-section'>
+            <section>
                 <TriviaCarousel
                     genres={genres}
                     activeIndex={activeIndex}

@@ -13,22 +13,3 @@ export default function Card({ front, back, isFlipped }) {
         </div>
     );
 }
-
-
-
-// import React, { useState } from 'react';
-
-// export default function Card({ front, back }) {
-//     const [isFlipped, setIsFlipped] = useState(false);
-
-//     const flipCard = () => {
-//         setIsFlipped(!isFlipped);
-//     };
-
-//     return (
-//         <div className="card" onClick={flipCard}>
-//             {isFlipped ? <div className="card-back">{back}</div> :
-//             <div className="card-front">{front}</div>}
-//         </div>
-//     );
-// };

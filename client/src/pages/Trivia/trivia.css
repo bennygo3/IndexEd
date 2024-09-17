@@ -1,86 +1,24 @@
-.trivia-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-}
-
-.trivia-header {
-    margin: 20px 0;
-}
-
-.trivia-carousel-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 500px;
-    position: relative;
-}
-
 .carousel {
     display: flex;
     align-items: center;
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.carousel-inner {
-    display: flex;
     justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
     position: relative;
+    height: 100%;
+    width: 100%;
 }
 
-.card {
+/* these are the three individual carousel card displays */
+.trivia-carousel > div:nth-child(-n+3) {
     position: absolute;
-    width: 250px;
-    height: 350px;
+    height: 300px;
+    width: 375px;
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.card img {
-    width: 100%;
+.trivia-item img{
     height: auto;
-    border-radius: 10px;
+    width: 100%;
 }
 
-.card.left {
-    transform: translate(-150%, 0) scale(0.8);
-    opacity: 0.5;
-}
 
-.card.center {
-    transform: translate(0, 0) scale(1);
-    opacity: 1;
-    z-index: 2;
-}
 
-.card.right {
-    transform: translate(150%, 0) scale(0.8);
-    opacity: 0.5;
-}
-
-.left-button,
-.right-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 2rem;
-    color: #333;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.left-button {
-    left: 5%;
-}
-
-.right-button {
-    right: 5%;
-}

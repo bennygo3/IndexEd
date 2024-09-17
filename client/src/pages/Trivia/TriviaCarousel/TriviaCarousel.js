@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
-import './trivia-carousel.css';
 
 function TriviaItem({ genre, description, imageUrl, linkUrl, component }) {
     return (
@@ -38,18 +37,18 @@ export default function TriviaCarousel({ genres, activeIndex, setActiveIndex }) 
     const nextIndex = (activeIndex + 1) % genres.length;
 
     return (
-        <div {...handlers} className="carousel">
-            <div className="carousel-inner">
-                <div className="card left">
-                    <TriviaItem {...genres[previousIndex]} />
-                </div>
-                <div className="card center">
-                    <TriviaItem {...genres[activeIndex]} />
-                </div>
-                <div className="card right">
-                    <TriviaItem {...genres[nextIndex]} />
-                </div>
+        <div {...handlers} className="trivia-carousel">
+
+            <div className="card-left">
+                <TriviaItem {...genres[previousIndex]} />
             </div>
+            <div className="card-center">
+                <TriviaItem {...genres[activeIndex]} />
+            </div>
+            <div className="card-right">
+                <TriviaItem {...genres[nextIndex]} />
+            </div>
+
             <div className="carousel-indicators">
                 <button className="left-button"
                     onClick={() => updateIndex(activeIndex - 1)}>
@@ -73,30 +72,3 @@ export default function TriviaCarousel({ genres, activeIndex, setActiveIndex }) 
         </div>
     );
 };
-
-/* <div className="carousel-inner" style={{ transform: `translateX(-${activeIndex * 100}%)` }}></div> */
-/* <div className="carousel-inner">
-{genres.map((genre, index) => (
-    <TriviaItem key={index} {...genre} />
-))}
-</div>
-<div className="carousel-indicators">
-<button className="left-button"
-    onClick={() => updateIndex(activeIndex - 1)}>
-    <span className="left-arrow">&#9756;</span>
-</button>
-
-{genres.map((genre, index) => (
-    <button
-        key={index}
-        className={index === activeIndex ? "active" : ""}
-        onClick={() => updateIndex(index)}>
-        {index + 1}
-    </button>
-))}
-
-<button className="right-button"
-    onClick={() => updateIndex(activeIndex + 1)}>
-    <span className="right-arrow">&#9758;</span>
-</button>
-</div> */

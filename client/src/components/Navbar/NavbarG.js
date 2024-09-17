@@ -28,7 +28,7 @@ export default function NavbarG(){
                     </li>
                     <li>
                         <Highlighted color="hotpink">
-                            <Link to='/trivia-decks'>
+                            <Link to='/trivia'>
                                 Study trivia cards
                             </Link>
                         </Highlighted>
