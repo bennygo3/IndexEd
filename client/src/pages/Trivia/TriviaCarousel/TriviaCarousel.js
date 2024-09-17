@@ -37,15 +37,15 @@ export default function TriviaCarousel({ genres, activeIndex, setActiveIndex }) 
     const nextIndex = (activeIndex + 1) % genres.length;
 
     return (
-        <div {...handlers} className="trivia-carousel">
+        <div {...handlers} >
 
-            <div className="card-left">
+            <div className="t-card left">
                 <TriviaItem {...genres[previousIndex]} />
             </div>
-            <div className="card-center">
+            <div className="t-card center">
                 <TriviaItem {...genres[activeIndex]} />
             </div>
-            <div className="card-right">
+            <div className="t-card right">
                 <TriviaItem {...genres[nextIndex]} />
             </div>
 
