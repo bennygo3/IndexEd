@@ -26,7 +26,7 @@ export default function Navbar() {
         </li>
         <li>
           <Highlighted color="hotpink">
-            <Link to='/trivia-decks'>
+            <Link to='/trivia'>
             Trivia studycards
             </Link>
           </Highlighted>

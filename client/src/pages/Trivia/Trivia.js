@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Navbar from '../../components/Navbar/Navbar.js';
+// import Navbar from '../../components/Navbar/Navbar.js';
 import TriviaCarousel from './TriviaCarousel/TriviaCarousel.js';
 import pokeSnapshot from '../../assets/pokeSnapshot.png';
 import Basketball from './Basketball/Basketball.js';
@@ -39,7 +39,7 @@ export default function Trivia() {
         <main className='trivia-page'>
             <header className='trivia-header'>
                 <h1>Trivia</h1>
-                <Navbar />
+                {/* <Navbar /> */}
             </header>
             <section className='trivia-carousel-section'>
                 <TriviaCarousel

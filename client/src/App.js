@@ -10,7 +10,6 @@ import MyCards from './pages/MyCards/MyCards.js';
 import CardCreate from './pages/CardCreate/CardCreate.js';
 import Games from './pages/Games/Games.js';
 
-import TriviaDecks from './pages/Trivia/TriviaDecks/TriviaDecks.js';
 import Trivia from './pages/Trivia/Trivia.js';
 import PokemonTrivia from './pages/Trivia/TriviaGenres/Pokemon/PokemonTrivia.js';
 import NbaLogos from './pages/Trivia/TriviaGenres/Sports/NBA/NbaLogos.js';
@@ -48,10 +47,6 @@ function App() {
                         <Route 
                             path='/trivia'
                             element={<Trivia />}
-                        />
-                        <Route
-                            path='trivia-decks'
-                            element={<TriviaDecks />}
                         />
                         <Route
                             path='games'
