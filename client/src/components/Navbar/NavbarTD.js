@@ -8,7 +8,12 @@ export default function NavbarTD(){
             <nav className='navbar-td'>
                 <ul>
                     <li>
-                        <Highlighted>
+                        <Highlighted 
+                          color="white"
+                          border="solid yellow 4px"
+                          underline="underline red dashed 3px"
+                          underlineOffset="5px"
+                        >
                             <Link to="/home">
                                 Home
                             </Link>
@@ -26,6 +31,13 @@ export default function NavbarTD(){
                         <Highlighted color="hotpink">
                             <Link to='/card-create'>
                                 Create a new card
+                            </Link>
+                        </Highlighted>
+                    </li>
+                    <li>
+                        <Highlighted color="rgb(57, 255, 20)">
+                            <Link to='/games'>
+                                Games
                             </Link>
                         </Highlighted>
                     </li>
