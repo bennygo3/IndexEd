@@ -3,22 +3,29 @@
     width: auto;
 }
 
+.trivia-header h1{
+    font-size: 50px;
+}
+
 .trivia-carousel {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: auto;
-    height: 50dvh;
-    
+    /* height: 50dvh; */
     position: relative;
+    transform: translateY(40%);
 }
 
 .t-card {
-    position: absolute;
+    
     width: 350px;
     height: 300px;
     transition: opacity 0.5s ease, transform 0.5s ease;
-    border: dashed black 2px;
+    border-bottom: solid lightskyblue 2px;
+    border-top: solid rgb(255, 0, 0) 2px;
+    
 }
 
 .trivia-item {
@@ -52,12 +59,15 @@
 
 .carousel-indicators {
     position: relative;
-    top: 50%;
-    width: 100%;
+    top: 45%;
+    width: auto;
     display: flex;
-    justify-content: space-evenly;
-    transform: translateY(-50%);
+    /* justify-content: center; */
+    /* transform: translateY(-50%); */
+    align-items: center;
 }
+
+
 
 .left-button,
 .right-button {
