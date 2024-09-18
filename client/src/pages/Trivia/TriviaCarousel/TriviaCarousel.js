@@ -33,22 +33,11 @@ export default function TriviaCarousel({ genres, activeIndex, setActiveIndex }) 
         onSwipedRight: () => updateIndex(activeIndex - 1)
     });
 
-    const previousIndex = (activeIndex - 1 + genres.length) % genres.length;
-    const nextIndex = (activeIndex + 1) % genres.length;
-
     return (
-        <div {...handlers} >
-
-            <div className="t-card left">
-                <TriviaItem {...genres[previousIndex]} />
-            </div>
-            <div className="t-card center">
+        <>
+            <div {...handlers} className="t-card center">
                 <TriviaItem {...genres[activeIndex]} />
             </div>
-            <div className="t-card right">
-                <TriviaItem {...genres[nextIndex]} />
-            </div>
-
             <div className="carousel-indicators">
                 <button className="left-button"
                     onClick={() => updateIndex(activeIndex - 1)}>
@@ -69,6 +58,20 @@ export default function TriviaCarousel({ genres, activeIndex, setActiveIndex }) 
                     <span className="right-arrow">&#9758;</span>
                 </button>
             </div>
-        </div>
+        </>
     );
 };
+
+/* 
+const previousIndex = (activeIndex - 1 + genres.length) % genres.length;
+const nextIndex = (activeIndex + 1) % genres.length;
+
+<div className="t-card left">
+<TriviaItem {...genres[previousIndex]} />
+</div>
+<div className="t-card center">
+<TriviaItem {...genres[activeIndex]} />
+</div>
+<div className="t-card right">
+<TriviaItem {...genres[nextIndex]} />
+</div> */

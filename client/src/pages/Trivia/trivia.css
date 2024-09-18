@@ -1,16 +1,15 @@
-/* .trivia-page {
+.trivia-page {
     height: 100dvh;
     width: auto;
-} */
+}
 
 .trivia-carousel {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80%;
+    width: auto;
     height: 50dvh;
-    margin-left: auto;
-    margin-right: auto;
+    
     position: relative;
 }
 
@@ -68,4 +67,10 @@
     font-size: 2rem;
     color: #333;
     padding: 10px;
+}
+
+.component-wrapper {
+    height: 100%;
+    width: 100%;
+    position: relative;
 }
