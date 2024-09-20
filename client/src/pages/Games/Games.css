@@ -3,6 +3,8 @@
     padding: 20px;
     justify-content: space-evenly;
     align-items: center;
+    /* setting a border top as a way to add artifical margin */
+    border-top: white 20px solid;
 }
 
 .navbar-g ul{

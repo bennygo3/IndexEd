@@ -9,8 +9,8 @@ export default function NavbarG(){
                     <li>
                         <Highlighted 
                           color=" rgb(243,149,57)"
-                          underline="underline red dashed 2px"
-                          underlineOffset="3px"
+                        //   underline="underline red dashed 2px"
+                        //   underlineOffset="3px"
                         >
                             <Link to="/home">
                                 Home
@@ -26,16 +26,16 @@ export default function NavbarG(){
                         </Highlighted>
                     </li>
                     <li>
-                        <Highlighted color="hotpink">
-                            <Link to='/trivia'>
-                                Study trivia cards
+                        <Highlighted>
+                            <Link to='/card-create'>
+                                Create study card
                             </Link>
                         </Highlighted>
                     </li>
                     <li>
-                        <Highlighted>
-                            <Link to='/card-create'>
-                                Create study card
+                        <Highlighted color="hotpink">
+                            <Link to='/trivia'>
+                                Study trivia cards
                             </Link>
                         </Highlighted>
                     </li>

@@ -27,7 +27,7 @@ export default function NavbarTD() {
                         </Highlighted>
                     </li>
                     <li>
-                        <Highlighted color="hotpink">
+                        <Highlighted >
                             <Link to='/card-create'>
                                 Create a new card
                             </Link>
