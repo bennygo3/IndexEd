@@ -11,9 +11,9 @@
 
 .home-logout{
     /* outline: rgb(6, 6, 6) solid 1px; */
-    /* border: rgb(0, 0, 0) solid 1px; */
+    border: 1px solid black;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    border: none;
+    
     padding: 0px;
     border-radius: 50px;
     background-color: rgb(49, 145, 255);

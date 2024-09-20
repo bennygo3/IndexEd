@@ -5,7 +5,7 @@
 
 .trivia-header {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     padding: 10px;
 }
@@ -13,7 +13,7 @@
 .navbar-td ul {
     display: flex;
     flex-direction: row;
-    list-style-type: circle;
+    list-style-type:lower-alpha;
     font-family: "Edu SA Beginner", cursive;
     font-weight: 400;
     font-optical-sizing: auto;
@@ -22,11 +22,12 @@
 }
 
 .navbar-td li {
-    margin-right: 25px;
+    margin-right: 18px;
+    margin-left: 18px;
 }
 
 .navbar-td span {
-    padding: 15px 10px;
+    padding: 10px 10px;
 }
 
 .trivia-header h1{

@@ -4,11 +4,6 @@
     justify-content: space-around;
     align-items: center;
 }
-.navbar-td li {
-    /* border-top: solid transparent 20px; */
-    margin-top: 25px;
-    margin-bottom: 20px;
-}
 
 .ff-container {
     margin-right: 40px;

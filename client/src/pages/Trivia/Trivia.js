@@ -41,7 +41,7 @@ export default function Trivia() {
                 <h1>Trivia</h1>
                 <NavbarTD />
             </header>
-            <section className="trivia-carousel">
+            <section className='trivia-carousel'>
                 <TriviaCarousel
                     genres={genres}
                     activeIndex={activeIndex}

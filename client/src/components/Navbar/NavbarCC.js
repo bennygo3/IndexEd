@@ -9,9 +9,8 @@ export default function NavbarCC(){
                 <ul>
                     <li>
                         <Highlighted 
-                          color="white"
-                          border="solid yellow 4px"
-                          underline="underline red dashed 3px"
+                          color=" rgb(243,149,57)"
+                          underline="underline red dashed 2px"
                           underlineOffset="5px"
                         >
                             <Link to="/home">

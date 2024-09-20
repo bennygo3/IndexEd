@@ -5,12 +5,6 @@
     align-items: center;
 }
 
-.home-link{
-    text-decoration: underline;
-    text-decoration-color: red;
-    text-decoration-style: dashed;
-}
-
 .cardCreate-header h1{
     font-size: 2.25rem;
 }
@@ -24,7 +18,7 @@
 .navbar-cc span{
     border: none;
     border-radius: 50px;
-    padding: 15px 10px;
+    padding: 15px 13px;
     font-family: "Edu SA Beginner", cursive;
     font-weight: 400;
     font-optical-sizing: auto;

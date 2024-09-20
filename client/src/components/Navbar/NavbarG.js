@@ -4,14 +4,13 @@ import Highlighted from '../Highlighter/Highlighter';
 export default function NavbarG(){
     return (
         <>
-            <nav className='navbar-cc'>
+            <nav className='navbar-g'>
                 <ul>
                     <li>
                         <Highlighted 
-                          color="white"
-                          border="solid yellow 4px"
-                          underline="underline red dashed 3px"
-                          underlineOffset="5px"
+                          color=" rgb(243,149,57)"
+                          underline="underline red dashed 2px"
+                          underlineOffset="3px"
                         >
                             <Link to="/home">
                                 Home
