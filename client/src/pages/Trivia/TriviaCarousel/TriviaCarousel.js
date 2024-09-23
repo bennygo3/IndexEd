@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
 
-function TriviaItem({ genre, description, imageUrl, linkUrl, component }) {
+function TriviaItem({ genre, desc, imageUrl, linkUrl, component }) {
     return (
         <div className="trivia-item">
             {/* <h1 className="carousel-title">{genre}</h1> */}
@@ -13,7 +13,7 @@ function TriviaItem({ genre, description, imageUrl, linkUrl, component }) {
                     component
                 ) : null}
             </Link>
-            <p className="trivia-description">{description}</p>
+            <p className="trivia-description">{desc}</p>
         </div>
     );
 };

@@ -10,8 +10,8 @@ export default function NavbarCC(){
                     <li>
                         <Highlighted 
                           color=" rgb(243,149,57)"
-                          underline="underline red dashed 2px"
-                          underlineOffset="5px"
+                        //   underline="underline red dashed 2px"
+                        //   underlineOffset="5px"
                         >
                             <Link to="/home">
                                 Home
