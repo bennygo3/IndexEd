@@ -16,8 +16,8 @@ export default function Basketball() {
         // The next 4 lines initialize the position and velocity of the ball
         let x = Math.floor(Math.random() * (containerWidth - 200));
         let y = Math.floor(Math.random() * (containerHeight - 200));
-        let vx = Math.random() * 2 + 1;
-        let vy = Math.random() * 2 + 1;
+        let vx = Math.random() * 1 + 1;
+        let vy = Math.random() * 1 + 1;
 
         function movement() {
             requestAnimationFrame(movement);

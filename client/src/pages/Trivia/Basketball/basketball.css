@@ -1,11 +1,12 @@
 .basketball {
     overflow: hidden;
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
     background-color: orange;
     border-radius: 50%;
     position: absolute;
     box-shadow: inset 0 0 10px rgb(0, 0, 0);
+    z-index: 4;
 
     /* animation-name: bounce;
     animation-duration: 8s; */
@@ -24,11 +25,12 @@
 
 
 .basketball-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
+    width: 330px;
+    height: 290px;
+    /* position: relative; */
     background-color: #f0f0f0;
     overflow: hidden;
+    border: 2px black solid;
 }
 
 .line {
@@ -40,21 +42,21 @@
     top: 50%;
     left: 0;
     width: 100%;
-    height: 10px;
+    height: 6px;
     transform: translateY(-50%);
 }
 
 .vertical {
     top: 0;
     left: 50%;
-    width: 10px;
+    width: 6px;
     height: 100%;
     transform: translateX(-50%);
 }
 
 .curveR {
     position: relative;
-    border: 10px solid black;
+    border: 7px solid black;
     border-radius: 36%;
     top: 50%;
     left: 50%;
@@ -66,7 +68,7 @@
 
 .curveL {
     position: relative;
-    border: 10px solid black;
+    border: 7px solid black;
     border-radius: 36%;
     top: 50%;
     left: 50%;
