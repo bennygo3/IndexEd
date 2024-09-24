@@ -49,15 +49,17 @@
 .t-card {
     
     width: 350px;
-    height: 300px;
+    height: 350px;
     transition: opacity 0.5s ease, transform 0.5s ease;
     border-bottom: solid lightskyblue 2px;
     border-top: solid rgb(255, 0, 0) 2px;
-    
+    width: 100%;
+    height: 100%;
 }
 
 .trivia-item {
     position: relative;
+    height: 100%;
 }
 
 .trivia-item img {
@@ -65,25 +67,16 @@
     width: 100%;
 }
 
-.t-card.left {
-    transform: translate(-70%, 0) scale(0.8);
-    opacity: 0.5;
-    z-index: 1;
-
-}
-
 .t-card.center {
+    width: 350px; 
+    height: 350px; 
+    position: relative;
     transform: translate(0, 0) scale(1);
     opacity: 1;
     z-index: 2;
     background-color: white;
 }
 
-.t-card.right {
-    transform: translate(70%, 0) scale(0.8);
-    opacity: 0.5;
-    z-index: 1;
-}
 
 .carousel-indicators {
     position: relative;
@@ -112,3 +105,15 @@
     width: 100%;
     position: relative;
 }
+
+/* .t-card.left {
+    transform: translate(-70%, 0) scale(0.8);
+    opacity: 0.5;
+    z-index: 1;
+
+}
+.t-card.right {
+    transform: translate(70%, 0) scale(0.8);
+    opacity: 0.5;
+    z-index: 1;
+} */
