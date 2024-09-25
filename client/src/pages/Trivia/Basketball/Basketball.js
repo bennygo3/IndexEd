@@ -5,26 +5,28 @@ export default function Basketball() {
     const canvasRef = useRef(null);
 
     useEffect(() => {
-        const canvas = canvasRef.current;
+        const canvas = canvasRef.current; 
         const context = canvas.getContext('2d');
 
-        let x = canvas.width / 2;
+        let x = canvas.width / 2; // start at the center of the canvas
         let y = canvas.height / 2;
-        let dx = (Math.random() - 0.5) * 2;
+        let dx = (Math.random() - 0.5) * 2; // sets the randomized x velo
         let dy = (Math.random() - 0.5) * 2;
         const ballRadius = 75;
 
         const animate = () => {
-            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.clearRect(0, 0, canvas.width, canvas.height); // clears the canvas before the drawing of each (new) frame of the animation
 
+            // draws the basketball
             context.beginPath();
-            context.arc(x, y, ballRadius, 0, 2 * Math.PI);
+            context.arc(x, y, ballRadius, 0, 2 * Math.PI); // draws a complete circle
             context.fillStyle = 'orange';
             context.fill();
             context.lineWidth = 5;
             context.strokeStyle = 'black';
             context.stroke();
 
+            // horizontal line
             context.beginPath();
             context.moveTo(x - ballRadius, y);
             context.lineTo(x + ballRadius, y);
@@ -32,6 +34,7 @@ export default function Basketball() {
             context.strokeStyle = 'black';
             context.stroke();
 
+            // vertical line
             context.beginPath();
             context.moveTo(x, y - ballRadius);
             context.lineTo(x, y + ballRadius);
@@ -39,36 +42,38 @@ export default function Basketball() {
             context.strokeStyle = 'black';
             context.stroke();
 
+            // curve 1
             context.beginPath();
-            context.arc(x, y, ballRadius * 0.97, 1.25 * Math.PI, 1.75 * Math.PI);
+            context.arc(x, y, ballRadius * 0.97, 1.25 * Math.PI, false);
             context.lineWidth = 6;
             context.strokeStyle = 'black';
             context.stroke();
 
+            // curve 2
             context.beginPath();
-            context.arc(x, y, ballRadius * 0.97, 0.25 * Math.PI, 0.75 * Math.PI);
+            context.arc(x, y, ballRadius * 0.97, 0.85 * Math.PI, 0.15 * Math.PI, true);
             context.lineWidth = 7;
             context.strokeStyle = 'black';
             context.stroke();
 
-            x += dx;
+            x += dx; // updates x position
             y += dy;
 
             if (x + ballRadius > canvas.width || x - ballRadius < 0) {
-                dx = -dx;
+                dx = -dx; // reverses x direction when hitting the canvas edge
             }
 
             if (y + ballRadius > canvas.height || y - ballRadius < 0) {
-                dy = -dy;
+                dy = -dy; // reverses y
             }
 
-            requestAnimationFrame(animate);
+            requestAnimationFrame(animate); // requests the next frame of the animation
         };
 
         animate();
 
         return () => {
-            cancelAnimationFrame(animate);
+            cancelAnimationFrame(animate); // cleanup function, when Basketball component is unmounted, the animation will stop
         };
     }, []);
 
