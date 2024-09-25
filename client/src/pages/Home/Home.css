@@ -1,6 +1,5 @@
 .home-body {
     background-color: rgb(121 231 75 / 77%);
-    /* background-color: rgb(251 247 113 / 80%); */
     background-color: rgb(255, 255, 255);
     min-height: 100vh;
     width: auto;
@@ -10,6 +9,145 @@
 }
 
 .home-logout {
+    border: 1px solid black;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    padding: 3px 2px 3px;
+    border-radius: 50px;
+    background-color: rgb(253, 71, 47);
+    height: 50px;
+    width: 50px;
+    font-size: 28px;
+}
+
+.login-button {
+    border: 1px solid black;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    padding: 3px 2px 3px;
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    cursor: pointer;
+    background-color: rgb(255, 229, 76);
+    height: 50px;
+    width: 50px;
+}
+
+
+.home-header {
+    text-align: center;
+    font-size: 96px;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 30px;
+    margin-inline-end: 0px;
+    transform: translateY(36px);
+    font-weight: bold;
+}
+
+
+/* this is the index card */
+.home-background {
+    background-color: white;
+    box-shadow: 1px 3px 9px 2px rgba(0, 0, 0, 0.3);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto auto;
+    /* Adjust rows automatically based on content */
+    grid-template-areas:
+        "redline buttons"
+        "bluelines bluelines"
+        "navbar navbar";
+    align-items: start;
+    position: relative;
+    margin-top: 10%;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    min-width: 700px;
+    height: auto;
+}
+
+.buttons-container {
+    grid-area: buttons;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+/* "logout login"
+    "redline redline"
+    "bluelines bluelines"
+    "navbar navbar"; */
+
+.home-background button {
+    cursor: pointer;
+    z-index: 3;
+}
+
+button {
+    cursor: pointer;
+}
+
+.red-line {
+    grid-area: redline;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 40px;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(251, 52, 52, 0.518);
+    /* margin-top: 20px; */
+}
+
+.blue-line {
+    width: 100%;
+    height: 1.75px;
+    background-color: rgb(0, 115, 255, 0.3);
+    margin-top: 20px;
+}
+
+.line-container {
+    width: 100%;
+    grid-area: bluelines;
+    display: block;
+}
+
+/* .home-background {
+    background-color: white;
+    box-shadow: 1px 3px 9px 2px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-top: 10%;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    min-width: 700px;
+} */
+
+/* .home-background {
+    background-color: white;
+    box-shadow: 1px 3px 9px 2px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-top: 10%;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    min-width: 700px;
+} */
+
+/* .red-line {
+    width: 100%;
+    height: 2px;
+    background-color: rgba(251, 52, 52, 0.518);
+    margin-top: 65px;
+} */
+
+/* .home-logout {
     border: 1px solid black;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     padding: 0px;
@@ -23,9 +161,9 @@
     position: absolute;
     top: 8px;
     right: 12px;
-}
+} */
 
-.login-button {
+/* .login-button {
     border: 1px solid black;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     padding: 3px 2px 3px;
@@ -39,64 +177,4 @@
     background-color: rgb(255, 229, 76);
     height: 50px;
     width: 50px;
-    touch-action: manipulation;
-    z-index: 4;
-}
-
-.home-header {
-    text-align: center;
-    font-size: 96px;
-    margin-block-start: 0px;
-    margin-block-end: 0px;
-    margin-inline-start: 30px;
-    margin-inline-end: 0px;
-    transform: translateY(36px);
-    font-weight: bold;
-}
-
-.emoji {
-    font-size: 35px;
-    transform: translateY(-36px);
-}
-
-/* this is the index card */
-.home-background {
-    background-color: white;
-    box-shadow: 1px 3px 9px 2px rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    margin-top: 10%;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    min-width: 700px;
-}
-
-.home-background button {
-    cursor: pointer;
-    z-index: 3;
-}
-
-button {
-    cursor: pointer;
-}
-
-.red-line {
-    width: 100%;
-    height: 2px;
-    background-color: rgba(251, 52, 52, 0.518);
-    margin-top: 65px;
-}
-
-.blue-line {
-    width: 100%;
-    height: 1.75px;
-    background-color: rgb(0, 115, 255, 0.3);
-    margin-top: 20px;
-}
-
-.line-container {
-    width: 100%;
-
-}
+} */

@@ -9,8 +9,10 @@ export default function Home() {
       <h1 className="home-header">Index<span style={{ marginLeft: "10px" }}></span>Ed</h1>
 
       <div className="home-background">
+        <div className="buttons-container">
         <LogoutButton className='home-logout' />
-        {/* <button className="login-button">Login</button> */}
+        <button className="login-button">Login</button>
+        </div>
         <div className="red-line"></div>
         <LineGenerator amount={17} colorClass="blue-line" />
         <Navbar className="navbar-home" />
