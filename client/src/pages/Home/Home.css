@@ -9,23 +9,38 @@
     align-items: center;
 }
 
-.home-logout{
-    /* outline: rgb(6, 6, 6) solid 1px; */
+.home-logout {
     border: 1px solid black;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    
     padding: 0px;
+    padding: 3px 2px 3px;
     border-radius: 50px;
     background-color: rgb(49, 145, 255);
     background-color: rgb(253, 71, 47);
-    /* background-color: rgb(114 255 55); */
     height: 50px;
     width: 50px;
     font-size: 28px;
-    /* letter-spacing: 1px; */
     position: absolute;
-    top: 8px; 
+    top: 8px;
     right: 12px;
+}
+
+.login-button {
+    border: 1px solid black;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    padding: 3px 2px 3px;
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0);
+    background-color: rgb(255, 229, 76);
+    height: 50px;
+    width: 50px;
+    touch-action: manipulation;
+    z-index: 4;
 }
 
 .home-header {
@@ -39,15 +54,12 @@
     font-weight: bold;
 }
 
-.emoji{
+.emoji {
     font-size: 35px;
     transform: translateY(-36px);
 }
 
-.home-container {
-    min-width: 700px;
-}
-
+/* this is the index card */
 .home-background {
     background-color: white;
     box-shadow: 1px 3px 9px 2px rgba(0, 0, 0, 0.3);
@@ -58,9 +70,10 @@
     margin-top: 10%;
     margin-bottom: 10px;
     padding-bottom: 10px;
+    min-width: 700px;
 }
 
-.home-background button{
+.home-background button {
     cursor: pointer;
     z-index: 3;
 }
@@ -85,5 +98,5 @@ button {
 
 .line-container {
     width: 100%;
-    
+
 }
