@@ -44,7 +44,7 @@
     cursor: pointer;
 }
 
-.login-active {
+.login-button-active {
     text-shadow: 2px 2px lightskyblue;
 }
 
@@ -52,7 +52,7 @@
     text-shadow: 2px 2px rgb(96, 255, 114);
 }
 
-#login:hover{
+#login-button:hover{
     transform: scale(1.25);
 }
 

@@ -10,8 +10,10 @@ export default function LogoutButton({ className }) {
     };
 
     return (
-        <button className={className} onClick={handleLogout}> &#9032;</button>
+        <button className={className} onClick={handleLogout}>Sign<br></br>out</button>
     );
 }
 
-// &#8998;
+// different button aesthetics below:
+// &#8998; 
+// <button className={className} onClick={handleLogout}> &#9032;</button>

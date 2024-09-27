@@ -9,17 +9,26 @@
 }
 
 .home-logout {
+    font-family: "Edu SA Beginner", cursive;
+    font-weight: 400;
+    font-optical-sizing: auto;
+    font-style: normal;
     border: 1px solid black;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     padding: 3px 2px 3px;
     border-radius: 50px;
     background-color: rgb(253, 71, 47);
+    background-color: rgb(255, 176, 72);
     height: 50px;
     width: 50px;
-    font-size: 28px;
+    font-size: 16px;
 }
 
-.login-button {
+#login-button {
+    font-family: "Edu SA Beginner", cursive;
+    font-weight: 400;
+    font-optical-sizing: auto;
+    font-style: normal;
     border: 1px solid black;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     padding: 3px 2px 3px;
@@ -29,6 +38,8 @@
     border-radius: 50px;
     cursor: pointer;
     background-color: rgb(255, 229, 76);
+    background-color: rgb(255, 176, 72);
+    cursor: pointer;
     height: 50px;
     width: 50px;
 }
@@ -58,7 +69,7 @@
         "redline buttons"
         "bluelines bluelines"
         "navbar navbar";
-    align-items: start;
+    align-items: end;
     position: relative;
     margin-top: 10%;
     margin-bottom: 10px;
@@ -91,9 +102,10 @@ button {
 
 .red-line {
     grid-area: redline;
-    position: absolute;
-    left: 0;
-    right: 0;
+    
+    /* position: absolute; */
+    /* left: 0;
+    right: 0; */
     top: 40px;
     width: 100%;
     height: 2px;
