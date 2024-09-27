@@ -9,6 +9,9 @@
     font-family: "Edu SA Beginner", cursive;
     font-weight: 400;
     font-optical-sizing: auto;
+    font-size: 30px;
+    /* text-decoration: underline solid 1px lightblue; */
+    text-shadow: 2px 2px lightblue;
 }
 
 #formLogin, #formSignUp{
@@ -29,10 +32,4 @@
     font-optical-sizing: auto;
     border: 1px solid;
     border-radius: 5px;
-}
-
-.signin-header {
-    font-size: 30px;
-    /* text-decoration: underline solid 1px lightblue; */
-    text-shadow: 2px 2px lightblue;
 }

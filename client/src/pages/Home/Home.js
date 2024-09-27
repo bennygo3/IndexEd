@@ -10,6 +10,7 @@ export default function Home() {
   const [loginPopup, setLoginPopup] = useState(false);
   const [signUpPopup, setButtonPopup] = useState(false);
   return (
+    <div className="home-margin">
     <main className="home-body">
       <h1 className="landing-header">Index-Ed</h1>
       <div className="home-background">
@@ -21,7 +22,7 @@ export default function Home() {
           <Login trigger={loginPopup} setTrigger={setLoginPopup} />
           <button id="signup-button" onClick={() => setButtonPopup(true)}
             className={signUpPopup ? 'signup-button-active' : ''}>
-            Sign Up
+            Sign up
           </button>
           <SignUp trigger={signUpPopup} setTrigger={setButtonPopup} />
           <LogoutButton className='home-logout' />
@@ -32,6 +33,7 @@ export default function Home() {
       </div>
 
     </main>
+    </div>
   );
 };
 

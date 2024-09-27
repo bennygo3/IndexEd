@@ -1,7 +1,11 @@
+.home-margin {
+    border-top: white solid 30px;
+}
+
 .home-body {
     background-color: rgb(121 231 75 / 77%);
     background-color: rgb(255, 255, 255);
-    min-height: 100vh;
+    min-height: 90vh;
     width: auto;
     display: flex;
     flex-direction: column;
@@ -50,7 +54,7 @@
         "navbar navbar";
     align-items: end;
     position: relative;
-    margin-top: 10%;
+    margin-top: 5%;
     margin-bottom: 10px;
     padding-bottom: 10px;
     min-width: 700px;
@@ -85,6 +89,7 @@
     cursor: pointer;
     height: 50px;
     width: 50px;
+    padding-inline: 3px;
 }
 
 #login-button {
@@ -105,6 +110,20 @@
     cursor: pointer;
     height: 50px;
     width: 50px;
+    padding-inline: 3px;
+}
+
+#formSignUp {
+    font-size: 28px;
+    top: 26px
+}
+
+.signup-header {
+    font-size: 26px;
+    text-shadow: 2px 2px rgb(96, 255, 114);
+    font-family: "Edu SA Beginner", cursive;
+    font-weight: 400;
+    font-optical-sizing: auto;
 }
 
 .home-background button {

@@ -49,6 +49,7 @@ export default function SignUp(props){
         <div className="signUpPopup">
             <StickyNote>
             <div className='popup-inner'>
+            <h1 className="signup-header">Sign Up</h1>
             <span className="close" onClick={handleClose}>&times;</span>
                 <form onSubmit={handleFormSubmit} >
                             <label id="formSignUp">
