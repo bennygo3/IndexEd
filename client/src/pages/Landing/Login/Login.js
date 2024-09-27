@@ -45,6 +45,7 @@ export default function Login(props) {
         <div className="loginPopup">
             <StickyNote>
             <div className='loginPopup-inner'>
+            <h1 className="signin-header">Sign In</h1>
             <span className="close" onClick={handleClose}>&times;</span>
                 <form onSubmit={handleFormSubmit} >
                     <label id="formLogin">
@@ -68,7 +69,7 @@ export default function Login(props) {
                         <button
                             type='submit'
                             className='login-btn'>
-                            Enter
+                            ENTER
                         </button>
 
                     </label>

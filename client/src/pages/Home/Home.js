@@ -14,7 +14,7 @@ export default function Home() {
       <div className="home-background">
         <div className="buttons-container">
           <button id="login-button" onClick={() => setLoginPopup(true)}
-            className={loginPopup ? 'login-active' : ''}>
+            className={loginPopup ? 'login-button-active' : ''}>
             Sign in
           </button>
           <Login trigger={loginPopup} setTrigger={setLoginPopup} />
