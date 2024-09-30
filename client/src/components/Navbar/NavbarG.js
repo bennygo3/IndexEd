@@ -12,7 +12,7 @@ export default function NavbarG(){
                         //   underline="underline red dashed 2px"
                         //   underlineOffset="3px"
                         >
-                            <Link to="/home">
+                            <Link to="/">
                                 Home
                             </Link>
                         </Highlighted>

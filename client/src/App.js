@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import client from './utils/apolloClient.js';
 import ThemeProvider from './context/ThemeProvider.js';
 
-import Landing from './pages/Landing/Landing.js';
+// import Landing from './pages/Landing/Landing.js';
 import Home from './pages/Home/Home.js';
 import MyCards from './pages/MyCards/MyCards.js';
 import CardCreate from './pages/CardCreate/CardCreate.js';
@@ -29,11 +29,7 @@ function App() {
                 <Router>
                     <Routes>
                         <Route
-                            path="/"
-                            element={<Landing />}
-                        />
-                        <Route
-                            path='/home'
+                            path='/'
                             element={<Home />}
                         />
                         <Route

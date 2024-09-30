@@ -13,7 +13,7 @@ export default function NavbarCC(){
                         //   underline="underline red dashed 2px"
                         //   underlineOffset="5px"
                         >
-                            <Link to="/home">
+                            <Link to="/">
                                 Home
                             </Link>
                         </Highlighted>
