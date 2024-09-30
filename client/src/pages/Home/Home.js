@@ -10,7 +10,7 @@ export default function Home() {
   const [loginPopup, setLoginPopup] = useState(false);
   const [signUpPopup, setButtonPopup] = useState(false);
   return (
-    <div className="home-margin">
+    
     <main className="home-body">
       <h1 className="landing-header">Index-Ed</h1>
       <div className="home-background">
@@ -33,7 +33,7 @@ export default function Home() {
       </div>
 
     </main>
-    </div>
+    
   );
 };
 

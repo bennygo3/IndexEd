@@ -18,6 +18,7 @@
     margin-bottom: 10px;
     letter-spacing: 5px;
     color: rgb(50, 50, 50);
+    
 }
 
 .landing-redLine{
@@ -68,9 +69,6 @@
     left: 10%;
     transform: translateX(-51%);
     z-index: 3;
-    font-family: "Edu SA Beginner", cursive;
-    font-weight: 400;
-    font-optical-sizing: auto;
 } 
 
 #signUp{

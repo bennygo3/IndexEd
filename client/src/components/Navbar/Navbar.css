@@ -7,22 +7,19 @@
   position: absolute;
   width: 100%;
   padding-inline-start: 10px;
-  margin-inline-start: 30px;
+  margin-inline-start: 20px;
+  top: 100px;
 }
 
 .nav-list {
   display: flex;
   flex-direction: column;
-  /* align-items: flex-start; */
-}
-
-.nav-list li:first-child {
-  margin-top: 90px;
+  
 }
 
 .nav-list li{
   list-style-type: decimal;
-  margin-bottom: 45px;
+  margin-bottom: 50px;
 }
 
 a:-webkit-any-link {
@@ -31,8 +28,6 @@ a:-webkit-any-link {
 }
 
 .highlighted {
-  padding: 7px 8px;
+  padding: 8px 9px;
   border-radius: 8px;
-  /* border: 2px solid black; */
-  /* background-color: yellow; */
 }
