@@ -57,14 +57,15 @@ input {
 
 /* from the signup css page originally */
 input[type="text" i] {
-  line-height: 1.0;
-  font-size: 18px;
+  line-height: 1;
+  font-size: 18px;;
+  
 }
 
 input[type=text], input[type=password] {
   background-color: white;
   border: none;
-  height: 2.6rem;
+  height: 2.1rem;
   width: auto;
   font-size: 30px;
   margin: 0 0 5px 0;
