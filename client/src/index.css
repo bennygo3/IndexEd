@@ -20,10 +20,9 @@ body {
 
 input {
   writing-mode: horizontal-tb !important;
-  font-family: 'Josefin Slab', serif;
-  
-  font-style: normal;
-  font-weight: 500;
+  font-family: "Edu SA Beginner", cursive;
+  font-weight: 400;
+  font-optical-sizing: auto;
   font-size: 30px;
   /* font-style: ;
   font-variant-ligatures: ;
@@ -56,19 +55,19 @@ input {
 }
 
 /* from the signup css page originally */
-input[type="text" i] {
+/* input[type="text" i] {
   line-height: 1;
   font-size: 18px;;
   
-}
+} */
 
 input[type=text], input[type=password] {
   background-color: white;
   border: none;
-  height: 2.1rem;
-  width: auto;
-  font-size: 30px;
-  margin: 0 0 5px 0;
+  height: 2.5rem;
+  width: 99%;
+  font-size: 25px;
+  margin: 3px 0 3px 0;
   padding: 0;
   box-shadow: none;
   box-sizing: content-box;

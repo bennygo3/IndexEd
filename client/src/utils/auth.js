@@ -26,7 +26,7 @@ class AuthService {
 
     login(idToken) {
         localStorage.setItem('id_token', idToken);
-        window.location.assign('/home');
+        window.location.assign('/');
     }
 
     logout(navigate) {
@@ -40,7 +40,6 @@ class AuthService {
 
         try {
             const decoded = decode(token);
-            console.log(decoded);
             return decoded.data._id;
         } catch (error) {
             console.error('Failed to decode token:', error);

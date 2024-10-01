@@ -46,7 +46,7 @@ const resolvers = {
       return snakeScore || { userId, highSnakeScore: 0 };
     },
     stacks: async () => {
-      return await Stack.find({});//.populate('studycards');
+      return await Stack.find({}); //.populate('studycards');
     },
     studycards: async (parent, args) => {
       return Studycard.find({});
