@@ -2,8 +2,8 @@ import { useState } from 'react';
 import './Home.css';
 import Navbar from '../../components/Navbar/Navbar';
 import LineGenerator from '../../components/Lines/LineGenerator.js';
-import Login from '../Landing/Login/Login';
-import SignUp from '../Landing/SignUp/SignUp';
+import Login from './Login/Login';
+import SignUp from './SignUp/SignUp';
 import LogoutButton from '../../components/Logout/LogoutButton.js';
 
 export default function Home() {
