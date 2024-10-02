@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Snake from "../Snake/Snake";
 import FallDown from "../FallDown/FallDown";
 import TTT from "../TTT/TTT";
+import './arcade.css';
 
 const games = [
     { name: "Snake", component: <Snake /> }, 
@@ -101,8 +102,8 @@ export default function Arcade() {
     };
 
     return (
-        <div>
-            <h1 style={{ textAlign: "center", fontFamily: "ArcadeFont", color: "yellow" }}>
+        <div className="arcade-main">
+            <h1 className="arcade-header">
                 GAMES
             </h1>
             <canvas 

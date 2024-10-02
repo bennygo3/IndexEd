@@ -1,0 +1,19 @@
+.arcade-main {
+    position: relative;
+    margin: 50px auto;
+    width: 400px;
+
+}
+
+.arcade-header {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    /* font-family: "ArcadeFont"; */
+    color: yellow;
+    font-size: 34px;
+    border: dotted yellow 3px;
+    padding: 4px;
+}
