@@ -1,5 +1,6 @@
 import "./Games.css";
 import NavbarG from '../../components/Navbar/NavbarG.js';
+import Arcade from "./Arcade/Arcade";
 
 export default function Games() {
     return (
@@ -7,6 +8,9 @@ export default function Games() {
         <header id="games-header">
             <NavbarG />
         </header>
+        <section>
+          <Arcade />
+        </section>
       </main>
     );
 }
