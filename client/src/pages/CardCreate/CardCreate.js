@@ -130,12 +130,3 @@ export default function CardCreate() {
         </main>
     );
 }
-
-
-// {/* <input
-// type="text"
-// id="front"
-// className="input-class"
-// value={front}
-// onChange={(e) => setFront(e.target.value)}
-// /> */}
