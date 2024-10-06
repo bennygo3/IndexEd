@@ -17,7 +17,7 @@ export default function Arcade() {
 
     const drawScreen = useCallback((ctx) => {
         ctx.fillStyle = "black";
-        ctx.fillRect(50, 100, 300, 210);
+        ctx.fillRect(50, 85, 300, 230);
 
         games.forEach((game, index) => {
             const isSelected = index === currentIndex;
@@ -43,11 +43,14 @@ export default function Arcade() {
         ctx.beginPath();
         ctx.arc(300, 450, 20, 0, Math.PI * 2);
         ctx.fill();
+        ctx.fillStyle = "black";
         ctx.fillText("A", 295, 455);
 
+        ctx.fillStyle = "red";
         ctx.beginPath();
         ctx.arc(250, 470, 20, 0, Math.PI * 2);
         ctx.fill();
+        ctx.fillStyle = "black";
         ctx.fillText("B", 245, 475);
 
         // Directional pad
@@ -56,9 +59,9 @@ export default function Arcade() {
 
     const drawDirectionalPad = (ctx) => {
         ctx.fillStyle = "black";
-        // up and down
+        // up and down d-pad
         ctx.fillRect(101, 425, 25, 80);
-        // left and right
+        // left and right d-pad
         ctx.fillRect(74, 451, 80, 25);
     };
 
@@ -109,9 +112,9 @@ export default function Arcade() {
 
     return (
         <div className="arcade-main">
-            <h1 className="arcade-header">
+            {/* <h1 className="arcade-header">
                 GAMES
-            </h1>
+            </h1> */}
             <canvas 
                 ref={canvasRef}
                 width={400}
