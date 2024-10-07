@@ -38,21 +38,6 @@ export default function Arcade() {
         ctx.fillStyle = "darkgray";
         ctx.fillRect(50, 50, 300, 300) // Screen
 
-        // A and B buttons
-        ctx.fillStyle = "red";
-        ctx.beginPath();
-        ctx.arc(300, 450, 20, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = "black";
-        ctx.fillText("A", 295, 455);
-
-        ctx.fillStyle = "red";
-        ctx.beginPath();
-        ctx.arc(250, 470, 20, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = "black";
-        ctx.fillText("B", 245, 475);
-
         // Directional pad
         drawDirectionalPad(ctx);
     }, []);
@@ -123,81 +108,26 @@ export default function Arcade() {
                 className="gameboy-canvas"
                 style={{ border: "2px solid black", display: "block", margin: "0 auto" }}
             />
+            <button className="a-button" onClick={() => alert("A button pressed")}>
+                A
+            </button>
+            <button className="b-button" onClick={() => alert("B button pressed")}>
+                B
+            </button>
         </div>
     )
 }
+        // A and B buttons
+        // ctx.fillStyle = "red";
+        // ctx.beginPath();
+        // ctx.arc(300, 450, 20, 0, Math.PI * 2);
+        // ctx.fill();
+        // ctx.fillStyle = "black";
+        // ctx.fillText("A", 295, 455);
 
-//  setting drawScreen with games[currentIndex] to display one at a time
-//  useEffect(() => {
-//     const canvas = canvasRef.current;
-//     const ctx = canvas.getContext("2d");
-
-//     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-//     drawArcadeBody(ctx);
-
-//     drawScreen(ctx, games[currentIndex]);
-
-//     drawJoysticks(ctx);
-
-//     drawButtons(ctx);
-// }, [currentIndex]);
-// ctx.fillStyle = "white";
-// ctx.font = "20px ArcadeFont";
-// ctx.fillText(game.name, 150, 200);
-
-//    const drawArcadeBody = (ctx) => {
-//     ctx.fillStyle = "black";
-//     ctx.fillRect(0, 0, 400, 600);
-
-//     ctx.fillStyle = "red";
-//     ctx.fillRect(10, 10, 380, 580);
-// };
-
-// const handleLeftClick = () => {
-//     setCurrentIndex((prevIndex) => 
-//         prevIndex === 0 ? games.length - 1 : prevIndex - 1
-//     );
-// };
-
-// const handleRightClick = () => {
-//     setCurrentIndex((prevIndex) =>
-//         prevIndex === games.length - 1 ? 0 : prevIndex + 1
-//     );
-// };
-
-//         if (offsetX >= 50 && offsetX <= 100 && offsetY >= 400 && offsetY <= 450) {
-//     handleLeftClick();
-// }
-
-// if (offsetX >= 300 && offsetX <= 350 && offsetY >= 400 && offsetY <= 450) {
-//     handleRightClick();
-// }
-
-// const drawJoysticks = (ctx) => {
-//     // Left joystick
-//     ctx.fillStyle = "blue";
-//     ctx.beginPath();
-//     ctx.arc(75, 425, 25, 0, Math.PI * 2);
-//     ctx.fill();
-
-//     //Right joystick
-//     ctx.fillStyle = "blue";
-//     ctx.beginPath();
-//     ctx.arc(325, 425, 25, 0, Math.PI * 2);
-//     ctx.fill();
-// };
-
-// const drawButtons = (ctx) => {
-//     // Left button
-//     ctx.fillStyle = "yellow";
-//     ctx.beginPath();
-//     ctx.arc(125, 475, 15, 0, Math.PI * 2);
-//     ctx.fill();
-
-//     // Right button
-//     ctx.fillStyle = "yellow";
-//     ctx.beginPath();
-//     ctx.arc(275, 475, 15, 0, Math.PI * 2);
-//     ctx.fill();
-// };
+        // ctx.fillStyle = "red";
+        // ctx.beginPath();
+        // ctx.arc(250, 470, 20, 0, Math.PI * 2);
+        // ctx.fill();
+        // ctx.fillStyle = "black";
+        // ctx.fillText("B", 245, 475);
