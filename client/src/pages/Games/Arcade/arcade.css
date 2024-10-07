@@ -2,7 +2,11 @@
     position: relative;
     margin: 50px auto;
     width: 400px;
+}
 
+.gameboy-canvas {
+    border-bottom-right-radius: 54px;
+    border: 1px solid rgb(77, 77, 77);
 }
 
 .arcade-header {
@@ -11,11 +15,38 @@
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-    /* font-family: "ArcadeFont"; */
     color: yellow;
     font-size: 34px;
     border: dotted yellow 3px;
     padding: 4px;
+}
+
+.games-list {
+    position: absolute;
+    top: 82px;
+    left: 52px;
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+    background-color: black;
+    width: 300px;
+    height: 200px;
+}
+
+.games-list li {
+    font-family: 'Press Start 2P';
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.selected-game {
+    color: yellow;
+    font-size: 22px;
+}
+
+a.game-link {
+    color: white;
 }
 
 .a-button {
@@ -28,7 +59,7 @@
     background-color: darkred;
     color:blueviolet;
     font-size: 20px;
-    border: white .1px solid;
+    border: rgb(73, 73, 73) .1px solid;
 }
 
 .b-button {
@@ -41,5 +72,5 @@
     background-color: darkred;
     color:blueviolet;
     font-size: 20px;
-    border: white .1px solid;
+    border: rgb(73, 73, 73) .1px solid;
 }
