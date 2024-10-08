@@ -14,7 +14,7 @@ const games = [
 export default function Arcade() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const canvasRef = useRef(null);
-
+    
     const drawGameBoy = useCallback((ctx) => {
         ctx.fillStyle = "gray";
         ctx.beginPath();
@@ -32,10 +32,10 @@ export default function Arcade() {
 
         // Directional pad
         ctx.fillStyle = "black";
-        // up and down d-pad
+        // up and down d-pad (x, y, width, height)
         ctx.fillRect(101, 425, 25, 80);
         // left and right d-pad
-        ctx.fillRect(74, 451, 80, 25);
+        ctx.fillRect(73, 451, 80, 25);
     }, []);
 
     useEffect(() => {
@@ -43,9 +43,8 @@ export default function Arcade() {
         const ctx = canvas.getContext("2d");
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
         drawGameBoy(ctx);
-    }, [drawGameBoy]);
+    }, [drawGameBoy, currentIndex]);
 
     const handleCanvasClick = (event) => {
         const { offsetX, offsetY } = event.nativeEvent;
@@ -70,7 +69,11 @@ export default function Arcade() {
     };
 
     const handleUpClick = () => {
-        setCurrentIndex((prevIndex) => prevIndex === 0 ? games.length - 1 : prevIndex - 1);
+        setCurrentIndex((prevIndex) => { 
+        const newIndex = prevIndex === 0 ? games.length - 1 : prevIndex - 1;
+        console.log('Up Clicked: New current index:', newIndex);
+        return newIndex;
+        });
     };
 
     const handleDownClick = () => {
