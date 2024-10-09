@@ -6,29 +6,48 @@ import TTT from "../TTT/TTT";
 import './arcade.css';
 
 const games = [
-    { name: "Snake", component: <Snake />, route: "/snake" }, 
-    { name: "Fall Down", component: <FallDown />, route: "/falldown"}, 
-    { name: "Tic Tac Toe", component: <TTT />, route:"ttt"}
+    { name: "Snake", component: <Snake />, route: "/snake" },
+    { name: "Fall Down", component: <FallDown />, route: "/falldown" },
+    { name: "Tic Tac Toe", component: <TTT />, route: "ttt" }
 ];
 
 export default function Arcade() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const canvasRef = useRef(null);
-    
+
     const drawGameBoy = useCallback((ctx) => {
-        ctx.fillStyle = "gray";
+        // need to setup ternary to adjust canvas drawing for different screen sizes
+        ctx.fillStyle = "lightgray";
         ctx.beginPath();
         ctx.moveTo(0, 0);
-        ctx.lineTo(400,0);
-        ctx.lineTo(400,550);
+        ctx.lineTo(400, 0);
+        ctx.lineTo(400, 550);
         ctx.arcTo(400, 600, 350, 600, 50);
         ctx.lineTo(0, 600);
         ctx.lineTo(0, 0);
         ctx.closePath();
         ctx.fill();
 
-        ctx.fillStyle = "darkgray";
-        ctx.fillRect(50, 50, 300, 300) // Screen
+        ctx.fillStyle = "gray";
+        ctx.beginPath();
+        // Top-left corner
+        ctx.moveTo(50, 50);
+        
+        // Top-right corner
+        ctx.arcTo(380, 50, 350, 350, 10);
+        
+        // Bottom-right corner (larger radius)
+        ctx.arcTo(380, 350, 50, 350, 50);
+        
+        // Bottom-left corner 
+        ctx.arcTo(20, 350, 50, 50, 20);
+        
+        // Top-left corner (small radius)
+        ctx.arcTo(20, 50, 350, 50, 10);
+        ctx.closePath();
+        ctx.fill();
+        //ctx.fillStyle = "gray";
+        //ctx.fillRect(50, 50, 300, 300) // Screen
 
         // Directional pad
         ctx.fillStyle = "black";
@@ -44,7 +63,7 @@ export default function Arcade() {
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawGameBoy(ctx);
-    }, [drawGameBoy, currentIndex]);
+    }, [drawGameBoy]);
 
     const handleCanvasClick = (event) => {
         const { offsetX, offsetY } = event.nativeEvent;
@@ -69,11 +88,7 @@ export default function Arcade() {
     };
 
     const handleUpClick = () => {
-        setCurrentIndex((prevIndex) => { 
-        const newIndex = prevIndex === 0 ? games.length - 1 : prevIndex - 1;
-        console.log('Up Clicked: New current index:', newIndex);
-        return newIndex;
-        });
+        setCurrentIndex((prevIndex) => prevIndex === 0 ? games.length - 1 : prevIndex - 1);
     };
 
     const handleDownClick = () => {
@@ -85,7 +100,7 @@ export default function Arcade() {
             {/* <h1 className="arcade-header">
                 GAMES
             </h1> */}
-            <canvas 
+            <canvas
                 ref={canvasRef}
                 width={400}
                 height={600}
@@ -94,7 +109,7 @@ export default function Arcade() {
             />
             <ul className="games-list">
                 {games.map((game, index) => (
-                    <li 
+                    <li
                         key={game.name}
                         className={index === currentIndex ? 'selected-game' : ''}
                         onClick={() => setCurrentIndex(index)}
@@ -109,9 +124,11 @@ export default function Arcade() {
                     </li>
                 ))}
             </ul>
-            <button className="a-button" onClick={() => alert(`Navigating to: ${games[currentIndex]}`)}>
-                A
-            </button>
+            <Link to={games[currentIndex].route}>
+                <button className="a-button">
+                    A
+                </button>
+            </Link>
             <button className="b-button" onClick={() => alert("B button pressed")}>
                 B
             </button>
@@ -134,17 +151,21 @@ export default function Arcade() {
 //         ctx.fillText(game.name || game, 60, 100 + index * 30);
 //     });
 // }, [currentIndex]);
-        // A and B buttons
-        // ctx.fillStyle = "red";
-        // ctx.beginPath();
-        // ctx.arc(300, 450, 20, 0, Math.PI * 2);
-        // ctx.fill();
-        // ctx.fillStyle = "black";
-        // ctx.fillText("A", 295, 455);
+// A and B buttons
+// ctx.fillStyle = "red";
+// ctx.beginPath();
+// ctx.arc(300, 450, 20, 0, Math.PI * 2);
+// ctx.fill();
+// ctx.fillStyle = "black";
+// ctx.fillText("A", 295, 455);
 
-        // ctx.fillStyle = "red";
-        // ctx.beginPath();
-        // ctx.arc(250, 470, 20, 0, Math.PI * 2);
-        // ctx.fill();
-        // ctx.fillStyle = "black";
-        // ctx.fillText("B", 245, 475);
+// ctx.fillStyle = "red";
+// ctx.beginPath();
+// ctx.arc(250, 470, 20, 0, Math.PI * 2);
+// ctx.fill();
+// ctx.fillStyle = "black";
+// ctx.fillText("B", 245, 475);
+
+//     <button className="a-button" onClick={() => alert(`Navigating to: ${games[currentIndex]}`)}>
+//     A
+// </button>
