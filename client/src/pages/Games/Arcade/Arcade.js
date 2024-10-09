@@ -18,13 +18,19 @@ export default function Arcade() {
     const drawGameBoy = useCallback((ctx) => {
         // need to setup ternary to adjust canvas drawing for different screen sizes
         ctx.fillStyle = "lightgray";
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(400, 0);
-        ctx.lineTo(400, 550);
-        ctx.arcTo(400, 600, 350, 600, 50);
-        ctx.lineTo(0, 600);
-        ctx.lineTo(0, 0);
+        ctx.beginPath(0, 0); // starts at 0,0
+        
+        ctx.lineTo(350, 0); // top line sets the length of x axis
+        ctx.arcTo(400, 0, 400, 50, 8); // (x1, y1, x2, y2, radius) this is the top right border radius
+        
+        ctx.lineTo(400, 550); // right vertical line/edge
+        ctx.arcTo(400, 600, 350, 600, 50); // bottom right arc
+        
+        ctx.lineTo(50, 600); // bottom line, starts at (350, 600) and ends 50 in from the left on x axis
+        ctx.arcTo(0, 600, 0, 550, 8); // bottom left corner
+        
+        ctx.arcTo(0, 0, 50, 0, 8); // top left arc
+        
         ctx.closePath();
         ctx.fill();
 
@@ -46,8 +52,6 @@ export default function Arcade() {
         ctx.arcTo(20, 50, 350, 50, 10);
         ctx.closePath();
         ctx.fill();
-        //ctx.fillStyle = "gray";
-        //ctx.fillRect(50, 50, 300, 300) // Screen
 
         // Directional pad
         ctx.fillStyle = "black";
@@ -87,6 +91,21 @@ export default function Arcade() {
         }
     };
 
+    const handleMouse = (event) => {
+        const { offsetX, offsetY } = event.nativeEvent;
+
+        const isOverUp = offsetX >= 101 && offsetX <= 126 && offsetY >= 425 && offsetY <= 450;
+        const isOverDown = offsetX >= 101 && offsetX <= 126 && offsetY >= 480 && offsetY <= 505;
+        const isOverLeft = offsetX >= 73 && offsetX <= 98 && offsetY >= 451 && offsetY <= 476;
+        const isOverRight = offsetX >= 129 && offsetX <= 154 && offsetY >= 451 && offsetY <= 476;
+
+        if (isOverUp || isOverDown || isOverLeft || isOverRight) {
+            canvasRef.current.style.cursor = "pointer";
+        } else {
+            canvasRef.current.style.cursor = "default";
+        }
+    };
+
     const handleUpClick = () => {
         setCurrentIndex((prevIndex) => prevIndex === 0 ? games.length - 1 : prevIndex - 1);
     };
@@ -105,6 +124,7 @@ export default function Arcade() {
                 width={400}
                 height={600}
                 onClick={handleCanvasClick}
+                onMouseMove={handleMouse}
                 className="gameboy-canvas"
             />
             <ul className="games-list">

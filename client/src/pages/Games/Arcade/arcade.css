@@ -4,10 +4,10 @@
     width: 400px;
 }
 
-.gameboy-canvas {
+/* .gameboy-canvas {
     border-bottom-right-radius: 54px;
     border: 1px solid rgb(77, 77, 77);
-}
+} */
 
 .arcade-header {
     position: absolute;
