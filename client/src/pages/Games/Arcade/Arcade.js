@@ -8,7 +8,7 @@ import './arcade.css';
 const games = [
     { name: "Snake", component: <Snake />, route: "/snake" },
     { name: "Fall Down", component: <FallDown />, route: "/falldown" },
-    { name: "Tic Tac Toe", component: <TTT />, route: "ttt" }
+    { name: "Tic Tac Toe", component: <TTT />, route: "/ttt" }
 ];
 
 export default function Arcade() {
@@ -36,20 +36,19 @@ export default function Arcade() {
 
         ctx.fillStyle = "gray";
         ctx.beginPath();
-        // Top-left corner
-        ctx.moveTo(50, 50);
         
-        // Top-right corner
-        ctx.arcTo(380, 50, 350, 350, 10);
+        ctx.lineTo(0, 50);  // top line
+        ctx.arcTo(380, 50, 380, 60, 10);  // Top-right corner
         
-        // Bottom-right corner (larger radius)
-        ctx.arcTo(380, 350, 50, 350, 50);
+        ctx.lineTo(380, 65);  // right line
+        ctx.arcTo(380, 350, 50, 350, 50); // Bottom-right corner
         
-        // Bottom-left corner 
-        ctx.arcTo(20, 350, 50, 50, 20);
+        ctx.lineTo(50, 350);
+        ctx.arcTo(20, 350, 50, 50, 10); // Bottom-left corner 
         
-        // Top-left corner (small radius)
-        ctx.arcTo(20, 50, 350, 50, 10);
+        ctx.lineTo(20, 60); // left line
+        ctx.arcTo(20, 50, 350, 50, 10); // Top-left corner
+
         ctx.closePath();
         ctx.fill();
 

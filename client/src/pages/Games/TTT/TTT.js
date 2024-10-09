@@ -29,7 +29,7 @@ function calculateWinner(squares) {
     return null;
 }
 
-export default function Board() {
+export default function TTT() {
     const [xIsNext, setXIsNext] = useState(true);
     const [squares, setSquares] = useState(Array(9).fill(null));
 
