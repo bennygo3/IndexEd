@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import './fall-down.css';
 import Scoreboard from '../Scoreboard/Scoreboard';
+import './fall-down.css';
 
 function Ball({ x, y }) {
     return <div className='ball' style={{ left: `${x}%`, top: `${y}%` }} />;
@@ -19,22 +19,23 @@ export default function FallDown() {
     const [ballY, setBallY] = useState(90);
     const [moveLeft, setMoveLeft] = useState(false);
     const [moveRight, setMoveRight] = useState(false);
-    const [floors, setFloors] = useState([{ x: 0, y: 98, holeX: 50 }]);
+    const [floors, setFloors] = useState([{ x: 0, y: 100, holeX: 50 }]);
     const [gameOver, setGameOver] = useState(false);
+    const [gameStarted, setGameStarted] = useState(false);
     const [paused, setPaused] = useState(false);
     // const [score, setScore] = useState(0);
     const [elapsedTime, setElapsedTime] = useState(0);
 
     const generateRandomFloor = () => {
         const holeX = Math.floor(Math.random() * 90);
-        return { x: 0, y: 100, holeX };
+        return { x: 0, y: 98, holeX };
     };
 
     const moveBall = useCallback(() => {
         setBallY((prev) => {
             const onFloor = floors.some(floor =>
                 ballY >= floor.y - 2 &&
-                ballY <= floor.y + 2 &&
+                ballY <= floor.y + 2.35 &&
                 !(ballX >= floor.holeX && ballX <= floor.holeX + 10)
             );
             if (onFloor) {
@@ -64,11 +65,11 @@ export default function FallDown() {
     }, [ballY]);
 
     const gameLoop = useCallback(() => {
-        if (!paused) {
+        if (!paused && gameStarted && !gameOver) {
             moveBall();
             moveFloors();
         }
-    }, [paused, moveBall, moveFloors])
+    }, [paused, gameStarted, gameOver, moveBall, moveFloors])
 
     useInterval(gameLoop, !paused ? 37 : null);
 
@@ -135,6 +136,7 @@ export default function FallDown() {
         setBallY(90);
         setGameOver(false);
         setPaused(false);
+        setGameStarted(true);
         setElapsedTime(0);
         // setScore(0);
     };
@@ -142,6 +144,13 @@ export default function FallDown() {
     const stopGame = () => {
         setPaused(true);
     };
+
+    if (!gameStarted) return (
+        <div>
+            <div>Click to start</div>
+            <button onClick={startGame}>Start</button>
+        </div>
+    );
 
     if (gameOver) return (
         <div>
