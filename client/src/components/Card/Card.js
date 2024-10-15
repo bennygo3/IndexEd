@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export default function Card({ front, back, isFlipped }) {
+export default function Card({ front, back }) {
+    const [isFlipped, setIsFlipped] = useState(false);
+
+    const handleFlip = () => {
+        setIsFlipped(prevState => !prevState);
+    };
+
     return (
-        <div className='card'>
+        <div className='card' onClick={handleFlip}>
             {isFlipped ? (
                 <div className='card-back'>
                     <div>{back}</div>
@@ -13,3 +19,5 @@ export default function Card({ front, back, isFlipped }) {
         </div>
     );
 }
+
+// export default function Card({ front, back, isFlipped }) 

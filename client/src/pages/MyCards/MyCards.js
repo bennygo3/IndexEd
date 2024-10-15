@@ -10,11 +10,11 @@ export default function MyCards() {
     if (error) return <p>Error: {error.message}</p>;
     
     return (
-        <div className="myCards-page">
+        <div className="my-cards-page">
             {data.currentUser.stacks.map(stack => (
                 <div key={stack._id} className="stack-section">
                     <h2>{stack.title}</h2>
-                    <div className="card-carousel">
+                    <div className="my-card-carousel">
                         {stack.studycards.map(card => (
                             <Card key={card._id} front={card.front} back={card.back} />
                         ))}
