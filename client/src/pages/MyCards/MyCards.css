@@ -1,4 +1,17 @@
-.my-cards-card .card-back {
-    /* transform: scaleX(-1); */
-    display: inline-block;
+.my-cards-carousel {
+    margin: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.my-cards-container {
+    border: dashed black 2px;
+    cursor: pointer;
+
+
+}
+
+.my-cards-container .card-back {
+    transform: scaleX(-1);
+    /* display: inline-block; */
 }
