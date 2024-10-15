@@ -7,11 +7,16 @@
 .my-cards-container {
     border: dashed black 2px;
     cursor: pointer;
-
+    height: 100px;
+    width: 200px;
+    padding: 5px;
 
 }
 
 .my-cards-container .card-back {
-    transform: scaleX(-1);
+    /* transform: scaleX(-1); */
+    height: 100px;
+    width: 200px;
+   
     /* display: inline-block; */
 }

@@ -47,7 +47,7 @@
 }
 
 
-.states-card .card-front, .card-back{
+.states-card .card-front, .states-card .card-back{
     width: 475px;
     height: 475px;
     border: 1px dotted rgb(10, 49, 97);

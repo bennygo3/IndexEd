@@ -88,16 +88,16 @@
     text-transform: capitalize;
 }
 
-.card.flipped .card-front {
+/* .card.flipped .card-front {
     transform: rotateY(180deg);
 }
 
 .card.flipped .card-back {
     transform: rotateY(0deg);
-}
+} */
 
 /* flips the back of the card to display the answer correctly */
-.card-back div {
+.pokemon-card .card-back div{
     transform: rotateY(180deg);
     font-family: Tahoma, sans-serif;
     
