@@ -19,9 +19,14 @@ export default function MyCards() {
     if (error) return <p>Error: {error.message}</p>;
 
     return (
-        <div className="my-cards-page">
+        <main className="my-cards-page">
+            <header className="my-cards-header">
+                {/* <h1>STUDY</h1> */}
+                <h1>My<br></br>Study<br></br>Cards</h1>
+                <p id="my-cards-header-p">1. the devotion of time and attention to acquiring knowledge on an academic subject, especially by means of notecards*</p>
+            </header>
             {data.currentUser.stacks.map(stack => (
-                <div key={stack._id} className="stack-section">
+                <section key={stack._id} className="stack-section">
                     <h2>{stack.title}</h2>
                     <div className="my-cards-carousel">
                         {stack.studycards.map(card => (
@@ -39,8 +44,8 @@ export default function MyCards() {
                             </div>
                         ))}
                     </div>
-                </div>
+                </section>
             ))}
-        </div>
+        </main>
     );
 };
