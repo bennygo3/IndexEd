@@ -21,9 +21,10 @@ export default function MyCards() {
     return (
         <main className="my-cards-page">
             <header className="my-cards-header">
-                {/* <h1>STUDY</h1> */}
-                <h1>My<br></br>Study<br></br>Cards</h1>
-                <p id="my-cards-header-p">1. the devotion of time and attention to acquiring knowledge on an academic subject, especially by means of notecards*</p>
+                {/* <h1>My<br></br>Study<br></br>Cards</h1> */}
+                <h1>My Study Cards</h1>
+                <div id="my-cards-chalk"></div>
+                {/* <p id="my-cards-header-p">1. the devotion of time and attention to acquiring knowledge on an academic subject, especially by means of notecards*</p> */}
             </header>
             {data.currentUser.stacks.map(stack => (
                 <section key={stack._id} className="stack-section">
