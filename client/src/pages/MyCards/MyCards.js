@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_CURRENT_USER } from '../../utils/queries';
+import NavbarMSC from '../../components/Navbar/NavbarMSC';
 import Card from '../../components/Card/Card';
 import './MyCards.css';
 
@@ -20,11 +21,13 @@ export default function MyCards() {
 
     return (
         <main className="my-cards-page">
-            <header>
+            <header id="my-cards-header">
                 {/* <h1>My<br></br>Study<br></br>Cards</h1> */}
-                <h1 id="my-cards-header">My Study Cards</h1>
+                <h1 id="my-cards-chalkboard">My Study Cards</h1>
                 <div id="my-cards-chalk"></div>
-                <div id="my-cards-corkboard"></div>
+                <div id="my-cards-corkboard">
+                    <NavbarMSC></NavbarMSC>
+                </div>
                 {/* <p id="my-cards-header-p">1. the devotion of time and attention to acquiring knowledge on an academic subject, especially by means of notecards*</p> */}
             </header>
             {data.currentUser.stacks.map(stack => (

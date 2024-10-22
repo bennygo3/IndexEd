@@ -1,4 +1,9 @@
 #my-cards-header {
+    display: inline-block;
+    flex-direction: row;
+}
+
+#my-cards-chalkboard {
     background-color: rgba(0, 0, 0, 0.866);
     border: 6px solid rgb(193, 154, 107);
     padding: 10px;
@@ -37,12 +42,26 @@
 
 #my-cards-corkboard {
     width: 420px;
-    height: 400px;
+    height: 300px;
     background: url('../../assets/cork_board.jpg');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    display: inline-block;
+    /* padding-top: 35px;
+    padding-left: 35px; */
+    display: flex;
+    align-items: center;
+
+}
+
+#navbar-msc {
+    margin: 20px;
+    
+}
+
+#navbar-msc ul{
+    display: grid;
+    gap: 30px;
 }
 
 #my-cards-header-p {
