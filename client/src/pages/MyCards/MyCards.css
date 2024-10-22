@@ -36,7 +36,13 @@
 }
 
 #my-cards-corkboard {
-    width: 
+    width: 420px;
+    height: 400px;
+    background: url('../../assets/cork_board.jpg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
 }
 
 #my-cards-header-p {
