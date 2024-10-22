@@ -20,10 +20,11 @@ export default function MyCards() {
 
     return (
         <main className="my-cards-page">
-            <header className="my-cards-header">
+            <header>
                 {/* <h1>My<br></br>Study<br></br>Cards</h1> */}
-                <h1>My Study Cards</h1>
+                <h1 id="my-cards-header">My Study Cards</h1>
                 <div id="my-cards-chalk"></div>
+                <div id="my-cards-corkboard"></div>
                 {/* <p id="my-cards-header-p">1. the devotion of time and attention to acquiring knowledge on an academic subject, especially by means of notecards*</p> */}
             </header>
             {data.currentUser.stacks.map(stack => (
