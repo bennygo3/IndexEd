@@ -4,8 +4,10 @@
 
 }
 #my-cards-header {
-    display: inline-block;
+    display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+    padding-top: 35px;
 }
 
 #my-cards-chalkboard {

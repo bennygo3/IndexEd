@@ -23,11 +23,12 @@ export default function MyCards() {
     return (
         <main className="my-cards-page">
             <header id="my-cards-header">
-                {/* <h1>My<br></br>Study<br></br>Cards</h1> */}
+                <div>
                 <h1 id="my-cards-chalkboard">My Study Cards</h1>
                 <div id="my-cards-chalk"></div>
+                </div>
                 <div id="my-cards-corkboard">
-                    <NavbarMSC></NavbarMSC>
+                    <NavbarMSC />
                 </div>
                 {/* <p id="my-cards-header-p">1. the devotion of time and attention to acquiring knowledge on an academic subject, especially by means of notecards*</p> */}
             </header>
