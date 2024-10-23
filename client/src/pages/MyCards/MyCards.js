@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 import { GET_CURRENT_USER } from '../../utils/queries';
 import NavbarMSC from '../../components/Navbar/NavbarMSC';
 import Card from '../../components/Card/Card';
+import Wood from '../../components/MadeWCss/Wood';
 import './MyCards.css';
 
 export default function MyCards() {
@@ -30,10 +31,12 @@ export default function MyCards() {
                 </div>
                 {/* <p id="my-cards-header-p">1. the devotion of time and attention to acquiring knowledge on an academic subject, especially by means of notecards*</p> */}
             </header>
+            <Wood>
             {data.currentUser.stacks.map(stack => (
-                <section key={stack._id} className="stack-section">
+
+                <section key={stack._id}>
                     <h2>{stack.title}</h2>
-                    <div className="my-cards-carousel">
+                    <div className="my-cards-carousel" id="my-cards-section">
                         {stack.studycards.map(card => (
                             <div
                                 key={card._id}
@@ -51,6 +54,7 @@ export default function MyCards() {
                     </div>
                 </section>
             ))}
+            </Wood>
         </main>
     );
 };
