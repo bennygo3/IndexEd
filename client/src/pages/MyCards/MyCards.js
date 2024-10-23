@@ -31,12 +31,13 @@ export default function MyCards() {
                 </div>
                 {/* <p id="my-cards-header-p">1. the devotion of time and attention to acquiring knowledge on an academic subject, especially by means of notecards*</p> */}
             </header>
-            <Wood>
+            {/* <Wood> */}
             {data.currentUser.stacks.map(stack => (
 
-                <section key={stack._id}>
+                <section key={stack._id} id="my-cards-wood">
+                    <Wood>
                     <h2>{stack.title}</h2>
-                    <div className="my-cards-carousel" id="my-cards-section">
+                    <div className="my-cards-carousel">
                         {stack.studycards.map(card => (
                             <div
                                 key={card._id}
@@ -52,9 +53,10 @@ export default function MyCards() {
                             </div>
                         ))}
                     </div>
+                    </Wood>
                 </section>
             ))}
-            </Wood>
+            
         </main>
     );
 };
