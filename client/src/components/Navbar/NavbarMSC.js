@@ -25,7 +25,7 @@ export default function NavbarMSC(){
                     <li>
                         <Highlighted color="hotpink">
                             <Link to="/trivia">
-                                Study trivia cards
+                                Trivia cards
                             </Link>
                         </Highlighted>
                     </li>

@@ -56,19 +56,48 @@
     background-repeat: no-repeat;
     /* padding-top: 35px;
     padding-left: 35px; */
-    display: flex;
-    align-items: center;
+    /* display: flex;
+    align-items: center; */
 
 }
 
 #navbar-msc {
     margin: 20px;
+}
+
+#navbar-msc a {
+    line-height: 1; 
+    font-size: calc(6px + 1vw); 
     
 }
 
 #navbar-msc ul{
-    display: grid;
-    gap: 30px;
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style-type: none;
+    font-family: "Cedarville Cursive", cursive;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+}
+
+#navbar-msc span.highlighted {
+    width: 75px;
+    height: 80px;
+    box-shadow: 0 3px 6px rgba(0,0,0,.25);
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.25);
+    -moz-box-shadow: 0 3px 6px rgba(0,0,0,.25);
+    float: left;
+    margin: 8px;
+    border: 1px solid rgba(0,0,0,.25) !important; 
+    border-radius: 0px;
+    font-size: calc(1px + 1vw); 
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #my-cards-header-p {
@@ -79,10 +108,11 @@
 
 .my-cards-carousel {
     display: flex;
-    gap: 38px;
+    gap: 30px;
     flex-direction: row;
     justify-content: center;
     padding: 20px;
+    
 }
 
 .my-cards-container {
@@ -91,7 +121,7 @@
     height: 100px;
     width: 200px;
     background-color: white;
-    padding: 5px;
+    /* padding: 5px; */
 
 }
 
@@ -105,8 +135,9 @@
 }
 
 #my-cards-wood {
-    border: 4px solid rgb(255, 255, 255);
+    text-align: center;
     width: 90%;
+    height: 400px;
     margin: auto;
     margin-top: 30px;
 }
