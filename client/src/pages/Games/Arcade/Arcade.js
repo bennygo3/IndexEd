@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import Snake from "../Snake/Snake";
 import FallDown from "../FallDown/FallDown";
 import TTT from "../TTT/TTT";
+import WordsPerMin from "../WPM/WordsPerMin";
 import './arcade.css';
 
 const games = [
     { name: "Snake", component: <Snake />, route: "/snake" },
     { name: "Fall Down", component: <FallDown />, route: "/falldown" },
-    { name: "Tic Tac Toe", component: <TTT />, route: "/ttt" }
+    { name: "Tic Tac Toe", component: <TTT />, route: "/ttt" },
+    { name: "Words PM", component: <WordsPerMin />, route: "/wpm"}
 ];
 
 export default function Arcade() {

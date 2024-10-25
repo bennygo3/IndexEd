@@ -18,6 +18,7 @@ import Basketball from './pages/Trivia/Basketball/Basketball.js';
 import Snake from './pages/Games/Snake/Snake.js';
 import TTT from './pages/Games/TTT/TTT.js';
 import FallDown from './pages/Games/FallDown/FallDown.js';
+import WordsPerMin from './pages/Games/WPM/WordsPerMin.js';
 import SimonSays from './pages/Games/SimonSays/SimonSays.js';
 
 
@@ -75,6 +76,10 @@ function App() {
                         <Route
                             path='falldown'
                             element={<FallDown />}
+                        />
+                        <Route 
+                            path="wpm"
+                            element={<WordsPerMin />}
                         />
                         <Route
                             path='simonsays'

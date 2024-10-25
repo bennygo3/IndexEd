@@ -33,6 +33,44 @@ export default function WordsPerMin() {
     const handleKeyStroke = (e) => {
         const value = e.target.value;
         setTypedWord(value);
+
+        // checks if the user typed the word correctly
+        if (value === words[currentWordIndex]) {
+            setCompletedWords(completedWords + 1);
+            setCurrentWordIndex(currentWordIndex + 1);
+            setTypedWord('');
+
+            //end round after 20 words
+            if (currentWordIndex === 19) {
+                const timeTaken = (Date.now() - startTime) / 60000; // convert ms to minutes
+                setWpm(Math.round(completedWords / timeTaken));
+                setGameOver(true);
+            }
+        }
+    };
+
+    if (gameOver) {
+        return (
+            <div>
+                <h1>Your WPM: {wpm}</h1>
+            </div>
+        );
     }
 
-}
+    return (
+        <div>
+            <h1>W.P.M.</h1>
+            <p>Type the words below:</p>
+            <h2>{words[currentWordIndex]}</h2>
+            <input 
+                type="text"
+                value={typedWord}
+                onChange={handleKeyStroke}
+                onFocus={startGame}
+                placeHolder="Start typing..."
+                disabled={gameOver}
+            />
+            <p>WPM: {wpm}</p>
+        </div>
+    );
+};
