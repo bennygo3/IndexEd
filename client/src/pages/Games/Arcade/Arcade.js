@@ -10,44 +10,73 @@ const games = [
     { name: "Snake", component: <Snake />, route: "/snake" },
     { name: "Fall Down", component: <FallDown />, route: "/falldown" },
     { name: "Tic Tac Toe", component: <TTT />, route: "/ttt" },
-    { name: "Words PM", component: <WordsPerMin />, route: "/wpm"}
+    { name: "Words PM", component: <WordsPerMin />, route: "/wpm" }
 ];
 
 export default function Arcade() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const canvasRef = useRef(null);
 
+    // wrapping the keyBind inside a useEffect hook to prevent memory leakage, cleanup and dependency mgmt a la currentIndex
+    useEffect(() => {
+        const keyDown = (e) => {
+            switch (e.key) {
+                case 'ArrowUp':
+                    handleUpClick();
+                    break;
+                case 'ArrowDown':
+                    handleDownClick();
+                    break;
+                case 'Enter':
+                    // takes us to current highlighted game
+                    if (games[currentIndex].route) {
+                        window.location.href = games[currentIndex].route;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        };
+
+        window.addEventListener("keydown", keyDown);
+
+        // cleans up the event listener when the component unmounts
+        return () => {
+            window.removeEventListener("keydown", keyDown);
+        };
+    }, [currentIndex]);
+
     const drawGameBoy = useCallback((ctx) => {
         // need to setup ternary to adjust canvas drawing for different screen sizes
         ctx.fillStyle = "lightgray";
         ctx.beginPath(0, 0); // starts at 0,0
-        
+
         ctx.lineTo(350, 0); // top line sets the length of x axis
         ctx.arcTo(400, 0, 400, 50, 8); // (x1, y1, x2, y2, radius) this is the top right border radius
-        
+
         ctx.lineTo(400, 550); // right vertical line/edge
         ctx.arcTo(400, 600, 350, 600, 50); // bottom right arc
-        
+
         ctx.lineTo(50, 600); // bottom line, starts at (350, 600) and ends 50 in from the left on x axis
         ctx.arcTo(0, 600, 0, 550, 8); // bottom left corner
-        
+
         ctx.arcTo(0, 0, 50, 0, 8); // top left arc
-        
+
         ctx.closePath();
         ctx.fill();
 
         ctx.fillStyle = "gray";
         ctx.beginPath();
-        
+
         ctx.lineTo(0, 50);  // top line
         ctx.arcTo(380, 50, 380, 60, 10);  // Top-right corner
-        
+
         ctx.lineTo(380, 65);  // right line
         ctx.arcTo(380, 350, 50, 350, 50); // Bottom-right corner
-        
+
         ctx.lineTo(50, 350);
         ctx.arcTo(20, 350, 50, 50, 10); // Bottom-left corner 
-        
+
         ctx.lineTo(20, 60); // left line
         ctx.arcTo(20, 50, 350, 50, 10); // Top-left corner
 

@@ -14,6 +14,21 @@ function Floor({ x, y, holeX }) {
     );
 }
 
+function useInterval(callback, delay) {
+    const savedCallback = useRef();
+
+    useEffect(() => {
+        savedCallback.current = callback;
+    }, [callback]);
+
+    useEffect(() => {
+        if (delay != null) {
+            const id = setInterval(() => savedCallback.current(), delay);
+            return () => clearInterval(id);
+        }
+    }, [delay]);
+}
+
 export default function FallDown() {
     const [ballX, setBallX] = useState(20);
     const [ballY, setBallY] = useState(90);
@@ -112,7 +127,7 @@ export default function FallDown() {
     }, [handleKeyDown, handleKeyUp]);
 
     useEffect(() => {
-        if(!paused && !gameOver) {
+        if (!paused && !gameOver) {
             const startTime = Date.now() - elapsedTime;
             const timer = setInterval(() => {
                 setElapsedTime(Date.now() - startTime);
@@ -163,47 +178,33 @@ export default function FallDown() {
         <div className='fd'>
             <Scoreboard className='scoreboardTimer' currentScore={formatTime(elapsedTime)} label="TIME" />
             <div>
-            <div className='fd-game'>
-                <Ball x={ballX} y={ballY} />
-                {floors.map((floor, index) => (
-                    <Floor key={index} x={floor.x} y={floor.y} holeX={floor.holeX} />
-                ))}
-            </div>
-            <button onClick={startGame} disabled={!paused}>Start</button>
-            <button onClick={stopGame} disabled={paused}>Stop</button>
+                <div className='fd-game'>
+                    <Ball x={ballX} y={ballY} />
+                    {floors.map((floor, index) => (
+                        <Floor key={index} x={floor.x} y={floor.y} holeX={floor.holeX} />
+                    ))}
+                </div>
+                <button onClick={startGame} disabled={!paused}>Start</button>
+                <button onClick={stopGame} disabled={paused}>Stop</button>
             </div>
         </div>
     );
 }
 
-function useInterval(callback, delay) {
-    const savedCallback = useRef();
 
-    useEffect(() => {
-        savedCallback.current = callback;
-    }, [callback]);
+// below is to set the score based off of time:
+// useEffect(() => {
+//     if (!paused && !gameOver) {
+//         const timer = setInterval(() => {
+//             setElapsedTime(prev => prev + 1);
+//             setScore(prev => prev + 1);
+//         }, 1000);
+//         return () => clearInterval(timer);
+//     }
+// }, [paused, gameOver]);
 
-    useEffect(() => {
-        if (delay != null) {
-            const id = setInterval(() => savedCallback.current(), delay);
-            return () => clearInterval(id);
-        }
-    }, [delay]);
-}
-
-    // below is to set the score based off of time:
-    // useEffect(() => {
-    //     if (!paused && !gameOver) {
-    //         const timer = setInterval(() => {
-    //             setElapsedTime(prev => prev + 1);
-    //             setScore(prev => prev + 1);
-    //         }, 1000);
-    //         return () => clearInterval(timer);
-    //     }
-    // }, [paused, gameOver]);
-
-    // useEffect(() => {
-    //     if (elapsedTime > 0 && !paused && !gameOver) {
-    //         setScore(elapsedTime);
-    //     }
-    // }, [elapsedTime, paused, gameOver]);
+// useEffect(() => {
+//     if (elapsedTime > 0 && !paused && !gameOver) {
+//         setScore(elapsedTime);
+//     }
+// }, [elapsedTime, paused, gameOver]);
