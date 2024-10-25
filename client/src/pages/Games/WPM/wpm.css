@@ -1,0 +1,23 @@
+#wpm-main{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#wpm-main header{
+    margin: 20px;
+    font-family: "American Typewriter", Courier, serif;
+    font-size: 46px;
+    border-bottom: dashed 2px black;
+}
+
+#wpm-input {
+   width: 40%;
+   border: 2px solid black;
+   padding: 5px;
+}
+
+#wpm-input::placeholder {
+    padding: 10px;
+}

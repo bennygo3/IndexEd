@@ -58,19 +58,23 @@ export default function WordsPerMin() {
     }
 
     return (
-        <div>
+        <main id="wpm-main">
+            <header>
             <h1>W.P.M.</h1>
-            <p>Type the words below:</p>
+            </header>
+            <p>Type the word below</p>
             <h2>{words[currentWordIndex]}</h2>
             <input 
+                id="wpm-input"
                 type="text"
                 value={typedWord}
                 onChange={handleKeyStroke}
                 onFocus={startGame}
-                placeHolder="Start typing..."
+                placeholder="Start typing..."
                 disabled={gameOver}
             />
+            <h2>Word/Words remaining: {currentWordIndex + 1}/{words.length}</h2>
             <p>WPM: {wpm}</p>
-        </div>
+        </main>
     );
 };
