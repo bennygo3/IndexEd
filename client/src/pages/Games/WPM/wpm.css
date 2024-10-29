@@ -7,15 +7,18 @@
 
 #wpm-main header{
     margin: 20px;
-    font-family: "American Typewriter", Courier, serif;
+    font-family: Courier, serif;
     font-size: 46px;
-    border-bottom: dashed 2px black;
+    border-bottom: dotted 2px black;
+    background-color: rgb(83, 215, 255);
+    padding: 15px;
 }
 
 #wpm-input {
    width: 40%;
    border: 2px solid black;
    padding: 5px;
+   background-color: rgba(255, 255, 0, 0.474);
 }
 
 #wpm-input::placeholder {
