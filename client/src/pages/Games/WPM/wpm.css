@@ -1,26 +1,36 @@
 #wpm-main{
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 #wpm-main header{
-    margin: 20px;
     font-family: Courier, serif;
-    font-size: 46px;
-    border-bottom: dotted 2px black;
-    background-color: rgb(83, 215, 255);
-    padding: 15px;
+    font-size: 38px;
+    background-color: rgb(130, 255, 159);
+    padding: 0px 20px;
+    font-family: "Balsamiq Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    display: inline-block;
+    text-align: center;
+}
+
+#wpm-main section {
+    position: relative;
+    text-align: center;
+    top: 100px;
 }
 
 #wpm-input {
    width: 40%;
-   border: 2px solid black;
+   border-bottom: 2px solid black;
+   border-bottom: 2px solid rgba(251, 52, 52, 0.518);
    padding: 5px;
+   padding-top: 25px;
    background-color: rgba(255, 255, 0, 0.474);
+   letter-spacing: 1px;
 }
 
 #wpm-input::placeholder {
     padding: 10px;
+    font-family: Courier, monospace;
 }

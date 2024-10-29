@@ -60,8 +60,9 @@ export default function WordsPerMin() {
     return (
         <main id="wpm-main">
             <header>
-            <h1>W.P.M.</h1>
+            <h1>Words<br></br>Per<br></br>Minute</h1>
             </header>
+            <section>
             <p>Type the word below</p>
             <h2>{words[currentWordIndex]}</h2>
             <input 
@@ -75,6 +76,7 @@ export default function WordsPerMin() {
             />
             <h2>Word/Words remaining: {currentWordIndex + 1}/{words.length}</h2>
             <p>WPM: {wpm}</p>
+            </section>
         </main>
     );
 };
