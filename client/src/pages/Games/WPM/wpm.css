@@ -11,7 +11,7 @@
     font-weight: 400;
     font-style: normal;
     display: inline-block;
-    text-align: center;
+    /* text-align: center; */
 }
 
 #wpm-main section {
