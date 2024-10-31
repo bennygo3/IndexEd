@@ -66,6 +66,7 @@ export default function WordsPerMin() {
             <section className="wpm-index">
                 <p>Type the word below:</p>
                 <h2 id="wpm-word">{words[currentWordIndex]}</h2>
+                <div id="wpm-redline"></div>
                 <input
                     id="wpm-input"
                     type="text"
@@ -77,9 +78,9 @@ export default function WordsPerMin() {
                 />
                 <div className="wpm-blue-line"></div>
                 <div className="wpm-blue-line"></div>
-                <h2>Words remaining: {currentWordIndex + 1}/{words.length}</h2>
+                <h3>Words remaining: {currentWordIndex + 1}/{words.length}</h3>
                 <div className="wpm-blue-line"></div>
-                <div>WPM: {wpm}</div>
+                <div id="wpm-score">WPM: {wpm}</div>
                 <div className="wpm-blue-line"></div>
                 <div className="wpm-blue-line"></div>
                 <div className="wpm-blue-line"></div>

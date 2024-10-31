@@ -1,8 +1,8 @@
-#wpm-main{
+#wpm-main {
     height: 100vh;
 }
 
-#wpm-main header{
+#wpm-main header {
     font-family: Courier, serif;
     font-size: 38px;
     background-color: rgb(130, 255, 159);
@@ -15,8 +15,10 @@
 
 .wpm-index {
     position: relative;
-    width: 500px;
+    width: 660px;
+    height: 440px;
     margin: 0 auto;
+    padding: 20px 0;
     display: flex;
     flex-direction: column;
     top: 100px;
@@ -24,28 +26,52 @@
     background-color: rgba(255, 255, 0, 0.474);
 }
 
+.wpm-index h2 {
+    position: relative;
+    left: 5px;
+}
+
+.wpm-index h3 {
+    margin-top: 11px;
+    font-size: 20px;
+}
+
+#wpm-score {
+    font-size: 18px;
+    margin-top: 13px;
+}
+
+#wpm-redline {
+    background-color: rgba(251, 52, 52, 0.518);
+    width: 100%;
+    height: 2px;
+    /* margin: 20px 0px 10px 0px; */
+    margin-bottom: 15px;
+}
+
 #wpm-word {
     font-family: Courier, monospace;
 }
 
 #wpm-input {
-   width: 500px;
-   
-   border-bottom: 2px solid rgba(251, 52, 52, 0.518);
-   
-   padding-top: 25px;
-   background-color: rgba(255, 255, 0, 0.474);
-   letter-spacing: 1px;
+    width: 100%;
+    /* border-bottom: 2px solid rgba(251, 52, 52, 0.518); */
+    /* background-color: rgba(255, 255, 0, 0.474); */
+    /* background-color: rgba(248, 248, 247, 0.849); */
+    background-color: rgba(255, 100, 232, 0.734);
+    letter-spacing: 1px;
 }
 
 #wpm-input::placeholder {
-    /* padding: 10px; */
     font-family: Courier, monospace;
 }
 
 .wpm-blue-line {
     background-color: rgb(0 115 255 / 19%);
     height: 2px;
-    margin: 20px 0px 10px 0px;
+}
 
+
+.wpm-blue-line + .wpm-blue-line {
+    margin-top: 31px; /* Consistent spacing for blue lines */
 }
