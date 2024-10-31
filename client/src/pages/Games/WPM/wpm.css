@@ -11,26 +11,41 @@
     font-weight: 400;
     font-style: normal;
     display: inline-block;
-    /* text-align: center; */
 }
 
-#wpm-main section {
+.wpm-index {
     position: relative;
-    text-align: center;
+    width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
     top: 100px;
+    font-family: Courier, monospace;
+    background-color: rgba(255, 255, 0, 0.474);
+}
+
+#wpm-word {
+    font-family: Courier, monospace;
 }
 
 #wpm-input {
-   width: 40%;
-   border-bottom: 2px solid black;
+   width: 500px;
+   
    border-bottom: 2px solid rgba(251, 52, 52, 0.518);
-   padding: 5px;
+   
    padding-top: 25px;
    background-color: rgba(255, 255, 0, 0.474);
    letter-spacing: 1px;
 }
 
 #wpm-input::placeholder {
-    padding: 10px;
+    /* padding: 10px; */
     font-family: Courier, monospace;
+}
+
+.wpm-blue-line {
+    background-color: rgb(0 115 255 / 19%);
+    height: 2px;
+    margin: 20px 0px 10px 0px;
+
 }

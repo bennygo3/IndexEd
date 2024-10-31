@@ -60,23 +60,35 @@ export default function WordsPerMin() {
     return (
         <main id="wpm-main">
             <header>
-            <h1>Words<br></br>Per<br></br>Minute</h1>
-            {/* <h1>Words Per Minute</h1> */}
+                <h1>Words Per<br></br>Minute</h1>
+                {/* <h1>Words Per Minute</h1> */}
             </header>
-            <section>
-            <p>Type the word below</p>
-            <h2>{words[currentWordIndex]}</h2>
-            <input 
-                id="wpm-input"
-                type="text"
-                value={typedWord}
-                onChange={handleKeyStroke}
-                onFocus={startGame}
-                placeholder="Start typing..."
-                disabled={gameOver}
-            />
-            <h2>Word/Words remaining: {currentWordIndex + 1}/{words.length}</h2>
-            <p>WPM: {wpm}</p>
+            <section className="wpm-index">
+                <p>Type the word below:</p>
+                <h2 id="wpm-word">{words[currentWordIndex]}</h2>
+                <input
+                    id="wpm-input"
+                    type="text"
+                    value={typedWord}
+                    onChange={handleKeyStroke}
+                    onFocus={startGame}
+                    placeholder="Start typing..."
+                    disabled={gameOver}
+                />
+                <div className="wpm-blue-line"></div>
+                <div className="wpm-blue-line"></div>
+                <h2>Words remaining: {currentWordIndex + 1}/{words.length}</h2>
+                <div className="wpm-blue-line"></div>
+                <div>WPM: {wpm}</div>
+                <div className="wpm-blue-line"></div>
+                <div className="wpm-blue-line"></div>
+                <div className="wpm-blue-line"></div>
+                <div className="wpm-blue-line"></div>
+                <div className="wpm-blue-line"></div>
+                <div className="wpm-blue-line"></div>
+                <div className="wpm-blue-line"></div>
+                <div className="wpm-blue-line"></div>
+                
             </section>
         </main>
     );
