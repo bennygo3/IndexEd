@@ -61,6 +61,7 @@ export default function WordsPerMin() {
         <main id="wpm-main">
             <header>
                 <h1>Words Per<br></br>Minute</h1>
+                <div id="wpm-redline"></div>
                 {/* <h1>Words Per Minute</h1> */}
             </header>
             <section className="wpm-index">

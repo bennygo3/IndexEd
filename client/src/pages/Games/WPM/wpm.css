@@ -1,5 +1,11 @@
 #wpm-main {
     height: 100vh;
+    height: 98vh;
+    width:98vw;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(254 161 107); 
+
 }
 
 #wpm-main header {
@@ -59,6 +65,8 @@
     /* background-color: rgba(255, 255, 0, 0.474); */
     /* background-color: rgba(248, 248, 247, 0.849); */
     background-color: rgba(255, 100, 232, 0.734);
+    background-color: rgb(255, 255, 255);
+
     letter-spacing: 1px;
 }
 
