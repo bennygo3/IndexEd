@@ -78,16 +78,26 @@ export default function WordsPerMin() {
 
     return (
         <main id="wpm-main">
-            <header>
-                <h1 id="wpm-header">W.P.M.</h1>
+            <header id="wpm-header">
+                <h1>W.P.M.</h1>
                 <div id="wpm-header-redline"></div>
+                <div id="wpm-header-body">
+                    <p></p>
                 <div className="wpm-header-blue"></div>
+                <p>Words Per Minute Words Per Minute Words Per Minute</p>
                 <div className="wpm-header-blue"></div>
+                <p>Words Per Minute Words Per Minute Words Per Minute</p>
                 <div className="wpm-header-blue"></div>
+                <p>Words Per Minute Words Per Minute Words Per Minute</p>
                 <div className="wpm-header-blue"></div>
+                <p>Words Per Minute Words Per Minute Words Per Minute</p>
                 <div className="wpm-header-blue"></div>
+                <p>Words Per Minute Words Per Minute Words Per Minute</p>
                 <div className="wpm-header-blue"></div>
+                <p>Words Per Minute Words Per Minute Words Per Minute</p>
                 <div className="wpm-header-blue"></div>
+                {/* <p>Words Per Minute Words Per Minute Words Per Minute</p> */}
+                </div>
             </header>
             <section id="wpm-index">
                 <div id="wpm-index-header">
