@@ -49,13 +49,13 @@ export default function WordsPerMin() {
         }
     };
 
-    if (gameOver) {
-        return (
-            <div>
-                <h1>Your WPM: {wpm}</h1>
-            </div>
-        );
-    }
+    // if (gameOver) {
+    //     return (
+    //         <div>
+    //             <h1>Your WPM: {wpm}</h1>
+    //         </div>
+    //     );
+    // }
 
     return (
         <main id="wpm-main">
@@ -86,13 +86,16 @@ export default function WordsPerMin() {
                     disabled={gameOver}
                 />
                 <div className="wpm-blue-line"></div>
-                <h4>Words remaining: {currentWordIndex + 1}/{words.length}</h4>
+                <h4>Words remaining: {currentWordIndex}/{words.length}</h4>
                 <div className="wpm-blue-line"></div>
                 {/* <h3>Words remaining: {currentWordIndex + 1}/{words.length}</h3> */}
                 <div className="wpm-blue-line"></div>
                 <div id="wpm-score">WPM: {wpm}</div>
                 <div className="wpm-blue-line"></div>
                 <div className="wpm-blue-line"></div>
+                {gameOver && (
+                    <p id="play-again">Play again? Y/N</p>
+                ) }
                 <div className="wpm-blue-line"></div>
                 <div className="wpm-blue-line"></div>
                 <div className="wpm-blue-line"></div>

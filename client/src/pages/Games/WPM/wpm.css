@@ -16,7 +16,7 @@
     font-weight: 400;
     font-style: normal;
     display: inline-block;
-    width: 370px;
+    width: 350px;
     height: 200px;
     text-align: center;
     position: relative;
@@ -65,8 +65,35 @@
     justify-content: space-evenly;
 }
 
+#wpm-redline {
+    background-color: rgba(251, 52, 52, 0.518);
+    width: 100%;
+    height: 2px;
+    margin-bottom: 15px;
+}
+
 #wpm-index-header p {
     font-size: 19px;
+}
+
+#wpm-input {
+    width: 86%;
+    margin: auto;
+    position: relative;
+    bottom: 7px;
+    font-family: Courier, monospace;
+    background-color: rgb(255, 255, 255);
+    font-size: 18px;
+    letter-spacing: 1px;
+    padding: 2px;
+}
+
+#wpm-input::placeholder {
+    font-family: Courier, monospace;
+}
+
+#wpm-input input[type=text] {
+    font-size: 18px;
 }
 
 #wpm-index h2 {
@@ -84,40 +111,10 @@
     margin-top: 3px;
 }
 
-#wpm-redline {
-    background-color: rgba(251, 52, 52, 0.518);
-    width: 100%;
-    height: 2px;
-    /* margin: 20px 0px 10px 0px; */
-    margin-bottom: 15px;
-}
-
-#wpm-word {
-    font-family: Courier, monospace;
-}
-
-#wpm-input {
-    width: 90%;
-    margin: auto;
-    position: relative;
-    bottom: 7px;
-    font-family: Courier, monospace;
-    /* background-color: rgba(255, 255, 0, 0.474); */
-    /* background-color: rgba(248, 248, 247, 0.849); */
-    background-color: rgba(255, 100, 232, 0.734);
-    background-color: rgb(255, 255, 255);
-    font-size: 18px !important;
-    letter-spacing: 1px;
-    padding: 3px;
-}
-
-#wpm-input::placeholder {
-    font-family: Courier, monospace;
-    
-}
-
-#wpm-input input[type=text] {
+#play-again {
+    margin-top: 13px; 
     font-size: 18px;
+    font-weight: bold;
 }
 
 .wpm-blue-line {
@@ -125,9 +122,6 @@
     height: 2px;
 }
 
-/* .wpm-blue-line + h4 {
-    margin-top: 31px; 
-} */
 /* sets consistent space between the blue lines on the index card */
 .wpm-blue-line + .wpm-blue-line {
     margin-top: 31px; 
