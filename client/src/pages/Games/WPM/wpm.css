@@ -10,13 +10,16 @@
 
 #wpm-main header {
     font-family: Courier, serif;
-    font-size: 38px;
+    font-size: 34px;
     background-color: rgb(130, 255, 159);
-    padding: 0px 20px;
+    /* padding: 20px; */
     font-family: "Balsamiq Sans", sans-serif;
     font-weight: 400;
     font-style: normal;
     display: inline-block;
+    width: 440px;
+    height: 200px;
+    text-align: center;
 }
 
 .wpm-index {
@@ -30,6 +33,18 @@
     top: 100px;
     font-family: Courier, monospace;
     background-color: rgba(255, 255, 0, 0.474);
+    text-indent: 20px;
+}
+
+#wpm-index-header {
+    height: 95px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#wpm-index-header p {
+    font-size: 19px;
 }
 
 .wpm-index h2 {
@@ -37,14 +52,14 @@
     left: 5px;
 }
 
-.wpm-index h3 {
-    margin-top: 11px;
-    font-size: 20px;
+.wpm-index h4 {
+    margin-top: 14px;
+    font-size: 18px;
 }
 
 #wpm-score {
-    font-size: 18px;
-    margin-top: 13px;
+    font-size: 22px;
+    margin-top: 3px;
 }
 
 #wpm-redline {
@@ -52,7 +67,7 @@
     width: 100%;
     height: 2px;
     /* margin: 20px 0px 10px 0px; */
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
 #wpm-word {
@@ -60,18 +75,27 @@
 }
 
 #wpm-input {
-    width: 100%;
-    /* border-bottom: 2px solid rgba(251, 52, 52, 0.518); */
+    width: 90%;
+    margin: auto;
+    position: relative;
+    bottom:10px;
+    font-family: Courier, monospace;
     /* background-color: rgba(255, 255, 0, 0.474); */
     /* background-color: rgba(248, 248, 247, 0.849); */
     background-color: rgba(255, 100, 232, 0.734);
     background-color: rgb(255, 255, 255);
-
+    font-size: 18px !important;
     letter-spacing: 1px;
+    padding: 5px;
 }
 
 #wpm-input::placeholder {
     font-family: Courier, monospace;
+    
+}
+
+#wpm-input input[type=text] {
+    font-size: 18px;
 }
 
 .wpm-blue-line {
@@ -79,7 +103,10 @@
     height: 2px;
 }
 
-
+/* .wpm-blue-line + h4 {
+    margin-top: 31px; 
+} */
+/* sets consistent space between the blue lines on the index card */
 .wpm-blue-line + .wpm-blue-line {
-    margin-top: 31px; /* Consistent spacing for blue lines */
+    margin-top: 31px; 
 }

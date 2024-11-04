@@ -60,13 +60,15 @@ export default function WordsPerMin() {
     return (
         <main id="wpm-main">
             <header>
-                <h1>Words Per<br></br>Minute</h1>
-                <div id="wpm-redline"></div>
+                <h1>Words Per <span><div id="wpm-redline"></div></span>Minute</h1>
+                <div className="wpm-blue-line"></div>
                 {/* <h1>Words Per Minute</h1> */}
             </header>
             <section className="wpm-index">
+                <div id="wpm-index-header">
                 <p>Type the word below:</p>
                 <h2 id="wpm-word">{words[currentWordIndex]}</h2>
+                </div>
                 <div id="wpm-redline"></div>
                 <input
                     id="wpm-input"
@@ -78,8 +80,9 @@ export default function WordsPerMin() {
                     disabled={gameOver}
                 />
                 <div className="wpm-blue-line"></div>
+                <h4>Words remaining: {currentWordIndex + 1}/{words.length}</h4>
                 <div className="wpm-blue-line"></div>
-                <h3>Words remaining: {currentWordIndex + 1}/{words.length}</h3>
+                {/* <h3>Words remaining: {currentWordIndex + 1}/{words.length}</h3> */}
                 <div className="wpm-blue-line"></div>
                 <div id="wpm-score">WPM: {wpm}</div>
                 <div className="wpm-blue-line"></div>
@@ -89,7 +92,7 @@ export default function WordsPerMin() {
                 <div className="wpm-blue-line"></div>
                 <div className="wpm-blue-line"></div>
                 <div className="wpm-blue-line"></div>
-                <div className="wpm-blue-line"></div>
+                {/* <div className="wpm-blue-line"></div> */}
                 
             </section>
         </main>
