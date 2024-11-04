@@ -60,11 +60,17 @@ export default function WordsPerMin() {
     return (
         <main id="wpm-main">
             <header>
-                <h1>Words Per <span><div id="wpm-redline"></div></span>Minute</h1>
-                <div className="wpm-blue-line"></div>
-                {/* <h1>Words Per Minute</h1> */}
+                <h1 id="wpm-header">Words Per Minute</h1>
+                <div id="wpm-header-redline"></div>
+                <div className="wpm-header-blue"></div>
+                <div className="wpm-header-blue"></div>
+                <div className="wpm-header-blue"></div>
+                <div className="wpm-header-blue"></div>
+                <div className="wpm-header-blue"></div>
+                <div className="wpm-header-blue"></div>
+                <div className="wpm-header-blue"></div>
             </header>
-            <section className="wpm-index">
+            <section id="wpm-index">
                 <div id="wpm-index-header">
                 <p>Type the word below:</p>
                 <h2 id="wpm-word">{words[currentWordIndex]}</h2>
