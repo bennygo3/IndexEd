@@ -49,18 +49,37 @@ export default function WordsPerMin() {
         }
     };
 
-    // if (gameOver) {
-    //     return (
-    //         <div>
-    //             <h1>Your WPM: {wpm}</h1>
-    //         </div>
-    //     );
-    // }
+    const restartGame = () => {
+        setWords([]);
+        setCurrentWordIndex(0);
+        setTypedWord('');
+        setStartTime(null);
+        setCompletedWords(0);
+        setWpm(0);
+        setGameOver(false);
+        fetchWords();
+    };
+
+    // hook used to allow y and n keystroke to reset game
+    useEffect(() => {
+        const handleKeyPress = (e) => {
+            if (gameOver) {
+                if (e.key.toLowerCase() === 'y') {
+                    restartGame();
+                } else if (e.key.toLowerCase() === 'n') {
+                    // need to figure out how to handle n. Leave screen as is?
+                }
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyPress);
+        return () => window.removeEventListener('keydown', handleKeyPress);
+    }, [gameOver, restartGame]);
 
     return (
         <main id="wpm-main">
             <header>
-                <h1 id="wpm-header">Words Per Minute</h1>
+                <h1 id="wpm-header">W.P.M.</h1>
                 <div id="wpm-header-redline"></div>
                 <div className="wpm-header-blue"></div>
                 <div className="wpm-header-blue"></div>
@@ -94,7 +113,11 @@ export default function WordsPerMin() {
                 <div className="wpm-blue-line"></div>
                 <div className="wpm-blue-line"></div>
                 {gameOver && (
-                    <p id="play-again">Play again? Y/N</p>
+                    <p id="play-again">
+                        Play again? 
+                        <span onClick={restartGame} style={{ cursor: 'pointer', color: 'blue' }}> Y</span> /
+                        <span style={{ cursor: 'pointer', color: 'blue'}}> N</span>
+                    </p>
                 ) }
                 <div className="wpm-blue-line"></div>
                 <div className="wpm-blue-line"></div>
