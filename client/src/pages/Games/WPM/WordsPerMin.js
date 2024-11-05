@@ -83,28 +83,29 @@ export default function WordsPerMin() {
                 <div id="wpm-header-redline"></div>
                 <div id="wpm-header-body">
                     <p></p>
-                <div className="wpm-header-blue"></div>
-                <p>Words Per Minute Words Per Minute Words Per Minute</p>
-                <div className="wpm-header-blue"></div>
-                <p>Words Per Minute Words Per Minute Words Per Minute</p>
-                <div className="wpm-header-blue"></div>
-                <p>Words Per Minute Words Per Minute Words Per Minute</p>
-                <div className="wpm-header-blue"></div>
-                <p>Words Per Minute Words Per Minute Words Per Minute</p>
-                <div className="wpm-header-blue"></div>
-                <p>Words Per Minute Words Per Minute Words Per Minute</p>
-                <div className="wpm-header-blue"></div>
-                <p>Words Per Minute Words Per Minute Words Per Minute</p>
-                <div className="wpm-header-blue"></div>
-                {/* <p>Words Per Minute Words Per Minute Words Per Minute</p> */}
+                    <div className="wpm-header-blue"></div>
+                    <p>Words Per Minute Words Per Minute Words Per Minute</p>
+                    <div className="wpm-header-blue"></div>
+                    <p>Words Per Minute Words Per Minute Words Per Minute</p>
+                    <div className="wpm-header-blue"></div>
+                    <p>Words Per Minute Words Per Minute Words Per Minute</p>
+                    <div className="wpm-header-blue"></div>
+                    <p>Words Per Minute Words Per Minute Words Per Minute</p>
+                    <div className="wpm-header-blue"></div>
+                    <p>Words Per Minute Words Per Minute Words Per Minute</p>
+                    <div className="wpm-header-blue"></div>
+                    <p>Words Per Minute Words Per Minute Words Per Minute</p>
+                    <div className="wpm-header-blue"></div>
+                    {/* <p>Words Per Minute Words Per Minute Words Per Minute</p> */}
                 </div>
             </header>
             <section id="wpm-index">
                 <div id="wpm-index-header">
-                <p>Type the word below:</p>
-                <h2 id="wpm-word">{words[currentWordIndex]}</h2>
+                    <p>Type the word below:</p>
+                    <h2 id="wpm-word">{words[currentWordIndex]}</h2>
                 </div>
                 <div id="wpm-redline"></div>
+                <div id="wpm-index-body">
                 <input
                     id="wpm-input"
                     type="text"
@@ -115,27 +116,29 @@ export default function WordsPerMin() {
                     disabled={gameOver}
                 />
                 <div className="wpm-blue-line"></div>
-                <h4>Words remaining: {currentWordIndex}/{words.length}</h4>
+                {/* <h4>Words remaining: {currentWordIndex}/{words.length}</h4> */}
                 <div className="wpm-blue-line"></div>
-                {/* <h3>Words remaining: {currentWordIndex + 1}/{words.length}</h3> */}
+                <h4>Words remaining: {currentWordIndex + 1}/{words.length}</h4>
+                <div className="wpm-blue-line"></div>
+                {/* <div id="wpm-score">WPM: {wpm}</div> */}
                 <div className="wpm-blue-line"></div>
                 <div id="wpm-score">WPM: {wpm}</div>
                 <div className="wpm-blue-line"></div>
-                <div className="wpm-blue-line"></div>
                 {gameOver && (
                     <p id="play-again">
-                        Play again? 
+                        Play again?
                         <span onClick={restartGame} style={{ cursor: 'pointer', color: 'blue' }}> Y</span> /
-                        <span style={{ cursor: 'pointer', color: 'blue'}}> N</span>
+                        <span style={{ cursor: 'pointer', color: 'blue' }}> N</span>
                     </p>
-                ) }
+                )}
                 <div className="wpm-blue-line"></div>
                 <div className="wpm-blue-line"></div>
                 <div className="wpm-blue-line"></div>
                 <div className="wpm-blue-line"></div>
                 <div className="wpm-blue-line"></div>
                 {/* <div className="wpm-blue-line"></div> */}
-                
+                </div>
+
             </section>
         </main>
     );
