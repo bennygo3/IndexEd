@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Navbar from '../../../components/Navbar/Navbar';
 import './wpm.css';
 
 export default function WordsPerMin() {
@@ -96,7 +97,7 @@ export default function WordsPerMin() {
                     <div className="wpm-header-blue"></div>
                     <p>Words Per Minute Words Per Minute Words Per Minute</p>
                     <div className="wpm-header-blue"></div>
-                    {/* <p>Words Per Minute Words Per Minute Words Per Minute</p> */}
+                    <p>Words Per Minute Words Per Minute Words Per Minute</p>
                 </div>
             </header>
             <section id="wpm-index">
@@ -115,14 +116,14 @@ export default function WordsPerMin() {
                     placeholder="Start typing..."
                     disabled={gameOver}
                 />
+                <div className="wpm-blue-line"></div>                
                 <div className="wpm-blue-line"></div>
-                {/* <h4>Words remaining: {currentWordIndex}/{words.length}</h4> */}
-                <div className="wpm-blue-line"></div>
-                <h4>Words remaining: {currentWordIndex + 1}/{words.length}</h4>
+                <h4>Word count: {currentWordIndex + 1}/{words.length}</h4>
                 <div className="wpm-blue-line"></div>
                 {/* <div id="wpm-score">WPM: {wpm}</div> */}
                 <div className="wpm-blue-line"></div>
                 <div id="wpm-score">WPM: {wpm}</div>
+                <div className="wpm-blue-line"></div>
                 <div className="wpm-blue-line"></div>
                 {gameOver && (
                     <p id="play-again">
@@ -135,11 +136,13 @@ export default function WordsPerMin() {
                 <div className="wpm-blue-line"></div>
                 <div className="wpm-blue-line"></div>
                 <div className="wpm-blue-line"></div>
-                <div className="wpm-blue-line"></div>
                 {/* <div className="wpm-blue-line"></div> */}
                 </div>
 
             </section>
+            <footer>
+                <Navbar />
+            </footer>
         </main>
     );
 };
