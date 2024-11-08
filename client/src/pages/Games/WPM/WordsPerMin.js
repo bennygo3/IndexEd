@@ -107,42 +107,43 @@ export default function WordsPerMin() {
                 </div>
                 <div id="wpm-redline"></div>
                 <div id="wpm-index-body">
-                <input
-                    id="wpm-input"
-                    type="text"
-                    value={typedWord}
-                    onChange={handleKeyStroke}
-                    onFocus={startGame}
-                    placeholder="Start typing..."
-                    disabled={gameOver}
-                />
-                <div className="wpm-blue-line"></div>                
-                <div className="wpm-blue-line"></div>
-                <h4>Word count: {currentWordIndex + 1}/{words.length}</h4>
-                <div className="wpm-blue-line"></div>
-                {/* <div id="wpm-score">WPM: {wpm}</div> */}
-                <div className="wpm-blue-line"></div>
-                <div id="wpm-score">WPM: {wpm}</div>
-                <div className="wpm-blue-line"></div>
-                <div className="wpm-blue-line"></div>
-                {gameOver && (
-                    <p id="play-again">
-                        Play again?
-                        <span onClick={restartGame} style={{ cursor: 'pointer', color: 'blue' }}> Y</span> /
-                        <span style={{ cursor: 'pointer', color: 'blue' }}> N</span>
-                    </p>
-                )}
-                <div className="wpm-blue-line"></div>
-                <div className="wpm-blue-line"></div>
-                <div className="wpm-blue-line"></div>
-                <div className="wpm-blue-line"></div>
-                {/* <div className="wpm-blue-line"></div> */}
+                    <input
+                        id="wpm-input"
+                        type="text"
+                        value={typedWord}
+                        onChange={handleKeyStroke}
+                        onFocus={startGame}
+                        placeholder="Start typing..."
+                        disabled={gameOver}
+                    />
+                    <div className="wpm-blue-line"></div>
+                    <div className="wpm-blue-line"></div>
+                    <h4>Word count: {currentWordIndex + 1}/{words.length}</h4>
+                    <div className="wpm-blue-line"></div>
+                    {/* <div id="wpm-score">WPM: {wpm}</div> */}
+                    <div className="wpm-blue-line"></div>
+                    <div id="wpm-score">WPM: {wpm}</div>
+                    <div className="wpm-blue-line"></div>
+                    <div className="wpm-blue-line"></div>
+                    {gameOver && (
+                        <p id="play-again">
+                            Play again?
+                            <span onClick={restartGame} style={{ cursor: 'pointer', color: 'blue' }}> Y</span> /
+                            <span style={{ cursor: 'pointer', color: 'blue' }}> N</span>
+                        </p>
+                    )}
+                    <div className="wpm-blue-line"></div>
+                    <div className="wpm-blue-line"></div>
+                    <div className="wpm-blue-line"></div>
+                    <div className="wpm-blue-line"></div>
+                    {/* <div className="wpm-blue-line"></div> */}
                 </div>
-
+                
             </section>
-            <footer>
+            <div id="wpm-navbar">
                 <Navbar />
-            </footer>
+            </div>
+
         </main>
     );
 };
