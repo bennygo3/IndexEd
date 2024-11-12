@@ -84,6 +84,12 @@
     top: 19px;
 }
 
+#timer-display {
+    position: absolute;
+    top: 25px;
+    right: 15px;
+}
+
 /* h2 here is the word to type */
 #wpm-index h2 {
     font-size: 26px;

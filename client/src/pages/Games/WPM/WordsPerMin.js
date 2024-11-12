@@ -10,6 +10,7 @@ export default function WordsPerMin() {
     const [completedWords, setCompletedWords] = useState(0);
     const [wpm, setWpm] = useState(0);
     const [gameOver, setGameOver] = useState(false);
+    const [timer, setTimer] = useState(0);
 
     const fetchWords = async () => {
         try {
@@ -50,6 +51,30 @@ export default function WordsPerMin() {
         }
     };
 
+    useEffect(() => {
+        let timerInterval;
+
+        if (startTime && !gameOver) {
+            timerInterval = setInterval(() => {
+                setTimer(Date.now() - startTime);
+            
+            }, 10); // Updates every 10ms = more precise
+        }
+
+        if (gameOver) {
+            clearInterval(timerInterval);
+        }
+
+        return () => clearInterval(timerInterval);
+    }, [startTime, gameOver]);
+
+    const formatTimer = (time) => {
+        const minutes = String(Math.floor(time / 60000)).padStart(2, '0');
+        const seconds = String(Math.floor((time % 60000) / 1000)).padStart(2, '0');    
+        const milliseconds = String(Math.floor((time % 1000) / 10)).padStart(2, '0');    
+        return `${minutes}:${seconds}:${milliseconds}`;
+    };
+
     const restartGame = () => {
         setWords([]);
         setCurrentWordIndex(0);
@@ -58,6 +83,7 @@ export default function WordsPerMin() {
         setCompletedWords(0);
         setWpm(0);
         setGameOver(false);
+        setTimer(0);
         fetchWords();
     };
 
@@ -76,6 +102,7 @@ export default function WordsPerMin() {
         window.addEventListener('keydown', handleKeyPress);
         return () => window.removeEventListener('keydown', handleKeyPress);
     }, [gameOver, restartGame]);
+
 
     return (
         <main id="wpm-main">
@@ -104,6 +131,7 @@ export default function WordsPerMin() {
                 <div id="wpm-index-header">
                     <p>Type the word below:</p>
                     <h2 id="wpm-word">{words[currentWordIndex]}</h2>
+                    <div id="timer-display">{formatTimer(timer)}</div>
                 </div>
                 <div id="wpm-redline"></div>
                 <div id="wpm-index-body">
