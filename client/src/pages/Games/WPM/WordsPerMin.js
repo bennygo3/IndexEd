@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import Navbar from '../../../components/Navbar/Navbar';
 import './wpm.css';
 
@@ -75,7 +75,8 @@ export default function WordsPerMin() {
         return `${minutes}:${seconds}:${milliseconds}`;
     };
 
-    const restartGame = () => {
+    // wrapped in a useCallback to memoize. restartGame now only changes if the dependencies change *fetchWords eg. This prevents unnecessary re-renders
+    const restartGame = useCallback(() => {
         setWords([]);
         setCurrentWordIndex(0);
         setTypedWord('');
@@ -85,7 +86,7 @@ export default function WordsPerMin() {
         setGameOver(false);
         setTimer(0);
         fetchWords();
-    };
+    },[fetchWords]);
 
     // hook used to allow y and n keystroke to reset game
     useEffect(() => {
@@ -141,12 +142,12 @@ export default function WordsPerMin() {
                         value={typedWord}
                         onChange={handleKeyStroke}
                         onFocus={startGame}
-                        placeholder="Start typing..."
+                        placeholder="Start by typing here..."
                         disabled={gameOver}
                     />
                     <div className="wpm-blue-line"></div>
                     <div className="wpm-blue-line"></div>
-                    <h4>Word count: {currentWordIndex + 1}/{words.length}</h4>
+                    <h4>Word count: {currentWordIndex}/{words.length}</h4>
                     <div className="wpm-blue-line"></div>
                     {/* <div id="wpm-score">WPM: {wpm}</div> */}
                     <div className="wpm-blue-line"></div>

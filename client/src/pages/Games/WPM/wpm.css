@@ -86,8 +86,9 @@
 
 #timer-display {
     position: absolute;
-    top: 25px;
+    top: 20px;
     right: 15px;
+    font-size: 20px;
 }
 
 /* h2 here is the word to type */
@@ -156,6 +157,7 @@
 }
 /* end of orange index card */
 
+/* white index card */
 #wpm-navbar {
     background-color: white;
     width: 350px;
@@ -164,28 +166,25 @@
     top: 10px;
     right: 45px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
 }
 
 #wpm-navbar nav {
-    font-size: 15px;
     top: 55px;
     left: -20px;
-    
-
+    font-size: 15px;
 }
 
 #wpm-navbar ul{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    
 }
 
 #wpm-navbar nav li {
    margin-bottom: 45px;
    margin-right: 35px;
    margin-left: 5px;
-   
 }
 
 
