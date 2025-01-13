@@ -5,13 +5,7 @@ export const typeDefs = `#graphql
         username: String!
         token: String!
         createdAt: String!
-        snakeScore: [HighScoreSnake]
-    }
-    input RegsiterInput {
-        username: String!
-        password: String!
-        confirmPassword: String!
-        email: String!
+        snakeScores: [HighScoreSnake]
     }
     
     type HighScoreSnake {
@@ -21,11 +15,19 @@ export const typeDefs = `#graphql
     }
 
     type Query {
-        getHighScoreSnake(userId: ID!):
+        getHighScoreSnake(userId: ID!): HighScoreSnake
     }
+    
     type Mutation {
         register(registerInput: RegisterInput): User!
         login(username: String!, password: String!): User!
         updateHighScoreSnake(username: ID!, newHighScoreSnake: Int!): HighScoreSnake!
+    }
+    
+    input RegsiterInput {
+        username: String!
+        password: String!
+        confirmPassword: String!
+        email: String!
     }
 `
