@@ -4,13 +4,36 @@ export const typeDefs = `#graphql
         email: String!
         username: String!
         createdAt: String!
+        studyCardGroups: [StudyCards]
         snakeScores: [HighScoreSnake]
+    }
+
+    type StudyCard {
+        id: ID!
+        front: String!
+        back: String!
+    }
+
+    type StudyCards {
+        id: ID!
+        title: String!
+        category: String!
+        description: String
+        date_created: String
+        author: ID!
+        studycards: [Studycard]
+        tags: [string] #allows user to search for keywords
     }
     
     type HighScoreSnake {
         id: ID! 
         username: String!
         highScore: Int! 
+    }
+    
+    type Auth {
+        token: String!
+        user: User!
     }
 
     type Query {
