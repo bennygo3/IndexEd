@@ -21,6 +21,6 @@ const studyCardSchema = new Schema(
     }
 );
 
-const Studycard = model('Studycard', studyCardSchema);
+const StudyCard = model('StudyCard', studyCardSchema);
 
-export default Studycard;
+export default StudyCard;
