@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-const studycardSchema = new Schema(
+const studyCardSchema = new Schema(
     {
         front: {
             type: String,
@@ -10,13 +10,17 @@ const studycardSchema = new Schema(
             type: String,
             required: true,
         },
-        stack: {
+        defaultGroup: {
             type: Schema.Types.ObjectId,
-            ref: "Stack"
-        }
+            ref: "StudyCards",
+            required: true,
+        },
+    },
+    {
+        timestamps: true,
     }
 );
 
-const Studycard = model('Studycard', studycardSchema);
+const Studycard = model('Studycard', studyCardSchema);
 
 export default Studycard;
