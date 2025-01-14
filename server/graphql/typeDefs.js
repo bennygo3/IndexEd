@@ -8,10 +8,17 @@ export const typeDefs = `#graphql
         snakeScores: [HighScoreSnake]
     }
 
+    type Category {
+        id: ID!
+        name: String!
+        description: String
+    }
+
     type StudyCard {
         id: ID!
         front: String!
         back: String!
+        defaultGroup: StudyCards
     }
 
     type StudyCards {
@@ -22,6 +29,8 @@ export const typeDefs = `#graphql
         date_created: String
         author: ID!
         studycards: [Studycard]
+        createdAt: String
+        updatedAt: String
         tags: [string] #allows user to search for keywords
     }
     

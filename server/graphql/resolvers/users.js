@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { UserInputError } from '@apollo/server';
+import { UserInputError, AuthenticationError } from '@apollo/server';
 import { validateRegisterInput, validateLoginInput } from '../../utils/validators';
 import { SECRET_KEY } from '../../../config';
 import Users from '../../models/Users';
