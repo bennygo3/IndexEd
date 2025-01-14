@@ -3,15 +3,14 @@ export const typeDefs = `#graphql
         id: ID!
         email: String!
         username: String!
-        token: String!
         createdAt: String!
         snakeScores: [HighScoreSnake]
     }
     
     type HighScoreSnake {
-        id: ID!
+        id: ID! 
         username: String!
-        highScoreSnake: Int!
+        highScore: Int! 
     }
 
     type Query {
@@ -24,7 +23,7 @@ export const typeDefs = `#graphql
         updateHighScoreSnake(username: ID!, newHighScoreSnake: Int!): HighScoreSnake!
     }
     
-    input RegsiterInput {
+    input RegisiterInput {
         username: String!
         password: String!
         confirmPassword: String!
