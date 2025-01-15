@@ -17,6 +17,21 @@ function generateToken(user) {
     );
 }
 
+const Query = {
+    async getCurrentUser(_,__, context) {
+        if (!context.user) {
+            throw new AuthenticationError('You are not authenticated')
+        }
+
+        const user = await User.findById(context.user.id);
+        if(!user) {
+            throw new UserInputError('User not found!')
+        }
+        
+        return user;
+    },
+};
+
 export const Mutation = {
     async login(_, { username, password }) {
         const { errors, valid } = validateLoginInput(username, password);
@@ -85,4 +100,6 @@ export const Mutation = {
         };
     }
 };
+
+export default { Query, Mutation };
 
