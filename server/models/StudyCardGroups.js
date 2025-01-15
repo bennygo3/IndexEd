@@ -1,9 +1,7 @@
 import { Schema, model } from 'mongoose';
-import userSchema from './User.js';
-import studycardSchema from './StudyCard.js';
 import dateFormat from '../utils/dateFormat.js';
 
-const stackSchema = new Schema(
+const studyCardsSchema = new Schema(
     {
         title: {
             type: String,
@@ -11,18 +9,11 @@ const stackSchema = new Schema(
         },
         category: {
             type: String,
-            required: true,
         },
         description: {
             type: String,
         },
-        date_created: {
-            type: Date,
-            default: Date.now(),
-            get: (timestamp) => dateFormat(timestamp),
-        },
-        author:
-        {
+        author: {
             type: Schema.Types.ObjectId,
             ref: 'User',
             required: true,
@@ -30,13 +21,21 @@ const stackSchema = new Schema(
         studycards: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Studycard'
-            }
-
+                ref: 'StudyCard',
+            },
         ],
+    },
+    {
+        timestamps: true, // Adds createdAt and updatedAt automatically
+        toJSON: {
+            getters: true, // Ensures getters like dateFormat are applied when converting to JSON
+        },
+        toObject: {
+            getters: true,
+        },
     }
 );
 
-const Stack = model('Stack', stackSchema);
+const StudyCardsGroup = model('StudyCards', studyCardsSchema);
 
-export default Stack;
+export default StudyCardsGroup;
