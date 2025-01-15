@@ -1,5 +1,5 @@
-import StudyCard from "../../models/StudyCard";
-import StudyCardGroups from "../../models/StudyCardGroups";
+import StudyCard from "../../models/StudyCard.js";
+import StudyCardGroups from "../../models/StudyCardGroups.js";
 import { AuthenticationError, UserInputError } from '@apollo/server';
 
 export const Query = {

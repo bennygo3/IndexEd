@@ -24,7 +24,7 @@ const validateRegisterInput = (
 
     return {
         errors, 
-        valid: Object.keys(errors).length < 1;
+        valid: Object.keys(errors).length < 1,
     };
 };
 
@@ -38,7 +38,7 @@ const validateLoginInput = (username, password) => {
     }
     return {
         errors, 
-        valid: Object.keys(errors).length < 1;
+        valid: Object.keys(errors).length < 1,
     };
 };
 

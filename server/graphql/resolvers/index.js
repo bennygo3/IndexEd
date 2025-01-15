@@ -1,5 +1,5 @@
-import usersResolvers from './users';
-import studyCardsResolvers from './studycards';
+import usersResolvers from './users.js';
+import studyCardsResolvers from './studycards.js';
 
 export default { 
     Query: {
@@ -11,3 +11,6 @@ export default {
         ...studyCardsResolvers.Mutation,
     },
 }; 
+
+console.log('Users Resolvers:', usersResolvers);
+console.log('StudyCards Resolvers:', studyCardsResolvers);
