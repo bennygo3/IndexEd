@@ -11,6 +11,3 @@ export default {
         ...studyCardsResolvers.Mutation,
     },
 }; 
-
-console.log('Users Resolvers:', usersResolvers);
-console.log('StudyCards Resolvers:', studyCardsResolvers);

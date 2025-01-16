@@ -54,8 +54,3 @@ db.once('open', () => {
 
 await new Promise(resolve => httpServer.listen({ port: PORT }, resolve));
 console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);
-
-
-
-console.log('TypeDefs:', typeDefs);
-console.log('Resolvers:', resolvers);
