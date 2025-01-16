@@ -7,7 +7,7 @@ import cors from 'cors';
 import http from 'http';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import typeDefs from './graphql/typeDefs.js';
+import { typeDefs } from './graphql/typeDefs.js';
 import resolvers from './graphql/resolvers/index.js';
 import { authMiddleware } from './utils/auth.js';
 import db from './config/connection.js';
