@@ -46,15 +46,23 @@ export const typeDefs = `#graphql
 
     type Query {
         getHighScoreSnake(userId: ID!): HighScoreSnake
+        getCurrentUser: User
+        getStudyCardGroups: [StudyCards]
+        getStudyCardGroup(groupId: ID!): StudyCards
     }
     
     type Mutation {
         register(registerInput: RegisterInput): User!
         login(username: String!, password: String!): User!
         updateHighScoreSnake(username: ID!, newHighScoreSnake: Int!): HighScoreSnake!
+        createStudyCardGroup(title: String!, category: String!, description: String): StudyCards!
+        deleteStudyCardGroup(groupId: ID!): Boolean!
+        updateStudyCardGroup(groupId: ID!, title: String, category: String, description: String): StudyCards!
+        createStudyCard(front: String!, back: String!, groupId: ID!): StudyCard!
+        deleteStudyCard(cardId: ID!): Boolean!
     }
     
-    input RegisiterInput {
+    input RegisterInput {
         username: String!
         password: String!
         confirmPassword: String!
