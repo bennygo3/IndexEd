@@ -9,13 +9,11 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import typeDefs from './graphql/typeDefs.js';
 import resolvers from './graphql/resolvers/index.js';
-// import { typeDefs, resolvers } from './schemas/index.js';
 import { authMiddleware } from './utils/auth.js';
 import db from './config/connection.js';
 
 import nbaRouter from './routes/nbaRoutes.js';
 
-// const PORT = process.env.PORT || 3001;
 const PORT = config.PORT || 3001;
 const app = express();
 const httpServer = http.createServer(app);

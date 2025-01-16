@@ -1,10 +1,11 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { UserInputError } from '@apollo/server';
-
+import { GraphQLError } from 'graphql';
 import { validateRegisterInput, validateLoginInput } from '../../utils/validators.js';
-import { SECRET_KEY } from '../../../config.js';
 import Users from '../../models/Users.js';
+import config from '../../../config.js';
+
+const { JWT_SECRET } = config;
 
 function generateToken(user) {
     return jwt.sign(
@@ -13,22 +14,26 @@ function generateToken(user) {
             email: user.email,
             username: user.username
         },
-        SECRET_KEY,
+        JWT_SECRET,
         { expiresIn: '3h' }
     );
 }
 
 const Query = {
-    async getCurrentUser(_,__, context) {
+    async getCurrentUser(_, __, context) {
         if (!context.user) {
-            throw new AuthenticationError('You are not authenticated')
+            throw new GraphQLError('You are not authenticated', {
+                extensions: { code: 'UNAUTHENTICATED' },
+            });
         }
 
         const user = await User.findById(context.user.id);
-        if(!user) {
-            throw new UserInputError('User not found!')
+        if (!user) {
+            throw new GraphQLError('User not found!', {
+                extensions: { code: 'BAD_USER_INPUT' },
+            });
         }
-        
+
         return user;
     },
 };
@@ -38,19 +43,24 @@ export const Mutation = {
         const { errors, valid } = validateLoginInput(username, password);
 
         if (!valid) {
-            throw new UserInputError('Errors', { errors });
+            throw new GraphQLError('Invalid input', {
+                extensions: { code: 'BAD_USER_INPUT', errors },
+            });
         }
+
         const user = await User.findOne({ username });
 
         if (!user) {
-            errors.general = 'User not found';
-            throw new UserInputError('User not found', { errors });
+            throw new GraphQLError('User not found', {
+                extensions: { code: 'BAD_USER_INPUT' },
+            });
         }
 
         const match = await bcrypt.compare(password, user.password);
         if (!match) {
-            errors.general = 'Wrong credentials';
-            throw new UserInputError('Wrong credentials', { errors });
+            throw new GraphQLError('Wrong credentials', {
+                extensions: { code: 'BAD_USER_INPUT' },
+            });
         }
 
         const token = generateToken(user);
@@ -60,7 +70,7 @@ export const Mutation = {
             id: user._id,
             token
         };
-        
+
     },
     async register(
         _,
@@ -70,18 +80,19 @@ export const Mutation = {
     ) {
         const { valid, errors } = validateRegisterInput(username, email, password, confirmPassword);
         if (!valid) {
-            throw new UserInputError('Errors', { errors });
+            throw new GraphQLError('Invalid input', { 
+                extensions: { code: 'BAD_USER_INPUT', errors },
+            });
         }
         // if user/username already exists throw error
-        const user = await User.findOne({ username });
-        if (user) {
-            throw new UserInputError('Username is taken', {
-                errors: {
-                    username: 'This username is taken'
-                }
-            })
+        const existingUser = await User.findOne({ username });
+        if (existingUser) {
+            throw new GraphQLError('Username is taken', {
+                extensions: { code: 'BAD_USER_INPUT' },
+            });
         }
-        password = await bcrypt.hash(password, 12);
+        
+        const hashedPassword = await bcrypt.hash(password, 12);
 
         const newUser = new User({
             username,
