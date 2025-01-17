@@ -22,6 +22,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const server = new ApolloServer({
     typeDefs,
     resolvers,
+    context: ({ req }) => authMiddleware({ req }),
 });
 
 await server.start();
@@ -30,12 +31,13 @@ app.use(
     '/graphql',
     cors(),
     express.json(),
-    expressMiddleware(server, {
-        context: ({ req }) => {
-            const user = authMiddleware({ req }).user;
-            return { user };
-        },
-    }),
+    expressMiddleware(server),
+    // expressMiddleware(server, {
+    //     context: ({ req }) => {
+    //         const user = authMiddleware({ req }).user;
+    //         return { user };
+    //     },
+    // }),
 );
 
 app.use('/api', nbaRouter);

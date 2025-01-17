@@ -4,8 +4,7 @@ import { GraphQLError } from 'graphql';
 import { validateRegisterInput, validateLoginInput } from '../../utils/validators.js';
 import Users from '../../models/Users.js';
 import config from '../../../config.js';
-
-const { JWT_SECRET } = config;
+import { signToken } from '../../utils/auth.js';
 
 function generateToken(user) {
     return jwt.sign(
@@ -15,7 +14,7 @@ function generateToken(user) {
             username: user.username
         },
         JWT_SECRET,
-        { expiresIn: '3h' }
+        { expiresIn: '8h' }
     );
 }
 
@@ -27,7 +26,9 @@ const Query = {
             });
         }
 
-        const user = await User.findById(context.user.id);
+        const user = await Users.findById(context.user.id)
+            .populate('studyCardGroups')
+            .exec()
         if (!user) {
             throw new GraphQLError('User not found!', {
                 extensions: { code: 'BAD_USER_INPUT' },
@@ -40,15 +41,8 @@ const Query = {
 
 export const Mutation = {
     async login(_, { username, password }) {
-        const { errors, valid } = validateLoginInput(username, password);
 
-        if (!valid) {
-            throw new GraphQLError('Invalid input', {
-                extensions: { code: 'BAD_USER_INPUT', errors },
-            });
-        }
-
-        const user = await User.findOne({ username });
+        const user = await Users.findOne({ username });
 
         if (!user) {
             throw new GraphQLError('User not found', {
@@ -63,7 +57,7 @@ export const Mutation = {
             });
         }
 
-        const token = generateToken(user);
+        const token = signToken(user);
 
         return {
             ...user._doc,
@@ -85,7 +79,7 @@ export const Mutation = {
             });
         }
         // if user/username already exists throw error
-        const existingUser = await User.findOne({ username });
+        const existingUser = await Users.findOne({ username });
         if (existingUser) {
             throw new GraphQLError('Username is taken', {
                 extensions: { code: 'BAD_USER_INPUT' },
@@ -94,7 +88,7 @@ export const Mutation = {
         
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        const newUser = new User({
+        const newUser = new Users({
             username,
             email,
             password,

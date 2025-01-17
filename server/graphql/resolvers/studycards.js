@@ -12,7 +12,7 @@ export const Query = {
         }
 
         // Fetch cards authored by the logged-in user
-        return await StudyCards.find({ author: context.user.id }).populate('studycards');
+        return await StudyCardGroups.find({ author: context.user.id }).populate('studycards');
     },
 
     // Get a single study card group by id
@@ -110,7 +110,7 @@ export const Mutation = {
         }
 
         // Find the StudyCard group
-        const group = await StudyCards.findById(groupId);
+        const group = await StudyCardGroups.findById(groupId);
         if(!group) {
             throw new GraphQLError('Study cards not found', {
                 extensions: { code: 'BAD_USER_INPUT' },

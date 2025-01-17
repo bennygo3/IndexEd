@@ -18,7 +18,6 @@ export const typeDefs = `#graphql
         id: ID!
         front: String!
         back: String!
-        defaultGroup: StudyCards
     }
 
     type StudyCards {
@@ -30,7 +29,7 @@ export const typeDefs = `#graphql
         studycards: [StudyCard]
         createdAt: String
         updatedAt: String
-        tags: [String] #allows user to search for keywords
+        tags: [String] 
     }
     
     type HighScoreSnake {
@@ -45,8 +44,8 @@ export const typeDefs = `#graphql
     }
 
     type Query {
-        getHighScoreSnake(userId: ID!): HighScoreSnake
         getCurrentUser: User
+        getHighScoreSnake(userId: ID!): HighScoreSnake
         getStudyCardGroups: [StudyCards]
         getStudyCardGroup(groupId: ID!): StudyCards
     }
