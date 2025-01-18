@@ -8,12 +8,6 @@ export const typeDefs = `#graphql
         snakeScores: [HighScoreSnake]
     }
 
-    type Category {
-        id: ID!
-        name: String!
-        description: String
-    }
-
     type StudyCard {
         id: ID!
         front: String!
@@ -34,7 +28,7 @@ export const typeDefs = `#graphql
     
     type HighScoreSnake {
         id: ID! 
-        username: String!
+        userId: String!
         highScore: Int! 
     }
     
@@ -48,17 +42,20 @@ export const typeDefs = `#graphql
         getHighScoreSnake(userId: ID!): HighScoreSnake
         getStudyCardGroups: [StudyCards]
         getStudyCardGroup(groupId: ID!): StudyCards
+        studycards: [StudyCard]
+        studycard(id: ID!): StudyCard
     }
     
     type Mutation {
-        register(registerInput: RegisterInput): User!
-        login(username: String!, password: String!): User!
+        register(registerInput: RegisterInput): Auth!
+        login(username: String!, password: String!): Auth!
         updateHighScoreSnake(username: ID!, newHighScoreSnake: Int!): HighScoreSnake!
         createStudyCardGroup(title: String!, category: String!, description: String): StudyCards!
         deleteStudyCardGroup(groupId: ID!): Boolean!
         updateStudyCardGroup(groupId: ID!, title: String, category: String, description: String): StudyCards!
         createStudyCard(front: String!, back: String!, groupId: ID!): StudyCard!
         deleteStudyCard(cardId: ID!): Boolean!
+        updateStudyCard(cardId: ID!, front: String, back: String): StudyCard!
     }
     
     input RegisterInput {
@@ -67,4 +64,4 @@ export const typeDefs = `#graphql
         confirmPassword: String!
         email: String!
     }
-`
+`;

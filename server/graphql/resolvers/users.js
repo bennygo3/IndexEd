@@ -1,41 +1,38 @@
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import { GraphQLError } from 'graphql';
-import { validateRegisterInput, validateLoginInput } from '../../utils/validators.js';
 import Users from '../../models/Users.js';
-import config from '../../../config.js';
+import SnakeScore from '../../models/SnakeScore.js';
+// import { validateRegisterInput, validateLoginInput } from '../../utils/validators.js';
 import { signToken } from '../../utils/auth.js';
-
-function generateToken(user) {
-    return jwt.sign(
-        {
-            id: user.id,
-            email: user.email,
-            username: user.username
-        },
-        JWT_SECRET,
-        { expiresIn: '8h' }
-    );
-}
 
 const Query = {
     async getCurrentUser(_, __, context) {
-        if (!context.user) {
-            throw new GraphQLError('You are not authenticated', {
-                extensions: { code: 'UNAUTHENTICATED' },
-            });
-        }
 
         const user = await Users.findById(context.user.id)
             .populate('studyCardGroups')
-            .exec()
+            .populate({
+                path: 'snakeScores',
+                select: 'highScore',
+            });
+
         if (!user) {
             throw new GraphQLError('User not found!', {
                 extensions: { code: 'BAD_USER_INPUT' },
             });
         }
 
+        if (!context.user) {
+            throw new GraphQLError('You are not authenticated', {
+                extensions: { code: 'UNAUTHENTICATED' },
+            });
+        }
+
         return user;
+    },
+
+    async getHighScoreSnake(_, { userId }) {
+        const snakeScore = await SnakeScore.findOne({ userId });
+        return snakeScore || { userId, highScore: 0 };
     },
 };
 
@@ -52,30 +49,20 @@ export const Mutation = {
 
         const match = await bcrypt.compare(password, user.password);
         if (!match) {
-            throw new GraphQLError('Wrong credentials', {
+            throw new GraphQLError('Invalid username or password', {
                 extensions: { code: 'BAD_USER_INPUT' },
             });
         }
 
         const token = signToken(user);
 
-        return {
-            ...user._doc,
-            id: user._id,
-            token
-        };
+        return { token, user };
 
     },
-    async register(
-        _,
-        {
-            registerInput: { username, email, password, confirmPassword }
-        },
-    ) {
-        const { valid, errors } = validateRegisterInput(username, email, password, confirmPassword);
-        if (!valid) {
-            throw new GraphQLError('Invalid input', { 
-                extensions: { code: 'BAD_USER_INPUT', errors },
+    async register(_, { registerInput: { username, email, password, confirmPassword } }) {
+        if (password !== confirmPassword) {
+            throw new GraphQLError('Invalid creds', {
+                extensions: { code: 'BAD_USER_INPUT' },
             });
         }
         // if user/username already exists throw error
@@ -91,20 +78,15 @@ export const Mutation = {
         const newUser = new Users({
             username,
             email,
-            password,
-            createdAt: new Date().toISOString()
+            password: hashedPassword,
         });
 
-        const res = await newUser.save();
+        await newUser.save();
 
-        const token = generateToken(res);
+        const token = signToken(newUser);
 
-        return {
-            ...res._doc,
-            id: res._id,
-            token
-        };
-    }
+        return { token, user: newUser };
+    },
 };
 
 export default { Query, Mutation };

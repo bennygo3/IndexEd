@@ -23,15 +23,29 @@ export const Query = {
             });
         }
 
-        const studyCardGroup = await StudyCardGroups.findById(groupId).populate('studycards');
-
-        if (!studyCardGroup) {
+        const group = await StudyCardGroups.findById(groupId).populate('studycards');
+        if (!group) {
             throw new GraphQLError('Study cards not found', {
                 extensions: { code: 'BAD_USER_INPUT' },
             });
         }
 
-        return studyCardGroup;
+        return group;
+    },
+
+    async studycards() {
+        return await StudyCard.find({});
+    },
+
+    async studycard(_, { id }) {
+        const card = await StudyCard.findById(id);
+        if (!card) {
+            throw new GraphQLError('Card not found.', {
+                extensions: { code: 'BAD_USER_INPUT'},
+            });
+        }
+
+        return card;
     },
 };
 
@@ -53,54 +67,7 @@ export const Mutation = {
 
         return await newGroup.save();
     },
-
-    // Delete a StudyCard group
-    async deleteStudyCardGroup(_, { groupId }, context) {
-        if(!context.user) {
-            throw new GraphQLError('You must be logged in to delete a group of study cards', {
-                extenstions: { code: 'UNAUTHENTICATED' },
-            });
-        }
-
-        const deletedGroup = await StudyCardGroups.findByIdAndDelete(groupId);
-
-        if (!deletedGroup) {
-            throw new GraphQLError('Study cards not found or they have already been deleted', {
-                extensions: { code: 'BAD_USER_INPUT' },
-            });
-        }
-
-        return true;
-    },
-
-    // Update a StudyCard group
-    async updateStudyCardGroup(_, { groupId, title, category, description }, context) {
-        if (!context.user) {
-            throw new GraphQLError('You must be logged in to update these study cards', {
-                extensions: { code: 'UNAUTHENTICATED' },
-            });
-        }
-
-        const updateFields = {};
-        if (title) updateFields.title = title;
-        if (category) updateFields.category = category;
-        if (description) updateFields.description = description;
-
-        const updatedGroup = await StudyCardGroups.findByIdAndUpdate(
-            groupId,
-            { $set: updateFields },
-            { new: true }
-        );
-
-        if (!updatedGroup) {
-            throw new GraphQLError('Study cards not found or update failed', {
-                extenions: { code: 'BAD_USER_INPUT' },
-            });
-        }
-
-        return updatedGroup;
-    },
-
+    
     // Add a StudyCard to a StudyCardGroup
     async createStudyCard(_, { front, back, groupId }, context) {
         if (!context.user) {
@@ -118,12 +85,7 @@ export const Mutation = {
         }
 
         // Create a new StudyCard
-        const newCard = new StudyCard({
-            front, 
-            back,
-            defaultGroup: groupId,
-        });
-
+        const newCard = new StudyCard({ front, back, defaultGroup: groupId });
         const savedCard = await newCard.save();
 
         // Add the StudyCard to the group's studycards array
@@ -132,31 +94,77 @@ export const Mutation = {
 
         return savedCard;
     },
-
-    // Delete a StudyCard
-    async deleteStudyCard(_, { cardId }, context) {
-        if (!context.user) {
-            throw new GraphQLError('You must be logged in to delete this study card', {
-                extensions: { code: 'UNAUTHENTICATED' },
-            });
-        }
-
-        const deletedCard = await StudyCard.findByIdAndDelete(cardId);
-
-        if (!deletedCard) {
-            throw new GraphQLError('Study card not found or it has already been deleted', {
-                extensions: { code: 'BAD_USER_INPUT' },
-            });
-        }
-
-        // Remove the StudyCard from its parent group's studycards array
-        await StudyCardGroups.updateOne(
-            { studycards: cardId },
-            { $pull: { studycards: cardId } }
-        );
-
-        return true;
-    },
 };
 
 export default { Query, Mutation };
+
+//async updateStudyCardGroup(_, { groupId, title, category, description }, context) {
+    //     if (!context.user) {
+    //         throw new GraphQLError('You must be logged in to update these study cards', {
+    //             extensions: { code: 'UNAUTHENTICATED' },
+    //         });
+    //     }
+
+    //     const updateFields = {};
+    //     if (title) updateFields.title = title;
+    //     if (category) updateFields.category = category;
+    //     if (description) updateFields.description = description;
+
+    //     const updatedGroup = await StudyCardGroups.findByIdAndUpdate(
+    //         groupId,
+    //         { $set: updateFields },
+    //         { new: true }
+    //     );
+
+    //     if (!updatedGroup) {
+    //         throw new GraphQLError('Study cards not found or update failed', {
+    //             extenions: { code: 'BAD_USER_INPUT' },
+    //         });
+    //     }
+
+    //     return updatedGroup;
+    // },
+
+   // Delete a StudyCard group
+    // async deleteStudyCardGroup(_, { groupId }, context) {
+    //     if(!context.user) {
+    //         throw new GraphQLError('You must be logged in to delete a group of study cards', {
+    //             extenstions: { code: 'UNAUTHENTICATED' },
+    //         });
+    //     }
+
+    //     const deletedGroup = await StudyCardGroups.findByIdAndDelete(groupId);
+
+    //     if (!deletedGroup) {
+    //         throw new GraphQLError('Study cards not found or they have already been deleted', {
+    //             extensions: { code: 'BAD_USER_INPUT' },
+    //         });
+    //     }
+
+    //     return true;
+    // },
+
+    // Delete a StudyCard
+    // async deleteStudyCard(_, { cardId }, context) {
+    //     if (!context.user) {
+    //         throw new GraphQLError('You must be logged in to delete this study card', {
+    //             extensions: { code: 'UNAUTHENTICATED' },
+    //         });
+    //     }
+
+    //     const deletedCard = await StudyCard.findByIdAndDelete(cardId);
+
+    //     if (!deletedCard) {
+    //         throw new GraphQLError('Study card not found or it has already been deleted', {
+    //             extensions: { code: 'BAD_USER_INPUT' },
+    //         });
+    //     }
+
+        // Remove the StudyCard from its parent group's studycards array
+    //     await StudyCardGroups.updateOne(
+    //         { studycards: cardId },
+    //         { $pull: { studycards: cardId } }
+    //     );
+
+    //     return true;
+    // },

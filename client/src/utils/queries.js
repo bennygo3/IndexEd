@@ -39,5 +39,3 @@ export const GET_HIGH_SNAKE_SCORE = gql`
         }
     }
 `;
-
-
