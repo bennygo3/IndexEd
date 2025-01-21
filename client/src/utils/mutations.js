@@ -1,11 +1,11 @@
 import { gql } from "@apollo/client";
 
-export const ADD_USER = gql`
-    mutation addUser($username: String!, $email: String!, $password: String!) {
-        addUser(username: $username, email: $email, password: $password) {
+export const REGISTER_USER = gql`
+    mutation register($registerInput: RegisterInput!) {
+        register(registerInput: $registerInput) {
             token
             user {
-                _id
+                id
                 username
             }
         }
@@ -15,7 +15,7 @@ export const ADD_USER = gql`
 export const UPDATE_IS_NEW_USER = gql`
     mutation updateUserIsNewField($userId: ID!, $isNewUser: Boolean!){
         updateUserIsNewField(userId: $userId, isNewUser: $isNewUser) {
-            _id
+            id
             isNewUser
         }
     }
@@ -26,7 +26,7 @@ export const LOGIN_USER = gql`
         login (username: $username, password: $password) {
             token
             user {
-                _id
+                id
                 username
             }
         }
@@ -34,33 +34,42 @@ export const LOGIN_USER = gql`
 `;
 
 export const CREATE_STUDYCARD = gql`
-    mutation createStudycard($input: CreateStudycardInput!) {
-        createStudycard(input: $input) {
-            _id
+    mutation createStudycard($front: String!, $back: String!, $groupId: ID!) {
+        createStudycard(front: $front, back: $back, groupId: $groupId) {
+            id
             front
             back      
         }
     }
 `;
-export const CREATE_STACK = gql`
-    mutation createStack($input: CreateStackInput!) {
-        createStack(input: $input) {
-            _id
+export const CREATE_STUDYCARD_GROUP = gql`
+    mutation createStudyCardGroup($title: String!, $category: String!, $description: String) {
+        createStudyCardGroup(title: $title, category: $category, description: $description) {
+            id
             title
             category
             description
-            author {
-                _id
-                username
-            }
+            createdAt
+            updatedAt
+        }
+    }
+`;
+
+export const UPDATE_STUDYCARD = gql `
+    mutation updateStudyCard($cardId: ID!, $front: String, $back: String) {
+        updateStudyCard(cardId: $cardId, front: $front, back: $back) {
+            id
+            front
+            back
         }
     }
 `;
 
 export const UPDATE_HIGH_SNAKE_SCORE = gql`
-    mutation UpdateHighSnakeScore($userId: ID!, $newSnakeScore: Int!) {
-        updateHighSnakeScore(userId: $userId, newSnakeScore: $newSnakeScore) {
-            highSnakeScore
+    mutation updateHighScoreSnake($username: ID!, $newHighScoreSnake: Int!) {
+        updateHighScoreSnake(username: $username, newHighScoreSnake: $newHighScoreSnake) {
+            username
+            highScore
         }
     }
 `;

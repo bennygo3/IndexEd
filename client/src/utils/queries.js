@@ -2,18 +2,19 @@ import { gql } from '@apollo/client';
 
 export const GET_CURRENT_USER = gql`
     query GetCurrentUser {
-        currentUser {
-            _id
+        getCurrentUser {
+            id
             username
             email
-            stacks {
-                _id
+            studyCardGroups {
+                id
                 title
                 category
                 description
-                date_created
+                createdAt
+                updatedAt
                 studycards {
-                    _id
+                    id
                     front
                     back
                 }
@@ -35,7 +36,8 @@ query studycards{
 export const GET_HIGH_SNAKE_SCORE = gql`
     query GetHighSnakeScore($userId: ID!) {
         getHighSnakeScore(userId: $userId) {
-            highSnakeScore
+            userId
+            highScore
         }
     }
 `;
