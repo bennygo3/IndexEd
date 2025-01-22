@@ -66,8 +66,10 @@ export const UPDATE_STUDYCARD = gql `
 `;
 
 export const UPDATE_HIGH_SNAKE_SCORE = gql`
-    mutation updateHighScoreSnake($username: ID!, $newHighScoreSnake: Int!) {
+    mutation updateHighScoreSnake($username: String!, $newHighScoreSnake: Int!) {
         updateHighScoreSnake(username: $username, newHighScoreSnake: $newHighScoreSnake) {
+            id
+            userId
             username
             highScore
         }

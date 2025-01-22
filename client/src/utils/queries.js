@@ -4,8 +4,9 @@ export const GET_CURRENT_USER = gql`
     query GetCurrentUser {
         getCurrentUser {
             id
-            username
             email
+            username
+            createdAt
             studyCardGroups {
                 id
                 title
@@ -19,7 +20,12 @@ export const GET_CURRENT_USER = gql`
                     back
                 }
             }
-            
+            snakeScores {
+                id
+                userId
+                username
+                highScore
+            }
         }
     }
 `;
@@ -27,7 +33,7 @@ export const GET_CURRENT_USER = gql`
 export const STUDYCARDS = gql`
 query studycards{
     studycards{
-        _id
+        id
         front
         back
     }
@@ -36,7 +42,9 @@ query studycards{
 export const GET_HIGH_SNAKE_SCORE = gql`
     query GetHighSnakeScore($userId: ID!) {
         getHighSnakeScore(userId: $userId) {
+            id
             userId
+            username
             highScore
         }
     }

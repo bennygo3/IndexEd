@@ -2,11 +2,17 @@ import bcrypt from 'bcrypt';
 import { GraphQLError } from 'graphql';
 import Users from '../../models/Users.js';
 import SnakeScore from '../../models/SnakeScore.js';
-// import { validateRegisterInput, validateLoginInput } from '../../utils/validators.js';
 import { signToken } from '../../utils/auth.js';
 
 const Query = {
     async getCurrentUser(_, __, context) {
+
+        // Authentication check first
+        if (!context.user) {
+            throw new GraphQLError('You are not authenticated', {
+                extensions: { code: 'UNAUTHENTICATED' },
+            });
+        }
 
         const user = await Users.findById(context.user.id)
             .populate('studyCardGroups')
@@ -21,18 +27,38 @@ const Query = {
             });
         }
 
-        if (!context.user) {
-            throw new GraphQLError('You are not authenticated', {
-                extensions: { code: 'UNAUTHENTICATED' },
-            });
-        }
-
-        return user;
+        return {
+            ...user.toObject(),
+            id: user._id,
+        };
     },
 
     async getHighScoreSnake(_, { userId }) {
         const snakeScore = await SnakeScore.findOne({ userId });
-        return snakeScore || { userId, highScore: 0 };
+
+        if (!snakeScore) {
+            const user = await Users.findById(userId);
+            if (!user) {
+                throw new GraphQLError('User not found', {
+                    extensions: { code: 'BAD_USER_INPUT' },
+                });
+            }
+            return { id: null, userId, username: user.username, highScore: 0};
+        }
+        
+        const user = await Users.findById(snakeScore.userId);
+        if (!user) {
+            throw new GraphQLError('User not found', {
+                extensions: { code: 'BAD_USER_INPUT' },
+            });
+        }
+        
+        return {
+            id: snakeScore._id,
+            userId: snakeScore.userId,
+            username: user.username,
+            highScore: snakeScore.highScore,
+        };
     },
 };
 

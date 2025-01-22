@@ -8,8 +8,8 @@ if (!JWT_SECRET) {
     throw new Error('jwt token is not set');
 }
 
-const signToken = ({ email, username, _id }) => {
-    const payload = { email, username, _id };
+const signToken = ({ email, username, id }) => {
+    const payload = { email, username, id };
     return jwt.sign({ data: payload }, JWT_SECRET, { expiresIn: EXPIRATION });
 };
 
@@ -37,7 +37,7 @@ const authMiddleware = ({ req }) => {
     }
 
     try {
-        const { data } = verifyToken(token);
+        const { data } = jwt.verify(token, JWT_SECRET, { maxAge: EXPIRATION });
         req.user = data;
     } catch (err) {
         console.error('AuthMiddleware error:', err.message);

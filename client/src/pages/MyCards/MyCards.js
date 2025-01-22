@@ -33,7 +33,7 @@ export default function MyCards() {
                 {/* <p id="my-cards-header-p">1. the devotion of time and attention to acquiring knowledge on an academic subject, especially by means of notecards*</p> */}
             </header>
             {/* <Wood> */}
-            {data.currentUser.stacks.map(stack => (
+            {data.getCurrentUser.stacks.map(stack => (
 
                 <section key={stack._id} id="my-cards-wood">
                     <Wood>

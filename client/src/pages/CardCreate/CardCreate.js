@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { CREATE_STUDYCARD, CREATE_STACK } from '../../utils/mutations.js';
+import { CREATE_STUDYCARD, CREATE_STUDYCARD_GROUP } from '../../utils/mutations.js';
 import { GET_CURRENT_USER } from '../../utils/queries.js';
 import './CardCreate.css';
 import NavbarCC from '../../components/Navbar/NavbarCC.js';
@@ -41,7 +41,7 @@ export default function CardCreate() {
         }
     });
 
-    const [createStack, { error: creatingStackError }] = useMutation(CREATE_STACK, {
+    const [createStack, { error: creatingStackError }] = useMutation(CREATE_STUDYCARD_GROUP, {
         onCompleted: (data) => {
             setStackId(data.createStack._id); //Sets the newly created stack as the selected stack
             refetchStacks();

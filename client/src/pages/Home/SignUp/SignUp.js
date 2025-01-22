@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../../../utils/mutations';
+import { REGISTER_USER } from '../../../utils/mutations';
 import Auth from '../../../utils/auth';
 import StickyNote from '../StickyNote/StickyNote';
 import './SignUp.css';
 
-export default function SignUp(props){
+export default function SignUp(props) {
     const [formState, setFormState] = useState({
         email: '',
         username: '',
         password: '',
+        confirmPassword: ''
     });
-    
-    const [addUser, { error, data }] = useMutation(ADD_USER);
+
+    const [addUser, { error, data }] = useMutation(REGISTER_USER);
     console.log(error, data);
 
     const handleChange = (event) => {
@@ -26,14 +27,21 @@ export default function SignUp(props){
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(`this is the state of the form ${formState.email}`)
-        
+        console.log(`Form State: ${JSON.stringify(formState)}`)
+
         try {
             const { data } = await addUser({
-                variables: { ...formState },
+                variables: {
+                    registerInput: {
+                        email: formState.email,
+                        username: formState.username,
+                        password: formState.password,
+                        confirmPassword: formState.confirmPassword,
+                    },
+                },
             });
 
-            Auth.login(data.addUser.token);
+            Auth.login(data.register.token);
         } catch (err) {
             console.log(err);
         }
@@ -42,48 +50,58 @@ export default function SignUp(props){
 
     const handleClose = () => {
         props.setTrigger(false);
-        setFormState({ email: '', username: '', password: '' });
+        setFormState({ email: '', username: '', password: '', confirmPassword: '', });
     };
 
-    return (props.trigger) ? (
+    return props.trigger ? (
         <div className="signUpPopup">
             <StickyNote>
-            <div className='popup-inner'>
-            <h1 className="signup-header">Sign Up</h1>
-            <span className="close" onClick={handleClose}>&times;</span>
-                <form onSubmit={handleFormSubmit} >
-                            <label id="formSignUp">
-                                Email:
-                                <input
-                                value= {formState.email}
-                                name= "email"
+                <div className='popup-inner'>
+                    <h1 className="signup-header">Sign Up</h1>
+                    <span className="close" onClick={handleClose}>
+                        &times;
+                    </span>
+                    <form onSubmit={handleFormSubmit}>
+                        <label id="formSignUp">
+                            Email:
+                            <input
+                                value={formState.email}
+                                name="email"
                                 onChange={handleChange}
                                 type="text"
-                                />
-                                <br></br>
-                                Username:
-                                <input 
-                                 value= {formState.username}
-                                 name= "username"
-                                 onChange={handleChange}
-                                 type="text"
-                                />
-                                <br></br>
-                                Password:
-                                <input 
-                                value= {formState.password}
-                                name= "password"
+                            />
+                            <br></br>
+                            Username:
+                            <input
+                                value={formState.username}
+                                name="username"
+                                onChange={handleChange}
+                                type="text"
+                            />
+                            <br></br>
+                            Password:
+                            <input
+                                value={formState.password}
+                                name="password"
                                 onChange={handleChange}
                                 type="password"
-                                />
-                            </label>
+                            />
+                            <br></br>
+                            Confirm Password:
+                            <input
+                                value={formState.confirmPassword}
+                                name="confirmPassword"
+                                onChange={handleChange}
+                                type="password"
+                            />
+                        </label>
 
-                            <button type="submit" className='submit-btn'>Submit</button> 
-                        </form>
-                
-            </div>
+                        <button type="submit" className='submit-btn'>Submit</button>
+                    </form>
+
+                </div>
             </StickyNote>
         </div>
-        
+
     ) : "";
 }
