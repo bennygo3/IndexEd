@@ -12,7 +12,7 @@ export const Query = {
         }
 
         // Fetch cards authored by the logged-in user
-        return await StudyCardGroups.find({ author: context.user.id }).populate('studycards');
+        return await StudyCardGroups.find({ author: context.user._id }).populate('studycards');
     },
 
     // Get a single study card group by id

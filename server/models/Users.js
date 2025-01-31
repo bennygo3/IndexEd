@@ -20,6 +20,10 @@ const userSchema = new Schema(
             required: true,
             minLength: 8,
         },
+        createdAt: {
+            type: Date,
+            default: Date.now
+        },
         studyCardGroups: [
             {
                 type: Schema.Types.ObjectId,
@@ -29,7 +33,7 @@ const userSchema = new Schema(
         snakeScores: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'HighScoreSnake',
+                ref: 'SnakeScore',
             }
         ],
         isNewUser: {
@@ -50,10 +54,9 @@ const userSchema = new Schema(
 
 // Middleware hasher pre saving
 userSchema.pre('save', async function (next) {
-    if (this.isNew || this.isModified('password')) {
-        const saltRounds = 10; // cost factor for hashing
-        this.password = await bcrypt.hash(this.password, saltRounds);
-    }
+    if (!this.isModified('password')) return next(); // Only hash if password is modified
+    const saltRounds = 10; // cost factor for hashing
+    this.password = await bcrypt.hash(this.password, saltRounds);
     next();
 });
 

@@ -1,34 +1,10 @@
 import { gql } from "@apollo/client";
 
-export const REGISTER_USER = gql`
-    mutation register($registerInput: RegisterInput!) {
-        register(registerInput: $registerInput) {
-            token
-            user {
-                id
-                username
-            }
-        }
-    }
-`;
-
 export const UPDATE_IS_NEW_USER = gql`
     mutation updateUserIsNewField($userId: ID!, $isNewUser: Boolean!){
         updateUserIsNewField(userId: $userId, isNewUser: $isNewUser) {
-            id
+            _id
             isNewUser
-        }
-    }
-`;
-
-export const LOGIN_USER = gql`
-    mutation login($username: String!, $password: String!) {
-        login (username: $username, password: $password) {
-            token
-            user {
-                id
-                username
-            }
         }
     }
 `;
@@ -36,7 +12,7 @@ export const LOGIN_USER = gql`
 export const CREATE_STUDYCARD = gql`
     mutation createStudycard($front: String!, $back: String!, $groupId: ID!) {
         createStudycard(front: $front, back: $back, groupId: $groupId) {
-            id
+            _id
             front
             back      
         }
@@ -45,7 +21,7 @@ export const CREATE_STUDYCARD = gql`
 export const CREATE_STUDYCARD_GROUP = gql`
     mutation createStudyCardGroup($title: String!, $category: String!, $description: String) {
         createStudyCardGroup(title: $title, category: $category, description: $description) {
-            id
+            _id
             title
             category
             description
@@ -58,7 +34,7 @@ export const CREATE_STUDYCARD_GROUP = gql`
 export const UPDATE_STUDYCARD = gql `
     mutation updateStudyCard($cardId: ID!, $front: String, $back: String) {
         updateStudyCard(cardId: $cardId, front: $front, back: $back) {
-            id
+            _id
             front
             back
         }
@@ -68,7 +44,7 @@ export const UPDATE_STUDYCARD = gql `
 export const UPDATE_HIGH_SNAKE_SCORE = gql`
     mutation updateHighScoreSnake($username: String!, $newHighScoreSnake: Int!) {
         updateHighScoreSnake(username: $username, newHighScoreSnake: $newHighScoreSnake) {
-            id
+            _id
             userId
             username
             highScore

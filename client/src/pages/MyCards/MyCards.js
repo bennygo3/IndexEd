@@ -20,6 +20,11 @@ export default function MyCards() {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
 
+    if (!data?.getCurrentUser || !data.getCurrentUser.stacks) {
+        console.warn("⚠️ getCurrentUser.stacks is missing or undefined!", data.getCurrentUser);
+        return <p>No stacks available. Try creating one!</p>;
+    }
+
     return (
         <main className="my-cards-page">
             <header id="my-cards-header">
@@ -33,13 +38,13 @@ export default function MyCards() {
                 {/* <p id="my-cards-header-p">1. the devotion of time and attention to acquiring knowledge on an academic subject, especially by means of notecards*</p> */}
             </header>
             {/* <Wood> */}
-            {data.getCurrentUser.stacks.map(stack => (
+            {data.getCurrentUser.studyCardGroups.map(group => (
 
-                <section key={stack._id} id="my-cards-wood">
+                <section key={group._id} id="my-cards-wood">
                     <Wood>
-                    <h2>{stack.title}</h2>
+                    <h2>{group.title}</h2>
                     <div className="my-cards-carousel">
-                        {stack.studycards.map(card => (
+                        {group.studycards.map(card => (
                             <div
                                 key={card._id}
                                 className="my-cards-container"

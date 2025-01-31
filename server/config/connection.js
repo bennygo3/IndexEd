@@ -4,7 +4,6 @@ import config from '../../config.js';
 mongoose.set('strictQuery', true);
 
 mongoose.connect(
-    // process.env.MONGODB_URI || 'mongodb://localhost:27017',
     config.MONGODB_URI || 'mongodb://localhost:27017',
     {
         useNewUrlParser: true,

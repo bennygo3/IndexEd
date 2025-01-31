@@ -6,6 +6,10 @@ const snakeScoreSchema = new Schema({
         ref: 'User',
         required: true,
     },
+    username: {
+        type: String,
+        required: true,
+    },
     highScore: {
         type: Number,
         required: true,

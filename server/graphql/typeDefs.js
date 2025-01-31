@@ -1,46 +1,46 @@
 export const typeDefs = `#graphql
     type User {
-        id: ID!
+        _id: ID!
         email: String!
         username: String!
         createdAt: String!
         studyCardGroups: [StudyCards]
-        snakeScores: [HighScoreSnake]
+        snakeScores: [SnakeScore]
     }
 
     type StudyCard {
-        id: ID!
+        _id: ID!
         front: String!
         back: String!
     }
 
     type StudyCards {
-        id: ID!
+        _id: ID!
         title: String!
         category: String!
         description: String
-        author: ID!
+        author: ID
         studycards: [StudyCard]
         createdAt: String
         updatedAt: String
         tags: [String] 
     }
     
-    type HighScoreSnake {
-        id: ID! 
-        userId: ID!
-        username: String!
-        highScore: Int! 
+    type Auth {
+        token: ID!
+        user: User!
     }
     
-    type Auth {
-        token: String!
-        user: User!
+    type SnakeScore {
+        _id: ID
+        userId: ID
+        username: String
+        highScore: Int
     }
 
     type Query {
         getCurrentUser: User
-        getHighScoreSnake(userId: ID!): HighScoreSnake
+        getHighScoreSnake(userId: ID!): SnakeScore
         getStudyCardGroups: [StudyCards]
         getStudyCardGroup(groupId: ID!): StudyCards
         studycards: [StudyCard]
@@ -48,9 +48,9 @@ export const typeDefs = `#graphql
     }
     
     type Mutation {
-        register(registerInput: RegisterInput): Auth!
+        register(username: String!, email: String!, password: String!, confirmPassword: String!): Auth!
         login(username: String!, password: String!): Auth!
-        updateHighScoreSnake(username: String!, newHighScoreSnake: Int!): HighScoreSnake!
+        updateHighScoreSnake(username: ID!, newHighScoreSnake: Int!): SnakeScore!
         createStudyCardGroup(title: String!, category: String!, description: String): StudyCards!
         deleteStudyCardGroup(groupId: ID!): Boolean!
         updateStudyCardGroup(groupId: ID!, title: String, category: String, description: String): StudyCards!
@@ -58,11 +58,5 @@ export const typeDefs = `#graphql
         deleteStudyCard(cardId: ID!): Boolean!
         updateStudyCard(cardId: ID!, front: String, back: String): StudyCard!
     }
-    
-    input RegisterInput {
-        username: String!
-        password: String!
-        confirmPassword: String!
-        email: String!
-    }
+
 `;

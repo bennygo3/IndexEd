@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { REGISTER_USER } from '../../../utils/mutations';
-import Auth from '../../../utils/auth';
-import StickyNote from '../StickyNote/StickyNote';
+import Auth from '../../../utils/auth.js';
+import StickyNote from '../StickyNote/StickyNote.js';
 import './SignUp.css';
 
 export default function SignUp(props) {
@@ -12,9 +10,6 @@ export default function SignUp(props) {
         password: '',
         confirmPassword: ''
     });
-
-    const [addUser, { error, data }] = useMutation(REGISTER_USER);
-    console.log(error, data);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -30,27 +25,22 @@ export default function SignUp(props) {
         console.log(`Form State: ${JSON.stringify(formState)}`)
 
         try {
-            const { data } = await addUser({
-                variables: {
-                    registerInput: {
-                        email: formState.email,
-                        username: formState.username,
-                        password: formState.password,
-                        confirmPassword: formState.confirmPassword,
-                    },
-                },
-            });
+            await Auth.register(
+                formState.username,
+                formState.email,
+                formState.password,
+                formState.confirmPassword
+            );
 
-            Auth.login(data.register.token);
+            console.log('Registration successful!')
         } catch (err) {
-            console.log(err);
+            console.error('Registration error:', err);
         }
     };
 
-
     const handleClose = () => {
         props.setTrigger(false);
-        setFormState({ email: '', username: '', password: '', confirmPassword: '', });
+        setFormState({ email: '', username: '', password: '', confirmPassword: '' });
     };
 
     return props.trigger ? (

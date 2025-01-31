@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../../../utils/mutations';
-import Auth from '../../../utils/auth';
-import StickyNote from '../StickyNote/StickyNote';
+// import { useMutation } from '@apollo/client';
+// import { LOGIN_USER } from '../../../utils/mutations';
+import Auth from '../../../utils/auth.js';
+import StickyNote from '../StickyNote/StickyNote.js';
 
 
 export default function Login(props) {
@@ -11,7 +11,7 @@ export default function Login(props) {
         password: '',
     });
 
-    const [loginUser] = useMutation(LOGIN_USER);
+    // const [loginUser] = useMutation(LOGIN_USER);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -26,13 +26,10 @@ export default function Login(props) {
         event.preventDefault();
 
         try {
-            const { data } = await loginUser({
-                variables: { ...formState },
-            });
-
-            Auth.login(data.login.token);
+            await Auth.login(formState.username, formState.password);
+            console.log('Login successful!')
         } catch (err) {
-            console.log(err);
+            console.error('Login error:', err);
         }
     };
 
