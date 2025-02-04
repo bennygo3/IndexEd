@@ -51,9 +51,11 @@ export const typeDefs = `#graphql
         register(username: String!, email: String!, password: String!, confirmPassword: String!): Auth!
         login(username: String!, password: String!): Auth!
         updateHighScoreSnake(username: ID!, newHighScoreSnake: Int!): SnakeScore!
-        createStudyCardGroup(title: String!, category: String!, description: String): StudyCards!
+        
+        createStudyCardGroup(title: String!, category: String!, description: String): StudyCardGroup!
         deleteStudyCardGroup(groupId: ID!): Boolean!
-        updateStudyCardGroup(groupId: ID!, title: String, category: String, description: String): StudyCards!
+        updateStudyCardGroup(groupId: ID!, title: String, category: String, description: String): StudyCardGroup!
+        
         createStudyCard(front: String!, back: String!, studyCardGroupId: ID!): StudyCard!
         deleteStudyCard(cardId: ID!): Boolean!
         updateStudyCard(cardId: ID!, front: String, back: String): StudyCard!

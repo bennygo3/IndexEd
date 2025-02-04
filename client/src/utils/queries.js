@@ -7,14 +7,14 @@ export const GET_CURRENT_USER = gql`
             email
             username
             createdAt
-            studyCardGroups {
+            studyCardGroup {
                 _id
                 title
                 category
                 description
                 createdAt
                 updatedAt
-                studycards {
+                studycard {
                     _id
                     front
                     back
@@ -30,9 +30,9 @@ export const GET_CURRENT_USER = gql`
     }
 `;
 
-export const STUDYCARDS = gql`
-query studycards{
-    studycards{
+export const STUDYCARD = gql`
+query studycard{
+    studycard{
         _id
         front
         back
