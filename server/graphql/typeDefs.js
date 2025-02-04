@@ -4,7 +4,7 @@ export const typeDefs = `#graphql
         email: String!
         username: String!
         createdAt: String!
-        studyCardGroup: [StudyCardGroup]
+        studyCardGroups: [StudyCardGroup]
         snakeScores: [SnakeScore]
     }
 
@@ -21,7 +21,7 @@ export const typeDefs = `#graphql
         category: String!
         description: String
         author: ID
-        studyCard: [StudyCard]
+        studycards: [StudyCard]
         createdAt: String
         updatedAt: String
         tags: [String] 

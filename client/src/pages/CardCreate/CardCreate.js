@@ -19,69 +19,95 @@ export default function CardCreate() {
         setIsModalOpen(true);
     };
 
-    const handleAddToGroup= (studyCardsId) => {
-        // Logic to add the card to the selected stack
-
+    const handleAddToGroup= (studyCardGroupId) => {
+        setStudyCardGroupId(studyCardGroupId);
         setIsModalOpen(false);
     }
 
-    const { data: studyCardGroups, loading: studyCardsLoading, error: studyCardsError, refetch: refetchStacks } = useQuery(GET_CURRENT_USER);
-    console.log(stacksData);
-    const { data: currentUserData } = useQuery(GET_CURRENT_USER);
+    const { data: currentUserData, loading: studyCardsLoading, error: studyCardsError, refetch: refetchGroups } = useQuery(GET_CURRENT_USER);
+    console.log(currentUserData);
+    // const { data: currentUserData } = useQuery(GET_CURRENT_USER);
 
     const [createStudycard, { loading: creatingStudycard, error: creatingCardError }] = useMutation(CREATE_STUDYCARD, {
-        onCompleted: (data) => {
-            console.log("Card created successfully:", data);
-            alert("Card created successfully!");
-            window.location.href = '/card-create';
-        },
+        onCompleted: handleCreateCardSuccess,
         onError: (error) => {
             console.error("Error creating card:", error);
             alert("Error creating card: " + error.message);
         }
     });
 
-    const [createStack, { error: creatingStackError }] = useMutation(CREATE_STUDYCARD_GROUP, {
+    const [createStudyCardGroup, { error: creatingGroupError }] = useMutation(CREATE_STUDYCARD_GROUP, {
         onCompleted: (data) => {
-            setStackId(data.createStack._id); //Sets the newly created stack as the selected stack
-            refetchStacks();
+            setStudyCardGroupId(data.createStudyCardGroup._id);
+            refetchGroups();
         }
     });
 
-    const handleCreateStack = (title) => {
-        if (currentUserData && currentUserData.currentUser) {
-            createStack({
+    const handleCreateGroup = () => {
+        if (currentUserData?.getCurrentUser) {
+            createStudyCardGroup({
                 variables: {
-                    input: {
-                        title: newStackTitle,
-                        category: "",
-                        description: "",
-                        author: currentUserData.currentUser._id
-                    }
+                    title: newGroupTitle,
+                    category: "",
+                    description: "",
                 }
             });
             setIsModalOpen(false);
-         }
+        }
+    }
 
-    };
+    // const [createStudycard, { loading: creatingStudycard, error: creatingCardError }] = useMutation(CREATE_STUDYCARD, {
+    //     onCompleted: (data) => {
+    //         console.log("Card created successfully:", data);
+    //         alert("Card created successfully!");
+    //         window.location.href = '/card-create';
+    //     },
+    //     onError: (error) => {
+    //         console.error("Error creating card:", error);
+    //         alert("Error creating card: " + error.message);
+    //     }
+    // });
+
+    // const [createStack, { error: creatingStackError }] = useMutation(CREATE_STUDYCARD_GROUP, {
+    //     onCompleted: (data) => {
+    //         setStackId(data.createStack._id); //Sets the newly created stack as the selected stack
+    //         refetchStacks();
+    //     }
+    // });
+
+    // const handleCreateStack = (title) => {
+    //     if (currentUserData && currentUserData.currentUser) {
+    //         createStack({
+    //             variables: {
+    //                 input: {
+    //                     title: newStackTitle,
+    //                     category: "",
+    //                     description: "",
+    //                     author: currentUserData.currentUser._id
+    //                 }
+    //             }
+    //         });
+    //         setIsModalOpen(false);
+    //      }
+
+    // };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Form submitted with:", { front, back });
+        console.log("Form submitted with:", { front, back, studyCardGroupId });
         createStudycard({
             variables: {
-                input: {
                     front,
-                    back
-                }
-            },
-            onCompleted: handleCreateCardSuccess, // this opens the modal upon successful card creation
+                    back,
+                    studyCardGroupId,
+            }
+            // onCompleted: handleCreateCardSuccess, // this opens the modal upon successful card creation
         });
     };
 
 
-    if (stacksLoading) return <p>Loading ...</p>
-    if(stacksError) return <p>Error loading: {stacksError.message}</p>
+    if (studyCardsLoading) return <p>Loading ...</p>
+    if(studyCardsError) return <p>Error loading: {studyCardsError.message}</p>
 
     return (
         <main>
@@ -112,19 +138,26 @@ export default function CardCreate() {
                         value={back}
                         onChange={(e) => setBack(e.target.value)}
                     />
+                    <label htmlFor="newGroupTitle" className="label-class">New Group Title:</label>
+                    <input
+                        id="newGroupTitle"
+                        className="input-class"
+                        value={newGroupTitle}
+                        onChange={(e) => setNewGroupTitle(e.target.value)}
+                    />
                     <button className="create-button" type="submit" disabled={creatingStudycard}>Create!</button>
 
                 </form>
             </div>
 
             {creatingCardError && <p>Error creating card: {creatingCardError.message}</p>}
-
+            {creatingGroupError && <p>Error creating study card group: {creatingGroupError.message}</p>}
             <AddToStackModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                onCreateStack={handleCreateStack}
-                onAddToStack={handleAddToStack}
-                studycards={stacksData ? stacksData.stacks : []}
+                onCreateStack={handleCreateGroup}
+                onAddToStack={handleAddToGroup}
+                studyCardGroups={currentUserData?.getCurrentUser?.studyCardGroups || []}
             />
         
         </main>
