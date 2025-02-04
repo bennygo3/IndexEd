@@ -1,5 +1,5 @@
 import StudyCard from "../../models/StudyCard.js";
-import StudyCardGroups from "../../models/StudyCardGroups.js";
+import StudyCardGroup from "../../models/StudyCardGroups.js";
 import { GraphQLError } from 'graphql';
 
 export const Query = {
@@ -12,18 +12,18 @@ export const Query = {
         }
 
         // Fetch cards authored by the logged-in user
-        return await StudyCardGroups.find({ author: context.user._id }).populate('studycards');
+        return await StudyCardGroup.find({ author: context.user._id }).populate('studycards');
     },
 
     // Get a single study card group by id
-    async getStudyCardGroup(_, { groupId }, context) {
+    async getStudyCardGroup(_, { studyCardGroupId }, context) {
         if (!context.user) {
             throw new GraphQLError('You must be logged in to view this section.', {
                 extensions: { code: 'UNAUTHENTICATED' },
             });
         }
 
-        const group = await StudyCardGroups.findById(groupId).populate('studycards');
+        const group = await StudyCardGroup.findById(groupId).populate('studycards');
         if (!group) {
             throw new GraphQLError('Study cards not found', {
                 extensions: { code: 'BAD_USER_INPUT' },
@@ -33,15 +33,15 @@ export const Query = {
         return group;
     },
 
-    async studycards() {
-        return await StudyCard.find({});
-    },
+    // async studycards() {
+    //     return await StudyCard.find({});
+    // },
 
     async studycard(_, { id }) {
         const card = await StudyCard.findById(id);
         if (!card) {
             throw new GraphQLError('Card not found.', {
-                extensions: { code: 'BAD_USER_INPUT'},
+                extensions: { code: 'BAD_USER_INPUT' },
             });
         }
 
@@ -58,31 +58,53 @@ export const Mutation = {
             });
         }
 
-        const newGroup = new StudyCardGroups({
+        const newGroup = new StudyCardGroup({
             title,
             category,
             description,
-            author: context.user.id,
+            author: context.user._id,
         });
 
         return await newGroup.save();
     },
-    
+
     // Add a StudyCard to a StudyCardGroup
-    async createStudyCard(_, { front, back, groupId }, context) {
+    async createStudyCard(_, { front, back, studyCardGroupId }, context) {
         if (!context.user) {
             throw new GraphQLError('You must be logged in to create a new study card', {
                 extensions: { code: 'UNAUTHENTICATED' },
             });
         }
 
-        // Find the StudyCard group
-        const group = await StudyCardGroups.findById(groupId);
-        if(!group) {
-            throw new GraphQLError('Study cards not found', {
-                extensions: { code: 'BAD_USER_INPUT' },
-            });
+        let group;
+
+        // const group = await StudyCardGroup.findById(studyCardGroupId);
+        if (studyCardGroupId) {
+            group = await StudyCardGroup.findById(studyCardGroupId);
+            if (!group) {
+                throw new GraphQLError('Study card group not found', {
+                    extensions: { code: 'BAD_USER_INPUT' },
+                });
+            }
+        } else {
+            group = await StudyCardGroup.findOne({ title: "General", author: context.user._id });
+
+            if (!group) {
+                group = new StudyCardGroup({
+                    title: "General",
+                    category: "Unsorted",
+                    description: "Default study card group",
+                    author: context.user._id,
+                });
+
+                await group.save();
+            }
         }
+        // if (!group) {
+        //     throw new GraphQLError('Study cards not found', {
+        //         extensions: { code: 'BAD_USER_INPUT' },
+        //     });
+        // }
 
         // Create a new StudyCard
         const newCard = new StudyCard({ front, back, defaultGroup: groupId });

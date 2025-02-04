@@ -4,7 +4,7 @@ export const typeDefs = `#graphql
         email: String!
         username: String!
         createdAt: String!
-        studyCardGroups: [StudyCards]
+        studyCardGroup: [StudyCardGroup]
         snakeScores: [SnakeScore]
     }
 
@@ -12,15 +12,16 @@ export const typeDefs = `#graphql
         _id: ID!
         front: String!
         back: String!
+        studyCardGroupId: ID!
     }
 
-    type StudyCards {
+    type StudyCardGroup {
         _id: ID!
         title: String!
         category: String!
         description: String
         author: ID
-        studycards: [StudyCard]
+        studyCard: [StudyCard]
         createdAt: String
         updatedAt: String
         tags: [String] 
@@ -41,9 +42,8 @@ export const typeDefs = `#graphql
     type Query {
         getCurrentUser: User
         getHighScoreSnake(userId: ID!): SnakeScore
-        getStudyCardGroups: [StudyCards]
-        getStudyCardGroup(groupId: ID!): StudyCards
-        studycards: [StudyCard]
+        getStudyCardGroups(userId: ID): [StudyCardGroup] 
+        getStudyCardGroup(groupId: ID!): StudyCardGroup
         studycard(id: ID!): StudyCard
     }
     
@@ -54,7 +54,7 @@ export const typeDefs = `#graphql
         createStudyCardGroup(title: String!, category: String!, description: String): StudyCards!
         deleteStudyCardGroup(groupId: ID!): Boolean!
         updateStudyCardGroup(groupId: ID!, title: String, category: String, description: String): StudyCards!
-        createStudyCard(front: String!, back: String!, groupId: ID!): StudyCard!
+        createStudyCard(front: String!, back: String!, studyCardGroupId: ID!): StudyCard!
         deleteStudyCard(cardId: ID!): Boolean!
         updateStudyCard(cardId: ID!, front: String, back: String): StudyCard!
     }

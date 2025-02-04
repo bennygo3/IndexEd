@@ -10,8 +10,8 @@ import AddToStackModal from '../../components/AddToStackModal/AddToStackModal.js
 export default function CardCreate() {
     const [front, setFront] = useState('');
     const [back, setBack] = useState('');
-    const [stackId, setStackId] = useState('');
-    const [newStackTitle, setNewStackTitle] = useState('');
+    const [studyCardGroupId, setStudyCardGroupId] = useState('');
+    const [newGroupTitle, setNewGroupTitle] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleCreateCardSuccess = (data) => {
@@ -19,13 +19,13 @@ export default function CardCreate() {
         setIsModalOpen(true);
     };
 
-    const handleAddToStack = (stackId) => {
+    const handleAddToGroup= (studyCardsId) => {
         // Logic to add the card to the selected stack
 
         setIsModalOpen(false);
     }
 
-    const { data: stacksData, loading: stacksLoading, error: stacksError, refetch: refetchStacks } = useQuery(GET_CURRENT_USER);
+    const { data: studyCardGroups, loading: studyCardsLoading, error: studyCardsError, refetch: refetchStacks } = useQuery(GET_CURRENT_USER);
     console.log(stacksData);
     const { data: currentUserData } = useQuery(GET_CURRENT_USER);
 
@@ -124,7 +124,7 @@ export default function CardCreate() {
                 onClose={() => setIsModalOpen(false)}
                 onCreateStack={handleCreateStack}
                 onAddToStack={handleAddToStack}
-                stacks={stacksData ? stacksData.stacks : []}
+                studycards={stacksData ? stacksData.stacks : []}
             />
         
         </main>

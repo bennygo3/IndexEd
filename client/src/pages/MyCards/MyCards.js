@@ -29,8 +29,8 @@ export default function MyCards() {
         <main className="my-cards-page">
             <header id="my-cards-header">
                 <div>
-                <h1 id="my-cards-chalkboard">My Study Cards</h1>
-                <div id="my-cards-chalk"></div>
+                    <h1 id="my-cards-chalkboard">My Study Cards</h1>
+                    <div id="my-cards-chalk"></div>
                 </div>
                 <div id="my-cards-corkboard">
                     <NavbarMSC />
@@ -38,31 +38,34 @@ export default function MyCards() {
                 {/* <p id="my-cards-header-p">1. the devotion of time and attention to acquiring knowledge on an academic subject, especially by means of notecards*</p> */}
             </header>
             {/* <Wood> */}
-            {data.getCurrentUser.studyCardGroups.map(group => (
-
+            {data.getCurrentUser?.studyCardGroups.length > 0 ? (
+                data.getCurrentUser.studyCardGroups.map(group => (
                 <section key={group._id} id="my-cards-wood">
                     <Wood>
-                    <h2>{group.title}</h2>
-                    <div className="my-cards-carousel">
-                        {group.studycards.map(card => (
-                            <div
-                                key={card._id}
-                                className="my-cards-container"
-                                onClick={() => handleFlip(card._id)}
-                            >
-                            <Card 
-                                // key={card._id} 
-                                front={card.front} 
-                                back={card.back} 
-                                isFlipped={flippedCard[card._id] || false} // default to false if not flipped yet
-                            />
-                            </div>
-                        ))}
-                    </div>
+                        <h2>{group.title}</h2>
+                        <div className="my-cards-carousel">
+                            {group.studycards.map(card => (
+                                <div
+                                    key={card._id}
+                                    className="my-cards-container"
+                                    onClick={() => handleFlip(card._id)}
+                                >
+                                    <Card
+                                        front={card.front}
+                                        back={card.back}
+                                        isFlipped={flippedCard[card._id] || false} // default to false if not flipped yet
+                                    />
+                                </div>
+                            ))}
+                        </div>
                     </Wood>
                 </section>
-            ))}
-            
+            )) 
+            ) : (
+                <p></p>
+            )}
+        
+
         </main>
     );
 };
