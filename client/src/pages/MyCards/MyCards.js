@@ -20,10 +20,10 @@ export default function MyCards() {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
 
-    if (!data?.getCurrentUser || !data.getCurrentUser.stacks) {
-        console.warn("⚠️ getCurrentUser.stacks is missing or undefined!", data.getCurrentUser);
-        return <p>No stacks available. Try creating one!</p>;
-    }
+    // if (!data?.getCurrentUser || !data.getCurrentUser.studyCardGroups) {
+    //     console.warn("⚠️ getCurrentUser.studyCardGroups are missing or undefined!", data.getCurrentUser);
+    //     return <p> Try creating one!</p>;
+    // }
 
     return (
         <main className="my-cards-page">

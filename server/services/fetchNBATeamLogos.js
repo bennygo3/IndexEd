@@ -6,7 +6,6 @@ const fetchNBATeamLogos = async () => {
     const nbaOptions = {
         method: 'GET',
         headers: {
-            // 'X-RapidAPI-Key': process.env.NBARAPIDAPI_KEY,
             'X-RapidAPI-Key': config.NBARAPIDAPI_KEY,
             'X-RapidAPI-Host': 'tank01-fantasy-stats.p.rapidapi.com'
         }

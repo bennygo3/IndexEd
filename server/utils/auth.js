@@ -3,7 +3,6 @@ import config from '../../config.js';
 
 const authMiddleware = ({ req }) => {
     let token = req.body.token || req.query.token || req.headers.authorization;
-    // const expiration = 'testExp' || '5h';
     const expiration = config.jwtExpiry;
 
     if (req.headers.authorization) {
@@ -17,8 +16,6 @@ const authMiddleware = ({ req }) => {
     }
 
     try {
-        // const secret = 'testSecret';
-        // const expiration = '5h';
         const decoded = jwt.verify(token, config.jwtSecret, { maxAge: expiration });
         req.user = decoded;
     } catch (err) {
@@ -30,12 +27,11 @@ const authMiddleware = ({ req }) => {
 };
 
 const signToken = ({ username, _id }) => {
-    const payload = { username, _id };
     
+    const payload = { username, _id };
     const token = jwt.sign(payload, config.jwtSecret, { expiresIn: expiration });
 
     return token;
 }
 
 export { authMiddleware, signToken };
-
