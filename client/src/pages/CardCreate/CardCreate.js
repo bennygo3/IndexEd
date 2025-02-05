@@ -19,7 +19,8 @@ export default function CardCreate() {
         setIsModalOpen(true);
     };
 
-    const handleAddToGroup= (studyCardGroupId) => {
+    const handleAddToGroup = (studyCardGroupId) => {
+        console.log("📌 handleAddToGroup: Setting studyCardGroupId:", studyCardGroupId);
         setStudyCardGroupId(studyCardGroupId);
         setIsModalOpen(false);
     }
@@ -43,18 +44,33 @@ export default function CardCreate() {
         }
     });
 
-    const handleCreateGroup = () => {
+    const handleCreateGroup = async () => {
         if (currentUserData?.getCurrentUser) {
-            createStudyCardGroup({
-                variables: {
-                    title: newGroupTitle,
-                    category: "",
-                    description: "",
+            try {
+                const { data } = await createStudyCardGroup({
+                    variables: {
+                        title: newGroupTitle,
+                        category: "",
+                        description: "",
+                    }
+                });
+                if (data?.createStudyCardGroup?._id) {
+                    console.log('📌 handleCreateGroup: New studyCardGroupId set:", data.createStudyCardGroup._id');
+                    setStudyCardGroupId(data.createStudyCardGroup._id);
+                } else {
+                    console.error("❌ handleCreateGroup: Failed to create a new study card group!")
                 }
-            });
-            setIsModalOpen(false);
+                // onCompleted: (data) => {
+                //     console.log("📌 handleCreateGroup: New studyCardGroupId set:", data.createStudyCardGroup._id);
+                //     setStudyCardGroupId(data.createStudyCardGroup._id);
+                // }
+                // });
+                setIsModalOpen(false);
+            } catch (error) {
+                console.error("❌ handleCreateGroup Error:", error)
+            }
         }
-    }
+    };
 
     // const [createStudycard, { loading: creatingStudycard, error: creatingCardError }] = useMutation(CREATE_STUDYCARD, {
     //     onCompleted: (data) => {
@@ -94,12 +110,18 @@ export default function CardCreate() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Form submitted with:", { front, back, studyCardGroupId });
+        // console.log("Form submitted with:", { front, back, studyCardGroupId });
+        console.log("📌 handleSubmit: studyCardGroupId before mutation:", studyCardGroupId);
+
+        if (!studyCardGroupId) {
+            console.error("❌ handleSubmit: studyCardGroupId is undefined or empty!");
+            return alert("Please select or create a study card group before creating a card.");
+        }
         createStudycard({
             variables: {
-                    front,
-                    back,
-                    studyCardGroupId,
+                front,
+                back,
+                studyCardGroupId,
             }
             // onCompleted: handleCreateCardSuccess, // this opens the modal upon successful card creation
         });
@@ -107,7 +129,7 @@ export default function CardCreate() {
 
 
     if (studyCardsLoading) return <p>Loading ...</p>
-    if(studyCardsError) return <p>Error loading: {studyCardsError.message}</p>
+    if (studyCardsError) return <p>Error loading: {studyCardsError.message}</p>
 
     return (
         <main>
@@ -159,7 +181,7 @@ export default function CardCreate() {
                 onAddToStack={handleAddToGroup}
                 studyCardGroups={currentUserData?.getCurrentUser?.studyCardGroups || []}
             />
-        
+
         </main>
     );
 }
