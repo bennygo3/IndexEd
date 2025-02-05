@@ -12,7 +12,7 @@ const studyCardSchema = new Schema(
         },
         defaultGroup: {
             type: Schema.Types.ObjectId,
-            ref: "StudyCards",
+            ref: "StudyCardsGroup",
             required: true,
         },
     },

@@ -76,8 +76,14 @@ export const Mutation = {
             });
         }
 
+        console.log("📌 studyCardGroupId received:", studyCardGroupId);
+        if (!studyCardGroupId) {
+            throw new GraphQLError('studyCardGroupId is missing!', {
+                extensions: { code: 'BAD_USER_INPUT' },
+            });
+        } 
         let group;
-
+        
         // const group = await StudyCardGroup.findById(studyCardGroupId);
         if (studyCardGroupId) {
             group = await StudyCardGroup.findById(studyCardGroupId);
@@ -109,7 +115,7 @@ export const Mutation = {
         // }
 
         // Create a new StudyCard
-        const newCard = new StudyCard({ front, back, studyCardGroupId });
+        const newCard = new StudyCard({ front, back, defaultGroup: studyCardGroupId, });
         const savedCard = await newCard.save();
 
         // Add the StudyCard to the group's studycards array
