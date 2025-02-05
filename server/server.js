@@ -3,6 +3,7 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser'
 import http from 'http';
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -27,7 +28,12 @@ const server = new ApolloServer({
 
 await server.start();
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
+// app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}))
 
 app.use(
     '/graphql',

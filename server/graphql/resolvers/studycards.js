@@ -23,7 +23,7 @@ export const Query = {
             });
         }
 
-        const group = await StudyCardGroup.findById(groupId).populate('studycards');
+        const group = await StudyCardGroup.findById(studyCardGroupId).populate('studycards');
         if (!group) {
             throw new GraphQLError('Study cards not found', {
                 extensions: { code: 'BAD_USER_INPUT' },
@@ -99,6 +99,8 @@ export const Mutation = {
 
                 await group.save();
             }
+
+            studyCardGroupId = group._id;
         }
         // if (!group) {
         //     throw new GraphQLError('Study cards not found', {
@@ -107,7 +109,7 @@ export const Mutation = {
         // }
 
         // Create a new StudyCard
-        const newCard = new StudyCard({ front, back, defaultGroup: groupId });
+        const newCard = new StudyCard({ front, back, studyCardGroupId });
         const savedCard = await newCard.save();
 
         // Add the StudyCard to the group's studycards array

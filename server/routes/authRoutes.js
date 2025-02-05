@@ -57,7 +57,6 @@ router.post('/register', async (req, res) => {
 // Login Route
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    
     const user = await Users.findOne({ username });
 
     if (!user) {
@@ -73,35 +72,75 @@ router.post('/login', async (req, res) => {
     const refreshToken = generateRefreshToken(user);
 
     refreshTokens.add(refreshToken);
-    res.json({ accessToken, refreshToken });
+
+    // Set accessToken in an httpOnly cookie
+    res.cookie('access_token', accessToken, {
+        httpOnly: true,
+        secure: false, // can change to true in production w/ HTTPS
+        sameSite: 'Lax',
+        maxAge: 15 * 60 * 1000 // 15 min
+    });
+
+    res.cookie('refresh_token', refreshToken, {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'Lax',
+        maxAge: 24 * 60 * 60 * 1000 // 1 day
+    })
+    res.json({ message: "Login successful" });
+
+    // res.json({ accessToken, refreshToken });
 });
 
 // Refresh Token Route
 router.post('/token', (req,res) => {
-    const { token } = req.body;
+    const refreshToken = req.cookies.refresh_token;
 
-    if (!token) return res.status(401).json({ message: 'No token provided' });
-    if (!refreshTokens.has(token)) return res.status(403).json({ message: 'Invalid refresh token' });
-
-    try {
-        const decoded = jwt.verify(token, config.jwtRefreshSecret);
-        const newAccessToken = generateAccessToken(decoded);
-        res.json({ accessToken: newAccessToken });
-    } catch (err) {
-        return res.status(403).json({ message: 'Invalid refresh token catch'})
+    if (!refreshToken || !refreshTokens.has(refreshToken)) {
+        return res.status(401).json({ message: 'No valid refresh token '})
     }
+
+    try{
+        const decoded = jwt.verify(refreshToken, config.jwtRefreshSecret);
+        const newAccessToken = generateAccessToken(decoded);
+
+        res.cookie('access_token', newAccessToken, {
+            httpOnly: true,
+            secure: false,
+            sameSite: 'Lax',
+            maxAge: 15 * 60 * 1000
+        });
+        res.json({ message: 'Token refreshed successfully' });
+    } catch (err) {
+        return res.status(403).json({ message: 'Invalid refresh token aRoutes'})
+    }
+    // const { token } = req.body;
+
+    // if (!token) return res.status(401).json({ message: 'No token provided' });
+    // if (!refreshTokens.has(token)) return res.status(403).json({ message: 'Invalid refresh token' });
+
+    // try {
+    //     const decoded = jwt.verify(token, config.jwtRefreshSecret);
+    //     const newAccessToken = generateAccessToken(decoded);
+    //     res.json({ accessToken: newAccessToken });
+    // } catch (err) {
+    //     return res.status(403).json({ message: 'Invalid refresh token catch'})
+    // }
 });
 
 // Logout Route - Revokes Refresh Token
 router.delete('/logout', (req, res) => {
-    const { token } = req.body;
+    res.clearCookie('access_token');
+    res.clearCookie('refresh_token');
+    res.json({ message: 'Looged out successfully '});
+    // const { token } = req.body;
 
-    if (!token) {
-        return res.status(400).json({ message: 'No token provided' });
-    }
+    // if (!token) {
+    //     return res.status(400).json({ message: 'No token provided' });
+    // }
 
-    refreshTokens.delete(token);
-    res.sendStatus(204);
+    // refreshTokens.delete(token);
+    // res.sendStatus(204);
 });
 
 export default router;
