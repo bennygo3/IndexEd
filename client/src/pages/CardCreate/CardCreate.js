@@ -72,6 +72,21 @@ export default function CardCreate() {
         }
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log('📌 handleSubmit: studyCardGroupId before mutation:', studyCardGroupId)
+
+        if (!studyCardGroupId) {
+            console.error('❌ handleSubmit: studyCardGroupId is undefined or empty!');
+
+            const existingGroups = currentUserData?.getCurrentUser?.studyCardGroups;
+            if (existingGroups?.length > 0) {
+                console.log('📌 handleSubmit: Found an existing group, setting studyCardGroupId:', existingGroups[0]._id);
+                setStudyCardGroupId(existingGroups[0]._id);
+            }
+        }
+    }
+
     // const [createStudycard, { loading: creatingStudycard, error: creatingCardError }] = useMutation(CREATE_STUDYCARD, {
     //     onCompleted: (data) => {
     //         console.log("Card created successfully:", data);
@@ -108,24 +123,24 @@ export default function CardCreate() {
 
     // };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // console.log("Form submitted with:", { front, back, studyCardGroupId });
-        console.log("📌 handleSubmit: studyCardGroupId before mutation:", studyCardGroupId);
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     // console.log("Form submitted with:", { front, back, studyCardGroupId });
+    //     console.log("📌 handleSubmit: studyCardGroupId before mutation:", studyCardGroupId);
 
-        if (!studyCardGroupId) {
-            console.error("❌ handleSubmit: studyCardGroupId is undefined or empty!");
-            return alert("Please select or create a study card group before creating a card.");
-        }
-        createStudycard({
-            variables: {
-                front,
-                back,
-                studyCardGroupId,
-            }
-            // onCompleted: handleCreateCardSuccess, // this opens the modal upon successful card creation
-        });
-    };
+    //     if (!studyCardGroupId) {
+    //         console.error("❌ handleSubmit: studyCardGroupId is undefined or empty!");
+    //         return alert("Please select or create a study card group before creating a card.");
+    //     }
+    //     createStudycard({
+    //         variables: {
+    //             front,
+    //             back,
+    //             studyCardGroupId,
+    //         }
+    //         // onCompleted: handleCreateCardSuccess, // this opens the modal upon successful card creation
+    //     });
+    // };
 
 
     if (studyCardsLoading) return <p>Loading ...</p>

@@ -24,10 +24,10 @@ const userSchema = new Schema(
             type: Date,
             default: Date.now
         },
-        studyCardGroups: [
+        studyGenres: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'StudyCards',
+                ref: 'StudyGenres',
             },
         ],
         snakeScores: [

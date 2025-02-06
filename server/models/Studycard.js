@@ -10,9 +10,9 @@ const studyCardSchema = new Schema(
             type: String,
             required: true,
         },
-        defaultGroup: {
+        studyGenres: {
             type: Schema.Types.ObjectId,
-            ref: "StudyCardsGroup",
+            ref: "StudyGenres",
             required: true,
         },
     },

@@ -1,5 +1,5 @@
 import User from './Users.js';
-import Stack from './StudyCardGroups.js';
+import StudyGenres from './StudyGenres.js';
 import Studycard from './StudyCard.js';
 import SnakeScore from './SnakeScore.js';
-export { User, Stack, Studycard, SnakeScore };
+export { User, StudyGenres, Studycard, SnakeScore };

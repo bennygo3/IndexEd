@@ -14,8 +14,11 @@ const Query = {
 
         const user = await Users.findById(context.user._id)
             .populate({
-                path: 'studyCardGroups',
-                populate: 'StudyCards',
+                path: 'studyGenres',
+                populate: {
+                    path: 'studyCards',
+                    model: 'StudyCard',
+                }, 
             })
             .populate({
                 path: 'snakeScores',

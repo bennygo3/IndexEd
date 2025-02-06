@@ -38,12 +38,13 @@ router.post('/register', async (req, res) => {
         return res.status(400).json({ message: 'Username is already taken' });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new Users({
         username,
         email,
-        password: hashedPassword,
+        password,
+        // password: hashedPassword,
     });
 
     await newUser.save();
