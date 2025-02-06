@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 
-export default function AddToStackModal({ isOpen, onClose, onCreateStack, onAddToStack, stacks, cardId }) {
-    const [newStackTitle, setNewStackTitle] = useState('');
-    const [selectedStackId, setSelectedStackId] = useState('');
+export default function AddToStackModal({ isOpen, onClose, onCreateGenre, onAddToGenre, studyGenres, cardId }) {
+    const [newGenreTitle, setNewGenreTitle] = useState('');
+    const [selectedGenreId, setSelectedGenreId] = useState('');
 
-    const handleCreateStack = async () => {
-        const newStackId = await onCreateStack(newStackTitle);
-        if (newStackId) {
-            onAddToStack(newStackId, cardId);
+    const handleCreateGenre = async () => {
+        const newGenreId = await onCreateGenre(newGenreTitle);
+        if (newGenreId) {
+            onAddToGenre(newGenreId, cardId);
             onClose();
         }
     };
 
-    const handleAddToStack = () => {
-        onAddToStack(selectedStackId, cardId);
+    const handleAddToGenre = () => {
+        onAddToGenre(selectedGenreId, cardId);
         onClose();
     };
 
@@ -27,25 +27,25 @@ export default function AddToStackModal({ isOpen, onClose, onCreateStack, onAddT
                 <span className="close" onClick={onClose}>&times;</span>
                 <h2>Add Card to Stack</h2>
                 <select 
-                    value={selectedStackId}
-                    onChange={(e) => setSelectedStackId(e.target.value)}
+                    value={selectedGenreId}
+                    onChange={(e) => setSelectedGenreId(e.target.value)}
                 >
-                    <option value="">Select a stack</option>
-                    {stacks.map((stack) => (
-                        <option key={stack._id} value={stack._id}>
-                            {stack.title}
+                    <option value="">Select a Genre</option>
+                    {studyGenres.map((genre) => (
+                        <option key={genre._id} value={genre._id}>
+                            {genre.title}
                         </option>
                     ))}
                 </select>
-                <button onClick={handleAddToStack}>Add to Selected Stack</button>
+                <button onClick={handleAddToGenre}>Add to Selected Genre</button>
                 <hr />
                 <input
                     type="text"
-                    value={newStackTitle}
-                    onChange={(e) => setNewStackTitle(e.target.value)}
-                    placeholder="New Stack Title"
+                    value={newGenreTitle}
+                    onChange={(e) => setNewGenreTitle(e.target.value)}
+                    placeholder="New Genre Title"
                 />
-                <button onClick={handleCreateStack}>Create New Stack</button>
+                <button onClick={handleCreateGenre}>Create New Genre</button>
             </div>
         </div>
     );

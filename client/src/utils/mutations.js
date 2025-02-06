@@ -10,17 +10,17 @@ export const UPDATE_IS_NEW_USER = gql`
 `;
 
 export const CREATE_STUDYCARD = gql`
-    mutation createStudyCard($front: String!, $back: String!, $studyCardGroupId: ID!) {
-        createStudyCard(front: $front, back: $back, studyCardGroupId: $studyCardGroupId) {
+    mutation createStudyCard($front: String!, $back: String!, $studyGenreId: ID!) {
+        createStudyCard(front: $front, back: $back, studyGenreId: $studyGenreId) {
             _id
             front
             back      
         }
     }
 `;
-export const CREATE_STUDYCARD_GROUP = gql`
-    mutation createStudyCardGroup($title: String!, $category: String!, $description: String) {
-        createStudyCardGroup(title: $title, category: $category, description: $description) {
+export const CREATE_STUDYGENRE = gql`
+    mutation createStudyGenre($title: String!, $category: String!, $description: String) {
+        createStudyGenre(title: $title, category: $category, description: $description) {
             _id
             title
             category

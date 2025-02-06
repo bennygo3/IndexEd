@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { CREATE_STUDYCARD, CREATE_STUDYCARD_GROUP } from '../../utils/mutations.js';
+import { CREATE_STUDYCARD, CREATE_STUDYGENRE } from '../../utils/mutations.js';
 import { GET_CURRENT_USER } from '../../utils/queries.js';
 import './CardCreate.css';
 import NavbarCC from '../../components/Navbar/NavbarCC.js';
@@ -10,8 +10,8 @@ import AddToStackModal from '../../components/AddToStackModal/AddToStackModal.js
 export default function CardCreate() {
     const [front, setFront] = useState('');
     const [back, setBack] = useState('');
-    const [studyCardGroupId, setStudyCardGroupId] = useState('');
-    const [newGroupTitle, setNewGroupTitle] = useState('');
+    const [studyGenreId, setStudyGenreId] = useState('');
+    const [newGenreTitle, setNewGenreTitle] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleCreateCardSuccess = (data) => {
@@ -19,17 +19,17 @@ export default function CardCreate() {
         setIsModalOpen(true);
     };
 
-    const handleAddToGroup = (studyCardGroupId) => {
-        console.log("📌 handleAddToGroup: Setting studyCardGroupId:", studyCardGroupId);
-        setStudyCardGroupId(studyCardGroupId);
+    const handleAddToGenre = (studyGenreId) => {
+        console.log("📌 handleAddToGroup: Setting studyCardGroupId:", studyGenreId);
+        setStudyGenreId(studyGenreId);
         setIsModalOpen(false);
     }
 
-    const { data: currentUserData, loading: studyCardsLoading, error: studyCardsError, refetch: refetchGroups } = useQuery(GET_CURRENT_USER);
+    const { data: currentUserData, loading: studyGenresLoading, error: studyGenresError, refetch: refetchGenres } = useQuery(GET_CURRENT_USER);
     console.log(currentUserData);
     // const { data: currentUserData } = useQuery(GET_CURRENT_USER);
 
-    const [createStudycard, { loading: creatingStudycard, error: creatingCardError }] = useMutation(CREATE_STUDYCARD, {
+    const [createStudyCard, { loading: creatingStudyCard, error: creatingCardError }] = useMutation(CREATE_STUDYCARD, {
         onCompleted: handleCreateCardSuccess,
         onError: (error) => {
             console.error("Error creating card:", error);
@@ -37,26 +37,27 @@ export default function CardCreate() {
         }
     });
 
-    const [createStudyCardGroup, { error: creatingGroupError }] = useMutation(CREATE_STUDYCARD_GROUP, {
+    const [createStudyGenre, { error: creatingGenreError }] = useMutation(CREATE_STUDYGENRE, {
         onCompleted: (data) => {
-            setStudyCardGroupId(data.createStudyCardGroup._id);
-            refetchGroups();
+            console.log("✅ New Study Genre Created:", data.createStudyGenre);
+            setStudyGenreId(data.createStudyGenre._id);
+            refetchGenres();
         }
     });
 
-    const handleCreateGroup = async () => {
+    const handleCreateGenre = async () => {
         if (currentUserData?.getCurrentUser) {
             try {
-                const { data } = await createStudyCardGroup({
+                const { data } = await createStudyGenre({
                     variables: {
-                        title: newGroupTitle,
+                        title: newGenreTitle,
                         category: "",
                         description: "",
                     }
                 });
-                if (data?.createStudyCardGroup?._id) {
-                    console.log('📌 handleCreateGroup: New studyCardGroupId set:", data.createStudyCardGroup._id');
-                    setStudyCardGroupId(data.createStudyCardGroup._id);
+                if (data?.createStudyGenre?._id) {
+                    console.log('📌 handleCreateGenre: New studyGenreId set:', data.createStudyGenre._id);
+                    setStudyGenreId(data.createStudyGenre._id);
                 } else {
                     console.error("❌ handleCreateGroup: Failed to create a new study card group!")
                 }
@@ -74,20 +75,93 @@ export default function CardCreate() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('📌 handleSubmit: studyCardGroupId before mutation:', studyCardGroupId)
+        console.log('📌 handleSubmit: studyGenreId before mutation:', studyGenreId)
 
-        if (!studyCardGroupId) {
-            console.error('❌ handleSubmit: studyCardGroupId is undefined or empty!');
+        if (!studyGenreId) {
+            console.error('❌ handleSubmit: studyGenreId is undefined or empty!');
 
-            const existingGroups = currentUserData?.getCurrentUser?.studyCardGroups;
-            if (existingGroups?.length > 0) {
-                console.log('📌 handleSubmit: Found an existing group, setting studyCardGroupId:', existingGroups[0]._id);
-                setStudyCardGroupId(existingGroups[0]._id);
+            const existingGenres = currentUserData?.getCurrentUser?.studyGenres;
+            if (existingGenres?.length > 0) {
+                console.log('📌 handleSubmit: Found an existing genre, setting studyCardGroupId:', existingGenres[0]._id);
+                setStudyGenreId(existingGenres[0]._id);
+            } else {
+                console.warn('no existing study genres found. cannot proceed.');
+                alert('Please select or create a study genre before adding a card.');
+                return;
             }
+        }
+        try {
+            await createStudyCard({
+                variables: {
+                    front,
+                    back,
+                    studyGenreId,
+                }
+            });
+        } catch (error) {
+            console.error('❌ Error submitting study card:', error)
         }
     }
 
-    // const [createStudycard, { loading: creatingStudycard, error: creatingCardError }] = useMutation(CREATE_STUDYCARD, {
+    if (studyGenresLoading) return <p>Loading ...</p>
+    if (studyGenresError) return <p>Error loading: {studyGenresError.message}</p>
+
+    return (
+        <main>
+            <header className="cardCreate-header">
+                <h1>Create A <br></br>New Card</h1>
+                <NavbarCC />
+            </header>
+
+            <div className="redLine-cc"></div>
+            <div className="background-lines">
+                <LineGenerator amount={25} colorClass="blue-line" />
+            </div>
+
+            <div className="form-cc">
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="front" className="label-class">Front of the Studycard:</label>
+                    <textarea
+                        id="front"
+                        className="input-class"
+                        value={front}
+                        onChange={(e) => setFront(e.target.value)}
+                    />
+
+                    <label htmlFor="back" className="label-class">Back of the Studycard:</label>
+                    <textarea
+                        id="back"
+                        className="input-class"
+                        value={back}
+                        onChange={(e) => setBack(e.target.value)}
+                    />
+                    <label htmlFor="newGenreTitle" className="label-class">New Genre Title:</label>
+                    <input
+                        id="newGenreTitle"
+                        className="input-class"
+                        value={newGenreTitle}
+                        onChange={(e) => setNewGenreTitle(e.target.value)}
+                    />
+                    <button className="create-button" type="submit" disabled={creatingStudyCard}>Create!</button>
+
+                </form>
+            </div>
+
+            {creatingCardError && <p>Error creating card: {creatingCardError.message}</p>}
+            {creatingGenreError && <p>Error creating study card group: {creatingGenreError.message}</p>}
+            <AddToStackModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onCreateGenre={handleCreateGenre}
+                onAddToGenre={handleAddToGenre}
+                studyGenres={currentUserData?.getCurrentUser?.studyGenres || []}
+            />
+
+        </main>
+    );
+}
+
+//const [createStudycard, { loading: creatingStudycard, error: creatingCardError }] = useMutation(CREATE_STUDYCARD, {
     //     onCompleted: (data) => {
     //         console.log("Card created successfully:", data);
     //         alert("Card created successfully!");
@@ -141,62 +215,3 @@ export default function CardCreate() {
     //         // onCompleted: handleCreateCardSuccess, // this opens the modal upon successful card creation
     //     });
     // };
-
-
-    if (studyCardsLoading) return <p>Loading ...</p>
-    if (studyCardsError) return <p>Error loading: {studyCardsError.message}</p>
-
-    return (
-        <main>
-            <header className="cardCreate-header">
-                <h1>Create A <br></br>New Card</h1>
-                <NavbarCC />
-            </header>
-
-            <div className="redLine-cc"></div>
-            <div className="background-lines">
-                <LineGenerator amount={25} colorClass="blue-line" />
-            </div>
-
-            <div className="form-cc">
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="front" className="label-class">Front of the Studycard:</label>
-                    <textarea
-                        id="front"
-                        className="input-class"
-                        value={front}
-                        onChange={(e) => setFront(e.target.value)}
-                    />
-
-                    <label htmlFor="back" className="label-class">Back of the Studycard:</label>
-                    <textarea
-                        id="back"
-                        className="input-class"
-                        value={back}
-                        onChange={(e) => setBack(e.target.value)}
-                    />
-                    <label htmlFor="newGroupTitle" className="label-class">New Group Title:</label>
-                    <input
-                        id="newGroupTitle"
-                        className="input-class"
-                        value={newGroupTitle}
-                        onChange={(e) => setNewGroupTitle(e.target.value)}
-                    />
-                    <button className="create-button" type="submit" disabled={creatingStudycard}>Create!</button>
-
-                </form>
-            </div>
-
-            {creatingCardError && <p>Error creating card: {creatingCardError.message}</p>}
-            {creatingGroupError && <p>Error creating study card group: {creatingGroupError.message}</p>}
-            <AddToStackModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                onCreateStack={handleCreateGroup}
-                onAddToStack={handleAddToGroup}
-                studyCardGroups={currentUserData?.getCurrentUser?.studyCardGroups || []}
-            />
-
-        </main>
-    );
-}

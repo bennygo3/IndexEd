@@ -33,7 +33,7 @@ export const Query = {
         return genre;
     },
 
-    async studyCard(_, { id }) {
+    async getStudyCard(_, { id }) {
         const card = await StudyCard.findById(id);
         if (!card) {
             throw new GraphQLError('Card not found.', {

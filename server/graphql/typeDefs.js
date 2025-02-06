@@ -4,7 +4,7 @@ export const typeDefs = `#graphql
         email: String!
         username: String!
         createdAt: String!
-        studyGenres: [StudyGenres]
+        studyGenres: [StudyGenre]
         snakeScores: [SnakeScore]
     }
 
@@ -12,10 +12,10 @@ export const typeDefs = `#graphql
         _id: ID!
         front: String!
         back: String!
-        studyGenres: ID!
+        studyGenreId: ID!
     }
 
-    type StudyGenres {
+    type StudyGenre {
         _id: ID!
         title: String!
         category: String!
@@ -42,9 +42,9 @@ export const typeDefs = `#graphql
     type Query {
         getCurrentUser: User
         getHighScoreSnake(userId: ID!): SnakeScore
-        getStudyCardGroups(userId: ID): [StudyCardGroup] 
-        getStudyCardGroup(groupId: ID!): StudyCardGroup
-        studycard(id: ID!): StudyCard
+        getStudyGenres(userId: ID): [StudyGenre] 
+        getStudyGenre(groupId: ID!): StudyGenre
+        getStudyCard(id: ID!): StudyCard
     }
     
     type Mutation {
@@ -52,11 +52,11 @@ export const typeDefs = `#graphql
         login(username: String!, password: String!): Auth!
         updateHighScoreSnake(username: ID!, newHighScoreSnake: Int!): SnakeScore!
         
-        createStudyCardGroup(title: String!, category: String!, description: String): StudyCardGroup!
-        deleteStudyCardGroup(groupId: ID!): Boolean!
-        updateStudyCardGroup(groupId: ID!, title: String, category: String, description: String): StudyCardGroup!
+        createStudyGenre(title: String!, category: String!, description: String): StudyGenre!
+        deleteStudyGenre(genreId: ID!): Boolean!
+        updateStudyGenre(genreId: ID!, title: String, category: String, description: String): StudyGenre!
         
-        createStudyCard(front: String!, back: String!, studyCardGroupId: ID!): StudyCard!
+        createStudyCard(front: String!, back: String!, studyGenreId: ID!): StudyCard!
         deleteStudyCard(cardId: ID!): Boolean!
         updateStudyCard(cardId: ID!, front: String, back: String): StudyCard!
     }

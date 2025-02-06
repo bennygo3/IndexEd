@@ -38,13 +38,13 @@ export default function MyCards() {
                 {/* <p id="my-cards-header-p">1. the devotion of time and attention to acquiring knowledge on an academic subject, especially by means of notecards*</p> */}
             </header>
             {/* <Wood> */}
-            {data.getCurrentUser?.studyCardGroups.length > 0 ? (
-                data.getCurrentUser.studyCardGroups.map(group => (
-                <section key={group._id} id="my-cards-wood">
+            {data.getCurrentUser?.studyGenres.length > 0 ? (
+                data.getCurrentUser.studyGenres.map(genre => (
+                <section key={genre._id} id="my-cards-wood">
                     <Wood>
-                        <h2>{group.title}</h2>
+                        <h2>{genre.title}</h2>
                         <div className="my-cards-carousel">
-                            {group.studycards.map(card => (
+                            {genre.studyCards.map(card => (
                                 <div
                                     key={card._id}
                                     className="my-cards-container"
