@@ -27,7 +27,7 @@ const userSchema = new Schema(
         studyGenres: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'StudyGenres',
+                ref: 'StudyGenre',
             },
         ],
         snakeScores: [
@@ -65,8 +65,8 @@ userSchema.methods.isCorrectPassword = async function (password) {
 };
 
 // Virtual to count total studycards
-userSchema.virtual('studyCardGroupCount').get(function () {
-    return this.studyCardGroups ? this.studyCardGroups.length : 0;
+userSchema.virtual('studyGenreCount').get(function () {
+    return this.studyGenres ? this.studyGenres.length : 0;
 });
 
 const User = model('User', userSchema);

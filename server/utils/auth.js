@@ -18,6 +18,18 @@ const authMiddleware = ({ req }) => {
     }
 
     return req;
+};
+
+const signToken = ({ _id, username }) => {
+    
+    const payload = { _id, username };
+    const token = jwt.sign(payload, config.jwtSecret, { expiresIn: config.jwtExpiry });
+
+    return token;
+}
+
+export { authMiddleware, signToken };
+
     // let token = req.body.token || req.query.token || req.headers.authorization;
     // const expiration = config.jwtExpiry;
 
@@ -40,14 +52,3 @@ const authMiddleware = ({ req }) => {
     // }
 
     // return req;
-};
-
-const signToken = ({ username, _id }) => {
-    
-    const payload = { username, _id };
-    const token = jwt.sign(payload, config.jwtSecret, { expiresIn: expiration });
-
-    return token;
-}
-
-export { authMiddleware, signToken };

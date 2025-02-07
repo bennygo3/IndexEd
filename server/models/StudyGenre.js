@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 import dateFormat from '../utils/dateFormat.js';
 
-const studyGenresSchema = new Schema(
+const studyGenreSchema = new Schema(
     {
         title: {
             type: String,
@@ -36,6 +36,6 @@ const studyGenresSchema = new Schema(
     }
 );
 
-const StudyGenres = model('StudyGenres', studyGenresSchema);
+const StudyGenre = model('StudyGenre', studyGenreSchema);
 
-export default StudyGenres;
+export default StudyGenre;

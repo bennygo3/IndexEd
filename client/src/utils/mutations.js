@@ -10,8 +10,8 @@ export const UPDATE_IS_NEW_USER = gql`
 `;
 
 export const CREATE_STUDYCARD = gql`
-    mutation createStudyCard($front: String!, $back: String!, $studyGenreId: ID!) {
-        createStudyCard(front: $front, back: $back, studyGenreId: $studyGenreId) {
+    mutation createStudyCard($front: String!, $back: String!, $studyGenre: ID!) {
+        createStudyCard(front: $front, back: $back, studyGenre: $studyGenre) {
             _id
             front
             back      

@@ -48,7 +48,7 @@ export const GET_STUDY_GENRES = gql`
 
 export const GET_STUDY_CARD = gql`
 query GetStudyCard($id: ID!) {
-    studyCard(id: $id){
+    getStudyCard(id: $id){
         _id
         front
         back

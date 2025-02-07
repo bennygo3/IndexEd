@@ -15,6 +15,7 @@ const Query = {
         const user = await Users.findById(context.user._id)
             .populate({
                 path: 'studyGenres',
+                model: 'StudyGenre',
                 populate: {
                     path: 'studyCards',
                     model: 'StudyCard',

@@ -43,7 +43,7 @@ export const typeDefs = `#graphql
         getCurrentUser: User
         getHighScoreSnake(userId: ID!): SnakeScore
         getStudyGenres(userId: ID): [StudyGenre] 
-        getStudyGenre(groupId: ID!): StudyGenre
+        getStudyGenre(studyGenreId: ID!): StudyGenre
         getStudyCard(id: ID!): StudyCard
     }
     
