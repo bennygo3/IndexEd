@@ -12,7 +12,6 @@ export const typeDefs = `#graphql
         _id: ID!
         front: String!
         back: String!
-        studyGenreId: ID!
     }
 
     type StudyGenre {
@@ -56,7 +55,7 @@ export const typeDefs = `#graphql
         deleteStudyGenre(genreId: ID!): Boolean!
         updateStudyGenre(genreId: ID!, title: String, category: String, description: String): StudyGenre!
         
-        createStudyCard(front: String!, back: String!, studyGenreId: ID!): StudyCard!
+        createStudyCard(front: String!, back: String!): StudyCard!
         deleteStudyCard(cardId: ID!): Boolean!
         updateStudyCard(cardId: ID!, front: String, back: String): StudyCard!
     }

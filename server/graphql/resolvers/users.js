@@ -15,10 +15,8 @@ const Query = {
         const user = await Users.findById(context.user._id)
             .populate({
                 path: 'studyGenres',
-                model: 'StudyGenre',
                 populate: {
                     path: 'studyCards',
-                    model: 'StudyCard',
                 }, 
             })
             .populate({
@@ -51,7 +49,7 @@ const Query = {
         const username = snakeScore.username || "Unknown";
 
         return {
-            _id: snakeScore.id,
+            _id: snakeScore._id,
             userId: snakeScore.userId,
             username: username,
             highScore: snakeScore.highScore,
@@ -100,7 +98,12 @@ const Mutation = {
             password,
         });
 
-        const token = signToken(user);
+        // const token = signToken(user);
+        const token = signToken({
+            _id: user._id,
+            username: user.username,
+        });
+
         return { token, user };
     },
 };

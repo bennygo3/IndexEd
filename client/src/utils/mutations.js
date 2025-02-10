@@ -8,28 +8,36 @@ export const UPDATE_IS_NEW_USER = gql`
         }
     }
 `;
-
 export const CREATE_STUDYCARD = gql`
-    mutation createStudyCard($front: String!, $back: String!, $studyGenre: ID!) {
-        createStudyCard(front: $front, back: $back, studyGenre: $studyGenre) {
+    mutation createStudyCard($front: String!, $back: String!) {
+        createStudyCard(front: $front, back: $back) {
             _id
             front
             back      
         }
     }
 `;
-export const CREATE_STUDYGENRE = gql`
-    mutation createStudyGenre($title: String!, $category: String!, $description: String) {
-        createStudyGenre(title: $title, category: $category, description: $description) {
-            _id
-            title
-            category
-            description
-            createdAt
-            updatedAt
-        }
-    }
-`;
+// export const CREATE_STUDYCARD = gql`
+//     mutation createStudyCard($front: String!, $back: String!, $studyGenre: ID!) {
+//         createStudyCard(front: $front, back: $back, studyGenre: $studyGenre) {
+//             _id
+//             front
+//             back      
+//         }
+//     }
+// `;
+// export const CREATE_STUDYGENRE = gql`
+//     mutation createStudyGenre($title: String!, $category: String!, $description: String) {
+//         createStudyGenre(title: $title, category: $category, description: $description) {
+//             _id
+//             title
+//             category
+//             description
+//             createdAt
+//             updatedAt
+//         }
+//     }
+// `;
 
 export const UPDATE_STUDYCARD = gql `
     mutation updateStudyCard($cardId: ID!, $front: String, $back: String) {

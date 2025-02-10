@@ -65,53 +65,54 @@ export const Mutation = {
     },
 
     // Add a StudyCard to a StudyCardGroup
-    async createStudyCard(_, { front, back, studyGenreId }, context) {
+    // async createStudyCard(_, { front, back, studyGenreId }, context) {
+    async createStudyCard(_, { front, back }, context) {
+
         if (!context.user) {
             throw new GraphQLError('You must be logged in to create a new study card', {
                 extensions: { code: 'UNAUTHENTICATED' },
             });
         }
 
-        console.log("📌 studyGenreId received:", studyGenreId);
-        if (!studyGenreId) {
-            throw new GraphQLError('studyCardGroupId is missing!', {
-                extensions: { code: 'BAD_USER_INPUT' },
-            });
-        } 
-        let genre;
+        console.log("📌 Creating study card with:", { front, back });
+
+        // console.log("📌 studyGenreId received:", studyGenreId);
+
+        // let genre;
         
         // const group = await StudyCardGroup.findById(studyCardGroupId);
-        if (studyGenreId) {
-            genre = await StudyGenre.findById(studyGenreId);
-            if (!genre) {
-                throw new GraphQLError('Study card group not found', {
-                    extensions: { code: 'BAD_USER_INPUT' },
-                });
-            }
-        } else {
-            genre = await StudyGenre.findOne({ title: "General", author: context.user._id });
+        // if (studyGenreId) {
+        //     genre = await StudyGenre.findById(studyGenreId);
+        //     if (!genre) {
+        //         throw new GraphQLError('Study card group not found', {
+        //             extensions: { code: 'BAD_USER_INPUT' },
+        //         });
+        //     }
+        // } else {
+        //     genre = await StudyGenre.findOne({ title: "General", author: context.user._id });
 
-            if (!genre) {
-                genre = new StudyGenre({
-                    title: "General",
-                    category: "Unsorted",
-                    description: "Default study genre",
-                    author: context.user._id,
-                });
+        //     if (!genre) {
+        //         genre = new StudyGenre({
+        //             title: "General",
+        //             category: "Unsorted",
+        //             description: "Default study genre",
+        //             author: context.user._id,
+        //         });
 
-                await genre.save();
-            }
+        //         await genre.save();
+        //     }
 
-            studyGenreId = genre._id;
-        }
+        //     studyGenreId = genre._id;
+        // }
 
         // Create a new StudyCard
-        const newCard = new StudyCard({ front, back, studyGenreId, });
+        // const newCard = new StudyCard({ front, back, studyGenreId, });
+        const newCard = new StudyCard({ front, back });
         const savedCard = await newCard.save();
 
         // Add the StudyCard to the group's studycards array
-        genre.studyCards.push(savedCard._id);
-        await genre.save();
+        // genre.studyCards.push(savedCard._id);
+        // await genre.save();
 
         return savedCard;
     },

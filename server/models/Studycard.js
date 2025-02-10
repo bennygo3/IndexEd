@@ -10,11 +10,11 @@ const studyCardSchema = new Schema(
             type: String,
             required: true,
         },
-        studyGenreId: {
-            type: Schema.Types.ObjectId,
-            ref: "StudyGenre",
-            required: true,
-        },
+        // studyGenreId: {
+        //     type: Schema.Types.ObjectId,
+        //     ref: "StudyGenre",
+        //     required: true,
+        // },
     },
     {
         timestamps: true,

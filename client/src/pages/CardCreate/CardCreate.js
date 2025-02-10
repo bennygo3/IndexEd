@@ -1,32 +1,36 @@
 import { useState } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
-import { CREATE_STUDYCARD, CREATE_STUDYGENRE } from '../../utils/mutations.js';
-import { GET_CURRENT_USER } from '../../utils/queries.js';
+// import { useMutation, useQuery } from '@apollo/client';
+import { useMutation} from '@apollo/client';
+
+// import { CREATE_STUDYCARD, CREATE_STUDYGENRE } from '../../utils/mutations.js';
+import { CREATE_STUDYCARD } from '../../utils/mutations.js';
+
+// import { GET_CURRENT_USER } from '../../utils/queries.js';
 import './CardCreate.css';
 import NavbarCC from '../../components/Navbar/NavbarCC.js';
 import LineGenerator from '../../components/Lines/LineGenerator.js';
-import AddToStackModal from '../../components/AddToStackModal/AddToStackModal.js';
+// import AddToStackModal from '../../components/AddToStackModal/AddToStackModal.js';
 
 export default function CardCreate() {
     const [front, setFront] = useState('');
     const [back, setBack] = useState('');
-    const [studyGenreId, setStudyGenreId] = useState('');
-    const [newGenreTitle, setNewGenreTitle] = useState('');
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    // const [studyGenreId, setStudyGenreId] = useState('');
+    // const [newGenreTitle, setNewGenreTitle] = useState('');
+    // const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleCreateCardSuccess = (data) => {
         console.log("Card created successfully:", data);
-        setIsModalOpen(true);
+        // setIsModalOpen(true);
     };
 
-    const handleAddToGenre = (studyGenreId) => {
-        console.log("📌 handleAddToGroup: Setting studyCardGroupId:", studyGenreId);
-        setStudyGenreId(studyGenreId);
-        setIsModalOpen(false);
-    }
+    // const handleAddToGenre = (studyGenreId) => {
+    //     console.log("📌 handleAddToGroup: Setting studyCardGroupId:", studyGenreId);
+    //     setStudyGenreId(studyGenreId);
+    //     setIsModalOpen(false);
+    // }
 
-    const { data: currentUserData, loading: studyGenresLoading, error: studyGenresError, refetch: refetchGenres } = useQuery(GET_CURRENT_USER);
-    console.log(currentUserData);
+    // const { data: currentUserData, loading: studyGenresLoading, error: studyGenresError, refetch: refetchGenres } = useQuery(GET_CURRENT_USER);
+    // console.log(currentUserData);
     // const { data: currentUserData } = useQuery(GET_CURRENT_USER);
 
     const [createStudyCard, { loading: creatingStudyCard, error: creatingCardError }] = useMutation(CREATE_STUDYCARD, {
@@ -37,74 +41,85 @@ export default function CardCreate() {
         }
     });
 
-    const [createStudyGenre, { error: creatingGenreError }] = useMutation(CREATE_STUDYGENRE, {
-        onCompleted: (data) => {
-            console.log("✅ New Study Genre Created:", data.createStudyGenre);
-            setStudyGenreId(data.createStudyGenre._id);
-            refetchGenres();
-        }
-    });
-
-    const handleCreateGenre = async () => {
-        if (currentUserData?.getCurrentUser) {
-            try {
-                const { data } = await createStudyGenre({
-                    variables: {
-                        title: newGenreTitle,
-                        category: "",
-                        description: "",
-                    }
-                });
-                if (data?.createStudyGenre?._id) {
-                    console.log('📌 handleCreateGenre: New studyGenreId set:', data.createStudyGenre._id);
-                    setStudyGenreId(data.createStudyGenre._id);
-                } else {
-                    console.error("❌ handleCreateGroup: Failed to create a new study card group!")
-                }
-                // onCompleted: (data) => {
-                //     console.log("📌 handleCreateGroup: New studyCardGroupId set:", data.createStudyCardGroup._id);
-                //     setStudyCardGroupId(data.createStudyCardGroup._id);
-                // }
-                // });
-                setIsModalOpen(false);
-            } catch (error) {
-                console.error("❌ handleCreateGroup Error:", error)
-            }
-        }
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('📌 handleSubmit: studyGenreId before mutation:', studyGenreId)
+        console.log('📌 handleSubmit: Creating study card with:', { front, back });
 
-        if (!studyGenreId) {
-            console.error('❌ handleSubmit: studyGenreId is undefined or empty!');
-
-            const existingGenres = currentUserData?.getCurrentUser?.studyGenres;
-            if (existingGenres?.length > 0) {
-                console.log('📌 handleSubmit: Found an existing genre, setting studyCardGroupId:', existingGenres[0]._id);
-                setStudyGenreId(existingGenres[0]._id);
-            } else {
-                console.warn('no existing study genres found. cannot proceed.');
-                alert('Please select or create a study genre before adding a card.');
-                return;
-            }
-        }
         try {
             await createStudyCard({
                 variables: {
                     front,
                     back,
-                    studyGenreId,
                 }
             });
         } catch (error) {
-            console.error('❌ Error submitting study card:', error)
+            console.error('❌ Error submitting study card:', error);
         }
     }
 
-    if (studyGenresLoading) return <p>Loading ...</p>
-    if (studyGenresError) return <p>Error loading: {studyGenresError.message}</p>
+    // const [createStudyGenre, { error: creatingGenreError }] = useMutation(CREATE_STUDYGENRE, {
+    //     onCompleted: (data) => {
+    //         console.log("✅ New Study Genre Created:", data.createStudyGenre);
+    //         setStudyGenreId(data.createStudyGenre._id);
+    //         refetchGenres();
+    //     }
+    // });
+
+    // const handleCreateGenre = async () => {
+    //     if (currentUserData?.getCurrentUser) {
+    //         try {
+    //             const { data } = await createStudyGenre({
+    //                 variables: {
+    //                     title: newGenreTitle,
+    //                     category: "",
+    //                     description: "",
+    //                 }
+    //             });
+    //             if (data?.createStudyGenre?._id) {
+    //                 console.log('📌 handleCreateGenre: New studyGenreId set:', data.createStudyGenre._id);
+    //                 setStudyGenreId(data.createStudyGenre._id);
+    //             } else {
+    //                 console.error("❌ handleCreateGroup: Failed to create a new study card group!")
+    //             }
+    //             setIsModalOpen(false);
+    //         } catch (error) {
+    //             console.error("❌ handleCreateGroup Error:", error)
+    //         }
+    //     }
+    // };
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     console.log('📌 handleSubmit: studyGenreId before mutation:', studyGenreId)
+
+    //     if (!studyGenreId) {
+    //         console.error('❌ handleSubmit: studyGenreId is undefined or empty!');
+
+    //         const existingGenres = currentUserData?.getCurrentUser?.studyGenres;
+    //         if (existingGenres?.length > 0) {
+    //             console.log('📌 handleSubmit: Found an existing genre, setting studyCardGroupId:', existingGenres[0]._id);
+    //             setStudyGenreId(existingGenres[0]._id);
+    //         } else {
+    //             console.warn('no existing study genres found. cannot proceed.');
+    //             alert('Please select or create a study genre before adding a card.');
+    //             return;
+    //         }
+    //     }
+    //     try {
+    //         await createStudyCard({
+    //             variables: {
+    //                 front,
+    //                 back,
+    //                 studyGenreId,
+    //             }
+    //         });
+    //     } catch (error) {
+    //         console.error('❌ Error submitting study card:', error)
+    //     }
+    // }
+
+    // if (studyGenresLoading) return <p>Loading ...</p>
+    // if (studyGenresError) return <p>Error loading: {studyGenresError.message}</p>
 
     return (
         <main>
@@ -135,27 +150,27 @@ export default function CardCreate() {
                         value={back}
                         onChange={(e) => setBack(e.target.value)}
                     />
-                    <label htmlFor="newGenreTitle" className="label-class">New Genre Title:</label>
+                    {/* <label htmlFor="newGenreTitle" className="label-class">New Genre Title:</label>
                     <input
                         id="newGenreTitle"
                         className="input-class"
                         value={newGenreTitle}
                         onChange={(e) => setNewGenreTitle(e.target.value)}
-                    />
+                    /> */}
                     <button className="create-button" type="submit" disabled={creatingStudyCard}>Create!</button>
 
                 </form>
             </div>
 
             {creatingCardError && <p>Error creating card: {creatingCardError.message}</p>}
-            {creatingGenreError && <p>Error creating study card group: {creatingGenreError.message}</p>}
-            <AddToStackModal
+            {/* {creatingGenreError && <p>Error creating study card group: {creatingGenreError.message}</p>} */}
+            {/* <AddToStackModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 onCreateGenre={handleCreateGenre}
                 onAddToGenre={handleAddToGenre}
                 studyGenres={currentUserData?.getCurrentUser?.studyGenres || []}
-            />
+            /> */}
 
         </main>
     );
