@@ -30,6 +30,12 @@ const userSchema = new Schema(
                 ref: 'StudyGenre',
             },
         ],
+        studyCards: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'StudyCard'
+            }
+        ],
         snakeScores: [
             {
                 type: Schema.Types.ObjectId,

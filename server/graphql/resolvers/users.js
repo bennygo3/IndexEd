@@ -16,12 +16,15 @@ const Query = {
             .populate({
                 path: 'studyGenres',
                 populate: {
-                    path: 'studyCards',
+                    // path: 'studyCards',
+                    path: 'studyCards'
                 }, 
             })
-            .populate({
-                path: 'snakeScores',
-            });
+            .populate('studyCards')
+            .populate('snakeScores')
+            // .populate({
+            //     path: 'snakeScores',
+            // });
         
         if (!user) {
             throw new GraphQLError('User not found!', {

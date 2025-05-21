@@ -1,5 +1,6 @@
 import StudyCard from "../../models/StudyCard.js";
 import StudyGenre from "../../models/StudyGenre.js";
+import Users from '../../models/Users.js';
 import { GraphQLError } from 'graphql';
 
 export const Query = {
@@ -79,17 +80,7 @@ export const Mutation = {
         // console.log("📌 studyGenreId received:", studyGenreId);
 
         let genre = await StudyGenre.findOne({ title: "General", author: context.user._id });
-        
-        // const group = await StudyCardGroup.findById(studyCardGroupId);
-        // if (studyGenreId) {
-        //     genre = await StudyGenre.findById(studyGenreId);
-        //     if (!genre) {
-        //         throw new GraphQLError('Study card group not found', {
-        //             extensions: { code: 'BAD_USER_INPUT' },
-        //         });
-        //     }
-        // } else {
-        //     genre = await StudyGenre.findOne({ title: "General", author: context.user._id });
+    
 
             if (!genre) {
                 genre = new StudyGenre({
@@ -120,8 +111,25 @@ export const Mutation = {
         genre.studyCards.push(savedCard._id);
         await genre.save();
 
+        // Update user with newly created study card
+        await Users.findByIdAndUpdate(
+            context.user._id,
+            { $push: { studyCards: savedCard._id } }
+        );
+
         return savedCard;
     },
 };
 
 export default { Query, Mutation };
+
+        // const group = await StudyCardGroup.findById(studyCardGroupId);
+        // if (studyGenreId) {
+        //     genre = await StudyGenre.findById(studyGenreId);
+        //     if (!genre) {
+        //         throw new GraphQLError('Study card group not found', {
+        //             extensions: { code: 'BAD_USER_INPUT' },
+        //         });
+        //     }
+        // } else {
+        //     genre = await StudyGenre.findOne({ title: "General", author: context.user._id });
