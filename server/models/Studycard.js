@@ -15,6 +15,15 @@ const studyCardSchema = new Schema(
             ref: "StudyGenre",
             required: true,
         },
+        authorId: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+        },
+        authorUsername: {
+            type: String,
+            required: true,
+        },
     },
     {
         timestamps: true,

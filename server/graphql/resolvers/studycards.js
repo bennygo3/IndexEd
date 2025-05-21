@@ -110,6 +110,8 @@ export const Mutation = {
             front, 
             back, 
             studyGenreId: genre._id, 
+            authorId: context.user._id,
+            authorUsername: context.user.username,
         });
         // const newCard = new StudyCard({ front, back });
         const savedCard = await newCard.save();
