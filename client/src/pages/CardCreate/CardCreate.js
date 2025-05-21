@@ -57,70 +57,6 @@ export default function CardCreate() {
         }
     }
 
-    // const [createStudyGenre, { error: creatingGenreError }] = useMutation(CREATE_STUDYGENRE, {
-    //     onCompleted: (data) => {
-    //         console.log("✅ New Study Genre Created:", data.createStudyGenre);
-    //         setStudyGenreId(data.createStudyGenre._id);
-    //         refetchGenres();
-    //     }
-    // });
-
-    // const handleCreateGenre = async () => {
-    //     if (currentUserData?.getCurrentUser) {
-    //         try {
-    //             const { data } = await createStudyGenre({
-    //                 variables: {
-    //                     title: newGenreTitle,
-    //                     category: "",
-    //                     description: "",
-    //                 }
-    //             });
-    //             if (data?.createStudyGenre?._id) {
-    //                 console.log('📌 handleCreateGenre: New studyGenreId set:', data.createStudyGenre._id);
-    //                 setStudyGenreId(data.createStudyGenre._id);
-    //             } else {
-    //                 console.error("❌ handleCreateGroup: Failed to create a new study card group!")
-    //             }
-    //             setIsModalOpen(false);
-    //         } catch (error) {
-    //             console.error("❌ handleCreateGroup Error:", error)
-    //         }
-    //     }
-    // };
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     console.log('📌 handleSubmit: studyGenreId before mutation:', studyGenreId)
-
-    //     if (!studyGenreId) {
-    //         console.error('❌ handleSubmit: studyGenreId is undefined or empty!');
-
-    //         const existingGenres = currentUserData?.getCurrentUser?.studyGenres;
-    //         if (existingGenres?.length > 0) {
-    //             console.log('📌 handleSubmit: Found an existing genre, setting studyCardGroupId:', existingGenres[0]._id);
-    //             setStudyGenreId(existingGenres[0]._id);
-    //         } else {
-    //             console.warn('no existing study genres found. cannot proceed.');
-    //             alert('Please select or create a study genre before adding a card.');
-    //             return;
-    //         }
-    //     }
-    //     try {
-    //         await createStudyCard({
-    //             variables: {
-    //                 front,
-    //                 back,
-    //                 studyGenreId,
-    //             }
-    //         });
-    //     } catch (error) {
-    //         console.error('❌ Error submitting study card:', error)
-    //     }
-    // }
-
-    // if (studyGenresLoading) return <p>Loading ...</p>
-    // if (studyGenresError) return <p>Error loading: {studyGenresError.message}</p>
-
     return (
         <main>
             <header className="cardCreate-header">
@@ -230,3 +166,77 @@ export default function CardCreate() {
     //         // onCompleted: handleCreateCardSuccess, // this opens the modal upon successful card creation
     //     });
     // };
+
+        // const [createStudyGenre, { error: creatingGenreError }] = useMutation(CREATE_STUDYGENRE, {
+    //     onCompleted: (data) => {
+    //         console.log("✅ New Study Genre Created:", data.createStudyGenre);
+    //         setStudyGenreId(data.createStudyGenre._id);
+    //         refetchGenres();
+    //     }
+    // });
+
+    // const handleCreateGenre = async () => {
+    //     if (currentUserData?.getCurrentUser) {
+    //         try {
+    //             const { data } = await createStudyGenre({
+    //                 variables: {
+    //                     title: newGenreTitle,
+    //                     category: "",
+    //                     description: "",
+    //                 }
+    //             });
+    //             if (data?.createStudyGenre?._id) {
+    //                 console.log('📌 handleCreateGenre: New studyGenreId set:', data.createStudyGenre._id);
+    //                 setStudyGenreId(data.createStudyGenre._id);
+    //             } else {
+    //                 console.error("❌ handleCreateGroup: Failed to create a new study card group!")
+    //             }
+    //             setIsModalOpen(false);
+    //         } catch (error) {
+    //             console.error("❌ handleCreateGroup Error:", error)
+    //         }
+    //     }
+    // };
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     console.log('📌 handleSubmit: studyGenreId before mutation:', studyGenreId)
+
+    //     if (!studyGenreId) {
+    //         console.error('❌ handleSubmit: studyGenreId is undefined or empty!');
+
+    //         const existingGenres = currentUserData?.getCurrentUser?.studyGenres;
+    //         if (existingGenres?.length > 0) {
+    //             console.log('📌 handleSubmit: Found an existing genre, setting studyCardGroupId:', existingGenres[0]._id);
+    //             setStudyGenreId(existingGenres[0]._id);
+    //         } else {
+    //             console.warn('no existing study genres found. cannot proceed.');
+    //             alert('Please select or create a study genre before adding a card.');
+    //             return;
+    //         }
+    //     }
+    //     try {
+    //         await createStudyCard({
+    //             variables: {
+    //                 front,
+    //                 back,
+    //                 studyGenreId,
+    //             }
+    //         });
+    //     } catch (error) {
+    //         console.error('❌ Error submitting study card:', error)
+    //     }
+    // }
+
+    // if (studyGenresLoading) return <p>Loading ...</p>
+    // if (studyGenresError) return <p>Error loading: {studyGenresError.message}</p>
+
+        // const handleAddToGenre = (studyGenreId) => {
+    //     console.log("📌 handleAddToGroup: Setting studyCardGroupId:", studyGenreId);
+    //     setStudyGenreId(studyGenreId);
+    //     setIsModalOpen(false);
+    // }
+
+    // const { data: currentUserData, loading: studyGenresLoading, error: studyGenresError, refetch: refetchGenres } = useQuery(GET_CURRENT_USER);
+    // console.log(currentUserData);
+    // const { data: currentUserData } = useQuery(GET_CURRENT_USER);

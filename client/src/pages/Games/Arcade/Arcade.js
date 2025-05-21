@@ -17,7 +17,7 @@ export default function Arcade() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const canvasRef = useRef(null);
 
-    // wrapping the keyBind inside a useEffect hook to prevent memory leakage, cleanup and dependency mgmt a la currentIndex
+    // keyBinds inside a useEffect hook to prevent memory leakage, cleanup and dependency mgmt a la currentIndex
     useEffect(() => {
         const keyDown = (e) => {
             switch (e.key) {
@@ -28,7 +28,7 @@ export default function Arcade() {
                     handleDownClick();
                     break;
                 case 'Enter':
-                    // takes us to current highlighted game
+                    // takes us to the highlighted game
                     if (games[currentIndex].route) {
                         window.location.href = games[currentIndex].route;
                     }
@@ -46,6 +46,7 @@ export default function Arcade() {
         };
     }, [currentIndex]);
 
+    // useCallback prevents drawGameBoy function from recreating the drawing unnecessarily
     const drawGameBoy = useCallback((ctx) => {
         // need to setup ternary to adjust canvas drawing for different screen sizes
         ctx.fillStyle = "lightgray";
@@ -121,6 +122,7 @@ export default function Arcade() {
         }
     };
 
+    // pointer effect added to indicate name of the games are clickable
     const handleMouse = (event) => {
         const { offsetX, offsetY } = event.nativeEvent;
 
@@ -136,6 +138,7 @@ export default function Arcade() {
         }
     };
 
+    // wraparound scrolling for games list
     const handleUpClick = () => {
         setCurrentIndex((prevIndex) => prevIndex === 0 ? games.length - 1 : prevIndex - 1);
     };

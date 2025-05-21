@@ -17,27 +17,6 @@ export const CREATE_STUDYCARD = gql`
         }
     }
 `;
-// export const CREATE_STUDYCARD = gql`
-//     mutation createStudyCard($front: String!, $back: String!, $studyGenre: ID!) {
-//         createStudyCard(front: $front, back: $back, studyGenre: $studyGenre) {
-//             _id
-//             front
-//             back      
-//         }
-//     }
-// `;
-// export const CREATE_STUDYGENRE = gql`
-//     mutation createStudyGenre($title: String!, $category: String!, $description: String) {
-//         createStudyGenre(title: $title, category: $category, description: $description) {
-//             _id
-//             title
-//             category
-//             description
-//             createdAt
-//             updatedAt
-//         }
-//     }
-// `;
 
 export const UPDATE_STUDYCARD = gql `
     mutation updateStudyCard($cardId: ID!, $front: String, $back: String) {
@@ -59,3 +38,25 @@ export const UPDATE_HIGH_SNAKE_SCORE = gql`
         }
     }
 `;
+
+// export const CREATE_STUDYCARD = gql`
+//     mutation createStudyCard($front: String!, $back: String!, $studyGenre: ID!) {
+//         createStudyCard(front: $front, back: $back, studyGenre: $studyGenre) {
+//             _id
+//             front
+//             back      
+//         }
+//     }
+// `;
+// export const CREATE_STUDYGENRE = gql`
+//     mutation createStudyGenre($title: String!, $category: String!, $description: String) {
+//         createStudyGenre(title: $title, category: $category, description: $description) {
+//             _id
+//             title
+//             category
+//             description
+//             createdAt
+//             updatedAt
+//         }
+//     }
+// `;

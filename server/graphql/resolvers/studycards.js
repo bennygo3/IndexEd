@@ -78,7 +78,7 @@ export const Mutation = {
 
         // console.log("📌 studyGenreId received:", studyGenreId);
 
-        // let genre;
+        let genre = await StudyGenre.findOne({ title: "General", author: context.user._id });
         
         // const group = await StudyCardGroup.findById(studyCardGroupId);
         // if (studyGenreId) {
@@ -91,28 +91,32 @@ export const Mutation = {
         // } else {
         //     genre = await StudyGenre.findOne({ title: "General", author: context.user._id });
 
-        //     if (!genre) {
-        //         genre = new StudyGenre({
-        //             title: "General",
-        //             category: "Unsorted",
-        //             description: "Default study genre",
-        //             author: context.user._id,
-        //         });
+            if (!genre) {
+                genre = new StudyGenre({
+                    title: "General",
+                    category: "Unsorted",
+                    description: "Default study genre",
+                    author: context.user._id,
+                });
 
-        //         await genre.save();
-        //     }
+                await genre.save();
+            }
 
         //     studyGenreId = genre._id;
         // }
 
         // Create a new StudyCard
-        // const newCard = new StudyCard({ front, back, studyGenreId, });
-        const newCard = new StudyCard({ front, back });
+        const newCard = new StudyCard({ 
+            front, 
+            back, 
+            studyGenreId: genre._id, 
+        });
+        // const newCard = new StudyCard({ front, back });
         const savedCard = await newCard.save();
 
         // Add the StudyCard to the group's studycards array
-        // genre.studyCards.push(savedCard._id);
-        // await genre.save();
+        genre.studyCards.push(savedCard._id);
+        await genre.save();
 
         return savedCard;
     },
