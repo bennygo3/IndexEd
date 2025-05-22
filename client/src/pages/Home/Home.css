@@ -19,6 +19,47 @@
     color: rgb(0, 0, 0);
 }
 
+.user-icon-container {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-icon-container.signed-in {
+    background-color: limegreen;
+}
+
+.user-icon-container.signed-out {
+    background-color: red;
+}
+
+.avatar {
+    position: relative;
+    width: 60%;
+    height: 60%;
+}
+
+.head {
+    background-color: white;
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.shoulders {
+    background-color: white;
+    width: 100%;
+    height: 46%;
+    border-top-left-radius: 50% 100%;
+    border-top-right-radius: 50% 100%;
+    position: absolute;
+    bottom: 5px;
+}
+
 /* this is the index card */
 .home-background {
     background-color: white;

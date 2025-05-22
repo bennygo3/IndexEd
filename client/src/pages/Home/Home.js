@@ -13,6 +13,12 @@ export default function Home() {
     
     <main className="home-body">
       <h1 className="landing-header">Index-Ed</h1>
+      <div className="user-icon-container signed-in">
+        <div className="avatar">
+          <div className="head"></div>
+          <div className="shoulders"></div>
+        </div>
+      </div>
       <div className="home-background">
         <div className="buttons-container">
           <button id="login-button" onClick={() => setLoginPopup(true)}
