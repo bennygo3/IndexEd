@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './Home.css';
+import UserIcon from '../../components/UserIcon/UserIcon';
 import Navbar from '../../components/Navbar/Navbar';
 import LineGenerator from '../../components/Lines/LineGenerator.js';
 import Login from './Login/Login';
@@ -13,12 +14,7 @@ export default function Home() {
     
     <main className="home-body">
       <h1 className="landing-header">Index-Ed</h1>
-      <div className="user-icon-container signed-in">
-        <div className="avatar">
-          <div className="head"></div>
-          <div className="shoulders"></div>
-        </div>
-      </div>
+      <UserIcon />
       <div className="home-background">
         <div className="buttons-container">
           <button id="login-button" onClick={() => setLoginPopup(true)}

@@ -10,15 +10,6 @@ class AuthService {
             console.error('Error decoding token:', err);
             return null;
         }
-        // const token = this.getToken();
-        // if (!token) return null;
-
-        // try {
-        //     return decode(token);
-        // } catch (err) {
-        //     console.error('Error decoding token:', err);
-        //     return null
-        // }
 
     }
 
@@ -196,3 +187,13 @@ class AuthService {
 
 const authService = new AuthService();
 export default authService;
+
+        // const token = this.getToken();
+        // if (!token) return null;
+
+        // try {
+        //     return decode(token);
+        // } catch (err) {
+        //     console.error('Error decoding token:', err);
+        //     return null
+        // }
