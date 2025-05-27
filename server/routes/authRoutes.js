@@ -93,6 +93,15 @@ router.post('/login', async (req, res) => {
     // res.json({ accessToken, refreshToken });
 });
 
+// Get access token from cookie
+router.get('/get-token', (req,res) => {
+    const token = req.cookies.access_token;
+    if(!token) {
+        return res.status(401).json({ error: 'No token found' });
+    }
+    res.json({ accessToken: token });
+})
+
 // Refresh Token Route
 router.post('/token', (req,res) => {
     const refreshToken = req.cookies.refresh_token;
@@ -115,18 +124,6 @@ router.post('/token', (req,res) => {
     } catch (err) {
         return res.status(403).json({ message: 'Invalid refresh token aRoutes'})
     }
-    // const { token } = req.body;
-
-    // if (!token) return res.status(401).json({ message: 'No token provided' });
-    // if (!refreshTokens.has(token)) return res.status(403).json({ message: 'Invalid refresh token' });
-
-    // try {
-    //     const decoded = jwt.verify(token, config.jwtRefreshSecret);
-    //     const newAccessToken = generateAccessToken(decoded);
-    //     res.json({ accessToken: newAccessToken });
-    // } catch (err) {
-    //     return res.status(403).json({ message: 'Invalid refresh token catch'})
-    // }
 });
 
 // Logout Route - Revokes Refresh Token

@@ -14,7 +14,7 @@ class AuthService {
     }
 
     async loggedIn() {
-        const token = this.getToken();
+        const token = await this.getToken();
         return token && !await this.isTokenExpired(token);
     }
 
@@ -33,29 +33,18 @@ class AuthService {
             return true;
         }
     }
-    // isTokenExpired(token) {
-    //     if (!token) return true;
-    //     try {
-    //         const decoded = decode(token);
-    //         if (decoded.exp < Date.now() / 1000) {
-    //             localStorage.removeItem('access_token');
-    //             return true;
-    //         }
-    //         return false;
-    //     } catch (err) {
-    //         console.error('Error decoding token af:', err);
-    //         return true;
-    //     }
-    // }
 
     async getToken() {
-        // return localStorage.getItem('access_token');
         try {
             const response = await fetch(`${configFront.API_BASE_URL}/get-token`, {
                 credentials: 'include' // Retrieve token from httpOnly cookie
             });
+
+            const rawText = await response.text();
+
             if (!response.ok) return null;
-            const { accessToken } = await response.json();
+
+            const { accessToken } = await JSON.parse(rawText);
             return accessToken;
         } catch (err) {
             console.error('Error retrieving token:', err);
@@ -70,18 +59,13 @@ class AuthService {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password }),
-                credentials: 'include' // added for troubleshooting
+                credentials: 'include' // required to send cookies for auth
             });
 
             if (!response.ok) throw new Error('Failed to log in auth front');
             
             window.location.assign('/');
 
-            // const { accessToken, refreshToken } = await response.json();
-
-            // localStorage.setItem('access_token', accessToken);
-            // localStorage.setItem('refresh_token', refreshToken);
-            // window.location.assign('/');
         } catch (error) {
             console.error('Login error:', error);
         }
@@ -101,14 +85,6 @@ class AuthService {
             } catch (error) {
                 console.error('Registration error:', error);
             }
-
-        //     const { accessToken, refreshToken } = await response.json();
-        //     localStorage.setItem('access_token', accessToken);
-        //     localStorage.setItem('refresh_token', refreshToken);
-        //     window.location.assign('/');
-        // } catch (error) {
-        //     console.error('Registration error:', error);
-        // }
     }
 
     async refreshAccessToken() {
@@ -126,25 +102,6 @@ class AuthService {
             console.error('Token refresh error:', error);
             return null;
         }
-        // try {
-        //     const refreshToken = localStorage.getItem('refresh_token');
-        //     if (!refreshToken) return;
-
-        //     const response = await fetch(`${configFront.API_BASE_URL}/token`, {
-        //         method: 'POST',
-        //         headers: { 'Content-Type': 'application/json' },
-        //         body: JSON.stringify({ token: refreshToken }),
-        //     });
-
-        //     if (!response.ok) {
-        //         throw new Error('Failed to refresh token');
-        //     }
-
-        //     const { accessToken } = await response.json();
-        //     localStorage.setItem('access_token', accessToken);
-        // } catch (error) {
-        //     console.error('Token refresh error:', error);
-        // }
     }
 
     async logout(navigate) {
@@ -156,44 +113,21 @@ class AuthService {
         } finally {
             navigate('/')
         }
-        // const refreshToken = localStorage.getItem('refresh_token');
-
-        // fetch(`${configFront.API_BASE_URL}/logout`, {
-        //     method: 'DELETE',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({ token: refreshToken }),
-        // }).finally(() => {
-        //     localStorage.removeItem('access_token');
-        //     localStorage.removeItem('refresh_token');
-        //     navigate('/');
-        // });
     }
 
-    getUserIdFromToken() {
-        const token = this.getToken();
+    async getUserIdFromToken() {
+        const token = await this.getToken();
         if (!token) return null;
     
         try {
             const decoded = decode(token);
             return decoded._id || null;
-            // return decoded.data._id || null;
         } catch (error) {
             console.error('Failed to decode token af:', error);
             return null;
         }
     }
-
 }
 
 const authService = new AuthService();
 export default authService;
-
-        // const token = this.getToken();
-        // if (!token) return null;
-
-        // try {
-        //     return decode(token);
-        // } catch (err) {
-        //     console.error('Error decoding token:', err);
-        //     return null
-        // }
