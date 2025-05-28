@@ -11,8 +11,6 @@ export default function Login(props) {
         password: '',
     });
 
-    // const [loginUser] = useMutation(LOGIN_USER);
-
     const handleChange = (event) => {
         const { name, value } = event.target;
 

@@ -5,9 +5,7 @@ import config from '../../config.js';
 import Users from '../models/Users.js';
 
 const router = express.Router();
-const refreshTokens = new Set();
-// const accessTokenSecret = 'testSecret';
-// const refreshTokenSecret = 'testRefreshSecret';
+// const refreshTokens = new Set();
 
 const generateAccessToken = (user) => {
     return jwt.sign(
@@ -38,20 +36,21 @@ router.post('/register', async (req, res) => {
         return res.status(400).json({ message: 'Username is already taken' });
     }
 
-    // const hashedPassword = await bcrypt.hash(password, 10);
-
     const newUser = new Users({
         username,
         email,
         password,
-        // password: hashedPassword,
     });
 
-    await newUser.save();
     const accessToken = generateAccessToken(newUser);
     const refreshToken = generateRefreshToken(newUser);
 
-    refreshTokens.add(refreshToken);
+    // refreshTokens.add(refreshToken);
+    newUser.refreshTokens.push({
+        token: refreshToken,
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000) // 1 day
+    });
+    await newUser.save();
     res.json({ accessToken, refreshToken });
 });
 
@@ -72,7 +71,12 @@ router.post('/login', async (req, res) => {
     const accessToken = generateAccessToken(user);
     const refreshToken = generateRefreshToken(user);
 
-    refreshTokens.add(refreshToken);
+    // refreshTokens.add(refreshToken);
+    user.refreshTokens.push({
+        token: refreshToken,
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000)
+    });
+    await user.save();
 
     // Set accessToken in an httpOnly cookie
     res.cookie('access_token', accessToken, {
@@ -103,16 +107,30 @@ router.get('/get-token', (req,res) => {
 })
 
 // Refresh Token Route
-router.post('/token', (req,res) => {
+router.post('/token', async (req,res) => {
     const refreshToken = req.cookies.refresh_token;
 
-    if (!refreshToken || !refreshTokens.has(refreshToken)) {
-        return res.status(401).json({ message: 'No valid refresh token '})
+    // if (!refreshToken || !refreshTokens.has(refreshToken)) {
+    //     return res.status(401).json({ message: 'No valid refresh token '})
+    // }
+    if (!refreshToken) {
+        return res.status(401).json({ message: 'No refresh token provided' });
     }
 
-    try{
-        const decoded = jwt.verify(refreshToken, config.jwtRefreshSecret);
-        const newAccessToken = generateAccessToken(decoded);
+    try {
+    const user = await Users.findOne({
+        'refreshTokens.token': refreshToken,
+        'refreshTokens.revoked': { $ne: true }
+    });
+
+    if (!user) {
+        return res.status(403).json({ message: 'Invalid or expired refresh token' });
+    }
+
+        // const decoded = jwt.verify(refreshToken, config.jwtRefreshSecret);
+        // const newAccessToken = generateAccessToken(decoded);
+        jwt.verify(refreshToken, config.jwtRefreshSecret);
+        const newAccessToken = generateAccessToken(user);
 
         res.cookie('access_token', newAccessToken, {
             httpOnly: true,
@@ -130,15 +148,8 @@ router.post('/token', (req,res) => {
 router.delete('/logout', (req, res) => {
     res.clearCookie('access_token');
     res.clearCookie('refresh_token');
-    res.json({ message: 'Looged out successfully '});
-    // const { token } = req.body;
+    res.json({ message: 'Logged out successfully '});
 
-    // if (!token) {
-    //     return res.status(400).json({ message: 'No token provided' });
-    // }
-
-    // refreshTokens.delete(token);
-    // res.sendStatus(204);
 });
 
 export default router;

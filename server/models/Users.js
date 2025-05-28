@@ -20,6 +20,14 @@ const userSchema = new Schema(
             required: true,
             minLength: 8,
         },
+        refreshTokens: [
+            {
+                token: { type: String, required: true },
+                expires: { type: Date, required: true },
+                createdAt: { type: Date, default: Date.now },
+                revoked: { type: Boolean, default: false },
+            }
+        ],
         createdAt: {
             type: Date,
             default: Date.now,
