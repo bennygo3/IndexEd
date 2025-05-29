@@ -135,7 +135,24 @@ router.post('/token', async (req, res) => {
 });
 
 // Logout Route - Revokes Refresh Token
-router.delete('/logout', (req, res) => {
+router.delete('/logout', async (req, res) => {
+    const refreshToken = req.cookies.refresh_token;
+
+    if (refreshToken) {
+        try {
+            const user = await Users.findOne({ 'refreshTokens.token': refreshToken });
+
+            if (user) {
+                const tokenEntry = user.refreshTokens.find(rt => rt.token === refreshToken);
+                if (tokenEntry) {
+                    tokenEntry.revoked = true;
+                    await user.save();
+                }
+            }
+        } catch (err) {
+            console.error('Error revoking refresh token:', err);
+        }
+    }
     res.clearCookie('access_token');
     res.clearCookie('refresh_token');
     res.json({ message: 'Logged out successfully ' });
