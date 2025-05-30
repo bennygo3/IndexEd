@@ -110,26 +110,60 @@ router.post('/token', async (req, res) => {
     }
 
     try {
+        const decoded = jwt.verify(refreshToken, config.jwtRefreshSecret);
+        
         const user = await Users.findOne({
+            _id: decoded._id,
             'refreshTokens.token': refreshToken,
-            'refreshTokens.revoked': { $ne: true }
+            'refreshTokens.revoked': false
         });
+        // const user = await Users.findOne({
+        //     'refreshTokens.token': refreshToken,
+        //     'refreshTokens.revoked': { $ne: true }
+        // });
 
         if (!user) {
             return res.status(403).json({ message: 'Invalid or expired refresh token' });
         }
 
-        jwt.verify(refreshToken, config.jwtRefreshSecret);
+        // test for revoking old refresh token
+        const oldToken = user.refreshTokens.find(rt => rt.token === refreshToken);
+        if (oldToken) {
+            oldToken.revoked = true;
+        }
+
+        // Create a new refresh token
+        const newRefreshToken = generateRefreshToken(user);
+        const newRefTokenExp = new Date(Date.now() + 24 * 60 * 60 * 1000); // 1 day
+
+        user.refreshTokens.push({
+            token: newRefreshToken,
+            expires: newExpires
+        });
+
+        await user.save();
+
+        // Create a new access token
         const newAccessToken = generateAccessToken(user);
 
+        // Send new cookies
         res.cookie('access_token', newAccessToken, {
             httpOnly: true,
             secure: false,
             sameSite: 'Lax',
-            maxAge: 15 * 60 * 1000
+            maxAge: 15 * 60 * 1000 // 15 minutes
         });
-        res.json({ message: 'Token refreshed successfully' });
+
+        res.cookie('refresh_token', newRefreshToken, {
+            httpOnly: true,
+            secure: false,
+            sameSite: 'Lax',
+            maxAge: 24 * 60 * 60 * 1000 // 1 Day
+        });
+
+        res.json({ message: 'Token refreshed successfully with rotation' });
     } catch (err) {
+        console.error('Refresh token error:', err)
         return res.status(403).json({ message: 'Invalid refresh token aRoutes' })
     }
 });

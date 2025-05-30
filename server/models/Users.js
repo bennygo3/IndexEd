@@ -23,8 +23,8 @@ const userSchema = new Schema(
         refreshTokens: [
             {
                 token: { type: String, required: true },
-                expires: { type: Date, required: true },
                 createdAt: { type: Date, default: Date.now },
+                expires: { type: Date, required: true },
                 revoked: { type: Boolean, default: false },
             }
         ],
