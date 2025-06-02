@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ApolloProvider } from '@apollo/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import client from './utils/apolloClient.js';
 import ThemeProvider from './context/ThemeProvider.js';
+import authService from './utils/auth.js';
 
 // import Landing from './pages/Landing/Landing.js';
 import Home from './pages/Home/Home.js';
@@ -23,9 +24,16 @@ import SimonSays from './pages/Games/SimonSays/SimonSays.js';
 
 
 function App() {
+    useEffect(() => {
+        const interval = setInterval(() => {
+            authService.refreshAccessToken();
+        }, 12 * 60 * 1000); 
+
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <ThemeProvider>
-            {/* < AuthCheck /> */}
             <ApolloProvider client={client}>
                 <Router>
                     <Routes>

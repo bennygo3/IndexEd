@@ -13,33 +13,33 @@ export default function Home() {
   const [loginPopup, setLoginPopup] = useState(false);
   const [signUpPopup, setButtonPopup] = useState(false);
   return (
-    
+
     <main className="home-body">
       <h1 className="landing-header">Index-Ed</h1>
       {/* <UserIcon /> */}
       <div className="home-background">
         {/* <div className="buttons-container"> */}
-          {/* <button id="login-button" onClick={() => setLoginPopup(true)}
+        {/* <button id="login-button" onClick={() => setLoginPopup(true)}
             className={loginPopup ? 'login-button-active' : ''}>
             Sign in
           </button> */}
-          {/* <Login trigger={loginPopup} setTrigger={setLoginPopup} /> */}
-          {/* <button id="signup-button" onClick={() => setButtonPopup(true)}
+        {/* <Login trigger={loginPopup} setTrigger={setLoginPopup} /> */}
+        {/* <button id="signup-button" onClick={() => setButtonPopup(true)}
             className={signUpPopup ? 'signup-button-active' : ''}>
             Sign up
           </button> */}
-          {/* <SignUp trigger={signUpPopup} setTrigger={setButtonPopup} /> */}
-          <div className="buttons-container">
+        {/* <SignUp trigger={signUpPopup} setTrigger={setButtonPopup} /> */}
+        <div className="buttons-container">
           {isAuthChecked ? (
             isLoggedIn ? (
               <>
-              <UserIcon />
-              <LogoutButton className='home-logout' />
+                <UserIcon />
+                <LogoutButton className='home-logout' />
               </>
             ) : (
               <>
-                <button 
-                  id="login-button" 
+                <button
+                  id="login-button"
                   onClick={() => setLoginPopup(true)}
                   className={loginPopup ? 'login-button-active' : ''}
                 >
@@ -47,8 +47,8 @@ export default function Home() {
                 </button>
                 <Login trigger={loginPopup} setTrigger={setLoginPopup} />
 
-                <button 
-                  id="signup-button" 
+                <button
+                  id="signup-button"
                   onClick={() => setButtonPopup(true)}
                   className={signUpPopup ? 'signup-button-active' : ''}
                 >
@@ -66,8 +66,6 @@ export default function Home() {
       </div>
 
     </main>
-    
+
   );
 };
-
-/* <h1 className="home-header">Index<span style={{ marginLeft: "10px" }}></span>Ed</h1> */
