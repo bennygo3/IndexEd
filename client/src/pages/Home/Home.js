@@ -16,20 +16,49 @@ export default function Home() {
     
     <main className="home-body">
       <h1 className="landing-header">Index-Ed</h1>
-      <UserIcon />
+      {/* <UserIcon /> */}
       <div className="home-background">
-        <div className="buttons-container">
-          <button id="login-button" onClick={() => setLoginPopup(true)}
+        {/* <div className="buttons-container"> */}
+          {/* <button id="login-button" onClick={() => setLoginPopup(true)}
             className={loginPopup ? 'login-button-active' : ''}>
             Sign in
-          </button>
-          <Login trigger={loginPopup} setTrigger={setLoginPopup} />
-          <button id="signup-button" onClick={() => setButtonPopup(true)}
+          </button> */}
+          {/* <Login trigger={loginPopup} setTrigger={setLoginPopup} /> */}
+          {/* <button id="signup-button" onClick={() => setButtonPopup(true)}
             className={signUpPopup ? 'signup-button-active' : ''}>
             Sign up
-          </button>
-          <SignUp trigger={signUpPopup} setTrigger={setButtonPopup} />
-          <LogoutButton className='home-logout' />
+          </button> */}
+          {/* <SignUp trigger={signUpPopup} setTrigger={setButtonPopup} /> */}
+          <div className="buttons-container">
+          {isAuthChecked ? (
+            isLoggedIn ? (
+              <>
+              <UserIcon />
+              <LogoutButton className='home-logout' />
+              </>
+            ) : (
+              <>
+                <button 
+                  id="login-button" 
+                  onClick={() => setLoginPopup(true)}
+                  className={loginPopup ? 'login-button-active' : ''}
+                >
+                  Sign in
+                </button>
+                <Login trigger={loginPopup} setTrigger={setLoginPopup} />
+
+                <button 
+                  id="signup-button" 
+                  onClick={() => setButtonPopup(true)}
+                  className={signUpPopup ? 'signup-button-active' : ''}
+                >
+                  Sign up
+                </button>
+                <SignUp trigger={signUpPopup} setTrigger={setButtonPopup} />
+              </>
+            )
+          ) : null}
+          {/* <LogoutButton className='home-logout' /> */}
         </div>
         <div className="red-line"></div>
         <LineGenerator amount={17} colorClass="blue-line" />
