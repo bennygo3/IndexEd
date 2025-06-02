@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './Home.css';
+import { useAuthenticated } from '../../hooks/useAuthenticated';
 import UserIcon from '../../components/UserIcon/UserIcon';
 import Navbar from '../../components/Navbar/Navbar';
 import LineGenerator from '../../components/Lines/LineGenerator.js';
@@ -8,6 +9,7 @@ import SignUp from './SignUp/SignUp';
 import LogoutButton from '../../components/Logout/LogoutButton.js';
 
 export default function Home() {
+  const { isAuthChecked, isLoggedIn } = useAuthenticated();
   const [loginPopup, setLoginPopup] = useState(false);
   const [signUpPopup, setButtonPopup] = useState(false);
   return (

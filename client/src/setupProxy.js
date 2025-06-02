@@ -20,6 +20,3 @@ module.exports = function(app) {
     })
   );
 };
-// console.log(`${process.env.REACT_APP_GRAPHQL_ENDPOINT}`);
-// console.log(process.env.REACT_APP_GRAPHQL_ENDPOINT);
-// console.log(process.env.MONGODB_URI);
