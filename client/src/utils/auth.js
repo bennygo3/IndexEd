@@ -14,24 +14,43 @@ class AuthService {
     }
 
     async loggedIn() {
+        await this.refreshAccessToken();
+        
         const token = await this.getToken();
         return token && !await this.isTokenExpired(token);
     }
 
     async isTokenExpired(token) {
         if (!token) return true;
+
         try {
             const decoded = decode(token);
-            if (decoded.exp < Date.now / 1000) {
+             console.log("🧪 Token expiration time:", decoded.exp);
+             console.log("🧪 Current time:", Math.floor(Date.now() / 1000));
+            
+             if (decoded.exp < Date.now() / 1000) {
                 console.log("🔄 Token expired, refreshing...");
-                await this.refreshAccessToken(); // Automatically refresh token
-                return false; // Assume successful refresh
+
+                const refreshed = await this.refreshAccessToken();
+                if (!refreshed) return true;
+
+                await new PromiseRejectionEvent(res => setTimeout(res, 200));
+                
+                // await this.refreshAccessToken(); // Automatically refresh token
+                
+                const newToken = await this.getToken();
+                if(!newToken) return true;
+
+                const newDecoded = decode(newToken);
+                console.log("✅ Refreshed token exp:", newDecoded.exp);
+                return newDecoded.exp < Date.now() / 1000;
             }
             return false; // Token is still valid
         } catch (err) {
             console.error('Error decoding token auth front', err);
             return true;
         }
+
     }
 
     async getToken() {
@@ -96,8 +115,10 @@ class AuthService {
 
             if (!response.ok) throw new Error('Failed to refresh token');
 
-            const { accessToken } = await response.json();
-            return accessToken;
+            console.log("✅ Access token refreshed successfully");
+            return true;
+            // const { accessToken } = await response.json();
+            // return accessToken;
         } catch (error) {
             console.error('Token refresh error:', error);
             return null;

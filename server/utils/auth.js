@@ -30,25 +30,3 @@ const signToken = ({ _id, username }) => {
 
 export { authMiddleware, signToken };
 
-    // let token = req.body.token || req.query.token || req.headers.authorization;
-    // const expiration = config.jwtExpiry;
-
-    // if (req.headers.authorization) {
-    //     token = token.split(' ').pop().trim();
-    // }
-
-    // if (!token) {
-    //     console.log("❌ No token provided");
-    //     req.user = null;
-    //     return req;
-    // }
-
-    // try {
-    //     const decoded = jwt.verify(token, config.jwtSecret, { maxAge: expiration });
-    //     req.user = decoded;
-    // } catch (err) {
-    //     console.error("❌ Invalid Token:", err.message);        
-    //     req.user = null;
-    // }
-
-    // return req;

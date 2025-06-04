@@ -14,6 +14,8 @@ const client = new ApolloClient({
     cache: new InMemoryCache(),
 })
 
+export default client;
+
 // const authLink = setContext((_, { headers }) => {
 //     const token = localStorage.getItem('access_token'); 
 //     // Return the headers to the context so httpLink can read them
@@ -29,5 +31,3 @@ const client = new ApolloClient({
 //     link: authLink.concat(httpLink),
 //     cache: new InMemoryCache(),
 // });
-
-export default client;

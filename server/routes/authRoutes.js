@@ -10,7 +10,8 @@ const generateAccessToken = (user) => {
     return jwt.sign(
         { _id: user._id, username: user.username },
         config.jwtSecret,
-        { expiresIn: config.jwtExpiry }
+        // { expiresIn: config.jwtExpiry }
+        { expiresIn: '30s' }
     );
 };
 
@@ -80,7 +81,8 @@ router.post('/login', async (req, res) => {
         httpOnly: true,
         secure: false, // can change to true in production w/ HTTPS
         sameSite: 'Lax',
-        maxAge: 15 * 60 * 1000 // 15 min
+        maxAge: 30 * 1000
+        // maxAge: 15 * 60 * 1000 
     });
 
     res.cookie('refresh_token', refreshToken, {
@@ -103,47 +105,43 @@ router.get('/get-token', (req, res) => {
 
 // Refresh Token Route
 router.post('/token', async (req, res) => {
+    console.log("🧪 Incoming cookies at /token:", req.cookies);
     const refreshToken = req.cookies.refresh_token;
-
-    if (!refreshToken) {
-        return res.status(401).json({ message: 'No refresh token provided' });
-    }
-
+    if (!refreshToken) return res.status(401).json({ message: 'No refresh token provided' });
+    
     try {
         const decoded = jwt.verify(refreshToken, config.jwtRefreshSecret);
-        
-        const user = await Users.findOne({
+
+        const user = await Users.findOneAndUpdate({
             _id: decoded._id,
             'refreshTokens.token': refreshToken,
             'refreshTokens.revoked': false
-        });
-        // const user = await Users.findOne({
-        //     'refreshTokens.token': refreshToken,
-        //     'refreshTokens.revoked': { $ne: true }
-        // });
+        },
+        {
+            $set: { 'refreshTokens.$.revoked': true },
+        },
+        { new: true }
+        );
 
         if (!user) {
             return res.status(403).json({ message: 'Invalid or expired refresh token' });
         }
 
-        // test for revoking old refresh token
-        const oldToken = user.refreshTokens.find(rt => rt.token === refreshToken);
-        if (oldToken) {
-            oldToken.revoked = true;
-        }
+        const newRefreshToken = generateRefreshToken({ _id: decoded._id, username: decoded.username });
+        const newRefTokenExp = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
-        // Create a new refresh token
-        const newRefreshToken = generateRefreshToken(user);
-        const newRefTokenExp = new Date(Date.now() + 24 * 60 * 60 * 1000); // 1 day
+        // await Users.updateOne(
+        //     { _id: decoded._id },
+        //     {
+        //         $push: {
+        //             refreshTokens: {
+        //                 $each: [{ token: newRefreshToken, expires: newRefTokenExp }],
+        //                 $slice: -5
+        //             }
+        //         }
+        //     }
+        // );
 
-        user.refreshTokens.push({
-            token: newRefreshToken,
-            expires: newExpires
-        });
-
-        await user.save();
-
-        // Create a new access token
         const newAccessToken = generateAccessToken(user);
 
         // Send new cookies
@@ -160,12 +158,16 @@ router.post('/token', async (req, res) => {
             sameSite: 'Lax',
             maxAge: 24 * 60 * 60 * 1000 // 1 Day
         });
+        console.log("♻️ Refresh endpoint hit");
+        console.log("New refresh token:", newRefreshToken);
+        console.log("New access token:", newAccessToken);
 
         res.json({ message: 'Token refreshed successfully with rotation' });
     } catch (err) {
         console.error('Refresh token error:', err)
         return res.status(403).json({ message: 'Invalid refresh token aRoutes' })
     }
+
 });
 
 // Logout Route - Revokes Refresh Token
