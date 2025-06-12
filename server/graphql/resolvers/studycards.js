@@ -122,14 +122,3 @@ export const Mutation = {
 };
 
 export default { Query, Mutation };
-
-        // const group = await StudyCardGroup.findById(studyCardGroupId);
-        // if (studyGenreId) {
-        //     genre = await StudyGenre.findById(studyGenreId);
-        //     if (!genre) {
-        //         throw new GraphQLError('Study card group not found', {
-        //             extensions: { code: 'BAD_USER_INPUT' },
-        //         });
-        //     }
-        // } else {
-        //     genre = await StudyGenre.findOne({ title: "General", author: context.user._id });

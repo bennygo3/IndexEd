@@ -10,8 +10,7 @@ const generateAccessToken = (user) => {
     return jwt.sign(
         { _id: user._id, username: user.username },
         config.jwtSecret,
-        // { expiresIn: config.jwtExpiry }
-        { expiresIn: '30s' }
+        { expiresIn: '15m' }
     );
 };
 
@@ -105,7 +104,7 @@ router.get('/get-token', (req, res) => {
 
 // Refresh Token Route
 router.post('/token', async (req, res) => {
-    console.log("🧪 Incoming cookies at /token:", req.cookies);
+    // console.log("🧪 Incoming cookies at /token:", req.cookies);
     const refreshToken = req.cookies.refresh_token;
     if (!refreshToken) return res.status(401).json({ message: 'No refresh token provided' });
     
@@ -159,8 +158,6 @@ router.post('/token', async (req, res) => {
             maxAge: 24 * 60 * 60 * 1000 // 1 Day
         });
         console.log("♻️ Refresh endpoint hit");
-        console.log("New refresh token:", newRefreshToken);
-        console.log("New access token:", newAccessToken);
 
         res.json({ message: 'Token refreshed successfully with rotation' });
     } catch (err) {

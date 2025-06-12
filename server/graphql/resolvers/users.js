@@ -16,10 +16,14 @@ const Query = {
             .populate({
                 path: 'studyGenres',
                 populate: {
-                    path: 'studyCards'
+                    path: 'studyCards',
+                    model: 'StudyCard',
                 }, 
             })
-            .populate('studyCards')
+            .populate({
+                path: 'studyCards',
+                model: 'StudyCard',
+            })
             .populate('snakeScores')
         
         if (!user) {

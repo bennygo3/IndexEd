@@ -29,7 +29,7 @@ class AuthService {
              console.log("🧪 Current time:", Math.floor(Date.now() / 1000));
             
              if (decoded.exp < Date.now() / 1000) {
-                console.log("🔄 Token expired, refreshing...");
+                // console.log("🔄 Token expired, refreshing...");
 
                 const refreshed = await this.refreshAccessToken();
                 if (!refreshed) return true;
@@ -42,7 +42,7 @@ class AuthService {
                 if(!newToken) return true;
 
                 const newDecoded = decode(newToken);
-                console.log("✅ Refreshed token exp:", newDecoded.exp);
+                // console.log("✅ Refreshed token exp:", newDecoded.exp);
                 return newDecoded.exp < Date.now() / 1000;
             }
             return false; // Token is still valid
