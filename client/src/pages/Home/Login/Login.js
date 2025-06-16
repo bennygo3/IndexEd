@@ -25,7 +25,6 @@ export default function Login(props) {
 
         try {
             await Auth.login(formState.username, formState.password);
-            console.log('Login successful!')
         } catch (err) {
             console.error('Login error:', err);
         }

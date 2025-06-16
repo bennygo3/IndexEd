@@ -24,6 +24,8 @@ const generateRefreshToken = (user) => {
 
 // Register new user
 router.post('/register', async (req, res) => {
+    console.log("📨 Incoming registration data:", req.body); // Add this line
+
     const { username, email, password, confirmPassword } = req.body;
 
     if (password !== confirmPassword) {
@@ -41,6 +43,13 @@ router.post('/register', async (req, res) => {
         password,
     });
 
+    try {
+        await newUser.save();
+    } catch (err) {
+        console.error('❌ MongoDB save error:', err);
+        return res.status(500).json({ message: 'Error saving user', error: err.message });
+    }
+
     const accessToken = generateAccessToken(newUser);
     const refreshToken = generateRefreshToken(newUser);
 
@@ -48,8 +57,26 @@ router.post('/register', async (req, res) => {
         token: refreshToken,
         expires: new Date(Date.now() + 24 * 60 * 60 * 1000) // 1 day
     });
+
     await newUser.save();
-    res.json({ accessToken, refreshToken });
+
+    // ✅ Set cookies for auth 
+    res.cookie('access_token', accessToken, {
+        httpOnly: true,
+        secure: false, // use true in production with HTTPS
+        sameSite: 'Lax',
+        maxAge: 15 * 60 * 1000 // 15 minutes
+    });
+
+    res.cookie('refresh_token', refreshToken, {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'Lax',
+        maxAge: 24 * 60 * 60 * 1000 // 1 day
+    });
+
+    res.json({ message: "Registration successful" });
+
 });
 
 // Login Route
@@ -107,7 +134,7 @@ router.post('/token', async (req, res) => {
     // console.log("🧪 Incoming cookies at /token:", req.cookies);
     const refreshToken = req.cookies.refresh_token;
     if (!refreshToken) return res.status(401).json({ message: 'No refresh token provided' });
-    
+
     try {
         const decoded = jwt.verify(refreshToken, config.jwtRefreshSecret);
 
@@ -116,10 +143,10 @@ router.post('/token', async (req, res) => {
             'refreshTokens.token': refreshToken,
             'refreshTokens.revoked': false
         },
-        {
-            $set: { 'refreshTokens.$.revoked': true },
-        },
-        { new: true }
+            {
+                $set: { 'refreshTokens.$.revoked': true },
+            },
+            { new: true }
         );
 
         if (!user) {

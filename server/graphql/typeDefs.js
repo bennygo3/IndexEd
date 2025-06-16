@@ -5,6 +5,7 @@ export const typeDefs = `#graphql
         username: String!
         createdAt: String!
         studyGenres: [StudyGenre]
+        studyCards: [StudyCard]
         snakeScores: [SnakeScore]
     }
 
@@ -25,9 +26,9 @@ export const typeDefs = `#graphql
         updatedAt: String
         tags: [String] 
     }
-    
+
     type Auth {
-        token: ID!
+        accessToken: String!
         user: User!
     }
     
@@ -49,6 +50,9 @@ export const typeDefs = `#graphql
     type Mutation {
         register(username: String!, email: String!, password: String!, confirmPassword: String!): Auth!
         login(username: String!, password: String!): Auth!
+        refreshToken: Auth!
+        logout: Boolean!
+
         updateHighScoreSnake(username: ID!, newHighScoreSnake: Int!): SnakeScore!
         
         createStudyGenre(title: String!, category: String!, description: String): StudyGenre!
@@ -61,3 +65,9 @@ export const typeDefs = `#graphql
     }
 
 `;
+
+// older will delete aftger testing new token field
+// type Auth {
+    //     token: ID!
+    //     user: User!
+    // }

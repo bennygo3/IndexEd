@@ -28,10 +28,10 @@ const userSchema = new Schema(
                 revoked: { type: Boolean, default: false },
             }
         ],
-        createdAt: {
-            type: Date,
-            default: Date.now,
-        },
+        // createdAt: {
+        //     type: Date,
+        //     default: Date.now,
+        // },
         studyGenres: [
             {
                 type: Schema.Types.ObjectId,
