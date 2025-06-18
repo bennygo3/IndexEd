@@ -21,6 +21,7 @@ import TTT from './pages/Games/TTT/TTT.js';
 import FallDown from './pages/Games/FallDown/FallDown.js';
 import WordsPerMin from './pages/Games/WPM/WordsPerMin.js';
 import SimonSays from './pages/Games/SimonSays/SimonSays.js';
+import Chess from './pages/Games/Chess/ChessBoard.jsx';
 
 
 function App() {
@@ -88,6 +89,10 @@ function App() {
                         <Route 
                             path="wpm"
                             element={<WordsPerMin />}
+                        />
+                        <Route
+                            path="chess"
+                            element={<Chess />}
                         />
                         <Route
                             path='simonsays'
