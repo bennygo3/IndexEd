@@ -1,4 +1,4 @@
-.top-border{
+.top-border {
     width: 100%;
     height: 30px;
     margin-bottom: 10px;
@@ -19,19 +19,24 @@
 }
 
 .chessSquareLight {
-  background-color: #f0d9b5; 
+    background-color: #f0d9b5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .chessSquareDark {
-  background-color: #b58863; 
-}
-/* .square.dark{
+    background-color: #b58863;
     display: flex;
-
     align-items: center;
-} */
+    justify-content: center;
+}
 
-.chessSquare {
+.piece {
+    font-size: 60px;
+}
+
+/* .chessSquare {
     background: #fff;
     border: 1px solid #999;
     float: left;
@@ -44,4 +49,4 @@
     padding: 0;
     text-align: center;
     width: 94px;
-}
+} */
