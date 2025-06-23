@@ -32,8 +32,16 @@
     justify-content: center;
 }
 
+/* .chessSquareDark:hover, .chessSquareLight:hover{
+    cursor: pointer;
+} */
+
 .piece {
     font-size: 60px;
+}
+
+.piece:hover {
+    cursor: pointer;
 }
 
 /* .chessSquare {
