@@ -5,14 +5,15 @@ import { isValidMove } from './utils/helpers';
 import './chessGame.css';
 
 const startingBoard = [
-    ['wr', 'wn', 'wb', 'wq', 'wk', 'wb', 'wn', 'wr'],
-    ['wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp'],
-    ['', '', '', '', '', '', '', ''],
-    ['', '', '', '', '', '', '', ''],
-    ['', '', '', '', '', '', '', ''],
-    ['', '', '', '', '', '', '', ''],
+    ['br', 'bn', 'bb', 'bq', 'bk', 'bb', 'bn', 'br'],
     ['bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp', 'bp'],
-    ['br', 'bn', 'bb', 'bq', 'bk', 'bb', 'bn', 'br']
+    ['', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', ''],
+    ['wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp', 'wp'],
+    ['wr', 'wn', 'wb', 'wq', 'wk', 'wb', 'wn', 'wr']
+    
 ];
 
 const Chess = () => {
@@ -22,7 +23,7 @@ const Chess = () => {
 
     const handlePieceClick = (chessRow, chessCol) => {
         const selectedPiece = boardState[chessRow][chessCol];
-
+        console.log(selectedPiece);
         if (selected) {
             // const from = { row: selected.chessRow, col: selected.chessCol };
             const from = selected;
@@ -35,6 +36,7 @@ const Chess = () => {
                 setBoardState(newBoard);
                 setSelected(null);
                 setCurrentTurn(currentTurn === 'white' ? 'black' : 'white');
+                console.log(setSelected)
             } else {
                 setSelected(null);
             }
@@ -50,12 +52,13 @@ const Chess = () => {
                 {boardState.flatMap((rowArr, rowIndex) =>
                     rowArr.map((piece, colIndex) => {
                         const isDark = (rowIndex + colIndex) % 2 === 1;
-
+                        
                         return (
                             <Square
                                 key={`${rowIndex}-${colIndex}`}
                                 isDark={isDark}
                                 position={{ chessRow: rowIndex, chessCol: colIndex }}
+                                // position={{ chessRow, chessCol }}
                                 onClick={() => handlePieceClick(rowIndex, colIndex)}
                             >
                                 {piece && <Piece type={piece} />}
