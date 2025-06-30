@@ -1,10 +1,12 @@
 import React from 'react';
 
-const Square = ({ isDark, position, onClick, children }) => {
-    const className= isDark ? 'chessSquareDark' : 'chessSquareLight';
+const Square = ({ isDark, isSelected, isHighlighted, position, onClick, children }) => {
+    let className = isDark ? 'chessSquareDark' : 'chessSquareLight';
 
+    if (isSelected) className += ' selectedSquare';
+    if (isHighlighted) className += ' highlightedSquare';
     return(
-        <div className={className} onClick={onClick}>
+        <div className ={className} onClick={onClick}>
             {children}
         </div>
     );

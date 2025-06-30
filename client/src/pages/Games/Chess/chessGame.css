@@ -19,22 +19,29 @@
 }
 
 .chessSquareLight {
-    background-color: #f0d9b5;
+    background-color: rgb(240, 217, 181);
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    aspect-ratio: 1;
+
 }
 
 .chessSquareDark {
-    background-color: #b58863;
+    background-color: rgb(181, 136, 99);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* .chessSquareDark:hover, .chessSquareLight:hover{
-    cursor: pointer;
-} */
+.selectedSquare {
+    outline: 3px solid rgb(255, 0, 0);
+}
+
+.highlightedSquare {
+    background-color: rgba(255, 255, 0, 0.971);
+}
 
 .piece {
     font-size: 60px;

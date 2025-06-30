@@ -25,9 +25,13 @@ const Chess = () => {
         const selectedPiece = boardState[chessRow][chessCol];
         console.log(selectedPiece);
         if (selected) {
-            // const from = { row: selected.chessRow, col: selected.chessCol };
             const from = selected;
             const to = { chessRow, chessCol }
+
+            if (from.chessRow === to.chessRow && from.chessCol === to.chessCol) {
+                setSelected(null); // Deselects the selected piece if it is clicked and unlciked on the same square
+                return;
+            }
 
             if (isValidMove(from, to, boardState, currentTurn)) {
                 const newBoard = [...boardState.map(r => [...r])];
@@ -57,8 +61,12 @@ const Chess = () => {
                             <Square
                                 key={`${rowIndex}-${colIndex}`}
                                 isDark={isDark}
+                                isSelected={
+                                    selected &&
+                                    selected.chessRow === rowIndex &&
+                                    selected.chessCol === colIndex
+                                }
                                 position={{ chessRow: rowIndex, chessCol: colIndex }}
-                                // position={{ chessRow, chessCol }}
                                 onClick={() => handlePieceClick(rowIndex, colIndex)}
                             >
                                 {piece && <Piece type={piece} />}
