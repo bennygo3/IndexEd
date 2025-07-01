@@ -66,13 +66,13 @@ export const authMiddleware = ({ req }) => {
 //     return req;
 // };
 
-// const signToken = ({ _id, username }) => {
+export const signToken = ({ _id, username }) => {
 
-//     const payload = { _id, username };
-//     const token = jwt.sign(payload, config.jwtSecret, { expiresIn: config.jwtExpiry });
+    const payload = { _id, username };
+    const token = jwt.sign(payload, config.jwtSecret, { expiresIn: config.jwtExpiry });
 
-//     return token;
-// }
+    return token;
+}
 
 // export { authMiddleware, signToken };
 
