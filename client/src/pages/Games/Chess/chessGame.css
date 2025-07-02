@@ -22,8 +22,8 @@
     position: relative;
     overflow: hidden;
     display: flex;
-    align-items: center;
     justify-content: center;
+    /* align-items: center; */
     /* width: 100%; */
     /* aspect-ratio: 1; */
 
@@ -41,8 +41,8 @@
 }
 
 .selectedSquare {
-    border: 2px solid rgb(255, 0, 0);
-    z-index: 1;
+    border: 1px solid rgb(0, 0, 0);
+    
     
 }
 
@@ -51,7 +51,14 @@
 }
 
 .piece {
-    font-size: 60px;
+    font-size: 75px;
+    
+
+}
+
+.selectedSquare .piece {
+    position: absolute;
+    font-size: 90px;
 }
 
 .piece:hover {

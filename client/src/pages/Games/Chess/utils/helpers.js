@@ -9,6 +9,13 @@ export function isValidMove(from, to, board, currentTurn) {
         return false;
     }
 
+    const target = board[to.chessRow][to.chessCol]
+
+    // Can't capture own piece
+    if (target && target[0] === piece[0]) {
+        return false;
+    }
+
     const type = piece.slice(1);
 
     switch (type) {
