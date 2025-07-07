@@ -156,17 +156,17 @@ router.post('/token', async (req, res) => {
         const newRefreshToken = generateRefreshToken({ _id: decoded._id, username: decoded.username });
         const newRefTokenExp = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
-        // await Users.updateOne(
-        //     { _id: decoded._id },
-        //     {
-        //         $push: {
-        //             refreshTokens: {
-        //                 $each: [{ token: newRefreshToken, expires: newRefTokenExp }],
-        //                 $slice: -5
-        //             }
-        //         }
-        //     }
-        // );
+        await Users.updateOne(
+            { _id: decoded._id },
+            {
+                $push: {
+                    refreshTokens: {
+                        $each: [{ token: newRefreshToken, expires: newRefTokenExp }],
+                        $slice: -5
+                    }
+                }
+            }
+        );
 
         const newAccessToken = generateAccessToken(user);
 
