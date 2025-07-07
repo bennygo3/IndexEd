@@ -13,9 +13,9 @@ export const createAccessToken = (user) => {
 // Refresh token - long lived
 export const createRefreshToken = (user) => {
     return jwt.sign(
-        { id: user._id, username: user.username },
+        { _id: user._id, username: user.username },
         config.jwtRefreshSecret,
-        { expiresIn: '7d' }
+        { expiresIn: '2d' }
     );
 };
 
@@ -46,6 +46,16 @@ export const authMiddleware = ({ req }) => {
 };
 
 
+export const signToken = ({ _id, username }) => {
+
+    const payload = { _id, username };
+    const token = jwt.sign(payload, config.jwtSecret, { expiresIn: config.jwtExpiry });
+
+    return token;
+}
+
+// export { authMiddleware, signToken };
+
 // implementing new token logic 6/16 was semi working below prior to changes 
 // const authMiddleware = ({ req }) => {
 //     let token = req.cookies.access_token;
@@ -65,14 +75,4 @@ export const authMiddleware = ({ req }) => {
 
 //     return req;
 // };
-
-export const signToken = ({ _id, username }) => {
-
-    const payload = { _id, username };
-    const token = jwt.sign(payload, config.jwtSecret, { expiresIn: config.jwtExpiry });
-
-    return token;
-}
-
-// export { authMiddleware, signToken };
 
