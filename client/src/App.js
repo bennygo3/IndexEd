@@ -28,7 +28,7 @@ function App() {
     useEffect(() => {
         const interval = setInterval(() => {
             authService.refreshAccessToken();
-        }, 12 * 60 * 1000); 
+        }, 12 * 60 * 1000); // q 12 minutes
 
         return () => clearInterval(interval);
     }, []);

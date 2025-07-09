@@ -107,8 +107,8 @@ router.post('/login', async (req, res) => {
         httpOnly: true,
         secure: false, // can change to true in production w/ HTTPS
         sameSite: 'Lax',
-        maxAge: 30 * 1000
-        // maxAge: 15 * 60 * 1000 
+        maxAge: 15 * 60 * 1000 // 15 min
+        // maxAge: 30 * 1000 // 30 sec
     });
 
     res.cookie('refresh_token', refreshToken, {

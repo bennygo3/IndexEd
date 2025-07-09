@@ -14,11 +14,26 @@ class AuthService {
     }
 
     async loggedIn() {
-        await this.refreshAccessToken();
-        
         const token = await this.getToken();
-        return token && !await this.isTokenExpired(token);
+
+        if (!token) return false;
+        
+        const expired = await this.isTokenExpired(token);
+
+        if (expired) {
+            const refreshed = await this.refreshAccessToken();
+            return refreshed;
+        }
+        
+        return true;
     }
+
+    // async loggedIn() {
+    //     await this.refreshAccessToken();
+        
+    //     const token = await this.getToken();
+    //     return token && !await this.isTokenExpired(token);
+    // }
 
     async isTokenExpired(token) {
         if (!token) return true;
@@ -42,7 +57,6 @@ class AuthService {
                 if(!newToken) return true;
 
                 const newDecoded = decode(newToken);
-                // console.log("✅ Refreshed token exp:", newDecoded.exp);
                 return newDecoded.exp < Date.now() / 1000;
             }
             return false; // Token is still valid
