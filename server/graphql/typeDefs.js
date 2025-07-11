@@ -3,10 +3,11 @@ export const typeDefs = `#graphql
         _id: ID!
         email: String!
         username: String!
-        createdAt: String!
         studyGenres: [StudyGenre]
         studyCards: [StudyCard]
         snakeScores: [SnakeScore]
+        createdAt: String!
+        updatedAt: String
     }
 
     type StudyCard {
@@ -65,9 +66,3 @@ export const typeDefs = `#graphql
     }
 
 `;
-
-// older will delete aftger testing new token field
-// type Auth {
-    //     token: ID!
-    //     user: User!
-    // }

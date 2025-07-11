@@ -31,12 +31,13 @@ export const sendRefreshToken = (res, token) => {
 
 // Auth middleware for protected routes
 export const authMiddleware = ({ req }) => {
-    const token = req.headers.authorization?.split(' ')[1];
+    // const token = req.headers.authorization?.split(' ')[1];
+    const token = req.cookies.access_token || req.headers.authorization?.split(' ')[1];
 
     if (!token) throw new Error('No access token');
 
     try {
-        const decoded = jwt.verify(token, config.jwtRefreshSecret);
+        const decoded = jwt.verify(token, config.jwtSecret);
         req.user = decoded;
     } catch (err) {
         throw new Error('Invalid or expired access token');

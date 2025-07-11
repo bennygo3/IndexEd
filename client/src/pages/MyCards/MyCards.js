@@ -20,10 +20,10 @@ export default function MyCards() {
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
 
-    // if (!data?.getCurrentUser || !data.getCurrentUser.studyCardGroups) {
-    //     console.warn("⚠️ getCurrentUser.studyCardGroups are missing or undefined!", data.getCurrentUser);
-    //     return <p> Try creating one!</p>;
-    // }
+    if (!data?.getCurrentUser?.studyGenres) {
+        console.warn("⚠️ getCurrentUser.studyCardGroups are missing or undefined!", data.getCurrentUser);
+        return <p> No study cards found. Try creating one!</p>;
+    }
 
     return (
         <main className="my-cards-page">
@@ -62,7 +62,7 @@ export default function MyCards() {
                 </section>
             )) 
             ) : (
-                <p></p>
+                <p>No study genres yet. Start by creating one!</p>
             )}
         
 
