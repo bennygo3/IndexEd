@@ -62,7 +62,7 @@ export default function MyCards() {
                 </section>
             )) 
             ) : (
-                <p>No material to study yet. Start by creating some study cards for review!</p>
+                <p className="studyCardsFallback">No material to study yet. Start by creating some study cards for review!</p>
             )}
         
 

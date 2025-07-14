@@ -72,15 +72,20 @@
 }
 
 #navbar-msc ul{
-    display: flex;
-    gap: 10px;
-    flex-direction: row;
-    flex-wrap: wrap;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 15px 0px;
+    align-items: center;
+    justify-items: center;
+    padding: 5px;
     list-style-type: none;
     font-family: "Cedarville Cursive", cursive;
+    font-size: calc(10px + 1vw);
     font-weight: 400;
     font-style: normal;
     text-align: center;
+    display: grid;
+    
 }
 
 #navbar-msc span.highlighted {
@@ -99,6 +104,11 @@
     justify-content: center;
     align-items: center;
 }
+
+/* #navbar-msc li::before {
+    content: "📍"
+} */
+
 
 #my-cards-header-p {
     font-size: 16px;
@@ -141,5 +151,9 @@
     margin: auto;
     margin-top: 30px;
 }
+
+/* .studyCardsFallback {
+
+} */
 
 /* box-shadow: blue 0px 0px 0px 2px inset, rgb(255, 255, 255) 10px -10px 0px -3px, rgb(31, 193, 27) 10px -10px, rgb(255, 255, 255) 20px -20px 0px -3px, rgb(255, 217, 19) 20px -20px, rgb(255, 255, 255) 30px -30px 0px -3px, rgb(255, 156, 85) 30px -30px, rgb(255, 255, 255) 40px -40px 0px -3px, rgb(255, 85, 85) 40px -40px; */
