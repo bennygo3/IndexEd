@@ -62,7 +62,7 @@ export default function MyCards() {
                 </section>
             )) 
             ) : (
-                <p>No study genres yet. Start by creating one!</p>
+                <p>No material to study yet. Start by creating some study cards for review!</p>
             )}
         
 
