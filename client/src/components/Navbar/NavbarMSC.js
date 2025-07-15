@@ -8,7 +8,7 @@ export default function NavbarMSC(){
                 <ul>
                     <li>
                         <Highlighted 
-                          color=" rgb(243,149,57)"
+                          color="rgb(243,149,57)"
                         >
                             <Link to="/">
                                 Home

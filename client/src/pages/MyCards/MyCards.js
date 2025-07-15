@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_CURRENT_USER } from '../../utils/queries';
-import NavbarMSC from '../../components/Navbar/NavbarMSC';
+import { Link }from 'react-router-dom'
+// import NavbarMSC from '../../components/Navbar/NavbarMSC';
 import Card from '../../components/Card/Card';
 import Wood from '../../components/MadeWCss/Wood';
 import './MyCards.css';
@@ -27,14 +28,19 @@ export default function MyCards() {
 
     return (
         <main className="my-cards-page">
-            <header id="my-cards-header">
-                <div>
-                    <h1 id="my-cards-chalkboard">My Study Cards</h1>
+            <div id="mcp-buffer"></div>
+            <header id="my-cards-chalkboard">
+                {/* <div> */}
+                    <h1 id="my-cards-header">My Study Cards</h1>
+                    <Link to="/" id="mcp-home">Home</Link>
+                    <Link to="/card-create" id="mcp-card-create">Create a new card</Link>
+                    <Link to="/trivia" id="mcp-trivia">Trivia cards</Link>
+                    <Link to="/games" id="mcp-games">Games</Link>
                     <div id="my-cards-chalk"></div>
-                </div>
-                <div id="my-cards-corkboard">
+                {/* </div> */}
+                {/* <div id="my-cards-corkboard">
                     <NavbarMSC />
-                </div>
+                </div> */}
                 {/* <p id="my-cards-header-p">1. the devotion of time and attention to acquiring knowledge on an academic subject, especially by means of notecards*</p> */}
             </header>
             {/* <Wood> */}
