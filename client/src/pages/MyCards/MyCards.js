@@ -32,10 +32,12 @@ export default function MyCards() {
             <header id="my-cards-chalkboard">
                 {/* <div> */}
                     <h1 id="my-cards-header">My Study Cards</h1>
+                    <ul>
                     <Link to="/" id="mcp-home">Home</Link>
                     <Link to="/card-create" id="mcp-card-create">Create a new card</Link>
                     <Link to="/trivia" id="mcp-trivia">Trivia cards</Link>
                     <Link to="/games" id="mcp-games">Games</Link>
+                    </ul>
                     <div id="my-cards-chalk"></div>
                 {/* </div> */}
                 {/* <div id="my-cards-corkboard">

@@ -34,6 +34,11 @@
     left: 20px;
 }
 
+#my-cards-chalkboard a {
+    margin: 5px;
+    padding: 0px;
+}
+
 #mcp-home {
     color: rgb(243,149,57);
 }
@@ -72,7 +77,7 @@
     border-radius: 3px;
 }
 
-#my-cards-corkboard {
+/* #my-cards-corkboard {
     width: 420px;
     height: 300px;
     background: url('../../assets/cork_board.jpg');
@@ -80,19 +85,19 @@
     background-position: center;
     background-repeat: no-repeat;
 
-}
+} */
 
-#navbar-msc {
+/* #navbar-msc {
     margin: 20px;
-}
+} */
 
-#navbar-msc a {
+/* #navbar-msc a {
     line-height: 1.55; 
     font-size: calc(8px + 1vw); 
     
-}
+} */
 
-#navbar-msc ul{
+/* #navbar-msc ul{
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 5px;
@@ -107,9 +112,9 @@
     text-align: center;
     display: grid;
     
-}
+} */
 
-#navbar-msc span.highlighted {
+/* #navbar-msc span.highlighted {
     width: 75px;
     height: 80px;
     box-shadow: 0 3px 6px rgba(0,0,0,.25);
@@ -124,7 +129,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 /* #navbar-msc li::before {
     content: "📍"
