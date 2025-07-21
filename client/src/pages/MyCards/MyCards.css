@@ -34,9 +34,10 @@
     left: 20px;
 }
 
-#my-cards-chalkboard a {
-    margin: 5px;
-    padding: 0px;
+#my-cards-header-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
 }
 
 #mcp-home {
