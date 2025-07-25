@@ -5,6 +5,7 @@ import { Link }from 'react-router-dom'
 // import NavbarMSC from '../../components/Navbar/NavbarMSC';
 import Card from '../../components/Card/Card';
 import Wood from '../../components/MadeWCss/Wood';
+import ThoughtBubble from '../../components/MadeWCss/ThoughtBubble';
 import './MyCards.css';
 
 export default function MyCards() {
@@ -71,7 +72,9 @@ export default function MyCards() {
                 </section>
             )) 
             ) : (
-                <p className="studyCardsFallback">No material to study yet. Start by creating some study cards for review!</p>
+                <>
+                <ThoughtBubble />
+                </>
             )}
         
 
