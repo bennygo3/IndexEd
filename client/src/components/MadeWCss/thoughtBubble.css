@@ -19,7 +19,7 @@
     /* box-shadow: inset 0 0 0 3px white; */
 }
 
-.main-bubble:after, .main-bubble:before, .small-bubble:after, .small-bubble:before {
+.main-bubble:after, .main-bubble:before {
     content:"";
     position: relative;
     display: inline-block;
@@ -43,11 +43,16 @@
 
 .small-bubble {
     position: absolute;
-    background-color: white;
-    border: 3px solid black;
+    background: white;
+    /* border: 3px solid black; */
     border-radius: 50%;
-    box-shadow: 0 0 0 3px white;
-    border-radius: 40% 60% 50% 60% / 60% 50% 60% 50%;
+    box-shadow: 
+        white 45px -15px 0 -5px,
+        white 15px -25px,
+        white 30px 10px,
+        white 60px 15px 0 -10px,
+        white 45px 5px 0 -5px
+    ;
 }
 
 .small-bubble.one {
@@ -60,8 +65,8 @@
 
 
 .small-bubble.two {
-    width: 55px;
-    height: 55px;
+    width: 30px;
+    height: 30px;
     left: 50px;
-    top: 180px;
+    top: 310px;
 }
