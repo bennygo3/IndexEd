@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_CURRENT_USER } from '../../utils/queries';
-import { Link }from 'react-router-dom'
+import { Link } from 'react-router-dom'
 // import NavbarMSC from '../../components/Navbar/NavbarMSC';
 import Card from '../../components/Card/Card';
 import Wood from '../../components/MadeWCss/Wood';
@@ -32,15 +32,14 @@ export default function MyCards() {
             <div id="mcp-buffer"></div>
             <header id="my-cards-chalkboard">
                 {/* <div> */}
-                    <h1 id="my-cards-header">My Study Cards</h1>
-                    <ul id="my-cards-header-list">
-                        <li><Link to="/" id="mcp-home">Home</Link></li>
-                    
+                <h1 id="my-cards-header">My Study Cards</h1>
+                <ul id="my-cards-header-list">
+                    <li><Link to="/" id="mcp-home">Home</Link></li>
                     <li><Link to="/card-create" id="mcp-card-create">Create a new card</Link></li>
                     <li><Link to="/trivia" id="mcp-trivia">Trivia cards</Link></li>
                     <li><Link to="/games" id="mcp-games">Games</Link></li>
-                    </ul>
-                    <div id="my-cards-chalk"></div>
+                </ul>
+                <div id="my-cards-chalk"></div>
                 {/* </div> */}
                 {/* <div id="my-cards-corkboard">
                     <NavbarMSC />
@@ -50,33 +49,33 @@ export default function MyCards() {
             {/* <Wood> */}
             {data.getCurrentUser?.studyGenres.length > 0 ? (
                 data.getCurrentUser.studyGenres.map(genre => (
-                <section key={genre._id} id="my-cards-wood">
-                    <Wood>
-                        <h2>{genre.title}</h2>
-                        <div className="my-cards-carousel">
-                            {genre.studyCards.map(card => (
-                                <div
-                                    key={card._id}
-                                    className="my-cards-container"
-                                    onClick={() => handleFlip(card._id)}
-                                >
-                                    <Card
-                                        front={card.front}
-                                        back={card.back}
-                                        isFlipped={flippedCard[card._id] || false} // default to false if not flipped yet
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                    </Wood>
-                </section>
-            )) 
+                    <section key={genre._id} id="my-cards-wood">
+                        <Wood>
+                            <h2>{genre.title}</h2>
+                            <div className="my-cards-carousel">
+                                {genre.studyCards.map(card => (
+                                    <div
+                                        key={card._id}
+                                        className="my-cards-container"
+                                        onClick={() => handleFlip(card._id)}
+                                    >
+                                        <Card
+                                            front={card.front}
+                                            back={card.back}
+                                            isFlipped={flippedCard[card._id] || false} // default to false if not flipped yet
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        </Wood>
+                    </section>
+                ))
             ) : (
                 <>
-                <ThoughtBubble />
+                    <ThoughtBubble />
                 </>
             )}
-        
+
 
         </main>
     );

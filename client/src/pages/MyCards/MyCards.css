@@ -1,7 +1,6 @@
 .my-cards-page {
     background-color:darkolivegreen;
     height: 100vh;
-
 }
 
 #mcp-buffer {
@@ -10,22 +9,21 @@
 
 #my-cards-header {
     font-size: 45px;
-    text-decoration: underline 2px;
+    text-align: center;
+    text-decoration: underline solid white 2px;
     text-underline-offset: 4px;
 }
 
 #my-cards-chalkboard {
     background-color: rgba(0, 0, 0, 0.866);
-    border: 8px solid rgb(193, 154, 107);
-    padding: 15px;
+    border: 13px solid rgb(193, 154, 107);
+    /* margin: 5px; */
     box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.7);
     height: 400px;
     width: 400px;
     font-family: "Cedarville Cursive", cursive;
     font-weight: 400;
     font-style: normal;
-    font-size: 38px;
-    color: rgba(255, 255, 102, 0.952);
     color: white;
     position: relative;
     left: 20px;
@@ -34,17 +32,12 @@
 #my-cards-header-list {
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    padding-left: 40px;
-    margin: 10px;
 }
 
 #my-cards-header-list li {
   line-height: 1;
-  padding: 0;
-  margin: 0;
   font-size: 32px;
-    /* display: inline-block; */
+  
 }
 
 
@@ -54,6 +47,11 @@
 
 #mcp-home {
     color: rgb(243,149,57);
+}
+
+#mcp-home text {
+    padding: 0px;
+    font-size: 37px;
 }
 
 #my-cards-header-list li:nth-child(2)::marker{
@@ -70,6 +68,7 @@
 
 #mcp-trivia {
     color: hotpink;
+    font-size: 32px;
 }
 
 #my-cards-header-list li:nth-child(4)::marker {
@@ -86,14 +85,14 @@
     background-color: rgba(255, 255, 102, 0.852);
     border-radius: 3px;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
-    position: relative;
-    bottom: -28px;
-    left: 355px;
+    /* position: relative; */
+    bottom: -43px;
+    left: 345px;
 }
 
 #my-cards-chalk::before {
     content: '';
-    position: absolute;
+    /* position: absolute; */
     width: 100%;
     height: 100%;
     background: linear-gradient(45deg, rgba(255, 255, 255, 0.3) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.3) 50%, transparent 75%, rgba(255, 255, 255, 0.3) 75%);
