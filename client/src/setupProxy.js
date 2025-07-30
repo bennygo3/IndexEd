@@ -6,6 +6,7 @@ module.exports = function(app) {
     createProxyMiddleware({
       target: 'http://localhost:4000',
       changeOrigin: true,
+      logLevel: 'debug',
       headers: {
         "Connection": "keep-alive",
       },
@@ -16,7 +17,8 @@ module.exports = function(app) {
     '/api',
     createProxyMiddleware({
       target: 'http://localhost:4000',
-      changeOrigin: true
+      changeOrigin: true,
+      logLevel: 'debug',
     })
   );
 };

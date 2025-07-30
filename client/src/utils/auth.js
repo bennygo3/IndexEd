@@ -28,13 +28,6 @@ class AuthService {
         return true;
     }
 
-    // async loggedIn() {
-    //     await this.refreshAccessToken();
-        
-    //     const token = await this.getToken();
-    //     return token && !await this.isTokenExpired(token);
-    // }
-
     async isTokenExpired(token) {
         if (!token) return true;
 
@@ -50,8 +43,6 @@ class AuthService {
                 if (!refreshed) return true;
 
                 await new PromiseRejectionEvent(res => setTimeout(res, 200));
-                
-                // await this.refreshAccessToken(); // Automatically refresh token
                 
                 const newToken = await this.getToken();
                 if(!newToken) return true;
@@ -122,17 +113,15 @@ class AuthService {
 
     async refreshAccessToken() {
         try {
+            console.log("🔄 Attempting to refresh access token at", new Date().toLocaleTimeString());
             const response = await fetch(`${configFront.API_BASE_URL}/token`, {
                 method: 'POST',
                 credentials: 'include'
             });
 
             if (!response.ok) throw new Error('Failed to refresh token');
-
             console.log("✅ Access token refreshed successfully");
             return true;
-            // const { accessToken } = await response.json();
-            // return accessToken;
         } catch (error) {
             console.error('Token refresh error:', error);
             return null;

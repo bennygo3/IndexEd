@@ -65,7 +65,8 @@ router.post('/register', async (req, res) => {
         httpOnly: true,
         secure: false, // use true in production with HTTPS
         sameSite: 'Lax',
-        maxAge: 15 * 60 * 1000 // 15 minutes
+        maxAge: 14 * 60 * 1000 // 14 minutes 
+        // maxAge: 60 * 1000 // 1m - testing purposes
     });
 
     res.cookie('refresh_token', refreshToken, {
@@ -131,7 +132,7 @@ router.get('/get-token', (req, res) => {
 
 // Refresh Token Route
 router.post('/token', async (req, res) => {
-    // console.log("🧪 Incoming cookies at /token:", req.cookies);
+    console.log("♻️ Refresh endpoint hit at", new Date().toLocaleTimeString());
     const refreshToken = req.cookies.refresh_token;
     if (!refreshToken) return res.status(401).json({ message: 'No refresh token provided' });
 

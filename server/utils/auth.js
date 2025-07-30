@@ -6,7 +6,8 @@ export const createAccessToken = (user) => {
     return jwt.sign(
         { id: user._id, username: user.username },
         config.jwtSecret,
-        { expiresIn: '15m' }
+        { expiresIn: '15m' } // access token that lasts 15 minutes
+        // { expiresIn: '1m' } // testing purposes
     );
 };
 
@@ -31,7 +32,6 @@ export const sendRefreshToken = (res, token) => {
 
 // Auth middleware for protected routes
 export const authMiddleware = ({ req }) => {
-    // const token = req.headers.authorization?.split(' ')[1];
     const token = req.cookies.access_token || req.headers.authorization?.split(' ')[1];
 
     if (!token) throw new Error('No access token');
@@ -54,26 +54,4 @@ export const signToken = ({ _id, username }) => {
 
     return token;
 }
-
-// export { authMiddleware, signToken };
-
-// implementing new token logic 6/16 was semi working below prior to changes 
-// const authMiddleware = ({ req }) => {
-//     let token = req.cookies.access_token;
-
-//     if (!token) {
-//         console.log('❌ No token provided');
-//         throw new Error("Authentication failed: No token prvided aMid")
-//     }
-
-//     try {
-//         const decoded = jwt.verify(token, config.jwtSecret);
-//         req.user = decoded;
-//     } catch (err) {
-//         console.error('❌ Invalid Token:', err.message);
-//         throw new Error('Authentication failed: Invalid token aMiddy')
-//     }
-
-//     return req;
-// };
 
