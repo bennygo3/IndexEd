@@ -1,6 +1,13 @@
-import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
-// import { setContext } from '@apollo/client/link/context';
+import { ApolloClient, InMemoryCache, createHttpLink, from } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
 import configFront from '../config.js';
+
+const errorLink = onError(({ networkError, operation, forward }) => {
+    if (networkError?.statusCode === 401 || networkError?.statusCode === 500) {
+        console.warn("🔁 Apollo retrying failed operation:", operation.operationName);
+        return forward(operation);
+    }
+});
 
 const httpLink =  createHttpLink({
     uri: configFront.REACT_APP_GRAPHQL_ENDPOINT,
@@ -10,24 +17,8 @@ const httpLink =  createHttpLink({
 console.log('httpLink', httpLink);
 
 const client = new ApolloClient({
-    link: httpLink,
+    link: from([errorLink, httpLink]),
     cache: new InMemoryCache(),
 })
 
 export default client;
-
-// const authLink = setContext((_, { headers }) => {
-//     const token = localStorage.getItem('access_token'); 
-//     // Return the headers to the context so httpLink can read them
-//     return {
-//         headers: {
-//             ...headers,
-//             authorization: token ? `Bearer ${token}` : "",
-//         },
-//     };
-// });
-
-// const client = new ApolloClient({
-//     link: authLink.concat(httpLink),
-//     cache: new InMemoryCache(),
-// });

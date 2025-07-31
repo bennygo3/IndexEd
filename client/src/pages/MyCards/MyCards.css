@@ -35,44 +35,20 @@
 }
 
 #my-cards-header-list li {
-  line-height: 1;
   font-size: 32px;
-  
-}
-
-
-#my-cards-header-list li:first-child::marker{
-    color: rgb(243,149,57);
 }
 
 #mcp-home {
     color: rgb(243,149,57);
 }
 
-#mcp-home text {
-    padding: 0px;
-    font-size: 37px;
-}
-
-#my-cards-header-list li:nth-child(2)::marker{
-    color: yellow;
-}
-
 #mcp-card-create {
     color: yellow;
-}
-
-#my-cards-header-list li:nth-child(3)::marker {
-    color: hotpink;
 }
 
 #mcp-trivia {
     color: hotpink;
     font-size: 32px;
-}
-
-#my-cards-header-list li:nth-child(4)::marker {
-    color: rgb(57, 255, 20)
 }
 
 #mcp-games {
@@ -100,65 +76,6 @@
     opacity: 0.95; 
     border-radius: 3px;
 }
-
-/* #my-cards-corkboard {
-    width: 420px;
-    height: 300px;
-    background: url('../../assets/cork_board.jpg');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-
-} */
-
-/* #navbar-msc {
-    margin: 20px;
-} */
-
-/* #navbar-msc a {
-    line-height: 1.55; 
-    font-size: calc(8px + 1vw); 
-    
-} */
-
-/* #navbar-msc ul{
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 5px;
-    align-items: center;
-    justify-items: center;
-    padding: 5px;
-    list-style-type: none;
-    font-family: "Cedarville Cursive", cursive;
-    font-size: calc(10px + 1vw);
-    font-weight: 400;
-    font-style: normal;
-    text-align: center;
-    display: grid;
-    
-} */
-
-/* #navbar-msc span.highlighted {
-    width: 75px;
-    height: 80px;
-    box-shadow: 0 3px 6px rgba(0,0,0,.25);
-    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.25);
-    -moz-box-shadow: 0 3px 6px rgba(0,0,0,.25);
-    float: left;
-    margin: 8px;
-    border: 1px solid rgba(0,0,0,.25) !important; 
-    border-radius: 0px;
-    font-size: calc(1px + 1vw); 
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
-
-/* #navbar-msc li::before {
-    content: "📍"
-} */
-
 
 #my-cards-header-p {
     font-size: 16px;
@@ -202,8 +119,77 @@
     margin-top: 30px;
 }
 
-/* .studyCardsFallback {
+/* 
+
+#my-cards-header-list li:first-child::marker{
+    color: rgb(243,149,57);
+}
+#my-cards-header-list li:nth-child(4)::marker {
+    color: rgb(57, 255, 20)
+} 
+#my-cards-header-list li:nth-child(3)::marker {
+    color: hotpink;
+}
+
+#my-cards-header-list li:nth-child(2)::marker{
+    color: yellow;
+
+*/
+
+/* #navbar-msc li::before {
+    content: "📍"
+} */
+
+/* #navbar-msc span.highlighted {
+    width: 75px;
+    height: 80px;
+    box-shadow: 0 3px 6px rgba(0,0,0,.25);
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.25);
+    -moz-box-shadow: 0 3px 6px rgba(0,0,0,.25);
+    float: left;
+    margin: 8px;
+    border: 1px solid rgba(0,0,0,.25) !important; 
+    border-radius: 0px;
+    font-size: calc(1px + 1vw); 
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+/* #navbar-msc ul{
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 5px;
+    align-items: center;
+    justify-items: center;
+    padding: 5px;
+    list-style-type: none;
+    font-family: "Cedarville Cursive", cursive;
+    font-size: calc(10px + 1vw);
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+    display: grid;
+    
+} */
+
+/* #my-cards-corkboard {
+    width: 420px;
+    height: 300px;
+    background: url('../../assets/cork_board.jpg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 
 } */
 
-/* box-shadow: blue 0px 0px 0px 2px inset, rgb(255, 255, 255) 10px -10px 0px -3px, rgb(31, 193, 27) 10px -10px, rgb(255, 255, 255) 20px -20px 0px -3px, rgb(255, 217, 19) 20px -20px, rgb(255, 255, 255) 30px -30px 0px -3px, rgb(255, 156, 85) 30px -30px, rgb(255, 255, 255) 40px -40px 0px -3px, rgb(255, 85, 85) 40px -40px; */
+/* #navbar-msc {
+    margin: 20px;
+} */
+
+/* #navbar-msc a {
+    line-height: 1.55; 
+    font-size: calc(8px + 1vw); 
+    
+} */

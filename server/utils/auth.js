@@ -34,12 +34,17 @@ export const sendRefreshToken = (res, token) => {
 export const authMiddleware = ({ req }) => {
     const token = req.cookies.access_token || req.headers.authorization?.split(' ')[1];
 
-    if (!token) throw new Error('No access token');
+    if (!token){
+        console.warn("⚠️ No token found in request");
+        throw new Error('No access token');
+    } 
 
     try {
         const decoded = jwt.verify(token, config.jwtSecret);
+        // console.log("✅ Token successfully verified for user:", decoded.username);
         req.user = decoded;
     } catch (err) {
+        console.error("❌ Token verification failed:", err.message);
         throw new Error('Invalid or expired access token');
     }
 
