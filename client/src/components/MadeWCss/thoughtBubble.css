@@ -6,35 +6,52 @@
 
 .main-bubble {
     position: absolute;
-    width: 350px;
-    height: 130px;
+    width: 370px;
+    height: 140px;
     left: 90px;
-    top: 60px;
+    top: 80px;
     background: #ECEFF1;
     box-shadow: 10px 10px rgba(0, 0, 0, 0.2);
     border-radius: 100px;
+    z-index: 1;
 }
 
 .main-bubble:after, .main-bubble:before {
     content:"";
-    position: relative;
-    display: inline-block;
+    position: absolute;
     background: inherit;
     border-radius: inherit;
+    z-index: 0;
 }
 
 .main-bubble::after {
-    width: 100px;
-    height: 100px;
-    top: -230px;
-    left: 20px;
+    width: 110px;
+    height: 110px;
+    /* top: -230px; */
+    /* left: 20px; */
+    top: -41px;
+    left: 65px;
 }
 
 .main-bubble::before {
-    width: 180px;
-    height: 180px;
-    top: -56px;
-    left: 130px;
+    width: 150px;
+    height: 170px;
+    top: -62px;
+    left: 151px;
+}
+
+.main-bubble-text {
+    font-family: 'Courier New', Courier, monospace, "Cedarville Cursive", cursive;
+    font-weight: 600;
+    /* font-style: bold; */
+    position: absolute;
+    z-index: 2;
+    top: 100px;
+    left: 110px;
+    width: 330px;
+    text-align: center;
+    font-size: 23px;
+    line-height: 1;
 }
 
 .small-bubble {
