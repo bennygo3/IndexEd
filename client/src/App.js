@@ -26,6 +26,7 @@ import Chess from './pages/Games/Chess/ChessBoard.jsx';
 
 function App() {
     useEffect(() => {
+        // authService.refreshAccessToken(); //access token is triggered on app mount
         const interval = setInterval(() => {
             authService.refreshAccessToken();
         }, 10 * 60 * 1000); // refresh triggered q 10 minutes

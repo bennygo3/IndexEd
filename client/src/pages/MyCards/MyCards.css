@@ -32,10 +32,21 @@
 #my-cards-header-list {
     display: flex;
     flex-direction: column;
+    height: 67%;
+    justify-content: space-around;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    padding-inline-start: 20px;
+    
 }
 
 #my-cards-header-list li {
   font-size: 32px;
+  /* display: inline; */
+  list-style-type: none;
+  /* box-sizing: border-box; */
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 #mcp-home {
