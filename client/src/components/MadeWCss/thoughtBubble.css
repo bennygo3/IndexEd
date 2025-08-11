@@ -1,19 +1,22 @@
 .thought-bubble-container {
     position: relative;
+    top: 40px;
     width: 400px;
-    height: 400px;
+    /* height: 400px; */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .main-bubble {
     position: absolute;
-    width: 370px;
-    height: 140px;
-    left: 90px;
+    width: 0px;
+    height: 0px;
     top: 120px;
     background: #ECEFF1;
-    box-shadow: 10px 10px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 10px 10px rgba(0, 0, 0, 0.2); */
     border-radius: 100px;
-    z-index: 1;
+    z-index: 1; 
+    /* box-shadow: white 30px 10px, white 60px 15px 0 -10px, white 45px 5px 0 -5px */
 }
 
 .main-bubble:after, .main-bubble:before {
@@ -25,47 +28,52 @@
 }
 
 .main-bubble::after {
-    width: 110px;
-    height: 110px;
-    /* top: -230px; */
-    /* left: 20px; */
-    top: -41px;
-    left: 65px;
+    width: 120px;
+    height: 120px;
+    top: -40px;
+    left: 190px;
+    box-shadow: 
+    rgb(236, 239, 241) -198px 10px, 
+    rgb(236, 239, 241) -230px 80px,
+    rgb(236, 239, 241) -155px 120px, 
+    rgb(236, 239, 241) 38px 120px,
+    rgb(236, 239, 241) 120px 95px;
+    /* cloud parts are made with box shadow and each value above is ordered counter-clockwise  */
 }
 
 .main-bubble::before {
-    width: 150px;
+    width: 170px;
     height: 170px;
     top: -62px;
-    left: 151px;
+    left: 65px;
+    box-shadow: rgb(236, 239, 241) 36px 105px, rgb(236, 239, 241) 170px 22px;
 }
 
 .main-bubble-text {
+    width: 370px;
+    height: 130px;
     font-family: 'Courier New', Courier, monospace, "Cedarville Cursive", cursive;
     font-weight: 600;
-    /* font-style: bold; */
-    position: absolute;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    flex-wrap: wrap;
+    background: #ECEFF1;
     z-index: 2;
-    top: 140px;
-    left: 110px;
-    width: 330px;
+    top: 125px;
     text-align: center;
-    font-size: 23px;
-    line-height: 1;
+    font-size: 22px;
+    line-height: 1.4;
+    /* box-shadow: 10px 10px rgba(0, 0, 0, 0.2); */
+    border-radius: 100px;
 }
 
 .small-bubble {
     position: absolute;
     background: white;
-    /* border: 3px solid black; */
     border-radius: 50%;
-    /* box-shadow: 
-        white 45px -15px 0 -5px,
-        white 15px -25px,
-        white 30px 10px,
-        white 60px 15px 0 -10px,
-        white 45px 5px 0 -5px
-    ; */
 }
 
 .small-bubble.one {
