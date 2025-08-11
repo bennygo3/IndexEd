@@ -4,48 +4,42 @@
 }
 
 #my-cards-header {
-    color: rgb(255, 247, 176);
     color: white;
     font-size: 45px;
     text-align: center;
     text-decoration: underline solid white 4px;
-    /* text-decoration: underline solid rgb(255, 247, 176); */
     text-underline-offset: 9px;
 }
 
 #my-cards-chalkboard {
     background-color: rgba(0, 0, 0, 0.866);
     border: 15px solid rgb(193, 154, 107);
-    /* margin: 5px; */
     box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.7);
     height: 237px;
     width: 80%;
     font-family: "Cedarville Cursive", cursive;
     font-weight: 400;
     font-style: normal;
-    /* color: rgb(255, 247, 176); */
     position: relative;
     top: 40px;
-    
     margin-left: auto;
     margin-right: auto;
 }
 
 #my-cards-header-list {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-evenly;
-    margin-block-start: 0.5em;
+    margin-block-start: 1em;
     margin-block-end: 0em;
-    /* padding-inline-start: 30px; */
+    padding-inline-start: 0px;
     
 }
 
 #my-cards-header-list li {
-  font-size: 32px;
+  font-size: 28px;
   list-style-type: none;
-  padding-top: 0px;
-  padding-bottom: 0px;
 }
 
 #mcp-home {
@@ -58,7 +52,6 @@
 
 #mcp-trivia {
     color: hotpink;
-    font-size: 32px;
 }
 
 #mcp-games {
@@ -71,19 +64,19 @@
     background-color: rgba(255, 255, 102, 0.852);
     border-radius: 3px;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
-    /* position: relative; */
-    bottom: 5px;
-    /* left: 345px; */
+    position: relative;
+    top: 71px;
+    left: 30px;
 }
 
 #my-cards-chalk::before {
     content: '';
-    /* position: absolute; */
+    position: absolute;
     width: 100%;
     height: 100%;
     background: linear-gradient(45deg, rgba(255, 255, 255, 0.3) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.3) 50%, transparent 75%, rgba(255, 255, 255, 0.3) 75%);
     background-size: 15px 15px;
-    opacity: 0.95; 
+    opacity: 0.98; 
     border-radius: 3px;
 }
 

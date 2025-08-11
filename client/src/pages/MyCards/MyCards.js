@@ -33,10 +33,10 @@ export default function MyCards() {
                 {/* <div> */}
                 <h1 id="my-cards-header">My Study Cards</h1>
                 <ul id="my-cards-header-list">
-                    <li><Link to="/" id="mcp-home"> - Home</Link></li>
-                    <li><Link to="/card-create" id="mcp-card-create"> - Create a new card</Link></li>
-                    <li><Link to="/trivia" id="mcp-trivia"> - Trivia cards</Link></li>
-                    <li><Link to="/games" id="mcp-games"> - Games</Link></li>
+                    <li><Link to="/" id="mcp-home"> -Home</Link></li>
+                    <li><Link to="/card-create" id="mcp-card-create"> -Create a new card</Link></li>
+                    <li><Link to="/trivia" id="mcp-trivia"> -Trivia cards</Link></li>
+                    <li><Link to="/games" id="mcp-games"> -Games</Link></li>
                 </ul>
                 <div id="my-cards-chalk"></div>
                 {/* </div> */}
