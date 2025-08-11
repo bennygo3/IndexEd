@@ -29,7 +29,6 @@ export default function MyCards() {
 
     return (
         <main className="my-cards-page">
-            <div id="mcp-buffer"></div>
             <header id="my-cards-chalkboard">
                 {/* <div> */}
                 <h1 id="my-cards-header">My Study Cards</h1>

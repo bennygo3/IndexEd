@@ -9,7 +9,7 @@
     width: 370px;
     height: 140px;
     left: 90px;
-    top: 80px;
+    top: 120px;
     background: #ECEFF1;
     box-shadow: 10px 10px rgba(0, 0, 0, 0.2);
     border-radius: 100px;
@@ -46,7 +46,7 @@
     /* font-style: bold; */
     position: absolute;
     z-index: 2;
-    top: 100px;
+    top: 140px;
     left: 110px;
     width: 330px;
     text-align: center;
