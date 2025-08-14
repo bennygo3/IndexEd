@@ -59,14 +59,14 @@
 }
 
 #my-cards-chalk {
-    width: 49px;
-    height: 12px;
+    width: 46px;
+    height: 9px;
     background-color: rgba(255, 255, 102, 0.852);
     border-radius: 3px;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
     position: relative;
-    top: 71px;
-    left: 30px;
+    top: 73px;
+    left: 92%;
 }
 
 #my-cards-chalk::before {

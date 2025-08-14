@@ -30,23 +30,23 @@
 .main-bubble::after {
     width: 120px;
     height: 120px;
-    top: -40px;
+    top: -64px;
     left: 190px;
     box-shadow: 
     rgb(236, 239, 241) -198px 10px, 
     rgb(236, 239, 241) -230px 80px,
-    rgb(236, 239, 241) -155px 120px, 
-    rgb(236, 239, 241) 38px 120px,
+    rgb(236, 239, 241) -175px 130px, 
+    rgb(236, 239, 241) 48px 120px,
     rgb(236, 239, 241) 120px 95px;
     /* cloud parts are made with box shadow and each value above is ordered counter-clockwise  */
 }
 
 .main-bubble::before {
-    width: 170px;
-    height: 170px;
-    top: -62px;
-    left: 65px;
-    box-shadow: rgb(236, 239, 241) 36px 105px, rgb(236, 239, 241) 170px 22px;
+    width: 160px;
+    height: 160px;
+    top: -70px;
+    left: 70px;
+    box-shadow: rgb(236, 239, 241) 36px 105px, rgb(236, 239, 241) 175px 9px;
 }
 
 .main-bubble-text {
