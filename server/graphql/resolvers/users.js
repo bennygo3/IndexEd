@@ -109,6 +109,19 @@ const Mutation = {
 
         return { token, user };
     },
+
+    async updateHighSnakeScore(_, { userId, newSnakeScore }) {
+        const highSnakeScore = await SnakeScore.findOne({ userId });
+
+        if (!highSnakeScore) {
+            const user = await Users.findById(userId);
+            if(!user) {
+                throw new GraphQLError('User not found', { extensions: { code: 'BAD_USER_INPUT' } });
+            }
+
+            const 
+        }
+    }
 };
 
 export default { Query, Mutation };

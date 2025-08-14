@@ -16,8 +16,8 @@ export default function UserIcon() {
     return (
         <div className={`user-icon-container ${isLoggedIn ? 'signed-in' : 'signed-out'}`}>
             <div className= 'avatar'>
-                <div className='head'></div>
-                <div className='shoulders'></div>
+                <div className='user-head'></div>
+                <div className='user-shoulders'></div>
             </div>
         </div>
     );

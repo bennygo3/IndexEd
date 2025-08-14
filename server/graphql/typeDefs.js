@@ -42,7 +42,7 @@ export const typeDefs = `#graphql
 
     type Query {
         getCurrentUser: User
-        getHighScoreSnake(userId: ID!): SnakeScore
+        getHighScoreSnake: SnakeScore
         getStudyGenres(userId: ID): [StudyGenre] 
         getStudyGenre(studyGenreId: ID!): StudyGenre
         getStudyCard(id: ID!): StudyCard
@@ -54,7 +54,7 @@ export const typeDefs = `#graphql
         refreshToken: Auth!
         logout: Boolean!
 
-        updateHighScoreSnake(username: ID!, newHighScoreSnake: Int!): SnakeScore!
+        updateHighSnakeScore(newSnakeScore: Int!): SnakeScore!
         
         createStudyGenre(title: String!, category: String!, description: String): StudyGenre!
         deleteStudyGenre(genreId: ID!): Boolean!
@@ -66,3 +66,7 @@ export const typeDefs = `#graphql
     }
 
 `;
+
+// getHighScoreSnake(userId: ID!): SnakeScore
+
+// mutation: updateHighScoreSnake(username: ID!, newHighScoreSnake: Int!): SnakeScore!
