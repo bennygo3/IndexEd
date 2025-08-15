@@ -41,23 +41,13 @@ const Query = {
         return user;
     },
 
-    async getHighScoreSnake(_, { userId }) {
-
-        const snakeScore = await SnakeScore.findOne({ userId });
-
-        if (!snakeScore) {
-            return null;
-        }
-
-        const username = snakeScore.username || "Unknown";
-
-        return {
-            _id: snakeScore._id,
-            userId: snakeScore.userId,
-            username: username,
-            highScore: snakeScore.highScore,
-        };
+    async getHighScoreSnake(_, __, context) {
+        const authId = context.user?._id;
+        if (!authId) return null;
+        const score = await SnakeScore.findOne({ userId: authId });
+        return score || null;
     },
+
 };
 
 const Mutation = {
@@ -110,18 +100,62 @@ const Mutation = {
         return { token, user };
     },
 
-    async updateHighSnakeScore(_, { userId, newSnakeScore }) {
-        const highSnakeScore = await SnakeScore.findOne({ userId });
-
-        if (!highSnakeScore) {
-            const user = await Users.findById(userId);
-            if(!user) {
-                throw new GraphQLError('User not found', { extensions: { code: 'BAD_USER_INPUT' } });
-            }
-
-            const 
+    async updateHighSnakeScore(_, { newSnakeScore }, context) {
+        const authId = context.user?._id;
+        if(!authId) {
+            throw new GraphQLError('Not authenticated' , {
+                extensions: {code: 'UNAUTHENTICATED' },
+            });
         }
+
+        if (!Number.isInteger(newSnakeScore) || newSnakeScore < 0) {
+            throw new GraphQLError('Score must be a non-negative integer', {
+        extensions: { code: 'BAD_USER_INPUT' },
+        });
     }
+
+    const snakeUpdated = await SnakeScore.findOneAndUpdate(
+        { userId: authId },
+        {
+            $setOnInsert: { userId: authId, username: user.username, highScore: newSnakeScore },
+            $max: { highScore: newSnakeScore },
+            $set: { username: user.username },
+        },
+        { new: true, upsert: true }
+    );
+
+    return snakeUpdated;
+    },
 };
 
 export default { Query, Mutation };
+
+//async getHighScoreSnake(_, { userId }) {
+
+    //     const snakeScore = await SnakeScore.findOne({ userId });
+
+    //     if (!snakeScore) {
+    //         return null;
+    //     }
+
+    //     const username = snakeScore.username || "Unknown";
+
+    //     return {
+    //         _id: snakeScore._id,
+    //         userId: snakeScore.userId,
+    //         username: username,
+    //         highScore: snakeScore.highScore,
+    //     };
+    // },
+        // async updateHighSnakeScore(_, { userId, newSnakeScore }) {
+    //     const highSnakeScore = await SnakeScore.findOne({ userId });
+
+    //     if (!highSnakeScore) {
+    //         const user = await Users.findById(userId);
+    //         if(!user) {
+    //             throw new GraphQLError('User not found', { extensions: { code: 'BAD_USER_INPUT' } });
+    //         }
+
+    //         const 
+    //     }
+    // }

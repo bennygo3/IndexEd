@@ -34,10 +34,10 @@ export const typeDefs = `#graphql
     }
     
     type SnakeScore {
-        _id: ID
-        userId: ID
-        username: String
-        highScore: Int
+        _id: ID!
+        userId: ID!
+        username: String!
+        highScore: Int!
     }
 
     type Query {

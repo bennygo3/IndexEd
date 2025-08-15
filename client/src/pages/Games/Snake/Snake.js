@@ -7,7 +7,7 @@ import './snake.css';
 import Scoreboard from '../Scoreboard/Scoreboard.js';
 
 export default function Snake() {
-    // const userId = authService.getUserIdFromToken();
+    
     const [userId, setUserId] = useState(null);
     const { data, refetch } = useQuery(GET_HIGH_SNAKE_SCORE, {
         variables: { userId },
@@ -54,7 +54,7 @@ export default function Snake() {
             { x: 1, y: 2 },
             { x: 1, y: 1 },
         ]);
-        setFood({ x: 5, y: 5 });
+        setFood({ x: 6, y: 6 }); // coordinates needed for rerender
         setDirection({ x: 0, y: 1 });
     }, []);
 
