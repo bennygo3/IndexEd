@@ -8,23 +8,24 @@ import Scoreboard from '../Scoreboard/Scoreboard.js';
 
 export default function Snake() {
     
-    const [userId, setUserId] = useState(null);
+    const DEFAULT_SNAKE = [{ x: 1, y: 2 }, {x: 1, y: 1}];
+    const DEFAULT_DIR = { x: 0, y: 1};
+    const DEFAULT_FOOD = { x: 5, y: 5 };
+    
+    const [snake, setSnake] = useState(DEFAULT_SNAKE);
+    const [food, setFood] = useState(DEFAULT_FOOD);
+    const [direction, setDirection] = useState(DEFAULT_DIR);
+
+        const [userId, setUserId] = useState(null);
     const { data, refetch } = useQuery(GET_HIGH_SNAKE_SCORE, {
         variables: { userId },
         skip: !userId,
     });
     const [updateHighSnakeScore] = useMutation(UPDATE_HIGH_SNAKE_SCORE);
-
-    const [food, setFood] = useState({ x: 5, y: 5 });
-    const [direction, setDirection] = useState({ x: 0, y: 1 });
     const [gameOver, setGameOver] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
     const [score, setScore] = useState(0);
     const [highScore, setHighScore] = useState(0);
-    const [snake, setSnake] = useState([
-        { x: 1, y: 2 },
-        { x: 1, y: 1 },
-    ]);
 
     useEffect(() => {
         const id = authService.getUserIdFromToken();
