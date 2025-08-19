@@ -40,6 +40,11 @@ export const typeDefs = `#graphql
         highScore: Int!
     }
 
+    type UpdatedHighSnakeScore {
+        changed: Boolean!
+        highScore: Int
+    }
+
     type Query {
         getCurrentUser: User
         getHighScoreSnake: SnakeScore
@@ -54,7 +59,7 @@ export const typeDefs = `#graphql
         refreshToken: Auth!
         logout: Boolean!
 
-        updateHighSnakeScore(newSnakeScore: Int!): SnakeScore!
+        updateHighSnakeScore(newSnakeScore: Int!): UpdatedHighSnakeScore!
         
         createStudyGenre(title: String!, category: String!, description: String): StudyGenre!
         deleteStudyGenre(genreId: ID!): Boolean!

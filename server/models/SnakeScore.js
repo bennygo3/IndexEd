@@ -16,6 +16,8 @@ const snakeScoreSchema = new Schema({
     }
 });
 
+snake
+
 const SnakeScore = model('SnakeScore', snakeScoreSchema);
 
 export default SnakeScore;
