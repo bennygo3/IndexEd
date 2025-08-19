@@ -7,37 +7,37 @@ import './snake.css';
 import Scoreboard from '../Scoreboard/Scoreboard.js';
 
 export default function Snake() {
-    
-    const DEFAULT_SNAKE = [{ x: 1, y: 2 }, {x: 1, y: 1}];
-    const DEFAULT_DIR = { x: 0, y: 1};
+
+    const DEFAULT_SNAKE = [{ x: 1, y: 2 }, { x: 1, y: 1 }];
+    const DEFAULT_DIR = { x: 0, y: 1 };
     const DEFAULT_FOOD = { x: 5, y: 5 };
-    
+
     const [snake, setSnake] = useState(DEFAULT_SNAKE);
     const [food, setFood] = useState(DEFAULT_FOOD);
     const [direction, setDirection] = useState(DEFAULT_DIR);
 
-        const [userId, setUserId] = useState(null);
-    const { data, refetch } = useQuery(GET_HIGH_SNAKE_SCORE, {
-        variables: { userId },
-        skip: !userId,
-    });
-    const [updateHighSnakeScore] = useMutation(UPDATE_HIGH_SNAKE_SCORE);
     const [gameOver, setGameOver] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
     const [score, setScore] = useState(0);
     const [highScore, setHighScore] = useState(0);
 
-    useEffect(() => {
-        const id = authService.getUserIdFromToken();
-        setUserId(id);
-    }, []);
+    const isLoggedIn = Boolean(authService.getUserIdFromToken());
+
+    const { data, refetch } = useQuery(GET_HIGH_SNAKE_SCORE, {
+        skip: !isLoggedIn,
+        fetchPolicy: 'network-only',
+    });
+
+    const [updateHighSnakeScore] = useMutation(UPDATE_HIGH_SNAKE_SCORE);
 
     useEffect(() => {
-        if (data) {
-            console.log(`Fetched high score from server: ${data.getHighSnakeScore.highSnakeScore}`);
-            setHighScore(data.getHighSnakeScore.highSnakeScore);
+        if (data?.getHighScoreSnake?.highScore != null) {
+            console.log(`Fetched high score from server: ${data.getHighScoreSnake.highScore}`);
+            setHighScore(data.getHighScoreSnake.highScore);
+        } else if (!isLoggedIn) {
+            setHighScore(0);
         }
-    }, [data]);
+    }, [data, isLoggedIn]);
 
     const boardSize = 20;
 
@@ -93,20 +93,25 @@ export default function Snake() {
         console.log('Game over. Final score:', score, 'High score:', highScore);
         setGameOver(true);
         setGameStarted(false);
-        if (userId) {
+
+        if (isLoggedIn && score > highScore) {
             try {
-                if (score > highScore) {
-                    console.log('Updating high score with userId:', userId, 'and newScore:', score);
-                    await updateHighSnakeScore({ variables: { userId, newSnakeScore: score } });
-                    refetch();
-                } else {
-                    console.log('Score:', score, 'is not higher than the current high score:', highScore);
+                console.log('Updating high score (logged in) with newScore:', score);
+                const { data: m } = await updateHighSnakeScore({
+                    variables: { newSnakeScore: score },
+                });
+                if (m?.updateHighSnakeScore?.changed) {
+                    setHighScore(m.updateHighSnakeScore.highScore);
                 }
+                refetch();
             } catch (error) {
                 console.error('Error updating high score:', error);
             }
+        } else {
+            console.log('No server save either guest or not a new high');
         }
     };
+
 
     const generateFood = (snake) => {
         let newFood;
@@ -175,8 +180,6 @@ export default function Snake() {
         }, [delay]);
     }
 
-
-
     return (
         <div className='snake-game'>
             <div className='snake-scoreboard'>
@@ -185,7 +188,7 @@ export default function Snake() {
                     onClick={startGame}>
                     Start Game
                 </button>
-                <Scoreboard currentScore={score} label='SCORE'/>
+                <Scoreboard currentScore={score} label='SCORE' />
                 <div className='high-score'>
                     High Score: {highScore}
                 </div>
@@ -202,19 +205,19 @@ export default function Snake() {
                                 ? direction.x === 1
                                     ? 'right'
                                     : direction.x === -1
-                                    ? 'left'
-                                    : direction.y === 1
-                                    ? 'down'
-                                    : 'up'
+                                        ? 'left'
+                                        : direction.y === 1
+                                            ? 'down'
+                                            : 'up'
                                 : '';
                             const snakeBodyDirection = isSnakeSegment && !isSnakeHead
                                 ? direction.x === 1
                                     ? 'right'
                                     : direction.x === -1
-                                    ? 'left'
-                                    : direction.y === 1
-                                    ? 'down'
-                                    : 'up'
+                                        ? 'left'
+                                        : direction.y === 1
+                                            ? 'down'
+                                            : 'up'
                                 : '';
                             return (
                                 <div

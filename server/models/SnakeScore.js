@@ -16,7 +16,7 @@ const snakeScoreSchema = new Schema({
     }
 });
 
-snake
+snakeScoreSchema.index({ userId: 1 }, { unique: true });
 
 const SnakeScore = model('SnakeScore', snakeScoreSchema);
 

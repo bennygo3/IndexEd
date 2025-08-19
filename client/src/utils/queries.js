@@ -56,8 +56,8 @@ query GetStudyCard($id: ID!) {
 }`;
 
 export const GET_HIGH_SNAKE_SCORE = gql`
-    query GetHighSnakeScore($userId: ID!) {
-        getHighSnakeScore(userId: $userId) {
+    query GetHighScoreSnake {
+        getHighScoreSnake {
             _id
             userId
             username
@@ -65,3 +65,14 @@ export const GET_HIGH_SNAKE_SCORE = gql`
         }
     }
 `;
+
+// export const GET_HIGH_SNAKE_SCORE = gql`
+//     query GetHighSnakeScore($userId: ID!) {
+//         getHighSnakeScore(userId: $userId) {
+//             _id
+//             userId
+//             username
+//             highScore
+//         }
+//     }
+// `;

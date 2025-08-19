@@ -29,15 +29,25 @@ export const UPDATE_STUDYCARD = gql `
 `;
 
 export const UPDATE_HIGH_SNAKE_SCORE = gql`
-    mutation updateHighScoreSnake($username: String!, $newHighScoreSnake: Int!) {
-        updateHighScoreSnake(username: $username, newHighScoreSnake: $newHighScoreSnake) {
-            _id
-            userId
-            username
+    mutation UpdateHighScoreSnake($newSnakeScore: Int!) {
+        updateHighSnakeScore(newSnakeScore: $newSnakeScore) {
+            changed 
             highScore
         }
     }
 `;
+
+
+// export const UPDATE_HIGH_SNAKE_SCORE = gql`
+//     mutation updateHighScoreSnake($username: String!, $newHighScoreSnake: Int!) {
+//         updateHighScoreSnake(username: $username, newHighScoreSnake: $newHighScoreSnake) {
+//             _id
+//             userId
+//             username
+//             highScore
+//         }
+//     }
+// `;
 
 // export const CREATE_STUDYCARD = gql`
 //     mutation createStudyCard($front: String!, $back: String!, $studyGenre: ID!) {

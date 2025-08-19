@@ -24,7 +24,7 @@ const Query = {
                 path: 'studyCards',
                 model: 'StudyCard',
             })
-            .populate('snakeScores')
+            // .populate('snakeScores')
 
         if (!user) {
             throw new GraphQLError('User not found!', {
@@ -68,7 +68,7 @@ const Mutation = {
         }
 
         const token = signToken(user);
-        return { token, user };
+        return { accessToken: token, user };
     },
 
     async register(_, { username, email, password, confirmPassword }) {
@@ -97,7 +97,7 @@ const Mutation = {
             username: user.username,
         });
 
-        return { token, user };
+        return { accessToken: token, user };
     },
 
     async updateHighSnakeScore(_, { newSnakeScore }, context) {
