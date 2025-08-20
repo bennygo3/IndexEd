@@ -9,8 +9,6 @@ export default function NavbarG(){
                     <li>
                         <Highlighted 
                           color=" rgb(243,149,57)"
-                        //   underline="underline red dashed 2px"
-                        //   underlineOffset="3px"
                         >
                             <Link to="/">
                                 Home
