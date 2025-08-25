@@ -4,7 +4,7 @@ import config from '../../config.js';
 // Access token - short lived
 export const createAccessToken = (user) => {
     return jwt.sign(
-        { id: user._id, username: user.username },
+        { _id: user._id, username: user.username },
         config.jwtSecret,
         { expiresIn: '15m' } // access token that lasts 15 minutes
         // { expiresIn: '1m' } // testing purposes

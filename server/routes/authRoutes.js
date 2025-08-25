@@ -65,7 +65,8 @@ router.post('/register', async (req, res) => {
         httpOnly: true,
         secure: false, // use true in production with HTTPS
         sameSite: 'Lax',
-        maxAge: 14 * 60 * 1000 // 14 minutes 
+        path: '/',
+        maxAge: 14 * 60 * 1000, // 14 minutes 
         // maxAge: 60 * 1000 // 1m - testing purposes
     });
 
@@ -73,7 +74,8 @@ router.post('/register', async (req, res) => {
         httpOnly: true,
         secure: false,
         sameSite: 'Lax',
-        maxAge: 24 * 60 * 60 * 1000 // 1 day
+        path: '/',
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
 
     res.json({ message: "Registration successful" });
@@ -108,6 +110,7 @@ router.post('/login', async (req, res) => {
         httpOnly: true,
         secure: false, // can change to true in production w/ HTTPS
         sameSite: 'Lax',
+        path: '/',
         maxAge: 15 * 60 * 1000 // 15 min
         // maxAge: 30 * 1000 // 30 sec
     });
@@ -116,6 +119,7 @@ router.post('/login', async (req, res) => {
         httpOnly: true,
         secure: false,
         sameSite: 'Lax',
+        path: '/',
         maxAge: 24 * 60 * 60 * 1000 // 1 day
     })
     res.json({ message: "Login successful" });
@@ -176,6 +180,7 @@ router.post('/token', async (req, res) => {
             httpOnly: true,
             secure: false,
             sameSite: 'Lax',
+            path: '/',
             maxAge: 15 * 60 * 1000 // 15 minutes
         });
 
@@ -183,6 +188,7 @@ router.post('/token', async (req, res) => {
             httpOnly: true,
             secure: false,
             sameSite: 'Lax',
+            path: '/',
             maxAge: 24 * 60 * 60 * 1000 // 1 Day
         });
         console.log("♻️ Refresh endpoint hit");

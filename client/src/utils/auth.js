@@ -42,7 +42,7 @@ class AuthService {
                 const refreshed = await this.refreshAccessToken();
                 if (!refreshed) return true;
 
-                await new PromiseRejectionEvent(res => setTimeout(res, 200));
+                // await new PromiseRejectionEvent(res => setTimeout(res, 200));
                 
                 const newToken = await this.getToken();
                 if(!newToken) return true;
