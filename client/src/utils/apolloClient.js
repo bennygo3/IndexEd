@@ -1,18 +1,16 @@
-// client/src/apolloClient.js
-import { ApolloClient, InMemoryCache, createHttpLink, ApolloLink, from } from '@apollo/client';
+import { ApolloClient, InMemoryCache, createHttpLink, from } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { fromPromise } from '@apollo/client';
 import configFront from '../config.js';
 
-// Your existing http link (unchanged)
 const httpLink = createHttpLink({
-  uri: configFront.REACT_APP_GRAPHQL_ENDPOINT, // e.g. '/graphql' or 'http://localhost:4000/graphql'
+  uri: configFront.REACT_APP_GRAPHQL_ENDPOINT,
   credentials: 'include',
 });
 
 console.log('httpLink', httpLink);
 
-// --- Refresh-then-retry on 401 (single-flight) ---
+// Refresh-then-retry on 401
 let isRefreshing = false;
 let pendingResolvers = [];
 
@@ -69,28 +67,3 @@ const client = new ApolloClient({
 });
 
 export default client;
-
-// import { ApolloClient, InMemoryCache, createHttpLink, from } from '@apollo/client';
-// import { onError } from '@apollo/client/link/error';
-// import configFront from '../config.js';
-
-// const errorLink = onError(({ networkError, operation, forward }) => {
-//     if (networkError?.statusCode === 401 || networkError?.statusCode === 500) {
-//         console.warn("🔁 Apollo retrying failed operation:", operation.operationName);
-//         return forward(operation);
-//     }
-// });
-
-// const httpLink =  createHttpLink({
-//     uri: configFront.REACT_APP_GRAPHQL_ENDPOINT,
-//     credentials: 'include',
-// });
-
-// console.log('httpLink', httpLink);
-
-// const client = new ApolloClient({
-//     link: from([errorLink, httpLink]),
-//     cache: new InMemoryCache(),
-// })
-
-// export default client;
