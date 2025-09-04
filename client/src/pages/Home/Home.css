@@ -1,6 +1,6 @@
 .home-body {
-    background-color: rgb(121 231 75 / 77%);
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(66, 158, 26, 0.77);
+    /* background-color: rgb(255, 255, 255); */
     min-height: 100vh;
     width: auto;
     display: flex;
@@ -8,13 +8,28 @@
     align-items: center;
 }
 
+.home-header {
+    background-color: white;
+    box-shadow: 1px 3px 9px 2px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+    margin-top: 10%;
+    /* margin-bottom: 10px; */
+    padding-bottom: 10px;
+    min-width: 670px;
+    height: 470px;
+    rotate: 4deg;
+}
+
 .landing-header{
     font-family: 'Fredericka the Great', cursive;
     font-style: normal;
     font-weight: 100;
-    font-size: 90px;
+    font-size: 80px;
     text-align: center;
-    margin-top: 30px;
+    /* margin-top: 30px; */
     letter-spacing: 2px;
     color: rgb(0, 0, 0);
 }
@@ -27,7 +42,7 @@
     flex-direction: column;
     align-items: stretch;
     position: relative;
-    margin-top: 5%;
+    margin-top: 20%;
     margin-bottom: 10px;
     padding-bottom: 10px;
     min-width: 700px;
@@ -144,6 +159,7 @@
     height: 2px;
     background-color: rgba(251, 52, 52, 0.518);
     margin-top: 8px;
+    z-index: 2;
 }
 
 .blue-line {
@@ -155,7 +171,7 @@
 
 @media (max-width: 1200px) {
     .landing-header {
-        font-size: 90px; /* Smaller screen, smaller font */
+        font-size: 90px; 
     }
 
     #login, #signUp {
@@ -165,7 +181,7 @@
 
 @media (max-width: 768px) {
     .landing-header {
-        font-size: 70px; /* Even smaller screen, even smaller font */
+        font-size: 70px; 
     }
 
     #login, #signUp {
@@ -175,7 +191,7 @@
 
 @media (max-width: 480px) {
     .landing-header {
-        font-size: 50px; /* Very small screen, very small font */
+        font-size: 50px; 
     }
 
     #login, #signUp {
