@@ -69,7 +69,7 @@ export default function Home() {
     <main className="home-body">
       <header className="home-header">
         <h1 className="landing-header">Index-Ed</h1>
-        <div className="red-line"></div>
+        {/* <div className="red-line"></div> */}
        <LineGenerator amount={17} colorClass="blue-line" />
       </header>
       {/* <UserIcon /> */}
@@ -83,7 +83,7 @@ export default function Home() {
           signupActive={signUpPopup}
           className="buttons-container"
         />
-        <div className="red-line"></div>
+        {/* <div className="red-line"></div> */}
         <LineGenerator amount={17} colorClass="blue-line" />
         <Navbar className="navbar-home" />
       </div>
@@ -94,72 +94,3 @@ export default function Home() {
 
   );
 };
-
-// export default function Home() {
-//   const { isAuthChecked, isLoggedIn } = useAuthenticated();
-//   const [loginPopup, setLoginPopup] = useState(false);
-//   const [signUpPopup, setButtonPopup] = useState(false);
-//   return (
-
-//     <main className="home-body">
-//       <header className="home-header">
-      
-//       <h1 className="landing-header">Index-Ed</h1>
-//        <div className="red-line"></div>
-//        <LineGenerator amount={17} colorClass="blue-line" />
-//       </header>
-//       {/* <UserIcon /> */}
-//       <div className="home-background">
-//         <div className="buttons-container">
-//           {isAuthChecked ? (
-//             isLoggedIn ? (
-//               <>
-//                 <UserIcon />
-//                 <LogoutButton className='home-logout' />
-//               </>
-//             ) : (
-//               <>
-//                 <button
-//                   id="login-button"
-//                   onClick={() => setLoginPopup(true)}
-//                   className={loginPopup ? 'login-button-active' : ''}
-//                 >
-//                   Sign in
-//                 </button>
-//                 <Login trigger={loginPopup} setTrigger={setLoginPopup} />
-
-//                 <button
-//                   id="signup-button"
-//                   onClick={() => setButtonPopup(true)}
-//                   className={signUpPopup ? 'signup-button-active' : ''}
-//                 >
-//                   Sign up
-//                 </button>
-//                 <SignUp trigger={signUpPopup} setTrigger={setButtonPopup} />
-//               </>
-//             )
-//           ) : null}
-//         </div>
-//         <div className="red-line"></div>
-//         <LineGenerator amount={17} colorClass="blue-line" />
-//         <Navbar className="navbar-home" />
-//       </div>
-
-//     </main>
-
-//   );
-// };
-
-//  {/* <div className="buttons-container"> */}
-        // {/* <button id="login-button" onClick={() => setLoginPopup(true)}
-            // className={loginPopup ? 'login-button-active' : ''}>
-            // Sign in
-          // </button> */}
-        // {/* <Login trigger={loginPopup} setTrigger={setLoginPopup} /> */}
-        // {/* <button id="signup-button" onClick={() => setButtonPopup(true)}
-        //     className={signUpPopup ? 'signup-button-active' : ''}>
-        //     Sign up
-        //   </button> */}
-        // {/* <SignUp trigger={signUpPopup} setTrigger={setButtonPopup} /> */}
-
-        // {/* <LogoutButton className='home-logout' /> */}

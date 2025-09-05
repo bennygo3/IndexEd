@@ -1,26 +1,48 @@
 .home-body {
-    background-color: rgba(66, 158, 26, 0.77);
-    /* background-color: rgb(255, 255, 255); */
-    min-height: 100vh;
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  background-color: rgba(66, 158, 26, 0.77);
+  min-height: 100vh;  
 }
 
 .home-header {
-    background-color: white;
-    box-shadow: 1px 3px 9px 2px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%) rotate(4deg);
+    z-index: 1;
+    background-color: #fff;
+    box-shadow: 1px 3px 9px 2px rgba(0,0,0,.3);
+    min-width: 670px;
+    height: 470px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    position: relative;
-    margin-top: 10%;
-    /* margin-bottom: 10px; */
     padding-bottom: 10px;
-    min-width: 670px;
+}
+
+.home-background {
+    position: fixed;
+    top: 220px;
+    left: 50%;
+    right: 50%;
+    z-index: 2;
+    background-color: #fff;
+    box-shadow: 1px 3px 9px 2px rgba(0,0,0,.3);
+    min-width: 700px;
     height: 470px;
-    rotate: 4deg;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.home-header::before,
+.home-background::before {
+  content: "";
+  display: block;
+  height: 2px;
+  background: rgba(251, 52, 52, .52);
+  margin-top: 8px;
+  position: relative; /* ensure it paints above the card background */
+  z-index: 1;
 }
 
 .landing-header{
@@ -35,19 +57,19 @@
 }
 
 /* this is the index card */
-.home-background {
+/* .home-background {
     background-color: white;
     box-shadow: 1px 3px 9px 2px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     align-items: stretch;
     position: relative;
-    margin-top: 20%;
+    margin-top: 2px;
     margin-bottom: 10px;
     padding-bottom: 10px;
     min-width: 700px;
     height: 470px;
-}
+} */
 
 .buttons-container {
     grid-area: buttons;
@@ -198,3 +220,27 @@
         font-size: 40px;
     }
 }
+
+/* .home-body {
+    background-color: rgba(66, 158, 26, 0.77);
+    min-height: 100vh;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} */
+
+/* .home-header {
+    background-color: white;
+    box-shadow: 1px 3px 9px 2px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+    margin-top: 2%;
+    margin-bottom: 10px; 
+    padding-bottom: 10px;
+    min-width: 670px;
+    height: 470px;
+    rotate: 4deg;
+} */
