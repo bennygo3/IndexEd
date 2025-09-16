@@ -11,12 +11,17 @@ export default function USAStates() {
     const [isFlipped, setIsFlipped] = useState(false);
     const [guess, setGuess] = useState('');
     const [feedback, setFeedback] = useState('');
+    const[guessBank, setGuessBank] = useState([]);
+
+    const normalize = (s) => s.toLowerCase().replace(/\s+/g, ' ').trim();
+    const titleCase = (s) => s.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
 
     const nextCard = useCallback(() => {
         setCurrentIndex(prevIndex => (prevIndex + 1) % statesData.length);
         setIsFlipped(false);
         setFeedback('');
         setGuess('');
+        setGuessBank([]);
     }, []);
 
     const prevCard = useCallback(() => {
@@ -24,6 +29,7 @@ export default function USAStates() {
         setIsFlipped(false);
         setFeedback('');
         setGuess('');
+        setGuessBank('');
     }, []);
 
     useEffect(() => {
@@ -45,16 +51,27 @@ export default function USAStates() {
     const handleFlip = () => {
         setIsFlipped(!isFlipped);
     };
-
+    
     // function to check user's guess
     const checkGuess = () => {
-        const userGuess = guess.trim().toLowerCase();
-        const correctAnswer = statesData[currentIndex].name.toLowerCase();
+        const userCurrentGuess = guess;
+        const userGuess = normalize(userCurrentGuess);
+        const correctAnswer = normalize(statesData[currentIndex].name);
+        
+        if (!userGuess) return;
+
         if (userGuess === correctAnswer) {
             setFeedback('Correct! 🥳');
         } else {
             setFeedback('Incorrect 😔');
         }
+
+        setGuessBank(prev => {
+            const exists = prev.some(g => normalize(g) === userGuess);
+            return exists ? prev : [...prev, titleCase(userCurrentGuess)];
+        });
+
+        setGuess('');
     };
 
     return (
@@ -90,6 +107,19 @@ export default function USAStates() {
                         <button onClick={handleFlip}>Flip Card</button>
                         <button onClick={checkGuess}>Submit</button>
     
+                    </div>
+
+                    <div className="guess-bank" aria-live="polite">
+                        <div className="guess-bank-title">Guesses:</div>
+                        {guessBank.length ? (
+                        <ul className="guess-list">
+                        {guessBank.map((g, i) => (
+                            <li key={`${g}-${i}`} className="guess-chip">{g}</li>
+                        ))}
+                        </ul>
+                        ) : (
+                            <div className="empty-guess"></div>
+                        )}
                     </div>
                     <div
                         className={`guess-feedback ${feedback === 'Correct! 🥳' ? 'is-correct' : feedback ? 'is-wrong' : ''}`}
