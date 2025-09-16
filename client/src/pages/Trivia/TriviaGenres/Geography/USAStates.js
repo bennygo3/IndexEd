@@ -13,7 +13,6 @@ export default function USAStates() {
     const [feedback, setFeedback] = useState('');
 
     const nextCard = useCallback(() => {
-        // setCurrentIndex((currentIndex + 1) % statesData.length);
         setCurrentIndex(prevIndex => (prevIndex + 1) % statesData.length);
         setIsFlipped(false);
         setFeedback('');
@@ -21,7 +20,6 @@ export default function USAStates() {
     }, []);
 
     const prevCard = useCallback(() => {
-        // setCurrentIndex((currentIndex - 1 + statesData.length) % statesData.length);
         setCurrentIndex(prevIndex => (prevIndex - 1 + statesData.length) % statesData.length);
         setIsFlipped(false);
         setFeedback('');
@@ -67,7 +65,6 @@ export default function USAStates() {
                 <FunFacts />
             </header>
             <section className='usa-states-background'>
-
                 <div className='usa-studycard-section'>
                     <form onSubmit={(e) => {
                         e.preventDefault();
@@ -80,21 +77,31 @@ export default function USAStates() {
                                 className='states-input'
                                 type='text'
                                 value={guess}
-                                placeholder='Answer'
+                                placeholder=''
+                                autoComplete='off'
                                 onChange={(e) => setGuess(e.target.value)}
                             />
-                            <div className='state-counter'>
-                                {currentIndex + 1}/{statesData.length}
-                            </div>
-                            <div>{feedback}</div>
+
                         </div>
                     </form>
                     <div>
-                        <button onClick={checkGuess}>Submit</button>
-                        <button onClick={handleFlip}>Flip Card</button>
                         <button onClick={prevCard}>Prev State</button>
                         <button onClick={nextCard}>Next State</button>
+                        <button onClick={handleFlip}>Flip Card</button>
+                        <button onClick={checkGuess}>Submit</button>
+    
                     </div>
+                    <div
+                        className={`guess-feedback ${feedback === 'Correct! 🥳' ? 'is-correct' : feedback ? 'is-wrong' : ''}`}
+                        aria-live="polite"
+                    >
+                        {feedback}
+                    </div>
+
+                    <div className='state-counter'>
+                        {currentIndex + 1}/{statesData.length}
+                    </div>
+
 
                 </div>
 
