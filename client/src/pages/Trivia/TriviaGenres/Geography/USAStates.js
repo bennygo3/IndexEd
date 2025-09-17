@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { statesData } from '../../StateImages/StateImages';
 import Card from '../../../../components/Card/Card.js';
 import USFlag from '../../StateImages/USFlag.js';
@@ -51,6 +51,11 @@ export default function USAStates() {
     const handleFlip = () => {
         setIsFlipped(!isFlipped);
     };
+
+    const validStates = useMemo(
+        () => new Set(statesData.map(s => normalize(s.name))),
+        []
+    );
     
     // function to check user's guess
     const checkGuess = () => {
@@ -60,16 +65,25 @@ export default function USAStates() {
         
         if (!userGuess) return;
 
+        // Blocks any submission that isn't a 50-state name
+        if (!validStates.has(userGuess)) {
+            setFeedback('Not a valid U.S.state');
+            setGuess('');
+            return;
+        }
+        
         if (userGuess === correctAnswer) {
             setFeedback('Correct! 🥳');
-        } else {
-            setFeedback('Incorrect 😔');
+            return;
+        } 
+        
+        setFeedback('Incorrect 😔');
 
             setGuessBank(prev => {
             const exists = prev.some(g => normalize(g) === userGuess);
             return exists ? prev : [...prev, titleCase(userCurrentGuess)];
         });
-        }
+        
 
         setGuess('');
     };
