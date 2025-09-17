@@ -64,12 +64,12 @@ export default function USAStates() {
             setFeedback('Correct! 🥳');
         } else {
             setFeedback('Incorrect 😔');
-        }
 
-        setGuessBank(prev => {
+            setGuessBank(prev => {
             const exists = prev.some(g => normalize(g) === userGuess);
             return exists ? prev : [...prev, titleCase(userCurrentGuess)];
         });
+        }
 
         setGuess('');
     };

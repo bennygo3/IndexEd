@@ -138,13 +138,22 @@
 .usa-states-background button {
     margin: 10px;
     background-color: rgba(255, 250, 105, 0.457);
-    border: 2px solid rgb(28, 217, 246);
+    /* border: 2px solid rgb(28, 217, 246); */
     border: 2px solid rgba(251, 52, 52, 0.421);
     outline: 2px solid rgb(28, 217, 246);
     outline-offset: 1px;
     padding: 6px;
     font-size: 19px;
 
+}
+
+.guess-chip {
+    text-decoration-color: red;
+    text-decoration-line: line-through;
+}
+
+.guess-chip::marker {
+    color: black
 }
 
 .material-symbols-outlined{
