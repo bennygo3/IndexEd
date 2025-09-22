@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
+import TestEngine from './TestMode';
 import { statesData } from '../../StateImages/StateImages';
 import Card from '../../../../components/Card/Card.js';
 import USFlag from '../../StateImages/USFlag.js';
@@ -11,7 +12,8 @@ export default function USAStates() {
     const [isFlipped, setIsFlipped] = useState(false);
     const [guess, setGuess] = useState('');
     const [feedback, setFeedback] = useState('');
-    const[guessBank, setGuessBank] = useState([]);
+    const [guessBank, setGuessBank] = useState([]);
+    const [isTest, setIsTest] = useState(false);
 
     const normalize = (s) => s.toLowerCase().replace(/\s+/g, ' ').trim();
     const titleCase = (s) => s.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
@@ -29,10 +31,12 @@ export default function USAStates() {
         setIsFlipped(false);
         setFeedback('');
         setGuess('');
-        setGuessBank('');
+        setGuessBank([]);
     }, []);
 
     useEffect(() => {
+        if (isTest) return; // disables prev/next buttons while in test mode
+        
         const handleKeyPress = (event) => {
             if (event.key === 'ArrowRight') {
                 nextCard();
@@ -45,7 +49,7 @@ export default function USAStates() {
         return () => {
             window.removeEventListener('keydown', handleKeyPress);
         }
-    }, [nextCard, prevCard]);
+    }, [nextCard, prevCard, isTest]);
 
     // function to flip card
     const handleFlip = () => {
@@ -74,6 +78,7 @@ export default function USAStates() {
         
         if (userGuess === correctAnswer) {
             setFeedback('Correct! 🥳');
+            setGuess('');
             return;
         } 
         
@@ -97,6 +102,31 @@ export default function USAStates() {
             </header>
             <section className='usa-states-background'>
                 <div className='usa-studycard-section'>
+                <div className="states-test-button">
+                        {!isTest ? (
+                            <button onClick = {() => setIsTest(true)}>Take Test</button>
+                        ) : (
+                            <button onClick = {() => setIsTest(false)}>Quit Test</button>
+                        )}
+                    </div>
+                     {/* ---Test Mode--- */}
+                    {isTest ? (
+                        <TestEngine
+                            title="U.S. States Test"
+                            data={statesData}
+                            getLabel={(item) => item.name}
+                            renderPrompt={(item) => (
+                                <img src={item.image} alt={item.name} className="state-image" />
+                            )}
+                            validateSet={new Set(statesData.map(s => s.name.toLowerCase()))}
+                            onFinish={(result) => {
+                                const { correct, total, percent } = result
+                                console.log('Final test result:', result, correct, total, percent)
+                            }}
+                        />
+                    ) : (
+                        // ---Study Mode---
+                <>
                     <form onSubmit={(e) => {
                         e.preventDefault();
                         checkGuess();
@@ -122,7 +152,7 @@ export default function USAStates() {
                         <button onClick={checkGuess}>Submit</button>
     
                     </div>
-
+                
                     <div className="guess-bank" aria-live="polite">
                         <div className="guess-bank-title">Guesses:</div>
                         {guessBank.length ? (
@@ -145,7 +175,8 @@ export default function USAStates() {
                     <div className='state-counter'>
                         {currentIndex + 1}/{statesData.length}
                     </div>
-
+                </>
+                    )}
 
                 </div>
 

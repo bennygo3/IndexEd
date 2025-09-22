@@ -177,11 +177,9 @@ export default function TestEngine({
                         <button onClick={restart}>Restart</button>
                     </div>
                 </div>
-            )
-            }
+            )}
         </section>
     );
-
 }
 
 // const startTest = () => {
