@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import TestEngine from './TestMode';
 import { statesData } from '../../StateImages/StateImages';
 import Card from '../../../../components/Card/Card.js';
@@ -13,10 +13,22 @@ export default function USAStates() {
     const [guess, setGuess] = useState('');
     const [feedback, setFeedback] = useState('');
     const [guessBank, setGuessBank] = useState([]);
+
+    // ---Test Hooks---
     const [isTest, setIsTest] = useState(false);
+    const [order, setOrder] = useState([]);
+    const [idxInOrder, setIdxInOrder] = useState(0);
+    const [answered, setAnswered] = useState(false);
+    const [testScore, setTestScore] = useState({ correct: 0, total: 0 })
+    const advanceRef = useRef(null);
 
     const normalize = (s) => s.toLowerCase().replace(/\s+/g, ' ').trim();
     const titleCase = (s) => s.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+
+     const validStates = useMemo(
+        () => new Set(statesData.map(s => normalize(s.name))),
+        []
+    );
 
     const nextCard = useCallback(() => {
         setCurrentIndex(prevIndex => (prevIndex + 1) % statesData.length);
@@ -55,11 +67,6 @@ export default function USAStates() {
     const handleFlip = () => {
         setIsFlipped(!isFlipped);
     };
-
-    const validStates = useMemo(
-        () => new Set(statesData.map(s => normalize(s.name))),
-        []
-    );
     
     // function to check user's guess
     const checkGuess = () => {
@@ -71,7 +78,7 @@ export default function USAStates() {
 
         // Blocks any submission that isn't a 50-state name
         if (!validStates.has(userGuess)) {
-            setFeedback('Not a valid U.S.state');
+            setFeedback('Not a valid U.S. state');
             setGuess('');
             return;
         }

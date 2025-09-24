@@ -39,7 +39,7 @@ export default function TestEngine({
 
     const validSet = useMemo(() => {
         if (validateSet) return validateSet;
-        return new setAnswered(data.map((item) => norm(getLabel(item))));
+        return new Set(data.map((item) => norm(getLabel(item))));
     }, [data, getLabel, validateSet, norm]);
 
     const [indexInOrder, setIndexInOrder] = useState(0); // pointer into order
@@ -113,7 +113,7 @@ export default function TestEngine({
         if (advanceRef.current) clearTimeout(advanceRef.current);
         const ms = isCorrect ? (delayMs.correct ?? 800) : (delayMs.incorrect ?? 2000);
         advanceRef.current = setTimeout(advance, ms);
-    }, [answered, currentQue, norm, guess, correctAnswer, validSet, delayMs.correct, delayMs.incorrect, advance]);
+    }, [answered, currentQue, norm, guess, correctAnswer, validSet, delayMs, advance]);
 
     const restart = useCallback(() => {
         // rebuild order by toggling shuffle flag
@@ -137,7 +137,7 @@ export default function TestEngine({
                         onSubmit={(e) => { e.preventDefault(); submitQuiz(); }}
                         className="test-form"
                     >
-                        <label htmlFor="testInput" classname="test-label">Your answer:</label>
+                        <label htmlFor="testInput" className="test-label">Your answer:</label>
                         <input
                             id="testInput"
                             type="text"
@@ -182,35 +182,3 @@ export default function TestEngine({
     );
 }
 
-// const startTest = () => {
-//     const seq = shuffle([...Array(totalQuestions).keys()]);
-//     setOrder(seq);
-//     setIsTest(true);
-//     setTestScore({ correct: 0, total: 0 });
-//     setResultsOpen(false);
-//     setAnswered(false);
-//     // setFeedback('');
-//     // setGuess('');
-//     // setGuessBank([]);
-//     // setCurrentIndex(seq[0]);
-
-// };
-
-// const exitTest = () => {
-//     setIsTest(false);
-//     setAnswered(false);
-//     if (advanceRef.current) {
-//         clearTimeout(advanceRef.current);
-//         advanceRef.current = null;
-//     }
-// };
-
-// const finishTest = () => {
-//     setIsTest(false);
-//     setAnswered(false);
-//     setResultsOpen(true);
-//     if(advanceRef.current) {
-//         clearTimeout(advanceRef.current);
-//         advanceRef.current = null;
-//     }
-// };
