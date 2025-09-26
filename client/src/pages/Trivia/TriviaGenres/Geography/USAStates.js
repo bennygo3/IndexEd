@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import TestEngine from './TestMode';
+// import TestEngine from './TestMode';
 import { statesData } from '../../StateImages/StateImages';
 import Card from '../../../../components/Card/Card.js';
 import USFlag from '../../StateImages/USFlag.js';
@@ -25,36 +25,35 @@ export default function USAStates() {
     const normalize = (s) => s.toLowerCase().replace(/\s+/g, ' ').trim();
     const titleCase = (s) => s.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
 
-     const validStates = useMemo(
+    const validStates = useMemo(
         () => new Set(statesData.map(s => normalize(s.name))),
         []
     );
 
     const nextCard = useCallback(() => {
+        if (isTest) return; //next card button locked during a test
         setCurrentIndex(prevIndex => (prevIndex + 1) % statesData.length);
         setIsFlipped(false);
         setFeedback('');
         setGuess('');
         setGuessBank([]);
-    }, []);
+    }, [isTest]);
 
     const prevCard = useCallback(() => {
+        if (isTest) return; //previous card button locked during a test
         setCurrentIndex(prevIndex => (prevIndex - 1 + statesData.length) % statesData.length);
         setIsFlipped(false);
         setFeedback('');
         setGuess('');
         setGuessBank([]);
-    }, []);
+    }, [isTest]);
 
     useEffect(() => {
         if (isTest) return; // disables prev/next buttons while in test mode
-        
+
         const handleKeyPress = (event) => {
-            if (event.key === 'ArrowRight') {
-                nextCard();
-            } else if (event.key === 'ArrowLeft') {
-                prevCard();
-            }
+            if (event.key === 'ArrowRight') nextCard();
+            else if (event.key === 'ArrowLeft') prevCard();
         };
 
         window.addEventListener('keydown', handleKeyPress);
@@ -65,16 +64,71 @@ export default function USAStates() {
 
     // function to flip card
     const handleFlip = () => {
+        if (isTest) return;
         setIsFlipped(!isFlipped);
     };
-    
-    // function to check user's guess
+
+    // --- test fucntions
+    const totalQuestions = statesData.length;
+    const shuffleQs = (arr) => {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    };
+
+    const startTest = () => {
+        const sequence = shuffleQs([...Array(totalQuestions).keys()]);
+        setOrder(sequence);
+        setIdxInOrder(0);
+        setIsTest(true);
+        setTestScore({ correct: 0, total: 0 });
+        setAnswered(false);
+        setFeedback('');
+        setGuessBank([]);
+        setIsFlipped(false);
+        setCurrentIndex(sequence[0]);
+    };
+
+    const finishTest = () => {
+        setIsTest(false);
+        setAnswered(false);
+        if (advanceRef.current) {
+            clearTimeout(advanceRef.current);
+            advanceRef.current = null;
+        }
+        const pctScore = Math.round((testScore.correct / totalQuestions) * 100);
+        setFeedback(`Test complete: ${testScore.correct}/${totalQuestions} (${pctScore}%)`);
+    };
+
+    const advanceTest = () => {
+        const next = idxInOrder + 1;
+        if (next >= totalQuestions) {
+            finishTest();
+            return;
+        }
+        setIdxInOrder(next);
+        setCurrentIndex(order[next]);
+        setGuess('');
+        setFeedback('');
+        setAnswered(false);
+        setIsFlipped(false);
+    };
+
+    useEffect(() => {
+        return () => {
+            if (advanceRef.current) clearTimeout(advanceRef.current);
+        };
+    }, []);
+
+
     const checkGuess = () => {
         const userCurrentGuess = guess;
         const userGuess = normalize(userCurrentGuess);
         const correctAnswer = normalize(statesData[currentIndex].name);
-        
-        if (!userGuess) return;
+        if (!userGuess || answered) return;
 
         // Blocks any submission that isn't a 50-state name
         if (!validStates.has(userGuess)) {
@@ -82,22 +136,35 @@ export default function USAStates() {
             setGuess('');
             return;
         }
-        
-        if (userGuess === correctAnswer) {
-            setFeedback('Correct! 🥳');
-            setGuess('');
+
+
+        if (!isTest) {
+            // --- study mode ---
+            if (userGuess === correctAnswer) {
+                setFeedback('Correct! 🥳');
+            } else {
+                setFeedback('Incorrect 😫');
+                setGuessBank(prev => {
+                    const exists = prev.some(g => normalize(g) === userGuess);
+                    return exists ? prev : [...prev, titleCase(userCurrentGuess)];
+                });
+            }
+            setGuess('')
             return;
-        } 
-        
-        setFeedback('Incorrect 😔');
+        };
 
-            setGuessBank(prev => {
-            const exists = prev.some(g => normalize(g) === userGuess);
-            return exists ? prev : [...prev, titleCase(userCurrentGuess)];
-        });
-        
+        // --- test mode
+        const isCorrect = userGuess === correctAnswer;
+        setAnswered(true);
+        setFeedback(isCorrect ? 'Correct! 🥳' : 'Incorrect 😫');
+        setTestScore(s => ({
+            correct: s.correct + (isCorrect ? 1 : 0),
+            total: s.total + 1,
+        }));
 
-        setGuess('');
+        if (advanceRef.current) clearTimeout(advanceRef.current);
+        const delayMs = isCorrect ? 800 : 2000;
+        advanceRef.current = setTimeout(advanceTest, delayMs);
     };
 
     return (
@@ -107,33 +174,24 @@ export default function USAStates() {
                 <USFlag />
                 <FunFacts />
             </header>
+
             <section className='usa-states-background'>
                 <div className='usa-studycard-section'>
-                <div className="states-test-button">
+                    <div className="states-test-button">
                         {!isTest ? (
-                            <button onClick = {() => setIsTest(true)}>Take Test</button>
+                            <button onClick={startTest}>Take Test</button>
                         ) : (
-                            <button onClick = {() => setIsTest(false)}>Quit Test</button>
+                            <button onClick={finishTest}>Quit Test</button>
                         )}
                     </div>
-                     {/* ---Test Mode--- */}
-                    {isTest ? (
-                        <TestEngine
-                            title="U.S. States Test"
-                            data={statesData}
-                            getLabel={(item) => item.name}
-                            renderPrompt={(item) => (
-                                <img src={item.image} alt={item.name} className="state-image" />
-                            )}
-                            validateSet={new Set(statesData.map(s => s.name.toLowerCase()))}
-                            onFinish={(result) => {
-                                const { correct, total, percent } = result
-                                console.log('Final test result:', result, correct, total, percent)
-                            }}
-                        />
-                    ) : (
-                        // ---Study Mode---
-                <>
+                    {/* ---Test Mode--- */}
+                    {isTest && (
+                        <div className='test-banner'>
+                            <strong>Test Mode</strong>
+                            • Question {Math.min(testScore.total + 1, totalQuestions)}/{totalQuestions} • Correct: {testScore.correct}
+                        </div>
+                    )}
+
                     <form onSubmit={(e) => {
                         e.preventDefault();
                         checkGuess();
@@ -148,6 +206,7 @@ export default function USAStates() {
                                 placeholder=''
                                 autoComplete='off'
                                 onChange={(e) => setGuess(e.target.value)}
+                                disabled={answered && isTest}
                             />
 
                         </div>
@@ -157,23 +216,25 @@ export default function USAStates() {
                         <button onClick={nextCard}>Next State</button>
                         <button onClick={handleFlip}>Flip Card</button>
                         <button onClick={checkGuess}>Submit</button>
-    
+
                     </div>
-                
-                    <div className="guess-bank" aria-live="polite">
-                        <div className="guess-bank-title">Guesses:</div>
-                        {guessBank.length ? (
-                        <ul className="guess-list">
-                        {guessBank.map((g, i) => (
-                            <li key={`${g}-${i}`} className="guess-chip">{g}</li>
-                        ))}
-                        </ul>
-                        ) : (
-                            <div className="empty-guess"></div>
-                        )}
-                    </div>
+
+                    {!isTest && (
+                        <div className="guess-bank" aria-live="polite">
+                            <div className="guess-bank-title">Guesses:</div>
+                            {guessBank.length ? (
+                                <ul className="guess-list">
+                                    {guessBank.map((g, i) => (
+                                        <li key={`${g}-${i}`} className="guess-chip">{g}</li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <div className="empty-guess"></div>
+                            )}
+                        </div>
+                    )}
                     <div
-                        className={`guess-feedback ${feedback === 'Correct! 🥳' ? 'is-correct' : feedback ? 'is-wrong' : ''}`}
+                        className={`guess-feedback ${feedback.startsWith('Correct') ? 'is-correct' : feedback ? 'is-wrong' : ''}`}
                         aria-live="polite"
                     >
                         {feedback}
@@ -182,13 +243,11 @@ export default function USAStates() {
                     <div className='state-counter'>
                         {currentIndex + 1}/{statesData.length}
                     </div>
-                </>
-                    )}
 
                 </div>
 
                 <div className='states-display'>
-                    <div className='states-card' onClick={handleFlip}>
+                    <div className='states-card' onClick={!isTest ? handleFlip : undefined}>
 
                         <Card
                             front={<img src={statesData[currentIndex].image} alt={statesData[currentIndex].name} />}
@@ -198,23 +257,11 @@ export default function USAStates() {
                                     <div className='states-back-text'>{statesData[currentIndex].name}</div>
                                 </div>
                             }
-                            isFlipped={isFlipped}
+                            isFlipped={isTest ? false : isFlipped} // locked during a test no cheating
                         />
                     </div>
                 </div>
-            </section>
+            </section >
         </>
     );
 }
-
-//      <span class="material-symbols-outlined">
-//     cognition
-//     web_traffic
-//     release_alert
-//     add_comment
-//     edit_note
-//     text_fields
-//     text_fields_alt
-//     text_add
-//     psychology_alt
-// </span> 
