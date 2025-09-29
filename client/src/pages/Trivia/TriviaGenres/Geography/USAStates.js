@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-// import TestEngine from './TestMode';
 import { statesData } from '../../StateImages/StateImages';
 import Card from '../../../../components/Card/Card.js';
 import USFlag from '../../StateImages/USFlag.js';
@@ -176,21 +175,8 @@ export default function USAStates() {
             </header>
 
             <section className='usa-states-background'>
+                
                 <div className='usa-studycard-section'>
-                    <div className="states-test-button">
-                        {!isTest ? (
-                            <button onClick={startTest}>Take Test</button>
-                        ) : (
-                            <button onClick={finishTest}>Quit Test</button>
-                        )}
-                    </div>
-                    {/* ---Test Mode--- */}
-                    {isTest && (
-                        <div className='test-banner'>
-                            <strong>Test Mode</strong>
-                            • Question {Math.min(testScore.total + 1, totalQuestions)}/{totalQuestions} • Correct: {testScore.correct}
-                        </div>
-                    )}
 
                     <form onSubmit={(e) => {
                         e.preventDefault();
@@ -211,11 +197,19 @@ export default function USAStates() {
 
                         </div>
                     </form>
+                    
                     <div>
                         <button onClick={prevCard}>Prev State</button>
                         <button onClick={nextCard}>Next State</button>
                         <button onClick={handleFlip}>Flip Card</button>
                         <button onClick={checkGuess}>Submit</button>
+                        <div className="states-test-button">
+                        {!isTest ? (
+                            <button onClick={startTest}>Take Test</button>
+                        ) : (
+                            <button onClick={finishTest}>Quit Test</button>
+                        )}
+                    </div>
 
                     </div>
 
@@ -240,9 +234,11 @@ export default function USAStates() {
                         {feedback}
                     </div>
 
+                    {!isTest && (
                     <div className='state-counter'>
                         {currentIndex + 1}/{statesData.length}
                     </div>
+                    )}
 
                 </div>
 
