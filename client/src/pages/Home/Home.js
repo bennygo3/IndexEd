@@ -68,12 +68,14 @@ export default function Home() {
   return (
     <main className="home-body">
       <header className="home-header">
-        <h1 className="landing-header">Index-Ed</h1>
+        {/* <h1 className="landing-header">Index-Ed</h1> */}
         {/* <div className="red-line"></div> */}
        <LineGenerator amount={17} colorClass="blue-line" />
       </header>
       {/* <UserIcon /> */}
       <div className="home-background">
+        <h1 className="landing-header">Index-Ed</h1>
+
         <AuthButtons
           isAuthChecked={isAuthChecked}
           isLoggedIn={isLoggedIn}
@@ -83,6 +85,7 @@ export default function Home() {
           signupActive={signUpPopup}
           className="buttons-container"
         />
+        
         {/* <div className="red-line"></div> */}
         <LineGenerator amount={17} colorClass="blue-line" />
         <Navbar className="navbar-home" />
