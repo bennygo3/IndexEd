@@ -8,9 +8,9 @@ import Login from './Login/Login';
 import SignUp from './SignUp/SignUp';
 import LogoutButton from '../../components/Logout/LogoutButton.js';
 
-const AuthButtons = memo(function AuthButtons({ 
-  isAuthChecked, 
-  isLoggedIn, 
+const AuthButtons = memo(function AuthButtons({
+  isAuthChecked,
+  isLoggedIn,
   onOpenLogin,
   onOpenSignup,
   loginActive = false,
@@ -19,18 +19,18 @@ const AuthButtons = memo(function AuthButtons({
   // onLogout 
 }) {
   if (!isAuthChecked) return null;
-  
-  return(
+
+  return (
     <div className={className}>
       {isLoggedIn ? (
         <>
           <UserIcon />
-          <LogoutButton className= "home-logout" />
+          <LogoutButton className="home-logout" />
         </>
-        
+
       ) : (
         <>
-          <button 
+          <button
             id="login-button"
             onClick={onOpenLogin}
             className={loginActive ? 'login-button-active' : ''}
@@ -40,7 +40,7 @@ const AuthButtons = memo(function AuthButtons({
             Sign in
           </button>
 
-          <button 
+          <button
             id="signup-button"
             onClick={onOpenSignup}
             className={signupActive ? 'signup-button-active' : ''}
@@ -57,7 +57,7 @@ const AuthButtons = memo(function AuthButtons({
 
 export default function Home() {
   const { isAuthChecked, isLoggedIn } = useAuthenticated();
-  
+
   const [loginPopup, setLoginPopup] = useState(false);
   const [signUpPopup, setButtonPopup] = useState(false);
 
@@ -67,15 +67,13 @@ export default function Home() {
 
   return (
     <main className="home-body">
-      <header className="home-header">
-        {/* <h1 className="landing-header">Index-Ed</h1> */}
-        {/* <div className="red-line"></div> */}
-       <LineGenerator amount={17} colorClass="blue-line" />
-      </header>
+      <div className="back-card">
+        <LineGenerator amount={17} colorClass="blue-line" />
+      </div>
       {/* <UserIcon /> */}
       <div className="home-background">
+        <div>
         <h1 className="landing-header">Index-Ed</h1>
-
         <AuthButtons
           isAuthChecked={isAuthChecked}
           isLoggedIn={isLoggedIn}
@@ -85,7 +83,8 @@ export default function Home() {
           signupActive={signUpPopup}
           className="buttons-container"
         />
-        
+        </div>
+
         {/* <div className="red-line"></div> */}
         <LineGenerator amount={17} colorClass="blue-line" />
         <Navbar className="navbar-home" />

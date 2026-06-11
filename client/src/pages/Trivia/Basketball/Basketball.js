@@ -43,18 +43,50 @@ export default function Basketball() {
             context.stroke();
 
             // curve 1
+            context.save();
+
             context.beginPath();
-            context.arc(x, y, ballRadius * 0.97, 1.25 * Math.PI, false);
+            context.arc(x, y, ballRadius, 0, 2 * Math.PI);
+            context.clip();
+
+            context.beginPath();
+            context.ellipse(
+                x - ballRadius * 0.55,
+                y,
+                ballRadius * 0.45,
+                ballRadius * 1.05,
+                0,
+                -0.45 * Math.PI,
+                0.45 * Math.PI
+            );
             context.lineWidth = 6;
             context.strokeStyle = 'black';
             context.stroke();
+            context.restore();
 
             // curve 2
+            context.save();
+
             context.beginPath();
-            context.arc(x, y, ballRadius * 0.97, 0.85 * Math.PI, 0.15 * Math.PI, true);
+            context.arc(x, y, ballRadius, 0, 2 * Math.PI);
+            context.clip();
+
+            context.beginPath();
+            context.ellipse(
+                x + ballRadius * 0.55, 
+                y, 
+                ballRadius * 0.45, 
+                ballRadius * .95,
+                0, 
+                0.5 * Math.PI, 
+                1.5 * Math.PI
+            );
+
             context.lineWidth = 7;
             context.strokeStyle = 'black';
             context.stroke();
+
+            context.restore();
 
             x += dx; // updates x position
             y += dy;
