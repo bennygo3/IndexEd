@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Auth from '../../../utils/auth.js';
 import StickyNote from '../StickyNote/StickyNote.js';
-import './SignUp.css';
+
 
 export default function SignUp(props) {
     const [formState, setFormState] = useState({
@@ -85,7 +85,7 @@ export default function SignUp(props) {
                                 type="password"
                             />
 
-                            <button type="submit" className='submit-btn'>Submit</button>
+                            
                         </label>
 
                     </form>

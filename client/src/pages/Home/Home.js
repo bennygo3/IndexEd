@@ -37,7 +37,7 @@ const AuthButtons = memo(function AuthButtons({
             aria-haspopup="dialog"
             aria-expanded={loginActive}
           >
-            Sign in
+            Sign In
           </button>
 
           <button
@@ -47,7 +47,7 @@ const AuthButtons = memo(function AuthButtons({
             aria-haspopup="dialog"
             aria-expanded={signupActive}
           >
-            Sign up
+            Sign Up
           </button>
         </>
       )}
@@ -70,14 +70,7 @@ export default function Home() {
 
   const closePopup = useCallback(() => {
     setActivePopup(null);
-  })
-
-  // const [loginPopup, setLoginPopup] = useState(false);
-  // const [signUpPopup, setButtonPopup] = useState(false);
-
-  // <AuthButtons /> memoized
-  // const openLogin = useCallback(() => setLoginPopup(true), []);
-  // const openSignup = useCallback(() => setButtonPopup(true), []);
+  }, []);
 
   return (
     <main className="home-body">
@@ -86,11 +79,10 @@ export default function Home() {
       </div>
       {/* <UserIcon /> */}
       <div className="home-background">
-        <div classname="home-top">
+        <div className="home-top">
           <h1 className="landing-header">Index-Ed</h1>
 
           <AuthButtons
-            // className="buttons-container"
             isAuthChecked={isAuthChecked}
             isLoggedIn={isLoggedIn}
             onOpenLogin={openLogin}
