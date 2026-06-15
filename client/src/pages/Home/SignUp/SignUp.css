@@ -1,17 +1,3 @@
 label{
     color: black;
 }
-
-.submit-btn{
-   font-size: 25px;
-    position: relative;
-    top: 38px;
-    border: black 1px solid;
-    text-shadow: 1px 1px rgb(96, 255, 114);
-    cursor: pointer;
-    font-family: "Edu SA Beginner", cursive;
-    font-weight: 400;
-    font-optical-sizing: auto;
-    border: 1px solid;
-    border-radius: 5px;
-}

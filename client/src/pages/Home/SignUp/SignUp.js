@@ -84,9 +84,10 @@ export default function SignUp(props) {
                                 onChange={handleChange}
                                 type="password"
                             />
+
+                            <button type="submit" className='submit-btn'>Submit</button>
                         </label>
 
-                        <button type="submit" className='submit-btn'>Submit</button>
                     </form>
 
                 </div>

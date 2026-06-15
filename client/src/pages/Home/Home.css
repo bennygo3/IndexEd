@@ -1,23 +1,6 @@
 .home-body {
-  background-color: rgba(66, 158, 26, 0.77);
+  background-color: rgba(52, 125, 21, 0.909);
   height: 100vh; 
-}
-
-.home-header {
-    position: fixed;
-    top: 84px;
-    left: 50%;
-    transform: translateX(-50%) rotate(4deg);
-    z-index: 1;
-    background-color: #fff;
-    box-shadow: 1px 3px 9px 2px rgba(0,0,0,.3);
-    min-width: 720px;
-    height: 570px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    padding-bottom: 10px;
-
 }
 
 .home-background {
@@ -28,71 +11,51 @@
     z-index: 2;
     background-color: #fff;
     box-shadow: 1px 3px 9px 2px rgba(0,0,0,.3);
-    min-width: 720px;
-    height: 470px;
+    min-width: 750px;
+    height: 490px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
 }
 
-.back-card {
-    background-color: #fff;
-    transform-origin: center top;
-    left: 50%;
-    top: 220px;
-    width: 720px;
-    min-width: 720px;
-    transform: translateX(-50%) rotate(4deg);
-    position: fixed;
-    top: 84px;
-    left: 50%;
-    transform: translateX(-50%) rotate(4deg);
-    z-index: 1;
-    background-color: #fff;
-    box-shadow: 1px 3px 9px 2px rgba(0,0,0,.3);
-    min-width: 720px;
-    height: 470px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    padding-bottom: 10px;
+.home-background button {
+    cursor: pointer;
+    z-index: 3;
 }
-
-.back-card::before,
-.home-background::before {
-  content: "";
-  display: block;
-  height: 3px;
-  background: rgba(251, 52, 52, .52);
-  top: 100px;
-  left: 0;
-  right: 0;
-  position: absolute; 
-  z-index: 1;
-}
-
 
 .landing-header{
     font-family: 'Fredericka the Great', cursive;
     font-style: normal;
     font-weight: 100;
-    font-size: 75px;
-    /* text-align: center; */
+    font-size: 82px;
+    position: absolute;
+    top: 12px;
+    left: 95px;
     letter-spacing: 4px;
     color: rgb(0, 0, 0);
 }
 
-.buttons-container {
-    grid-area: buttons;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 20px;
+.home-top {
     position: relative;
-    top: 10px;
-    right: 18px;
-    padding: 5px;
 }
+
+.home-creds {
+    position: absolute;
+    top: 90px;
+    right: 18px;
+    z-index: 3;
+}
+
+.loginPopup, .signUpPopup{ 
+    height: 415px;
+    min-width: 390px;
+    position: relative;
+    z-index: 3;
+    font-family: "Edu SA Beginner", cursive;
+    font-weight: 400;
+    font-optical-sizing: auto;
+    
+} 
 
 #login-button, #signup-button, .home-logout {
     font-family: "Edu SA Beginner", cursive;
@@ -109,28 +72,21 @@
     cursor: pointer;
     background-color: rgb(255, 229, 76);
     background-color: rgb(255, 176, 72);
-    height: 50px;
-    width: 50px;
-    padding-inline: 3px;
+    height: 60px;
+    width: 60px;
+    
 }
 
-.loginPopup, .signUpPopup{ 
-    height: 408px;
-    width: auto;
-    min-width: 390px;
+.buttons-container {
+    grid-area: buttons;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 25px;
     position: absolute;
-    top: 113%;
-    left: 10%;
-    transform: translateX(14%);
-    z-index: 3;
-    font-family: "Edu SA Beginner", cursive;
-    font-weight: 400;
-    font-optical-sizing: auto;
-    
-} 
-
-.loginPopup-inner {
-    padding: 2px;
+    top: 20px;
+    right: 18px;
+    padding: 5px;
 }
 
 .close {
@@ -148,44 +104,48 @@
 
 #formLogin, #formSignUp{
     line-height: 1;
-    font-size: 24px;
+    font-size: 22px;
     position: relative;
     top: 26px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .login-btn{
+    font-size: 27px;
     position: relative;
     top: 5px;
-    font-size: 27px;
-    cursor: pointer;
     text-shadow: 2px 2px lightblue;
     font-family: "Edu SA Beginner", cursive;
-    font-weight: 400;
-    font-optical-sizing: auto;
-    border: 1px solid;
+    border: black 1px solid;
     border-radius: 5px;
 }
 
-.signup-header {
-    font-size: 28px;
-    text-shadow: 2px 2px rgb(96, 255, 114);
+.submit-btn{
+    font-size: 27px;
+    position: relative;
+    top: 15px;
+    text-shadow: 1px 1px rgb(96, 255, 114);
+    font-family: "Edu SA Beginner", cursive;
     font-weight: 400;
+    font-optical-sizing: auto;
+    border: black 1px solid;
+    border-radius: 5px;
+}
+
+.signup-header, .signin-header {
+    position: relative;
+    top: 10px;
+    left: 15px;
+    font-size: 30px;
+    text-shadow: 3px 1px rgb(96, 255, 114);
+    font-weight: 500;
     font-optical-sizing: auto;
 }
 
 .signin-header {
-    font-size: 28px;
-    text-shadow: 2px 2px lightblue;
-    font-weight: 400;
-    font-optical-sizing: auto;
-}
-
-.home-background button {
-    cursor: pointer;
-    z-index: 3;
+    text-shadow: 3px 1px lightblue;
 }
 
 .blue-line {
@@ -193,6 +153,49 @@
     height: 1.75px;
     background-color: rgb(0, 115, 255, 0.3);
     margin-top: 21px;
+}
+
+.line-container {
+    position: absolute;
+    top: 130px;
+    left: 0;
+    right: 0;
+}
+
+.back-card {
+    background-color: #fff;
+    transform-origin: center top;
+    left: 50%;
+    top: 220px;
+    width: 720px;
+    min-width: 720px;
+    position: fixed;
+    top: 140px;
+    left: 55%;
+    transform: translateX(-50%) rotate(4deg);
+    z-index: 1;
+    background-color: #fff;
+    box-shadow: 1px 3px 9px 2px rgba(0,0,0,.3);
+    min-width: 720px;
+    height: 470px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding-bottom: 10px;
+}
+
+/* red line on index cards */
+.back-card::before,
+.home-background::before {
+  content: "";
+  display: block;
+  height: 3px;
+  background: rgba(251, 52, 52, .52);
+  top: 100px;
+  left: 0;
+  right: 0;
+  position: absolute; 
+  z-index: 1;
 }
 
 @media (max-width: 1200px) {

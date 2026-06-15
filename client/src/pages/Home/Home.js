@@ -58,40 +58,64 @@ const AuthButtons = memo(function AuthButtons({
 export default function Home() {
   const { isAuthChecked, isLoggedIn } = useAuthenticated();
 
-  const [loginPopup, setLoginPopup] = useState(false);
-  const [signUpPopup, setButtonPopup] = useState(false);
+  const [activePopup, setActivePopup] = useState(null);
+
+  const openLogin = useCallback(() => {
+    setActivePopup(prev => (prev === "login" ? null : "login"));
+  }, []);
+
+  const openSignup = useCallback(() => {
+    setActivePopup(prev => (prev === "signup" ? null : "signup"));
+  }, []);
+
+  const closePopup = useCallback(() => {
+    setActivePopup(null);
+  })
+
+  // const [loginPopup, setLoginPopup] = useState(false);
+  // const [signUpPopup, setButtonPopup] = useState(false);
 
   // <AuthButtons /> memoized
-  const openLogin = useCallback(() => setLoginPopup(true), []);
-  const openSignup = useCallback(() => setButtonPopup(true), []);
+  // const openLogin = useCallback(() => setLoginPopup(true), []);
+  // const openSignup = useCallback(() => setButtonPopup(true), []);
 
   return (
     <main className="home-body">
       <div className="back-card">
-        <LineGenerator amount={17} colorClass="blue-line" />
+        <LineGenerator amount={15} colorClass="blue-line" />
       </div>
       {/* <UserIcon /> */}
       <div className="home-background">
-        <div>
-        <h1 className="landing-header">Index-Ed</h1>
-        <AuthButtons
-          isAuthChecked={isAuthChecked}
-          isLoggedIn={isLoggedIn}
-          onOpenLogin={openLogin}
-          onOpenSignup={openSignup}
-          loginActive={loginPopup}
-          signupActive={signUpPopup}
-          className="buttons-container"
-        />
+        <div classname="home-top">
+          <h1 className="landing-header">Index-Ed</h1>
+
+          <AuthButtons
+            // className="buttons-container"
+            isAuthChecked={isAuthChecked}
+            isLoggedIn={isLoggedIn}
+            onOpenLogin={openLogin}
+            onOpenSignup={openSignup}
+            loginActive={activePopup === "login"}
+            signupActive={activePopup === "signup"}
+          />
+
+          <div className="home-creds">
+            {activePopup === "login" && (
+              <Login trigger={true} setTrigger={closePopup} />
+            )}
+
+            {activePopup === "signup" && (
+              <SignUp trigger={true} setTrigger={closePopup} />
+            )}
+
+          </div>
         </div>
 
-        {/* <div className="red-line"></div> */}
-        <LineGenerator amount={17} colorClass="blue-line" />
+        <LineGenerator amount={15} colorClass="blue-line" />
         <Navbar className="navbar-home" />
+
       </div>
 
-      <Login trigger={loginPopup} setTrigger={setLoginPopup} />
-      <SignUp trigger={signUpPopup} setTrigger={setButtonPopup} />
     </main>
 
   );

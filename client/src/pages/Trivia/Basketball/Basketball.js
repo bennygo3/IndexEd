@@ -7,6 +7,7 @@ export default function Basketball() {
     useEffect(() => {
         const canvas = canvasRef.current; 
         const context = canvas.getContext('2d');
+        let animationId;
 
         let x = canvas.width / 2; // start at the center of the canvas
         let y = canvas.height / 2;
@@ -59,7 +60,7 @@ export default function Basketball() {
                 -0.45 * Math.PI,
                 0.45 * Math.PI
             );
-            context.lineWidth = 6;
+            context.lineWidth = 5;
             context.strokeStyle = 'black';
             context.stroke();
             context.restore();
@@ -76,13 +77,13 @@ export default function Basketball() {
                 x + ballRadius * 0.55, 
                 y, 
                 ballRadius * 0.45, 
-                ballRadius * .95,
+                ballRadius * 1.15,
                 0, 
                 0.5 * Math.PI, 
                 1.5 * Math.PI
             );
 
-            context.lineWidth = 7;
+            context.lineWidth = 5;
             context.strokeStyle = 'black';
             context.stroke();
 
@@ -99,13 +100,13 @@ export default function Basketball() {
                 dy = -dy; // reverses y
             }
 
-            requestAnimationFrame(animate); // requests the next frame of the animation
+           animationId = requestAnimationFrame(animate); // requests the next frame of the animation
         };
 
         animate();
 
         return () => {
-            cancelAnimationFrame(animate); // cleanup function, when Basketball component is unmounted, the animation will stop
+            cancelAnimationFrame(animationId); // cleanup function, when Basketball component is unmounted, the animation will stop
         };
     }, []);
 
@@ -118,54 +119,36 @@ export default function Basketball() {
         />
     );
 }
-//     // useRef hook creates references to DOM elements
-//     const containerRef = useRef(null);
-//     const ballRef = useRef(null);
-   
-//     useEffect(() => {
-//         const ball = ballRef.current;
-//         const container = containerRef.current;
 
-//         const containerWidth = container.clientWidth;
-//         const containerHeight = container.clientHeight;
+/* 
+context.save();
+context.beginPath();
+context.arc(x, y, ballRadius, 0, 2 * Math.PI);
+context.clip();
 
-//         const ballSize = 150;
+context.beginPath();
+context.ellipse(
+    x,
+    y,
+    ballRadius * 1.15,
+    ballRadius * 0.6,
+    Math.PI / 4,
+    0,
+    2 * Math.PI
+);
+context.stroke();
 
-//         // Initialize the position of the ball
-//         let x = Math.floor(Math.random() * (containerWidth - ballSize));
-//         let y = Math.floor(Math.random() * (containerHeight - ballSize));
+context.beginPath();
+context.ellipse(
+    x,
+    y,
+    ballRadius * 1.15,
+    ballRadius * 0.6,
+    -Math.PI / 4,
+    0,
+    2 * Math.PI 
+);
+context.stroke();
 
-//         // Velocity calculation
-//         let vx = Math.random() * 1 + 1;
-//         let vy = Math.random() * 1 + 1;
-
-//         function movement() {
-//             requestAnimationFrame(movement);
-            
-//             // Checks for boundary width, reverses mvmt if ball reaches boundary
-//             if (x + 200 > containerWidth || x < 0) vx = -vx;
-//             if (y + 200 > containerHeight || y < 0) vy = -vy;
-
-//             // Updates position of ball
-//             x += vx;
-//             y += vy;
-
-//             const rotAngle = (Date.now() % 3600) / 20;
- 
-//             // Continuously created new position of the ball element
-//             ball.style.transform = `translate(${x}px, ${y}px) rotate(${rotAngle}deg)`;
-//         }
-//         movement();
-//     }, []);
-
-//     return (
-//         <div ref={containerRef} className='basketball-container'>
-//             <div ref={ballRef} className='basketball'>
-//                 <div className='line horizontal'></div>
-//                 <div className='line vertical'></div>
-//                 <div className='curveR'></div>
-//                 <div className='curveL'></div>
-//             </div>
-//         </div>
-//     );
-// }
+context.restore();
+*/

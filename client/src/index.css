@@ -23,7 +23,7 @@ input {
   font-family: "Edu SA Beginner", cursive;
   font-weight: 400;
   font-optical-sizing: auto;
-  font-size: 30px;
+  font-size: 20px;
   /* font-style: ;
   font-variant-ligatures: ;
   font-variant-caps: ;
@@ -39,7 +39,7 @@ input {
   word-spacing: normal;
   line-height: normal;
   text-transform: none;
-  text-indent: 13px;
+  text-indent: 10px;
   text-shadow: none;
   text-align: start;
   appearance: none;
@@ -54,20 +54,13 @@ input {
   border-image: initial;
 }
 
-/* from the signup css page originally */
-/* input[type="text" i] {
-  line-height: 1;
-  font-size: 18px;;
-  
-} */
-
 input[type=text], input[type=password] {
   background-color: white;
   border: none;
-  height: 2.5rem;
-  width: 99%;
-  font-size: 25px;
-  margin: 3px 0 3px 0;
+  height: 2.0rem;
+  width: 100%;
+  font-size: 22px;
+  margin: 3px 0 0px 0;
   padding: 0;
   box-shadow: none;
   box-sizing: content-box;
