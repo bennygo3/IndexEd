@@ -114,7 +114,13 @@ export const Mutation = {
         // Update user with newly created study card
         await Users.findByIdAndUpdate(
             context.user._id,
-            { $push: { studyCards: savedCard._id } }
+            {
+                $addToSet: {
+                    studyCards: savedCard._id,
+                    studyGenres: genre._id,
+                },
+            }
+            // { $push: { studyCards: savedCard._id } }
         );
 
         return savedCard;

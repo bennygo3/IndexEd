@@ -47,8 +47,8 @@
 }
 
 .loginPopup, .signUpPopup{ 
-    height: 415px;
-    min-width: 390px;
+    height: 455px;
+    min-width: 400px;
     position: relative;
     z-index: 3;
     font-family: "Edu SA Beginner", cursive;
@@ -87,6 +87,7 @@
     top: 20px;
     right: 18px;
     padding: 5px;
+    
 }
 
 .close {
@@ -107,6 +108,7 @@
     font-size: 23px;
     position: relative;
     top: 26px;
+    left: 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -126,7 +128,7 @@
     font-size: 27px;
     position: relative;
     top: 15px;
-    text-shadow: 1px 1px rgb(96, 255, 114);
+    text-shadow: 2px 1px rgb(96, 255, 114);
     font-family: "Edu SA Beginner", cursive;
     font-weight: 400;
     font-optical-sizing: auto;

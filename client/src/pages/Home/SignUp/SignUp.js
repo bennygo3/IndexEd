@@ -85,7 +85,11 @@ export default function SignUp(props) {
                                 type="password"
                             />
 
-                            
+                            <button
+                            type='submit'
+                            className='submit-btn'>
+                            Sign Up
+                        </button>
                         </label>
 
                     </form>
