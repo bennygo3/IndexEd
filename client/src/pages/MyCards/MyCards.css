@@ -1,6 +1,9 @@
 .my-cards-page {
     background-color:darkolivegreen;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
 }
 
 #my-cards-header {
@@ -24,6 +27,58 @@
     top: 40px;
     margin-left: auto;
     margin-right: auto;
+}
+
+#my-cards-top-row {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#my-cards-menu-button {
+    position: absolute;
+    right: 3rem;
+    top: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+#my-cards-menu {
+    position: absolute;
+    right: 2rem;
+    top: 3rem;
+    list-style: none;
+    padding: 1rem;
+    background-color: rgb(5, 11, 5);
+    border: 2px solid white;
+    z-index: 5;
+}
+
+#my-cards-menu li {
+    margin: 0.75rem 0;
+}
+
+#my-cards-menu a {
+    color: white;
+    text-decoration: none;
+}
+
+#my-cards-genre-row {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+}
+
+#my-cards-new-genre-button {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
 }
 
 #my-cards-header-list {

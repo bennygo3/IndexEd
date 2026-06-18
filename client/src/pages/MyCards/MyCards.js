@@ -10,6 +10,7 @@ import './MyCards.css';
 
 export default function MyCards() {
     const [flippedCard, setFlippedCard] = useState({});
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handleFlip = (cardId) => {
         setFlippedCard(prevState => ({
@@ -30,22 +31,39 @@ export default function MyCards() {
     return (
         <main className="my-cards-page">
             <header id="my-cards-chalkboard">
-                {/* <div> */}
-                <h1 id="my-cards-header">My Study Cards</h1>
-                <ul id="my-cards-header-list">
-                    <li><Link to="/" id="mcp-home"> -Home</Link></li>
-                    <li><Link to="/card-create" id="mcp-card-create"> -Create a new card</Link></li>
-                    <li><Link to="/trivia" id="mcp-trivia"> -Trivia cards</Link></li>
-                    <li><Link to="/games" id="mcp-games"> -Games</Link></li>
-                </ul>
+                <div id="my-cards-top-row">
+                    <h1 id="my-cards-header">
+                        My Study Cards
+                    </h1>
+
+                    <button
+                        id="my-cards-menu-button"
+                        onClick={() => setIsMenuOpen(prev => !prev)}
+                        aria-label="Open navigation menu"
+                    >
+                        ☰
+                    </button>
+
+                    {isMenuOpen && (
+                        <ul id="my-cards-menu">
+                            <li><Link to="/">Home</Link></li>
+                            <li><Link to="/card-create">Create a new card</Link></li>
+                            <li><Link to="/trivia">Trivia cards</Link></li>
+                            <li><Link to="/games">Games</Link></li>
+                        </ul>
+                    )}
+                </div>
+
+                <div id="my-cards-genre-row">
+                    <h2>Genre: General</h2>
+                    <button id="my-cards-new-genre-button">
+                        + New Genre
+                    </button>
+                </div>
+
                 <div id="my-cards-chalk"></div>
-                {/* </div> */}
-                {/* <div id="my-cards-corkboard">
-                    <NavbarMSC />
-                </div> */}
-                {/* <p id="my-cards-header-p">1. the devotion of time and attention to acquiring knowledge on an academic subject, especially by means of notecards*</p> */}
             </header>
-            {/* <Wood> */}
+
             {data.getCurrentUser?.studyGenres.length > 0 ? (
                 data.getCurrentUser.studyGenres.map(genre => (
                     <section key={genre._id} id="my-cards-wood">
@@ -79,3 +97,21 @@ export default function MyCards() {
         </main>
     );
 };
+
+// old header setup 6/18
+// <header id="my-cards-chalkboard">
+//     {/* <div> */}
+//     <h1 id="my-cards-header">My Study Cards</h1>
+//     <ul id="my-cards-header-list">
+//         <li><Link to="/" id="mcp-home"> -Home</Link></li>
+//         <li><Link to="/card-create" id="mcp-card-create"> -Create a new card</Link></li>
+//         <li><Link to="/trivia" id="mcp-trivia"> -Trivia cards</Link></li>
+//         <li><Link to="/games" id="mcp-games"> -Games</Link></li>
+//     </ul>
+//     <div id="my-cards-chalk"></div>
+//     {/* </div> */}
+//     {/* <div id="my-cards-corkboard">
+//         <NavbarMSC />
+//     </div> */}
+//     {/* <p id="my-cards-header-p">1. the devotion of time and attention to acquiring knowledge on an academic subject, especially by means of notecards*</p> */}
+// </header>
