@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 import { GET_CURRENT_USER } from '../../utils/queries';
 import { Link } from 'react-router-dom'
 // import NavbarMSC from '../../components/Navbar/NavbarMSC';
+import StickyNote from '../Home/StickyNote/StickyNote';
 import Card from '../../components/Card/Card';
 import Wood from '../../components/MadeWCss/Wood';
 import ThoughtBubble from '../../components/MadeWCss/ThoughtBubble';
@@ -21,7 +22,19 @@ export default function MyCards() {
     const { loading, error, data } = useQuery(GET_CURRENT_USER);
 
     if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error.message}</p>;
+    if (error) return(
+        <StickyNote color="pink" width="100%" height="100vh">
+        <div className="error-message">
+            <h1>My Study Cards</h1>
+            <h2>Your session has expired.</h2>
+            <p>Please sign in again to access this page</p>
+            <span>&#x2B07;</span>
+            <Link to="/" className="return-home-link">
+                Return to Home page
+            </Link>
+        </div>
+        </StickyNote>
+    );
 
     if (!data?.getCurrentUser?.studyGenres) {
         console.warn("⚠️ getCurrentUser.studyCardGroups are missing or undefined!", data.getCurrentUser);

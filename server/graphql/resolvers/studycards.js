@@ -66,7 +66,6 @@ export const Mutation = {
     },
 
     // Add a StudyCard to a StudyCardGroup
-    // async createStudyCard(_, { front, back, studyGenreId }, context) {
     async createStudyCard(_, { front, back }, context) {
 
         if (!context.user) {
@@ -76,8 +75,6 @@ export const Mutation = {
         }
 
         console.log("📌 Creating study card with:", { front, back });
-
-        // console.log("📌 studyGenreId received:", studyGenreId);
 
         let genre = await StudyGenre.findOne({ title: "General", author: context.user._id });
     
@@ -93,8 +90,6 @@ export const Mutation = {
                 await genre.save();
             }
 
-        //     studyGenreId = genre._id;
-        // }
 
         // Create a new StudyCard
         const newCard = new StudyCard({ 

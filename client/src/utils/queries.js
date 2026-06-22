@@ -65,14 +65,3 @@ export const GET_HIGH_SNAKE_SCORE = gql`
         }
     }
 `;
-
-// export const GET_HIGH_SNAKE_SCORE = gql`
-//     query GetHighSnakeScore($userId: ID!) {
-//         getHighSnakeScore(userId: $userId) {
-//             _id
-//             userId
-//             username
-//             highScore
-//         }
-//     }
-// `;
