@@ -59,10 +59,10 @@ export default function MyCards() {
 
                     {isMenuOpen && (
                         <ul id="my-cards-menu">
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/card-create">Create a new card</Link></li>
-                            <li><Link to="/trivia">Trivia cards</Link></li>
-                            <li><Link to="/games">Games</Link></li>
+                            <li><Link to="/" id="mcp-home">• Home</Link></li>
+                            <li><Link to="/card-create" id="mcp-card-create">• Create a new card</Link></li>
+                            <li><Link to="/trivia" id="mcp-trivia">• Trivia cards</Link></li>
+                            <li><Link to="/games" id="mcp-games">• Games</Link></li>
                         </ul>
                     )}
                 </div>
