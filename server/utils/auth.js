@@ -16,7 +16,7 @@ export const createRefreshToken = (user) => {
     return jwt.sign(
         { _id: user._id, username: user.username },
         config.jwtRefreshSecret,
-        { expiresIn: '2d' }
+        { expiresIn: '1d' }
     );
 };
 
@@ -25,7 +25,8 @@ export const sendRefreshToken = (res, token) => {
     res.cookie('jid', token, {
         httpOnly: true,
         sameSite: 'Lax',
-        path: '/graphql',
+        // path: '/graphql',
+        path: '/',
         secure: process.env.NODE_ENV === 'production',
     });
 };
@@ -35,7 +36,7 @@ export const authMiddleware = ({ req }) => {
     const token = req.cookies.access_token || req.headers.authorization?.split(' ')[1];
 
     if (!token){
-        console.warn("⚠️ No token found in request");
+        console.warn(`⚠️ No token found for ${req.method} ${req.path}`);
         throw new Error('No access token');
     } 
 
@@ -44,7 +45,7 @@ export const authMiddleware = ({ req }) => {
         // console.log("✅ Token successfully verified for user:", decoded.username);
         req.user = decoded;
     } catch (err) {
-        console.error("❌ Token verification failed:", err.message);
+        console.error(`❌ Token verification failed for ${req.method} ${req.path}`);
         throw new Error('Invalid or expired access token');
     }
 
@@ -52,11 +53,11 @@ export const authMiddleware = ({ req }) => {
 };
 
 
-export const signToken = ({ _id, username }) => {
+// export const signToken = ({ _id, username }) => {
 
-    const payload = { _id, username };
-    const token = jwt.sign(payload, config.jwtSecret, { expiresIn: config.jwtExpiry });
+//     const payload = { _id, username };
+//     const token = jwt.sign(payload, config.jwtSecret, { expiresIn: config.jwtExpiry });
 
-    return token;
-}
+//     return token;
+// }
 

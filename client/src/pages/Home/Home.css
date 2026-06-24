@@ -5,7 +5,7 @@
 
 .home-background {
     position: fixed;
-    top: 220px;
+    top: 210px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
@@ -29,8 +29,8 @@
     font-weight: 100;
     font-size: 82px;
     position: absolute;
-    top: 12px;
-    left: 95px;
+    top: 6px;
+    left: 130px;
     letter-spacing: 4px;
     color: rgb(0, 0, 0);
 }
@@ -70,11 +70,9 @@
     letter-spacing: 1px;
     border-radius: 50px;
     cursor: pointer;
-    background-color: rgb(255, 229, 76);
     background-color: rgb(255, 176, 72);
     height: 60px;
     width: 60px;
-    
 }
 
 .buttons-container {
@@ -84,7 +82,7 @@
     align-items: center;
     gap: 25px;
     position: absolute;
-    top: 20px;
+    top: 30px;
     right: 18px;
     padding: 5px;
     

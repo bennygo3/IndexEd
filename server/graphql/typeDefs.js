@@ -27,11 +27,6 @@ export const typeDefs = `#graphql
         updatedAt: String
         tags: [String] 
     }
-
-    type Auth {
-        accessToken: String!
-        user: User!
-    }
     
     type SnakeScore {
         _id: ID!
@@ -54,11 +49,6 @@ export const typeDefs = `#graphql
     }
     
     type Mutation {
-        register(username: String!, email: String!, password: String!, confirmPassword: String!): Auth!
-        login(username: String!, password: String!): Auth!
-        refreshToken: Auth!
-        logout: Boolean!
-
         updateHighSnakeScore(newSnakeScore: Int!): UpdatedHighSnakeScore!
         
         createStudyGenre(title: String!, category: String!, description: String): StudyGenre!
@@ -72,6 +62,29 @@ export const typeDefs = `#graphql
 
 `;
 
-// getHighScoreSnake(userId: ID!): SnakeScore
+// mutation changes below due to changes in authentication changes
+// eg, switching from graphql authentication to REST
 
 // mutation: updateHighScoreSnake(username: ID!, newHighScoreSnake: Int!): SnakeScore!
+
+    // type Auth {
+    //     accessToken: String!
+    //     user: User!
+    // }
+
+        // type Mutation {
+    //     register(username: String!, email: String!, password: String!, confirmPassword: String!): Auth!
+    //     login(username: String!, password: String!): Auth!
+    //     refreshToken: Auth!
+    //     logout: Boolean!
+
+    //     updateHighSnakeScore(newSnakeScore: Int!): UpdatedHighSnakeScore!
+        
+    //     createStudyGenre(title: String!, category: String!, description: String): StudyGenre!
+    //     deleteStudyGenre(genreId: ID!): Boolean!
+    //     updateStudyGenre(genreId: ID!, title: String, category: String, description: String): StudyGenre!
+        
+    //     createStudyCard(front: String!, back: String!): StudyCard!
+    //     deleteStudyCard(cardId: ID!): Boolean!
+    //     updateStudyCard(cardId: ID!, front: String, back: String): StudyCard!
+    // }
