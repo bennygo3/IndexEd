@@ -52,7 +52,7 @@ export const authMiddleware = ({ req }) => {
     return req;
 };
 
-
+// no longer needed -> REST > GraphQL for auth
 // export const signToken = ({ _id, username }) => {
 
 //     const payload = { _id, username };

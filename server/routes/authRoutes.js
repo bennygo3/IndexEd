@@ -4,23 +4,12 @@ import bcrypt from 'bcrypt';
 import config from '../../config.js';
 import Users from '../models/Users.js';
 
+import {
+    createAccessToken,
+    createRefreshToken,
+} from '../utils/auth.js';
+
 const router = express.Router();
-
-const generateAccessToken = (user) => {
-    return jwt.sign(
-        { _id: user._id, username: user.username },
-        config.jwtSecret,
-        { expiresIn: '15m' }
-    );
-};
-
-const generateRefreshToken = (user) => {
-    return jwt.sign(
-        { _id: user._id, username: user.username },
-        config.jwtRefreshSecret,
-        { expiresIn: '1d' }
-    );
-};
 
 // Register new user
 router.post('/register', async (req, res) => {
@@ -50,8 +39,8 @@ router.post('/register', async (req, res) => {
         return res.status(500).json({ message: 'Error saving user', error: err.message });
     }
 
-    const accessToken = generateAccessToken(newUser);
-    const refreshToken = generateRefreshToken(newUser);
+    const accessToken = createAccessToken(newUser);
+    const refreshToken = createRefreshToken(newUser);
 
     newUser.refreshTokens.push({
         token: refreshToken,
@@ -96,8 +85,8 @@ router.post('/login', async (req, res) => {
         return res.status(400).json({ message: 'Invalid username or password' });
     }
 
-    const accessToken = generateAccessToken(user);
-    const refreshToken = generateRefreshToken(user);
+    const accessToken = createAccessToken(user);
+    const refreshToken = createRefreshToken(user);
 
     user.refreshTokens.push({
         token: refreshToken,
@@ -158,7 +147,8 @@ router.post('/token', async (req, res) => {
             return res.status(403).json({ message: 'Invalid or expired refresh token' });
         }
 
-        const newRefreshToken = generateRefreshToken({ _id: decoded._id, username: decoded.username });
+        // const newRefreshToken = generateRefreshToken({ _id: decoded._id, username: decoded.username });
+        const newRefreshToken = createRefreshToken({ _id: decoded._id, username: decoded.username });
         const newRefTokenExp = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
         await Users.updateOne(
@@ -173,7 +163,8 @@ router.post('/token', async (req, res) => {
             }
         );
 
-        const newAccessToken = generateAccessToken(user);
+        const newAccessToken = createAccessToken(user);
+
 
         // Send new cookies
         res.cookie('access_token', newAccessToken, {
