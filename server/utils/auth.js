@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import config from '../../config.js';
 
-// Access token - short lived
+// Token creation/Access token - short lived - exported to authRoutes
 export const createAccessToken = (user) => {
     return jwt.sign(
         { _id: user._id, username: user.username },
@@ -11,7 +11,7 @@ export const createAccessToken = (user) => {
     );
 };
 
-// Refresh token - long lived
+// Token creation/Refresh token - long lived -> authRoutes
 export const createRefreshToken = (user) => {
     return jwt.sign(
         { _id: user._id, username: user.username },
@@ -20,18 +20,44 @@ export const createRefreshToken = (user) => {
     );
 };
 
-// Cookie setter for refresh token
-export const sendRefreshToken = (res, token) => {
-    res.cookie('jid', token, {
-        httpOnly: true,
-        sameSite: 'Lax',
-        // path: '/graphql',
-        path: '/',
-        secure: process.env.NODE_ENV === 'production',
+// Auth Helper ---> authRoutes
+export const issueTokens = async (user) => {
+    const accessToken = createAccessToken(user);
+    const refreshToken = createRefreshToken(user);
+
+    user.refreshTokens.push({
+        token: refreshToken,
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
     });
+
+    await user.save();
+
+    return {
+        accessToken,
+        refreshToken,
+    };
 };
 
-// Auth middleware for protected routes
+// Auth Helper ---> authRoutes
+export const setAuthCookies = (res, accessToken, refreshToken) => {
+    res.cookie('access_token', accessToken, {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'Lax',
+        path: '/',
+        maxAge: 15 * 60 * 1000,
+    });
+
+    res.cookie('refresh_token', refreshToken, {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'Lax',
+        path: '/',
+        maxAge: 24 * 60 * 60 * 1000,
+    });
+}
+
+// Auth middleware for protected routes, exported to server
 export const authMiddleware = ({ req }) => {
     const token = req.cookies.access_token || req.headers.authorization?.split(' ')[1];
 
@@ -51,13 +77,3 @@ export const authMiddleware = ({ req }) => {
 
     return req;
 };
-
-// no longer needed -> REST > GraphQL for auth
-// export const signToken = ({ _id, username }) => {
-
-//     const payload = { _id, username };
-//     const token = jwt.sign(payload, config.jwtSecret, { expiresIn: config.jwtExpiry });
-
-//     return token;
-// }
-

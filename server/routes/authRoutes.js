@@ -7,44 +7,11 @@ import Users from '../models/Users.js';
 import {
     createAccessToken,
     createRefreshToken,
+    issueTokens,
+    setAuthCookies,
 } from '../utils/auth.js';
 
 const router = express.Router();
-
-function setAuthCookies(res, accessToken, refreshToken) {
-    res.cookie('access_token', accessToken, {
-        httpOnly: true,
-        secure: false,
-        sameSite: 'Lax',
-        path: '/',
-        maxAge: 15 * 60 * 1000,
-    });
-
-    res.cookie('refresh_token', refreshToken, {
-        httpOnly: true,
-        secure: false,
-        sameSite: 'Lax',
-        path: '/',
-        maxAge: 24 * 60 * 60 * 1000,
-    });
-}
-
-async function issueTokens(user) {
-    const accessToken = createAccessToken(user);
-    const refreshToken = createRefreshToken(user);
-
-    user.refreshTokens.push({
-        token: refreshToken,
-        expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-    });
-
-    await user.save();
-
-    return {
-        accessToken,
-        refreshToken,
-    };
-}
 
 // Register new user
 router.post('/register', async (req, res) => {
