@@ -11,9 +11,44 @@ import {
 
 const router = express.Router();
 
+function setAuthCookies(res, accessToken, refreshToken) {
+    res.cookie('access_token', accessToken, {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'Lax',
+        path: '/',
+        maxAge: 15 * 60 * 1000,
+    });
+
+    res.cookie('refresh_token', refreshToken, {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'Lax',
+        path: '/',
+        maxAge: 24 * 60 * 60 * 1000,
+    });
+}
+
+async function issueTokens(user) {
+    const accessToken = createAccessToken(user);
+    const refreshToken = createRefreshToken(user);
+
+    user.refreshTokens.push({
+        token: refreshToken,
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    });
+
+    await user.save();
+
+    return {
+        accessToken,
+        refreshToken,
+    };
+}
+
 // Register new user
 router.post('/register', async (req, res) => {
-    console.log("📨 Incoming registration data:", req.body); // Add this line
+    console.log("📨 Incoming registration data:", req.body);
 
     const { username, email, password, confirmPassword } = req.body;
 
@@ -39,36 +74,12 @@ router.post('/register', async (req, res) => {
         return res.status(500).json({ message: 'Error saving user', error: err.message });
     }
 
-    const accessToken = createAccessToken(newUser);
-    const refreshToken = createRefreshToken(newUser);
-
-    newUser.refreshTokens.push({
-        token: refreshToken,
-        expires: new Date(Date.now() + 24 * 60 * 60 * 1000) // 1 day
-    });
-
-    await newUser.save();
+    const { accessToken, refreshToken } = await issueTokens(newUser);
 
     // ✅ Set cookies for auth 
-    res.cookie('access_token', accessToken, {
-        httpOnly: true,
-        secure: false, // use true in production with HTTPS
-        sameSite: 'Lax',
-        path: '/',
-        maxAge: 14 * 60 * 1000, // 14 minutes 
-        // maxAge: 60 * 1000 // 1m - testing purposes
-    });
-
-    res.cookie('refresh_token', refreshToken, {
-        httpOnly: true,
-        secure: false,
-        sameSite: 'Lax',
-        path: '/',
-        maxAge: 24 * 60 * 60 * 1000, // 1 day
-    });
+    setAuthCookies(res, accessToken, refreshToken);
 
     res.json({ message: "Registration successful" });
-
 });
 
 // Login Route
@@ -85,32 +96,10 @@ router.post('/login', async (req, res) => {
         return res.status(400).json({ message: 'Invalid username or password' });
     }
 
-    const accessToken = createAccessToken(user);
-    const refreshToken = createRefreshToken(user);
+    const { accessToken, refreshToken } = await issueTokens(user);
 
-    user.refreshTokens.push({
-        token: refreshToken,
-        expires: new Date(Date.now() + 24 * 60 * 60 * 1000)
-    });
-    await user.save();
+    setAuthCookies(res, accessToken, refreshToken);
 
-    // Set accessToken in an httpOnly cookie
-    res.cookie('access_token', accessToken, {
-        httpOnly: true,
-        secure: false, // can change to true in production w/ HTTPS
-        sameSite: 'Lax',
-        path: '/',
-        maxAge: 15 * 60 * 1000 // 15 min
-        // maxAge: 30 * 1000 // 30 sec
-    });
-
-    res.cookie('refresh_token', refreshToken, {
-        httpOnly: true,
-        secure: false,
-        sameSite: 'Lax',
-        path: '/',
-        maxAge: 24 * 60 * 60 * 1000 // 1 day
-    })
     res.json({ message: "Login successful" });
 });
 
@@ -147,7 +136,6 @@ router.post('/token', async (req, res) => {
             return res.status(403).json({ message: 'Invalid or expired refresh token' });
         }
 
-        // const newRefreshToken = generateRefreshToken({ _id: decoded._id, username: decoded.username });
         const newRefreshToken = createRefreshToken({ _id: decoded._id, username: decoded.username });
         const newRefTokenExp = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
@@ -165,23 +153,8 @@ router.post('/token', async (req, res) => {
 
         const newAccessToken = createAccessToken(user);
 
+        setAuthCookies(res, newAccessToken, newRefreshToken);
 
-        // Send new cookies
-        res.cookie('access_token', newAccessToken, {
-            httpOnly: true,
-            secure: false,
-            sameSite: 'Lax',
-            path: '/',
-            maxAge: 15 * 60 * 1000 // 15 minutes
-        });
-
-        res.cookie('refresh_token', newRefreshToken, {
-            httpOnly: true,
-            secure: false,
-            sameSite: 'Lax',
-            path: '/',
-            maxAge: 24 * 60 * 60 * 1000 // 1 Day
-        });
         console.log("♻️ Refresh endpoint hit");
 
         res.json({ message: 'Token refreshed successfully with rotation' });
