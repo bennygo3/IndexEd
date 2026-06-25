@@ -1,15 +1,9 @@
 import { useState } from 'react';
-// import { useMutation, useQuery } from '@apollo/client';
 import { useMutation} from '@apollo/client';
-
-// import { CREATE_STUDYCARD, CREATE_STUDYGENRE } from '../../utils/mutations.js';
 import { CREATE_STUDYCARD } from '../../utils/mutations.js';
-
-// import { GET_CURRENT_USER } from '../../utils/queries.js';
 import './CardCreate.css';
 import NavbarCC from '../../components/Navbar/NavbarCC.js';
 import LineGenerator from '../../components/Lines/LineGenerator.js';
-// import AddToStackModal from '../../components/AddToStackModal/AddToStackModal.js';
 
 export default function CardCreate() {
     const [front, setFront] = useState('');

@@ -1,16 +1,22 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import authService from '../../utils/auth';
 
 export default function LogoutButton({ className }) {
     const navigate = useNavigate();
+    const { checkAuth } = useAuth();
 
-    const handleLogout = () => {
-        authService.logout(navigate);
+    const handleLogout = async () => {
+       await  authService.logout();
+       await checkAuth();
+       navigate("/");
     };
 
     return (
-        <button className={className} onClick={handleLogout}>Sign<br></br>out</button>
+        <button className={className} onClick={handleLogout}>
+            Sign<br></br>Out
+        </button>
     );
 }
 

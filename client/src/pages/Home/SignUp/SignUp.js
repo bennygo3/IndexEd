@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthContext';
 import Auth from '../../../utils/auth.js';
 import StickyNote from '../StickyNote/StickyNote.js';
 
 
 export default function SignUp(props) {
+
     const [formState, setFormState] = useState({
         email: '',
         username: '',
         password: '',
         confirmPassword: ''
     });
+
+    const navigate = useNavigate();
+    const { checkAuth } = useAuth();
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -31,7 +37,9 @@ export default function SignUp(props) {
                 formState.password,
                 formState.confirmPassword
             );
-
+            await checkAuth();
+            props.setTrigger(false);
+            navigate("/");
             console.log('Registration successful!')
         } catch (err) {
             console.error('Registration error:', err);

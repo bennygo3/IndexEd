@@ -1,6 +1,6 @@
 import { useState } from 'react';
-// import { useMutation } from '@apollo/client';
-// import { LOGIN_USER } from '../../../utils/mutations';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthContext.js';
 import Auth from '../../../utils/auth.js';
 import StickyNote from '../StickyNote/StickyNote.js';
 
@@ -10,6 +10,9 @@ export default function Login(props) {
         username: '',
         password: '',
     });
+
+    const navigate = useNavigate();
+    const { checkAuth } = useAuth();
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -25,6 +28,9 @@ export default function Login(props) {
 
         try {
             await Auth.login(formState.username, formState.password);
+            await checkAuth();
+            props.setTrigger(false);
+            navigate('/');
         } catch (err) {
             console.error('Login error:', err);
         }

@@ -17,14 +17,14 @@ class AuthService {
         const token = await this.getToken();
 
         if (!token) return false;
-        
+
         const expired = await this.isTokenExpired(token);
 
         if (expired) {
             const refreshed = await this.refreshAccessToken();
             return refreshed;
         }
-        
+
         return true;
     }
 
@@ -33,16 +33,16 @@ class AuthService {
 
         try {
             const decoded = decode(token);
-             console.log("🧪 Token expiration time:", decoded.exp);
-             console.log("🧪 Current time:", Math.floor(Date.now() / 1000));
-            
-             if (decoded.exp < Date.now() / 1000) {
+            console.log("🧪 Token expiration time:", decoded.exp);
+            console.log("🧪 Current time:", Math.floor(Date.now() / 1000));
+
+            if (decoded.exp < Date.now() / 1000) {
 
                 const refreshed = await this.refreshAccessToken();
                 if (!refreshed) return true;
-                
+
                 const newToken = await this.getToken();
-                if(!newToken) return true;
+                if (!newToken) return true;
 
                 const newDecoded = decode(newToken);
                 return newDecoded.exp < Date.now() / 1000;
@@ -84,8 +84,8 @@ class AuthService {
             });
 
             if (!response.ok) throw new Error('Failed to log in auth front');
-            
-            window.location.assign('/');
+
+            // window.location.assign('/');
 
         } catch (error) {
             console.error('Login error:', error);
@@ -102,10 +102,11 @@ class AuthService {
             });
 
             if (!response.ok) throw new Error('Failed to register');
-                window.location.assign('/');
-            } catch (error) {
-                console.error('Registration error:', error);
-            }
+            
+            // window.location.assign('/');
+        } catch (error) {
+            console.error('Registration error:', error);
+        }
     }
 
     async refreshAccessToken() {
@@ -126,20 +127,16 @@ class AuthService {
     }
 
     async logout(navigate) {
-        try {
-            await fetch(`${configFront.API_BASE_URL}/logout`, {
-                method: 'DELETE',
-                credentials: 'include'
-            });
-        } finally {
-            navigate('/')
-        }
+        await fetch(`${configFront.API_BASE_URL}/logout`, {
+            method: 'DELETE',
+            credentials: 'include'
+        });
     }
 
     async getUserIdFromToken() {
         const token = await this.getToken();
         if (!token) return null;
-    
+
         try {
             const decoded = decode(token);
             return decoded._id || null;

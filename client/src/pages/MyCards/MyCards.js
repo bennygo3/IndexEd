@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_CURRENT_USER } from '../../utils/queries';
 import { Link } from 'react-router-dom'
-// import NavbarMSC from '../../components/Navbar/NavbarMSC';
 import StickyNote from '../Home/StickyNote/StickyNote';
 import Card from '../../components/Card/Card';
 import Wood from '../../components/MadeWCss/Wood';

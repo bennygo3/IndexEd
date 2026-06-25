@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { ApolloProvider } from '@apollo/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import client from './utils/apolloClient.js';
+import { AuthProvider } from './context/AuthContext.js';
 import ThemeProvider from './context/ThemeProvider.js';
 import authService from './utils/auth.js';
 
@@ -38,70 +39,72 @@ function App() {
     return (
         <ThemeProvider>
             <ApolloProvider client={client}>
-                <Router>
-                    <Routes>
-                        <Route
-                            path='/'
-                            element={<Home />}
-                        />
-                        <Route
-                            path='/card-create'
-                            element={<CardCreate />}
-                        />
-                        <Route
-                            path='/my-cards'
-                            element={<MyCards />}
-                        />
-                        <Route 
-                            path='/trivia'
-                            element={<Trivia />}
-                        />
-                        <Route
-                            path='games'
-                            element={<Games />}
-                        />
-                        <Route
-                            path='pokemon-trivia'
-                            element={<PokemonTrivia />}
-                        />
-                        <Route
-                            path='nba-logos'
-                            element={<NbaLogos />}
-                        />
-                        <Route
-                            path='usa-states'
-                            element={<USAStates />}
-                        />
-                        <Route
-                            path='basketball'
-                            element={<Basketball />}
-                        />
-                        <Route
-                            path='snake'
-                            element={<Snake />}
-                        />
-                        <Route 
-                            path='ttt'
-                            element={<TTT />}
-                        />
-                        <Route
-                            path='falldown'
-                            element={<FallDown />}
-                        />
-                        <Route 
-                            path="wpm"
-                            element={<WordsPerMin />}
-                        />
-                        <Route
-                            path="chess"
-                            element={<Chess />}
-                        />
-                        <Route
-                            path='simonsays'
-                            element={<SimonSays />}
-                        />
-                    </Routes>
-                </Router>
+                <AuthProvider>
+                    <Router>
+                        <Routes>
+                            <Route
+                                path='/'
+                                element={<Home />}
+                            />
+                            <Route
+                                path='/card-create'
+                                element={<CardCreate />}
+                            />
+                            <Route
+                                path='/my-cards'
+                                element={<MyCards />}
+                            />
+                            <Route
+                                path='/trivia'
+                                element={<Trivia />}
+                            />
+                            <Route
+                                path='games'
+                                element={<Games />}
+                            />
+                            <Route
+                                path='pokemon-trivia'
+                                element={<PokemonTrivia />}
+                            />
+                            <Route
+                                path='nba-logos'
+                                element={<NbaLogos />}
+                            />
+                            <Route
+                                path='usa-states'
+                                element={<USAStates />}
+                            />
+                            <Route
+                                path='basketball'
+                                element={<Basketball />}
+                            />
+                            <Route
+                                path='snake'
+                                element={<Snake />}
+                            />
+                            <Route
+                                path='ttt'
+                                element={<TTT />}
+                            />
+                            <Route
+                                path='falldown'
+                                element={<FallDown />}
+                            />
+                            <Route
+                                path="wpm"
+                                element={<WordsPerMin />}
+                            />
+                            <Route
+                                path="chess"
+                                element={<Chess />}
+                            />
+                            <Route
+                                path='simonsays'
+                                element={<SimonSays />}
+                            />
+                        </Routes>
+                    </Router>
+                </AuthProvider>
             </ApolloProvider>
         </ThemeProvider>
 

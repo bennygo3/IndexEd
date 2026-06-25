@@ -1,6 +1,6 @@
 import { useState, memo, useCallback } from 'react';
 import './Home.css';
-import { useAuthenticated } from '../../hooks/useAuthenticated';
+import { useAuth } from '../../context/AuthContext';
 import UserIcon from '../../components/UserIcon/UserIcon';
 import Navbar from '../../components/Navbar/Navbar';
 import LineGenerator from '../../components/Lines/LineGenerator.js';
@@ -16,7 +16,6 @@ const AuthButtons = memo(function AuthButtons({
   loginActive = false,
   signupActive = false,
   className = 'buttons-container',
-  // onLogout 
 }) {
   if (!isAuthChecked) return null;
 
@@ -56,7 +55,7 @@ const AuthButtons = memo(function AuthButtons({
 });
 
 export default function Home() {
-  const { isAuthChecked, isLoggedIn } = useAuthenticated();
+  const { isAuthChecked, isLoggedIn } = useAuth();
 
   const [activePopup, setActivePopup] = useState(null);
 
