@@ -18,6 +18,7 @@ CREATE TABLE divisions (
     CONSTRAINT fk_division_conference -- foreign key from divisions to conferences
         FOREIGN KEY (conference_id) -- The value stored in conference_id must already exist
         REFERENCES conferences(id) -- ... in the id column of the conference table. Meaning = a division cannot be assigned to a conference with an unrecognized conference id
+        ON DELETE RESTRICT 
 );
 
 CREATE TABLE teams (
@@ -37,4 +38,5 @@ CREATE TABLE teams (
     CONSTRAINT fk_team_division
         FOREIGN KEY (division_id)
         REFERENCES divisions(id)
-)
+        ON DELETE RESTRICT
+);
