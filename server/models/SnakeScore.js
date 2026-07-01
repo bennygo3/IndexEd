@@ -13,6 +13,9 @@ const snakeScoreSchema = new Schema({
     highScore: {
         type: Number,
         required: true,
+    },
+    {
+        timestamps: true
     }
 });
 

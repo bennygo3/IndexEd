@@ -5,10 +5,6 @@ mongoose.set('strictQuery', true);
 
 mongoose.connect(
     config.MONGODB_URI || 'mongodb://localhost:27017',
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    }
 );
 
 const connection = mongoose.connection;

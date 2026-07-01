@@ -9,7 +9,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import { typeDefs } from './graphql/typeDefs.js';
 import resolvers from './graphql/resolvers/index.js';
-import db from './config/connection.js';
+import db from './config/mongo.js';
 import jwt from 'jsonwebtoken';
 import { authMiddleware } from './utils/auth.js';
 

@@ -15,7 +15,7 @@ const router = express.Router();
 
 // Register new user
 router.post('/register', async (req, res) => {
-    console.log("📨 Incoming registration data:", req.body);
+    console.log("📨 Incoming registration data:", unsername);
 
     const { username, email, password, confirmPassword } = req.body;
 
@@ -58,7 +58,8 @@ router.post('/login', async (req, res) => {
         return res.status(400).json({ message: 'User not found' });
     }
 
-    const match = await bcrypt.compare(password, user.password);
+    // const match = await bcrypt.compare(password, user.password);
+    const match = await user.isCorrectPassword(password);
     if (!match) {
         return res.status(400).json({ message: 'Invalid username or password' });
     }
@@ -122,7 +123,7 @@ router.post('/token', async (req, res) => {
 
         setAuthCookies(res, newAccessToken, newRefreshToken);
 
-        console.log("♻️ Refresh endpoint hit");
+        // console.log("♻️ Refresh endpoint hit");
 
         res.json({ message: 'Token refreshed successfully with rotation' });
     } catch (err) {

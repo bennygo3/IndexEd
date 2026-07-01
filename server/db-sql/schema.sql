@@ -40,3 +40,4 @@ CREATE TABLE teams (
         REFERENCES divisions(id)
         ON DELETE RESTRICT
 );
+

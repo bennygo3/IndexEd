@@ -1,7 +1,6 @@
 import { GraphQLError } from 'graphql';
 import Users from '../../models/Users.js';
 import SnakeScore from '../../models/SnakeScore.js';
-// import { signToken } from '../../utils/auth.js';
 
 const Query = {
     async getCurrentUser(_, __, context) {

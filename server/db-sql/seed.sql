@@ -329,3 +329,38 @@ VALUES
     NULL,
     (SELECT id FROM southwest)
 );
+
+-- SELECT 
+--     location,
+--     teams.name AS team_name,
+--     divisions.name AS division_name
+-- FROM teams
+-- INNER JOIN divisions
+--     ON teams.division_id = divisions.id;
+
+-- SELECT 
+--     location,
+--     teams.name AS team_name,
+--     divisions.name AS division_name,
+--     conferences.name AS conference_name
+-- FROM teams
+--     INNER JOIN divisions 
+--     ON teams.division_id = divisions.id
+--     INNER JOIN conferences
+--     ON divisions.conference_id = conferences.id
+
+SELECT 
+    teams.location,
+    teams.name AS team_name,
+    divisions.name AS division_name,
+    conferences.name AS conference_name
+FROM teams
+INNER JOIN divisions 
+    ON teams.division_id = divisions.id
+INNER JOIN conferences
+    ON divisions.conference_id = conferences.id
+ORDER BY 
+    conferences.name,
+    divisions.name,
+    teams.location;
+    
