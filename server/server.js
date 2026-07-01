@@ -9,7 +9,8 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import { typeDefs } from './graphql/typeDefs.js';
 import resolvers from './graphql/resolvers/index.js';
-import db from './config/mongo.js';
+import db from './connection/mongo.js';
+import pool from './connection/postgres.js';
 import jwt from 'jsonwebtoken';
 import { authMiddleware } from './utils/auth.js';
 
@@ -45,7 +46,7 @@ app.use(
 );
 
 app.use('/auth', authRoutes);
-app.use('/api', nbaRouter);
+app.use('/api/nba', nbaRouter);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
@@ -57,6 +58,12 @@ if (process.env.NODE_ENV === 'production') {
 db.once('open', () => {
     console.log('✅ MongoDB connected.');
 });
+
+const result = await pool.query(
+    'SELECT NOW();'
+);
+
+console.log("🐘 PostgreSQL connected.", result.rows);
 
 await new Promise((resolve) => httpServer.listen({ port: PORT }, resolve));
 console.log(`🚀 Server ready at http://localhost:${PORT}/graphql`);

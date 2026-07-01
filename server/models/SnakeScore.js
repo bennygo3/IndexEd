@@ -14,10 +14,11 @@ const snakeScoreSchema = new Schema({
         type: Number,
         required: true,
     },
+},
     {
-        timestamps: true
-    }
-});
+    timestamps: true,
+    }  
+);
 
 snakeScoreSchema.index({ userId: 1 }, { unique: true });
 

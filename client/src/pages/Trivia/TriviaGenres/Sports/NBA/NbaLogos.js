@@ -28,7 +28,7 @@ export default function NbaLogos() {
         setIsLoading(true);
         setError(null);
         try {
-            const response = await fetch('/api/nba-logos');
+            const response = await fetch('/api/nba/logos');
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }

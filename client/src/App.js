@@ -67,7 +67,7 @@ function App() {
                                 element={<PokemonTrivia />}
                             />
                             <Route
-                                path='nba-logos'
+                                path='nba/logos'
                                 element={<NbaLogos />}
                             />
                             <Route
