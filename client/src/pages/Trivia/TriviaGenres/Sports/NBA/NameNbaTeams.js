@@ -4,6 +4,8 @@ import './nameNbaTeams.css';
 export default function NameNbaTeams() {
     const [board, setBoard] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [guess, setGuess] = useState('');
+    const [revealedTeams, setRevealedTeams] = useState(new Set());
 
 
     useEffect(() => {
@@ -26,6 +28,48 @@ export default function NameNbaTeams() {
 
         loadBoard();
     }, []);
+
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        const normalizedGuess = guess.trim().toLowerCase();
+
+        if(!normalizedGuess) {
+            return;
+        }
+
+        for (const conference of board) {
+            for (const division of conference.divisions) {
+                for (const team of division.teams) {
+
+                    const teamName = team.name.toLowerCase();
+                    const fullTeamName = `${team.location} ${team.name}`.toLowerCase();
+
+                    if (
+                        normalizedGuess === teamName ||
+                        normalizedGuess === fullTeamName
+                    ) {
+
+                        if (revealedTeams.has(team.abbreviation)) { // duplicate guess
+                            setGuess('');
+                            return;
+                        }
+
+                        setRevealedTeams(prev => {
+                            const updated = new Set(prev);
+                            updated.add(team.abbreviation);
+                            return updated;
+                        });
+
+                        setGuess('');
+                        return;
+                    }
+                }
+            }
+        }
+
+        setGuess('');
+    }
 
     if (loading) {
         return (
@@ -59,7 +103,10 @@ export default function NameNbaTeams() {
                                         <li key={team.abbreviation}
                                             className="team-slot"
                                         >
-                                           
+                                            {revealedTeams.has(team.abbreviation)
+                                                ? `${team.location} ${team.name}`
+                                                : ''
+                                            }
                                         </li>
                                     ))}
                                 </ul>
@@ -68,6 +115,21 @@ export default function NameNbaTeams() {
                     </div>
                 </section>
             ))}
+            <form 
+                className="nba-team-guess-form"
+                onSubmit={handleSubmit}
+            
+            >
+                <label htmlFor="nba-team-guess"></label>
+                <input 
+                    id="nba-team-guess"
+                    type="text"
+                    value={guess}
+                    onChange={(e) => setGuess(e.target.value)}
+                    placeholder="Example: Harlem Globetrotters or Globetrotters"
+                    autoComplete="off"
+                />  
+            </form>
         </main>
     );
 }

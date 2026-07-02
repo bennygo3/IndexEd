@@ -27,5 +27,25 @@
 .team-slot {
     height: 28px;
     border-bottom: 1px solid #888;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+}
+
+.nba-team-guess-form {
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.nba-team-guess-form input {
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    min-width: 280px;
+    outline: 2px solid black;
+}
+
+.nba-team-guess-form input:focus {
+    outline: none;
+    outline: 2px solid black;
+
 }

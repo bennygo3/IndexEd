@@ -2,6 +2,7 @@ import { useState } from 'react';
 import NavbarTD from '../../components/Navbar/NavbarTD.js';
 import TriviaCarousel from './TriviaCarousel/TriviaCarousel.js';
 import pokeSnapshot from '../../assets/pokeSnapshot.png';
+import indexCards from '../../assets/indexCards.png';
 import Basketball from './Basketball/Basketball.js';
 import usaPage from '../../assets/usa-states-page.png';
 import './trivia.css';
@@ -18,6 +19,12 @@ const genres = [
         desc: 'Name the NBA team based off their logo!',
         linkUrl: '/nba-logos',
         component: <Basketball />
+    },
+    {
+        genre: 'NBA',
+        desc: 'Name all the NBA teams',
+        linkUrl: '/nba-teams-quiz',
+        imageUrl: indexCards
     },
     {
         genre: 'USA States',
