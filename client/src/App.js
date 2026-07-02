@@ -15,6 +15,7 @@ import Games from './pages/Games/Games.js';
 import Trivia from './pages/Trivia/Trivia.js';
 import PokemonTrivia from './pages/Trivia/TriviaGenres/Pokemon/PokemonTrivia.js';
 import NbaLogos from './pages/Trivia/TriviaGenres/Sports/NBA/NbaLogos.js';
+import NameNbaTeams from './pages/Trivia/TriviaGenres/Sports/NBA/NameNbaTeams.js';
 import USAStates from './pages/Trivia/TriviaGenres/Geography/USAStates.js';
 import Basketball from './pages/Trivia/Basketball/Basketball.js';
 import Snake from './pages/Games/Snake/Snake.js';
@@ -67,8 +68,12 @@ function App() {
                                 element={<PokemonTrivia />}
                             />
                             <Route
-                                path='nba/logos'
+                                path='nba-logos'
                                 element={<NbaLogos />}
+                            />
+                            <Route
+                                path='nba-teams-quiz'
+                                element={<NameNbaTeams />}
                             />
                             <Route
                                 path='usa-states'

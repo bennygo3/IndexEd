@@ -16,7 +16,7 @@ const genres = [
     {
         genre: 'NBA',
         desc: 'Name the NBA team based off their logo!',
-        linkUrl: '/nba/logos',
+        linkUrl: '/nba-logos',
         component: <Basketball />
     },
     {

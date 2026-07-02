@@ -1,0 +1,31 @@
+.nba-team-guesser-page {
+    padding: 2rem;
+}
+
+.conference-section {
+    margin-bottom: 3rem;
+}
+
+.division-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.division-card {
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.team-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.team-slot {
+    height: 28px;
+    border-bottom: 1px solid #888;
+    margin-bottom: 8px;
+}

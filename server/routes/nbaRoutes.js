@@ -1,6 +1,9 @@
 import express from 'express';
 import fetchNBATeamLogos from '../services/fetchNBATeamLogos.js';
-import { getAllNbaTeams } from '../services/nbaService.js';
+import { 
+    getAllNbaTeams,
+    getNbaTeamsGuesserData,
+} from '../services/nbaService.js';
 
 const router = express.Router();
 
@@ -22,6 +25,16 @@ router.get('/teams', async (req, res) => {
     } catch (error) {
         console.error('Error fetching NBA teams from PostgreSQL:', error.message);
         res.status(500).json({ message: 'Failed to fetch NBA teams' });
+    }
+});
+
+router.get('/team-guesser', async (req, res) => {
+    try {
+        const data = await getNbaTeamsGuesserData();
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching NBA team guess game data:', error.message);
+        res.status(500).json({ message: 'Failed to fetch NBA team guess game data' })
     }
 });
 
