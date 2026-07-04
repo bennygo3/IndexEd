@@ -6,7 +6,7 @@ export default function NameNbaTeams() {
     const [loading, setLoading] = useState(true);
     const [guess, setGuess] = useState('');
     const [revealedTeams, setRevealedTeams] = useState(new Set());
-
+    const [showPlaceholder, setShowPlaceholder] = useState(true);
 
     useEffect(() => {
         async function loadBoard() {
@@ -125,8 +125,9 @@ export default function NameNbaTeams() {
                     id="nba-team-guess"
                     type="text"
                     value={guess}
+                    onFocus={() => setShowPlaceholder(false)}
                     onChange={(e) => setGuess(e.target.value)}
-                    placeholder="Example: Harlem Globetrotters or Globetrotters"
+                    placeholder={showPlaceholder ? "Example: Harlem Globetrotters or Globetrotters" : ""}
                     autoComplete="off"
                 />  
             </form>
