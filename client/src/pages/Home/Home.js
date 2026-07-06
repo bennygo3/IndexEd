@@ -76,9 +76,8 @@ export default function Home() {
       <div className="back-card">
         <LineGenerator amount={15} colorClass="blue-line" />
       </div>
-      {/* <UserIcon /> */}
       <div className="home-background">
-        <div className="home-top">
+        <div>
           <h1 className="landing-header">Index-Ed</h1>
 
           <AuthButtons

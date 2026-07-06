@@ -151,36 +151,3 @@ export default function Basketball() {
         />
     );
 }
-
-/* 
-context.save();
-context.beginPath();
-context.arc(x, y, ballRadius, 0, 2 * Math.PI);
-context.clip();
-
-context.beginPath();
-context.ellipse(
-    x,
-    y,
-    ballRadius * 1.15,
-    ballRadius * 0.6,
-    Math.PI / 4,
-    0,
-    2 * Math.PI
-);
-context.stroke();
-
-context.beginPath();
-context.ellipse(
-    x,
-    y,
-    ballRadius * 1.15,
-    ballRadius * 0.6,
-    -Math.PI / 4,
-    0,
-    2 * Math.PI 
-);
-context.stroke();
-
-context.restore();
-*/

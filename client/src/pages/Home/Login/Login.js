@@ -69,7 +69,7 @@ export default function Login(props) {
                         <button
                             type='submit'
                             className='login-btn'>
-                            ENTER
+                            Enter
                         </button>
 
                     </label>

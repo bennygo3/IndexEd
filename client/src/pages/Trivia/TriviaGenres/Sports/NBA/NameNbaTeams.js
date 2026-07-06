@@ -8,6 +8,13 @@ export default function NameNbaTeams() {
     const [revealedTeams, setRevealedTeams] = useState(new Set());
     const [showPlaceholder, setShowPlaceholder] = useState(true);
 
+    const GAME_TIME = 4 * 60;
+    const TOTAL_TEAMS = 30;
+    const score = revealedTeams.size;
+    const [gameStarted, setGameStarted] = useState(false);
+    const [timeRemaining, setTimeRemaining] = useState(GAME_TIME);
+    const [gameOver, setGameOver] = useState(false);
+
     useEffect(() => {
         async function loadBoard() {
             try {
@@ -29,9 +36,45 @@ export default function NameNbaTeams() {
         loadBoard();
     }, []);
 
+    useEffect(() => {
+        if (loading || !gameStarted || gameOver) return;
+
+        if (timeRemaining <= 0) {
+            setGameOver(true);
+            return;
+        }
+
+        const timer = setInterval(() => {
+            setTimeRemaining(prev => prev - 1);
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [loading, gameStarted, gameOver, timeRemaining]);
+
+    useEffect(() => {
+        if (score === TOTAL_TEAMS) {
+            setGameOver(true);
+        }
+    }, [score]);
+
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+
+        return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+    }
+
+    function startButton() {
+        setGameStarted(true);
+        setGameOver(false);
+        setTimeRemaining(GAME_TIME);
+        setRevealedTeams(new Set());
+        setGuess('');
+    }
+
     function handleSubmit(event) {
         event.preventDefault();
-
+        if (gameOver) return;
         const normalizedGuess = guess.trim().toLowerCase();
 
         if(!normalizedGuess) {
@@ -82,6 +125,27 @@ export default function NameNbaTeams() {
     return (
         <main className="nba-team-guesser-page">
             <h1>Fill in each NBA team</h1>
+            <div className="game-status">
+                <p>Score: {score} / {TOTAL_TEAMS}</p>
+                <p>Time: {formatTime(timeRemaining)}</p>
+            </div>
+
+            {gameOver && (
+                <div className="game-over-message">
+                    {score === TOTAL_TEAMS ? (
+                        <p>Perfect! Finalscore: {formatTime(timeRemaining)} remaining</p>
+                    ) : (
+                        <p>Time's up! Final score: {score} / {TOTAL_TEAMS}</p>
+                    )}
+                </div>
+            )}
+
+            <button 
+                onClick={startButton}
+                disabled={gameStarted}
+            >
+                Start Game
+            </button>
 
             {board.map((conference) => (
                 <section 
@@ -125,6 +189,7 @@ export default function NameNbaTeams() {
                     id="nba-team-guess"
                     type="text"
                     value={guess}
+                    disabled={!gameStarted || gameOver}
                     onFocus={() => setShowPlaceholder(false)}
                     onChange={(e) => setGuess(e.target.value)}
                     placeholder={showPlaceholder ? "Example: Harlem Globetrotters or Globetrotters" : ""}

@@ -46,19 +46,11 @@
     transform: translateY(30%);
 }
 
-/* .t-card {
-    
-    width: 350px;
-    height: 350px;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-
-    width: 100%;
-    height: 100%;
-} */
 
 .trivia-item {
-    position: relative;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .trivia-item img {
@@ -67,43 +59,45 @@
 }
 
 .t-card.center {
-    width: 350px; 
-    height: 350px; 
+    width: 400px; 
+    height: 400px; 
     position: relative;
     transform: translate(0, 0) scale(1);
     opacity: 1;
     z-index: 2;
-    background-color: white;
+    padding: 5px;
+    outline: 2px black solid;
+}
+
+.trivia-description {
+    text-align: center;
 }
 
 
 .carousel-indicators {
     position: relative;
-    top: 45%;
+    top: 40px;
+    gap: 5px;
     width: auto;
     display: flex;
-    /* justify-content: center; */
-    /* transform: translateY(-50%); */
     align-items: center;
 }
-
-
 
 .left-button,
 .right-button {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 2rem;
+    font-size: 4rem;
     color: #333;
     padding: 10px;
 }
 
-.component-wrapper {
+/* .component-wrapper {
     height: 100%;
     width: 100%;
     position: relative;
-}
+} */
 
 /* .t-card.left {
     transform: translate(-70%, 0) scale(0.8);

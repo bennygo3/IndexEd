@@ -94,10 +94,10 @@ export default function SignUp(props) {
                             />
 
                             <button
-                            type='submit'
-                            className='submit-btn'>
-                            Sign Up
-                        </button>
+                                type='submit'
+                                className='submit-btn'>
+                                Enter
+                            </button>
                         </label>
 
                     </form>
