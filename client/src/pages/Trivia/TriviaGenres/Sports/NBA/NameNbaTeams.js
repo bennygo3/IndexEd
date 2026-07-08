@@ -12,6 +12,7 @@ export default function NameNbaTeams() {
     const TOTAL_TEAMS = 30;
     const score = revealedTeams.size;
     const [gameStarted, setGameStarted] = useState(false);
+    const [guessFeedback, setGuessFeedback] = useState('');
     const [timeRemaining, setTimeRemaining] = useState(GAME_TIME);
     const [gameOver, setGameOver] = useState(false);
 
@@ -40,6 +41,7 @@ export default function NameNbaTeams() {
         if (loading || !gameStarted || gameOver) return;
 
         if (timeRemaining <= 0) {
+            setGameStarted(false);
             setGameOver(true);
             return;
         }
@@ -53,6 +55,7 @@ export default function NameNbaTeams() {
 
     useEffect(() => {
         if (score === TOTAL_TEAMS) {
+            setGameStarted(false);
             setGameOver(true);
         }
     }, [score]);
@@ -70,16 +73,26 @@ export default function NameNbaTeams() {
         setTimeRemaining(GAME_TIME);
         setRevealedTeams(new Set());
         setGuess('');
+        setGuessFeedback('');
+        setShowPlaceholder(true);
+    }
+
+    function flashFeedback(type) {
+        setGuessFeedback(type);
+
+        setTimeout(() => {
+            setGuessFeedback('');
+        }, 300);
     }
 
     function handleSubmit(event) {
         event.preventDefault();
-        if (gameOver) return;
+
+        if (!gameStarted || gameOver) return;
+
         const normalizedGuess = guess.trim().toLowerCase();
 
-        if(!normalizedGuess) {
-            return;
-        }
+        if (!normalizedGuess) return;
 
         for (const conference of board) {
             for (const division of conference.divisions) {
@@ -88,13 +101,14 @@ export default function NameNbaTeams() {
                     const teamName = team.name.toLowerCase();
                     const fullTeamName = `${team.location} ${team.name}`.toLowerCase();
 
-                    if (
+                    const isMatch =
                         normalizedGuess === teamName ||
-                        normalizedGuess === fullTeamName
-                    ) {
+                        normalizedGuess === fullTeamName;
 
-                        if (revealedTeams.has(team.abbreviation)) { // duplicate guess
+                    if (isMatch) {
+                        if (revealedTeams.has(team.abbreviation)) {
                             setGuess('');
+                            flashFeedback('wrong');
                             return;
                         }
 
@@ -105,6 +119,7 @@ export default function NameNbaTeams() {
                         });
 
                         setGuess('');
+                        flashFeedback('correct');
                         return;
                     }
                 }
@@ -112,6 +127,7 @@ export default function NameNbaTeams() {
         }
 
         setGuess('');
+        flashFeedback('wrong');
     }
 
     if (loading) {
@@ -119,7 +135,7 @@ export default function NameNbaTeams() {
             <main className="nba-team-guesser-page">
                 <h1>Loading NBA teams...</h1>;
             </main>
-        );    
+        );
     }
 
     return (
@@ -140,7 +156,7 @@ export default function NameNbaTeams() {
                 </div>
             )}
 
-            <button 
+            <button
                 onClick={startButton}
                 disabled={gameStarted}
             >
@@ -148,16 +164,16 @@ export default function NameNbaTeams() {
             </button>
 
             {board.map((conference) => (
-                <section 
-                    key={conference.conference} 
+                <section
+                    key={conference.conference}
                     className="conference-section"
                 >
                     <h2>{conference.conference} Conference</h2>
 
                     <div className="division-grid">
                         {conference.divisions.map((division) => (
-                            <section 
-                                key={division.name} 
+                            <section
+                                key={division.name}
                                 className="division-card"
                             >
                                 <h3>{division.name}</h3>
@@ -179,13 +195,13 @@ export default function NameNbaTeams() {
                     </div>
                 </section>
             ))}
-            <form 
+            <form
                 className="nba-team-guess-form"
                 onSubmit={handleSubmit}
-            
+
             >
                 <label htmlFor="nba-team-guess"></label>
-                <input 
+                <input
                     id="nba-team-guess"
                     type="text"
                     value={guess}
@@ -194,7 +210,7 @@ export default function NameNbaTeams() {
                     onChange={(e) => setGuess(e.target.value)}
                     placeholder={showPlaceholder ? "Example: Harlem Globetrotters or Globetrotters" : ""}
                     autoComplete="off"
-                />  
+                />
             </form>
         </main>
     );
