@@ -149,18 +149,15 @@ export default function NameNbaTeams() {
             {gameOver && (
                 <div className="game-over-message">
                     {score === TOTAL_TEAMS ? (
-                        <p>Perfect! Finalscore: {formatTime(timeRemaining)} remaining</p>
+                        <p>Perfect! Final score: {formatTime(timeRemaining)} remaining</p>
                     ) : (
                         <p>Time's up! Final score: {score} / {TOTAL_TEAMS}</p>
                     )}
                 </div>
             )}
 
-            <button
-                onClick={startButton}
-                disabled={gameStarted}
-            >
-                Start Game
+            <button onClick={startButton}>
+                {gameStarted ? "Restart Game" : gameOver ? "Play Again" : "Start Game"}
             </button>
 
             {board.map((conference) => (
@@ -180,14 +177,28 @@ export default function NameNbaTeams() {
 
                                 <ul className="team-list">
                                     {division.teams.map((team) => (
-                                        <li key={team.abbreviation}
-                                            className="team-slot"
+                                        <li 
+                                            key = {team.abbreviation}
+                                            className = {`team-slot ${
+                                                gameOver && !revealedTeams.has(team.abbreviation)
+                                                    ? "missed-team"
+                                                    : ""
+                                            }`}
                                         >
-                                            {revealedTeams.has(team.abbreviation)
+                                            {revealedTeams.has(team.abbreviation) || gameOver
                                                 ? `${team.location} ${team.name}`
-                                                : ''
+                                                : ""
                                             }
                                         </li>
+
+                                         /* <li key={team.abbreviation}
+                                            className="team-slot"
+                                         >
+                                            {revealedTeams.has(team.abbreviation)
+                                                 ? `${team.location} ${team.name}`
+                                             : ''
+                                             }
+                                         </li> */
                                     ))}
                                 </ul>
                             </section>
@@ -203,6 +214,7 @@ export default function NameNbaTeams() {
                 <label htmlFor="nba-team-guess"></label>
                 <input
                     id="nba-team-guess"
+                    className={guessFeedback}
                     type="text"
                     value={guess}
                     disabled={!gameStarted || gameOver}

@@ -49,3 +49,16 @@
     outline: 2px solid black;
 
 }
+
+#nba-team-guess.correct {
+    background-color: lightgreen;
+}
+
+#nba-team-guess.wrong {
+    background-color: lightcoral;
+}
+
+.missed-team {
+    color: red;
+    opacity: 0.75;
+}
