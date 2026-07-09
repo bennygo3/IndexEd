@@ -3,9 +3,9 @@ DROP TABLE IF EXISTS nba_divisions; -- divisions is dropped before conferences b
 DROP TABLE IF EXISTS nba_conferences; 
 
 CREATE TABLE nba_conferences (
-    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY, --generates unique integer for every conference (2)
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY, --automatically generates unique id integer for every conference (2)
 
-    name VARCHAR(50) NOT NULL UNIQUE -- varchar50 allows up to 50 chars to be used; not null = every conference must have a name; unique = no conference duplicates allowed
+    name VARCHAR(50) NOT NULL UNIQUE -- allows conf. names up to 50 chars to be used; not null = every conference must have a name; unique = no conference duplicates allowed
 );
 
 CREATE TABLE nba_divisions (

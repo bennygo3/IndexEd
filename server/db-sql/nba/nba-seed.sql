@@ -150,11 +150,11 @@ VALUES
 
 WITH southeast AS (
     SELECT id
-    FROM divisions
+    FROM nba_divisions
     WHERE name = 'Southeast'
 )
 
-INSERT INTO teams (location, name, abbreviation, logo_url, division_id)
+INSERT INTO nba_teams (location, name, abbreviation, logo_url, division_id)
 VALUES
 (
     'Atlanta',
@@ -196,11 +196,11 @@ VALUES
 
 WITH northwest AS (
     SELECT id
-    FROM divisions
+    FROM nba_divisions
     WHERE name = 'Northwest'
 )
 
-INSERT INTO teams (location, name, abbreviation, logo_url, division_id)
+INSERT INTO nba_teams (location, name, abbreviation, logo_url, division_id)
 VALUES
 (
     'Denver',
@@ -242,11 +242,11 @@ VALUES
 
 WITH pacific AS (
     SELECT id
-    FROM divisions
+    FROM nba_divisions
     WHERE name = 'Pacific'
 )
 
-INSERT INTO teams (location, name, abbreviation, logo_url, division_id)
+INSERT INTO nba_teams (location, name, abbreviation, logo_url, division_id)
 VALUES
 (
     'Golden State',
@@ -288,11 +288,11 @@ VALUES
 
 WITH southwest AS (
     SELECT id
-    FROM divisions
+    FROM nba_divisions
     WHERE name = 'Southwest'
 )
 
-INSERT INTO teams (location, name, abbreviation, logo_url, division_id)
+INSERT INTO nba_teams (location, name, abbreviation, logo_url, division_id)
 VALUES
 (
     'Dallas',
@@ -330,6 +330,21 @@ VALUES
     (SELECT id FROM southwest)
 );
 
+SELECT 
+    nba_teams.location,
+    nba_teams.name AS team_name,
+    nba_divisions.name AS division_name,
+    nba_conferences.name AS conference_name
+FROM nba_teams
+INNER JOIN nba_divisions 
+    ON nba_teams.division_id = nba_divisions.id
+INNER JOIN nba_conferences
+    ON nba_divisions.conference_id = nba_conferences.id
+ORDER BY 
+    nba_conferences.name,
+    nba_divisions.name,
+    nba_teams.location;
+
 -- SELECT 
 --     location,
 --     teams.name AS team_name,
@@ -348,19 +363,3 @@ VALUES
 --     ON teams.division_id = divisions.id
 --     INNER JOIN conferences
 --     ON divisions.conference_id = conferences.id
-
-SELECT 
-    teams.location,
-    teams.name AS team_name,
-    divisions.name AS division_name,
-    conferences.name AS conference_name
-FROM teams
-INNER JOIN divisions 
-    ON teams.division_id = divisions.id
-INNER JOIN conferences
-    ON divisions.conference_id = conferences.id
-ORDER BY 
-    conferences.name,
-    divisions.name,
-    teams.location;
-    

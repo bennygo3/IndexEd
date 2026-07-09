@@ -3,22 +3,22 @@ import pool from "../connection/postgres.js";
 export async function getAllNbaTeams() {
     const result = await pool.query(`
         SELECT 
-            teams.location,
-            teams.name,
-            teams.abbreviation,
-            teams.logo_url,
-            divisions.name AS division,
-            conferences.name AS conference
-        FROM teams
-        INNER JOIN divisions
-            ON teams.division_id = divisions.id
+            nba_teams.location,
+            nba_teams.name,
+            nba_teams.abbreviation,
+            nba_teams.logo_url,
+            nba_divisions.name AS division,
+            nba_conferences.name AS conference
+        FROM nba_teams
+        INNER JOIN nba_divisions
+            ON nba_teams.division_id = nba_divisions.id
         INNER JOIN conferences
-            ON divisions.conference_id = conferences.id
+            ON nba_divisions.conference_id = nba_conferences.id
         ORDER BY
-            conferences.name,
-            divisions.name,
-            teams.location,
-            teams.name
+            nba_conferences.name,
+            nba_divisions.name,
+            nba_teams.location,
+            nba_teams.name
     `);
 
     return result.rows;
@@ -27,21 +27,21 @@ export async function getAllNbaTeams() {
 export async function getNbaTeamsGuesserData() {
     const query = `
         SELECT
-            conferences.name AS conference,
-            divisions.name AS division,
-            teams.location,
-            teams.name,
-            teams.abbreviation
-        FROM teams
-        INNER JOIN divisions
-            ON teams.division_id = divisions.id
-        INNER JOIN conferences
-            ON divisions.conference_id = conferences.id
+            nba_conferences.name AS conference,
+            nba_divisions.name AS division,
+            nba_teams.location,
+            nba_teams.name,
+            nba_teams.abbreviation
+        FROM nba_teams
+        INNER JOIN nba_divisions
+            ON nba_teams.division_id = nba_divisions.id
+        INNER JOIN nba_conferences
+            ON nba_divisions.conference_id = nba_conferences.id
         ORDER BY
-            conferences.name,
-            divisions.name,
-            teams.location,
-            teams.name;
+            nba_conferences.name,
+            nba_divisions.name,
+            nba_teams.location,
+            nba_teams.name;
     `;
 
     const result = await pool.query(query);
@@ -49,30 +49,34 @@ export async function getNbaTeamsGuesserData() {
     const grouped = [];
 
     for (const row of result.rows) {
-        let conference = grouped.find(item => item.conference === row.conference);
+        let conferenceGroup = grouped.find(
+            item => item.conference === row.conference
+        );
 
-        if (!conference) {
-            conference = {
+        if (!conferenceGroup) {
+            conferenceGroup = {
                 conference: row.conference,
                 divisions: [],
             };
 
-            grouped.push(conference);
+            grouped.push(conferenceGroup);
         }
 
-        let division = conference.divisions.find(item => item.name === row.division);
+        let divisionGroup = conferenceGroup.divisions.find(
+            item => item.name === row.division
+        );
 
-        if (!division) {
-            division = {
+        if (!divisionGroup) {
+            divisionGroup = {
                 name: row.division,
                 teams: [],
             };
 
-            conference.divisions.push(division);
+            conferenceGroup.divisions.push(divisionGroup);
 
         }
 
-        division.teams.push({
+        divisionGroup.teams.push({
             location: row.location,
             name: row.name,
             abbreviation: row.abbreviation,
