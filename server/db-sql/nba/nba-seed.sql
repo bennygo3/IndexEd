@@ -1,15 +1,15 @@
-INSERT INTO conferences (name)
+INSERT INTO nba_conferences (name)
 VALUES 
     ('Eastern'),
     ('Western');
 
-INSERT INTO divisions (name, conference_id)
+INSERT INTO nba_divisions (name, conference_id)
 VALUES
 (
     'Atlantic',
     (
         SELECT id
-        FROM conferences
+        FROM nba_conferences
         WHERE name = 'Eastern'
     )
 ),
@@ -17,7 +17,7 @@ VALUES
     'Central',
     (
         SELECT id
-        FROM conferences
+        FROM nba_conferences
         WHERE name = 'Eastern'
     )
 ),
@@ -25,7 +25,7 @@ VALUES
     'Southeast',
     (
         SELECT id
-        FROM conferences
+        FROM nba_conferences
         WHERE name = 'Eastern'
     )
 ),
@@ -33,7 +33,7 @@ VALUES
     'Northwest',
     (
         SELECT id
-        FROM conferences
+        FROM nba_conferences
         WHERE name = 'Western'
     )
 ),
@@ -41,7 +41,7 @@ VALUES
     'Pacific',
     (
         SELECT id
-        FROM conferences
+        FROM nba_conferences
         WHERE name = 'Western'
     )
 ),
@@ -49,7 +49,7 @@ VALUES
     'Southwest',
     (
         SELECT id
-        FROM conferences
+        FROM nba_conferences
         WHERE name = 'Western'
     )
 );
@@ -58,11 +58,11 @@ VALUES
 
 WITH atlantic AS (
     SELECT id
-    FROM divisions
+    FROM nba_divisions
     WHERE name = 'Atlantic'
 )
 
-INSERT INTO teams (location, name, abbreviation, logo_url, division_id)
+INSERT INTO nba_teams (location, name, abbreviation, logo_url, division_id)
 VALUES
 (
     'Boston',
@@ -104,11 +104,11 @@ VALUES
 
 WITH central AS (
     SELECT id
-    FROM divisions
+    FROM nba_divisions
     WHERE name = 'Central'
 )
 
-INSERT INTO teams (location, name, abbreviation, logo_url, division_id)
+INSERT INTO nba_teams (location, name, abbreviation, logo_url, division_id)
 VALUES
 (
     'Chicago',
