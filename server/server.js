@@ -15,7 +15,8 @@ import jwt from 'jsonwebtoken';
 import { authMiddleware } from './utils/auth.js';
 
 import authRoutes from './routes/authRoutes.js';
-import nbaRouter from './routes/nbaRoutes.js';
+import teamsRoutes from './routes/teamsRoutes.js';
+// import nbaRouter from './routes/nbaRoutes.js';
 
 const PORT = config.PORT || 3001;
 const app = express();
@@ -46,7 +47,7 @@ app.use(
 );
 
 app.use('/auth', authRoutes);
-app.use('/api/nba', nbaRouter);
+app.use('/api', nbaRouter);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));

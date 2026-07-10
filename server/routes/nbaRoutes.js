@@ -28,14 +28,14 @@ router.get('/teams', async (req, res) => {
     }
 });
 
-router.get('/team-guesser', async (req, res) => {
-    try {
-        const data = await getNbaTeamsGuesserData();
-        res.json(data);
-    } catch (error) {
-        console.error('Error fetching NBA team guess game data:', error.message);
-        res.status(500).json({ message: 'Failed to fetch NBA team guess game data' })
-    }
-});
+// router.get('/team-guesser', async (req, res) => {
+//     try {
+//         const data = await getNbaTeamsGuesserData();
+//         res.json(data);
+//     } catch (error) {
+//         console.error('Error fetching NBA team guess game data:', error.message);
+//         res.status(500).json({ message: 'Failed to fetch NBA team guess game data' })
+//     }
+// });
 
 export default router;
