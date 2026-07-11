@@ -40,6 +40,12 @@ const userSchema = new Schema(
                 ref: 'StudyCard'
             }
         ],
+        teamGuessScores: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "TeamGuessScore",
+            },
+        ],
         snakeScores: [
             {
                 type: Schema.Types.ObjectId,
