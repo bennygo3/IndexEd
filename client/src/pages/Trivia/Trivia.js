@@ -22,8 +22,14 @@ const genres = [
     },
     {
         genre: 'NBA',
-        desc: 'Name all the NBA teams',
-        linkUrl: '/nba-teams-quiz',
+        desc: 'Name all of the NBA teams',
+        linkUrl: '/nba-teams-trivia',
+        imageUrl: indexCards
+    },
+    {
+        genre: 'NFL',
+        desc: 'Name all of the NFL teams',
+        linkUrl: '/nfl-teams-trivia',
         imageUrl: indexCards
     },
     {
