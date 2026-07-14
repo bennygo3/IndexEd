@@ -63,6 +63,13 @@ export default function TeamGuesserTrivia({
         }
     }, [score, totalTeams]);
 
+    useEffect(() => {
+        if (!gameOver) return;
+
+        console.log("🏁 Game finished");
+
+    }, [gameOver]);
+
     function formatTime(seconds) {
         const minutes = Math.floor(seconds / 60);
         const remainingSeconds = seconds % 60;
@@ -70,14 +77,22 @@ export default function TeamGuesserTrivia({
         return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
     }
 
-    function startButton() {
-        setGameStarted(true);
+    function resetGame() {
+        setGameStarted(true); // will eventually branch off to a countdown function to start game
         setGameOver(false);
         setTimeRemaining(gameTime);
         setRevealedTeams(new Set());
         setGuess('');
         setGuessFeedback('');
         setShowPlaceholder(true);
+    }
+
+    function handleInputFocus() {
+        setShowPlaceholder(false);
+
+        if (!gameStarted && !gameOver) { // Only start if answer input is the first click of the game
+            resetGame();
+        }
     }
 
     function flashFeedback(type) {
@@ -143,7 +158,7 @@ export default function TeamGuesserTrivia({
 
     return (
         <main className="nba-team-guesser-page">
-            <h1>Fill in each NBA team</h1>
+            <h1>{title}</h1>
             <div className="game-status">
                 <p>Score: {score} / {totalTeams}</p>
                 <p>Time: {formatTime(timeRemaining)}</p>
@@ -159,7 +174,7 @@ export default function TeamGuesserTrivia({
                 </div>
             )}
 
-            <button onClick={startButton}>
+            <button onClick={resetGame}>
                 {gameStarted ? "Restart Game" : gameOver ? "Play Again" : "Start Game"}
             </button>
 
@@ -212,7 +227,7 @@ export default function TeamGuesserTrivia({
                     type="text"
                     value={guess}
                     disabled={!gameStarted || gameOver}
-                    onFocus={() => setShowPlaceholder(false)}
+                    onFocus={handleInputFocus}
                     onChange={(e) => setGuess(e.target.value)}
                     placeholder={showPlaceholder ? "Example: Harlem Globetrotters or Globetrotters" : ""}
                     autoComplete="off"
