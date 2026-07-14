@@ -66,8 +66,7 @@ export default function TeamGuesserTrivia({
     useEffect(() => {
         if (!gameOver) return;
 
-        console.log("🏁 Game finished");
-
+        saveScore();
     }, [gameOver]);
 
     function formatTime(seconds) {
@@ -146,6 +145,11 @@ export default function TeamGuesserTrivia({
 
         setGuess('');
         flashFeedback('wrong');
+    }
+
+    function saveScore() {
+        // small function now. plans to expand later
+        console.log("🏁 Game finished, saving score...");
     }
 
     if (loading) {

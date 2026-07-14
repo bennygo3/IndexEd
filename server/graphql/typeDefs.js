@@ -5,6 +5,7 @@ export const typeDefs = `#graphql
         username: String!
         studyGenres: [StudyGenre]
         studyCards: [StudyCard]
+        teamGuessScores: [TeamGuessScore]
         snakeScores: [SnakeScore]
         createdAt: String!
         updatedAt: String
@@ -26,6 +27,17 @@ export const typeDefs = `#graphql
         createdAt: String
         updatedAt: String
         tags: [String] 
+    }
+
+    type TeamGuessScore {
+        _id: ID!
+        userId: ID!
+        league: String!
+        score: Int!
+        totalTeams: Int!
+        timeRemaining: Int!
+        createdAt: String
+        updatedAt: String
     }
     
     type SnakeScore {
@@ -49,8 +61,6 @@ export const typeDefs = `#graphql
     }
     
     type Mutation {
-        updateHighSnakeScore(newSnakeScore: Int!): UpdatedHighSnakeScore!
-        
         createStudyGenre(title: String!, category: String!, description: String): StudyGenre!
         deleteStudyGenre(genreId: ID!): Boolean!
         updateStudyGenre(genreId: ID!, title: String, category: String, description: String): StudyGenre!
@@ -58,6 +68,9 @@ export const typeDefs = `#graphql
         createStudyCard(front: String!, back: String!): StudyCard!
         deleteStudyCard(cardId: ID!): Boolean!
         updateStudyCard(cardId: ID!, front: String, back: String): StudyCard!
+
+        saveTeamGuessScore(league: String!, score: Int!, totalTeams: Int!, timeRemaining: Int!): TeamGuessScore!
+        updateHighSnakeScore(newSnakeScore: Int!): UpdatedHighSnakeScore!
     }
 
 `;

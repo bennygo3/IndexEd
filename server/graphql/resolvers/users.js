@@ -1,6 +1,7 @@
 import { GraphQLError } from 'graphql';
 import Users from '../../models/Users.js';
 import SnakeScore from '../../models/SnakeScore.js';
+import TeamGuessScore from '../../models/TeamGuessScore.js';
 
 const Query = {
     async getCurrentUser(_, __, context) {
@@ -23,7 +24,7 @@ const Query = {
                 path: 'studyCards',
                 model: 'StudyCard',
             })
-            // .populate('snakeScores')
+        // .populate('snakeScores')
 
         if (!user) {
             throw new GraphQLError('User not found!', {
@@ -50,6 +51,53 @@ const Query = {
 };
 
 const Mutation = {
+    async saveTeamGuessScore(
+        _,
+        {
+            league,
+            score,
+            totalTeams,
+            timeRemaining,
+        },
+        context
+    ) {
+        const authId = context.user?._id;
+
+        if (!authId) {
+            throw new GraphQLError(
+                "Not authenticated", 
+                {
+                    extensions: { code: "UNAUTHENTICATED" },
+                },
+            );
+        }
+
+        const user = await Users.findById(authId);
+
+        if (!user) {
+            throw new GraphQLError(
+                "User not found",
+                {
+                    extensions: { code: "BAD_USER_INPUT" },
+                }
+            );
+        }
+
+        const newScore = await TeamGuessScore.create({
+            userId: authId,
+            league,
+            score,
+            totalTeams,
+            timeRemaining,
+        });
+
+        user.teamGuessScores.push(newScore._id);
+
+        await user.save();
+
+        return newScore;
+    }
+
     async updateHighSnakeScore(_, { newSnakeScore }, context) {
         const authId = context.user?._id;
         if (!authId) {
@@ -92,6 +140,7 @@ const Mutation = {
 
         return { changed: false, highScore: existing.highScore }
     }
+
 };
 
 export default { Query, Mutation };
