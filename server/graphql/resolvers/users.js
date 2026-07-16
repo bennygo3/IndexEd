@@ -67,7 +67,7 @@ const Mutation = {
             throw new GraphQLError(
                 "Not authenticated", 
                 {
-                    extensions: { code: "UNAUTHENTICATED" },
+                    extensions: { code: "UNAUTH-id" },
                 },
             );
         }
@@ -96,13 +96,13 @@ const Mutation = {
         await user.save();
 
         return newScore;
-    }
+    },
 
     async updateHighSnakeScore(_, { newSnakeScore }, context) {
         const authId = context.user?._id;
         if (!authId) {
             throw new GraphQLError('Not authenticated', {
-                extensions: { code: 'UNAUTHENTICATED' },
+                extensions: { code: 'UNAUTH-od' },
             });
         }
 
