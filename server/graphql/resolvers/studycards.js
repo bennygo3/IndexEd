@@ -34,7 +34,7 @@ export const Query = {
         return genre;
     },
 
-    async getStudyCard(_, { id }) {
+    async getStudyCard(_, { _id }) {
         const card = await StudyCard.findById(id);
         if (!card) {
             throw new GraphQLError('Card not found.', {
@@ -67,6 +67,8 @@ export const Mutation = {
 
     // Add a StudyCard to a StudyCardGroup
     async createStudyCard(_, { front, back }, context) {
+
+        console.log('Authenticated user:', context.user);
 
         if (!context.user) {
             throw new GraphQLError('You must be logged in to create a new study card', {

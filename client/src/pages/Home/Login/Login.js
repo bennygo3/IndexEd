@@ -27,13 +27,28 @@ export default function Login(props) {
         event.preventDefault();
 
         try {
-            await Auth.login(formState.username, formState.password);
-            await checkAuth();
+            await Auth.register(
+                formState.username,
+                formState.email,
+                formState.password,
+                formState.confirmPassword
+            );
+
+            const loggedIn = await checkAuth();
+
+            if (!loggedIn) {
+                throw new Error(
+                    'Check Login'
+                );
+            }
+
             props.setTrigger(false);
             navigate('/');
+            console.log("Login, it's a success");
         } catch (err) {
             console.error('Login error:', err);
         }
+            
     };
 
     const handleClose = () => {

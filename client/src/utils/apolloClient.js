@@ -1,14 +1,25 @@
-import { ApolloClient, InMemoryCache, createHttpLink, from } from '@apollo/client';
+import { ApolloClient, InMemoryCache, createHttpLink, from, fromPromise, } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
-import { fromPromise } from '@apollo/client';
+
 import configFront from '../config.js';
+import Auth from './auth.js';
 
 const httpLink = createHttpLink({
   uri: configFront.REACT_APP_GRAPHQL_ENDPOINT,
   credentials: 'include',
 });
 
-console.log('httpLink', httpLink);
+const authLink = setContext(async (_, { headers }) => {
+  const token = await Auth.getToken();
+
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
 
 // Refresh-then-retry on 401
 let isRefreshing = false;
@@ -20,18 +31,23 @@ const resolvePending = () => {
   pendingResolvers = [];
 };
 
-const refresh = () =>
-  fetch(`${configFront.API_BASE_URL}/token`, {
-    method: 'POST',
-    credentials: 'include',
-  }).then((r) => {
-    if (!r.ok) throw new Error('refresh failed');
-  });
+const refresh = async () => {
+    const response = await fetch(`${configFront.API_BASE_URL}/token`, {
+      method: 'POST',
+      credentials: 'include',
+    });
+
+    if (!response.ok) {
+      throw new Error('Refresh failed');
+    }
+  };
 
 const errorLink = onError(({ networkError, operation, forward }) => {
-  const status = networkError && (networkError.statusCode || networkError.status);
+  const status = 
+    networkError?.statusCode ||
+    networkError?.status;
+
   if (status !== 401) {
-    // let non-401 errors flow normally
     return;
   }
 
@@ -50,11 +66,6 @@ const errorLink = onError(({ networkError, operation, forward }) => {
       .then(() => {
         resolvePending(); // allow queued ops to proceed
       })
-      .catch((e) => {
-        // bubble the error to all queued requests
-        pendingResolvers = [];
-        throw e;
-      })
       .finally(() => {
         isRefreshing = false;
       })
@@ -62,7 +73,7 @@ const errorLink = onError(({ networkError, operation, forward }) => {
 });
 
 const client = new ApolloClient({
-  link: from([errorLink, httpLink]),
+  link: from([errorLink, authLink, httpLink]),
   cache: new InMemoryCache(),
 });
 

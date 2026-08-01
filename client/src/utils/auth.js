@@ -14,46 +14,50 @@ class AuthService {
     }
 
     async loggedIn() {
-        const token = await this.getToken();
+        let token = await this.getToken();
 
-        if (!token) return false;
-
-        const expired = await this.isTokenExpired(token);
-
-        if (expired) {
+        if (!token) {
             const refreshed = await this.refreshAccessToken();
-            return refreshed;
+
+            if (!refreshed) {
+                return false;
+            }
+
+            token = await this.getToken();
+        }
+
+        if (!token) {
+            return false;
+        }
+
+        if (this.isTokenExpired(token)) {
+            const refreshed = await this.refreshAccessToken();
+
+            if (!refreshed) {
+                return false;
+            }
+
+            token = await this.getToken();
+
+            return Boolean(token && !this.isTokenExpired(token));
         }
 
         return true;
     }
 
-    async isTokenExpired(token) {
+    isTokenExpired(token) {
         if (!token) return true;
 
         try {
             const decoded = decode(token);
-            console.log("🧪 Token expiration time:", decoded.exp);
-            console.log("🧪 Current time:", Math.floor(Date.now() / 1000));
-
-            if (decoded.exp < Date.now() / 1000) {
-
-                const refreshed = await this.refreshAccessToken();
-                if (!refreshed) return true;
-
-                const newToken = await this.getToken();
-                if (!newToken) return true;
-
-                const newDecoded = decode(newToken);
-                return newDecoded.exp < Date.now() / 1000;
-            }
-            return false; // Token is still valid
+            return decoded.exp <= Date.now() / 1000;
         } catch (err) {
-            console.error('Error decoding token auth front', err);
+            console.error(`Error decoding token:`, err);
             return true;
         }
-
     }
+
+
 
     async getToken() {
         try {
@@ -93,20 +97,25 @@ class AuthService {
     }
 
     async register(username, email, password, confirmPassword) {
-        try {
-            const response = await fetch(`${configFront.API_BASE_URL}/register`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, email, password, confirmPassword }),
-                credentials: 'include' //added for troubleshooting 2/5/25
-            });
+        const response = await fetch(`${configFront.API_BASE_URL}/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                username,
+                email, 
+                password,
+                confirmPassword,
+            }),
+            credentials: 'include',
+        });
 
-            if (!response.ok) throw new Error('Failed to register');
-            
-            // window.location.assign('/');
-        } catch (error) {
-            console.error('Registration error:', error);
+        const data = await response.json().catch(() => null);
+
+        if (!response.ok) {
+            throw new Error(data?.message || 'Failed to register');
         }
+
+        return data;
     }
 
     async refreshAccessToken() {
@@ -149,3 +158,43 @@ class AuthService {
 
 const authService = new AuthService();
 export default authService;
+
+        // const token = await this.getToken();
+
+        // if (!token) return false;
+
+        // const expired = await this.isTokenExpired(token);
+
+        // if (expired) {
+        //     const refreshed = await this.refreshAccessToken();
+        //     return refreshed;
+        // }
+
+        // return true;
+
+            // async isTokenExpired(token) {
+    //     if (!token) return true;
+
+    //     try {
+    //         const decoded = decode(token);
+    //         console.log("🧪 Token expiration time:", decoded.exp);
+    //         console.log("🧪 Current time:", Math.floor(Date.now() / 1000));
+
+    //         if (decoded.exp < Date.now() / 1000) {
+
+    //             const refreshed = await this.refreshAccessToken();
+    //             if (!refreshed) return true;
+
+    //             const newToken = await this.getToken();
+    //             if (!newToken) return true;
+
+    //             const newDecoded = decode(newToken);
+    //             return newDecoded.exp < Date.now() / 1000;
+    //         }
+    //         return false; // Token is still valid
+    //     } catch (err) {
+    //         console.error('Error decoding token auth front', err);
+    //         return true;
+    //     }
+
+    // }
