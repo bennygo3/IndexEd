@@ -15,6 +15,7 @@ export const typeDefs = `#graphql
         _id: ID!
         front: String!
         back: String!
+        studyGenreId: ID!
     }
 
     type StudyGenre {
@@ -61,43 +62,38 @@ export const typeDefs = `#graphql
     }
     
     type Mutation {
-        createStudyGenre(title: String!, category: String!, description: String): StudyGenre!
+        createStudyGenre(
+            title: String! 
+            category: String! 
+            description: String
+        ): StudyGenre!
         deleteStudyGenre(genreId: ID!): Boolean!
-        updateStudyGenre(genreId: ID!, title: String, category: String, description: String): StudyGenre!
+        updateStudyGenre(
+            genreId: ID! 
+            title: String 
+            category: String 
+            description: String
+        ): StudyGenre!
         
-        createStudyCard(front: String!, back: String!): StudyCard!
+        createStudyCard(
+            front: String! 
+            back: String!
+            studyGenreId: ID
+        ): StudyCard!
         deleteStudyCard(cardId: ID!): Boolean!
-        updateStudyCard(cardId: ID!, front: String, back: String): StudyCard!
+        updateStudyCard(
+            cardId: ID! 
+            front: String 
+            back: String
+        ): StudyCard!
+
+        moveStudyCardsToGenre(
+            studyCardIds: [ID!]!
+            studyGenreId: ID!
+        ): StudyGenre!
 
         saveTeamGuessScore(league: String!, score: Int!, totalTeams: Int!, timeRemaining: Int!): TeamGuessScore!
         updateHighSnakeScore(newSnakeScore: Int!): UpdatedHighSnakeScore!
     }
 
 `;
-
-// mutation changes below due to changes in authentication changes
-// eg, switching from graphql authentication to REST
-
-// mutation: updateHighScoreSnake(username: ID!, newHighScoreSnake: Int!): SnakeScore!
-
-    // type Auth {
-    //     accessToken: String!
-    //     user: User!
-    // }
-
-        // type Mutation {
-    //     register(username: String!, email: String!, password: String!, confirmPassword: String!): Auth!
-    //     login(username: String!, password: String!): Auth!
-    //     refreshToken: Auth!
-    //     logout: Boolean!
-
-    //     updateHighSnakeScore(newSnakeScore: Int!): UpdatedHighSnakeScore!
-        
-    //     createStudyGenre(title: String!, category: String!, description: String): StudyGenre!
-    //     deleteStudyGenre(genreId: ID!): Boolean!
-    //     updateStudyGenre(genreId: ID!, title: String, category: String, description: String): StudyGenre!
-        
-    //     createStudyCard(front: String!, back: String!): StudyCard!
-    //     deleteStudyCard(cardId: ID!): Boolean!
-    //     updateStudyCard(cardId: ID!, front: String, back: String): StudyCard!
-    // }
