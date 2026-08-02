@@ -34,8 +34,20 @@ export const Query = {
         return genre;
     },
 
-    async getStudyCard(_, { _id }) {
-        const card = await StudyCard.findById(id);
+    async getStudyCard(_, { _id }, context) {
+        const userId = context.user?._id ?? context.user?.id;
+
+        if (!userId) {
+            throw new GraphQLError('You must be logged in', {
+                extensions: { code: 'UNAUTHENTICATED' },
+            });
+        }
+        
+        const card = await StudyCard.findById({
+            _id: id,
+            authorId: userId,
+        });
+
         if (!card) {
             throw new GraphQLError('Card not found.', {
                 extensions: { code: 'BAD_USER_INPUT' },
@@ -55,73 +67,134 @@ export const Mutation = {
             });
         }
 
-        const newGenre = new StudyGenre({
-            title,
+        const userId = context.user._id ?? context.user.id;
+        const cleanedTitle = title.trim();
+
+        if (!cleanedTitle) {
+            throw new GraphQLError('A genre title is required', {
+                extensions: { code: 'BAD_USER_INPUT' },
+            });
+        }
+
+        const newGenre = await StudyGenre.create({
+            title: cleanedTitle,
             category,
             description,
-            author: context.user._id,
+            author: userId,
         });
 
-        return await newGenre.save();
+        await Users.findByIdAndUpdate(userId, {
+            $addToSet: {
+                studyGenres: newGenre._id,
+            },
+        });
+
+        return newGenre;
     },
 
     // Add a StudyCard to a StudyCardGroup
-    async createStudyCard(_, { front, back }, context) {
-
-        console.log('Authenticated user:', context.user);
+    async createStudyCard(_, { front, back, studyGenreId }, context) {
 
         if (!context.user) {
             throw new GraphQLError('You must be logged in to create a new study card', {
-                extensions: { code: 'UNAUTHENTICATED' },
-            });
+                extensions: { code: 'UNAUTHENTICATED' } }
+            );
         }
 
         console.log("📌 Creating study card with:", { front, back });
 
-        let genre = await StudyGenre.findOne({ title: "General", author: context.user._id });
-    
+        const userId = context.user._id ?? context.user.id;
+        let genre;
+
+        if (studyGenreId) {
+            genre = await StudyGenre.findOne({
+                _id: studyGenreId,
+                author: userId,
+            });
 
             if (!genre) {
-                genre = new StudyGenre({
-                    title: "General",
-                    category: "Unsorted",
-                    description: "Default study genre",
-                    author: context.user._id,
+                throw new GraphQLError('Study genre not found', {
+                    extensions: { code: 'BAD_USER_INPUT' },
                 });
-
-                await genre.save();
             }
+        } else {
+            genre = await StudyGenre.findOne({
+                title: 'Misc.',
+                author: userId,
+            });
 
+            if (!genre) {
+                genre = await StudyGenre.create({
+                    title: 'Misc.',
+                    category: 'Unsorted',
+                    description: 'Study cards that have not been grouped yet',
+                    author: userId,
+                });
+            }
+        }
 
-        // Create a new StudyCard
-        const newCard = new StudyCard({ 
-            front, 
-            back, 
-            studyGenreId: genre._id, 
-            authorId: context.user._id,
+        const savedCard = await StudyCard.create({
+            front: front.trim(),
+            back: back.trim(),
+            studyGenreId: genre._id,
+            authorId: userId,
             authorUsername: context.user.username,
         });
-        // const newCard = new StudyCard({ front, back });
-        const savedCard = await newCard.save();
 
-        // Add the StudyCard to the group's studycards array
-        genre.studyCards.push(savedCard._id);
-        await genre.save();
+        await StudyGenre.findByIdAndUpdate(genre._id, {
+            $addToSet: { studyCards: savedCard._id },
+        });
 
-        // Update user with newly created study card
-        await Users.findByIdAndUpdate(
-            context.user._id,
-            {
-                $addToSet: {
-                    studyCards: savedCard._id,
-                    studyGenres: genre._id,
-                },
-            }
-            // { $push: { studyCards: savedCard._id } }
-        );
+        await Users.findByIdAndUpdate(userId, {
+            $addToSet: {
+                studyCards: savedCard._id,
+                StudyGenres: genre._id,
+            },
+        });
 
         return savedCard;
-    },
+}
 };
 
 export default { Query, Mutation };
+
+        // let genre = await StudyGenre.findOne({ title: "General", author: context.user._id });
+    
+
+        //     if (!genre) {
+        //         genre = new StudyGenre({
+        //             title: "General",
+        //             category: "Unsorted",
+        //             description: "Default study genre",
+        //             author: context.user._id,
+        //         });
+
+        //         await genre.save();
+        //     }
+
+
+        // // Create a new StudyCard
+        // const newCard = new StudyCard({ 
+        //     front, 
+        //     back, 
+        //     studyGenreId: genre._id, 
+        //     authorId: context.user._id,
+        //     authorUsername: context.user.username,
+        // });
+        // // const newCard = new StudyCard({ front, back });
+        // const savedCard = await newCard.save();
+
+        // // Add the StudyCard to the group's studycards array
+        // genre.studyCards.push(savedCard._id);
+        // await genre.save();
+
+        // // Update user with newly created study card
+        // await Users.findByIdAndUpdate(
+        //     context.user._id,
+        //     {
+        //         $addToSet: {
+        //             studyCards: savedCard._id,
+        //             studyGenres: genre._id,
+        //         },
+        //     }
+        // );

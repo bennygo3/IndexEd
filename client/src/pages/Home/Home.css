@@ -201,7 +201,7 @@
 
 @media (max-width: 1200px) {
     .landing-header {
-        font-size: 90px; 
+        font-size: 70px; 
     }
 
     #login, #signUp {
@@ -209,15 +209,15 @@
     }
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .landing-header {
-        font-size: 70px; 
+        font-size: 60px; 
     }
 
     #login, #signUp {
         font-size: 50px;
     }
-}
+} */
 
 @media (max-width: 480px) {
     .landing-header {
@@ -228,4 +228,6 @@
         font-size: 40px;
     }
 }
+
+
 
