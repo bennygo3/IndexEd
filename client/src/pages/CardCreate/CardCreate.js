@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useMutation} from '@apollo/client';
+import { GET_CURRENT_USER, GET_STUDY_GENRES } from '../../utils/queries.js';
 import { CREATE_STUDYCARD } from '../../utils/mutations.js';
 import './CardCreate.css';
 import NavbarCC from '../../components/Navbar/NavbarCC.js';
@@ -21,7 +22,12 @@ export default function CardCreate() {
         onError: (error) => {
             console.error("Error creating card:", error);
             alert("Error creating card: " + error.message);
-        }
+        },
+
+        refetchQueries: [
+            { query: GET_CURRENT_USER },
+            { query: GET_STUDY_GENRES },
+        ],
     });
 
     const handleSubmit = async (e) => {

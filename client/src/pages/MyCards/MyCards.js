@@ -109,21 +109,3 @@ export default function MyCards() {
         </main>
     );
 };
-
-// old header setup 6/18
-// <header id="my-cards-chalkboard">
-//     {/* <div> */}
-//     <h1 id="my-cards-header">My Study Cards</h1>
-//     <ul id="my-cards-header-list">
-//         <li><Link to="/" id="mcp-home"> -Home</Link></li>
-//         <li><Link to="/card-create" id="mcp-card-create"> -Create a new card</Link></li>
-//         <li><Link to="/trivia" id="mcp-trivia"> -Trivia cards</Link></li>
-//         <li><Link to="/games" id="mcp-games"> -Games</Link></li>
-//     </ul>
-//     <div id="my-cards-chalk"></div>
-//     {/* </div> */}
-//     {/* <div id="my-cards-corkboard">
-//         <NavbarMSC />
-//     </div> */}
-//     {/* <p id="my-cards-header-p">1. the devotion of time and attention to acquiring knowledge on an academic subject, especially by means of notecards*</p> */}
-// </header>

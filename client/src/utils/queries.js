@@ -18,6 +18,7 @@ export const GET_CURRENT_USER = gql`
                     _id
                     front
                     back
+                    studyGenreId
                 }
             }
             snakeScores {
@@ -41,19 +42,22 @@ export const GET_STUDY_GENRES = gql`
                 _id
                 front
                 back
+                studyGenreId
             }
         }
     }
 `;
 
 export const GET_STUDY_CARD = gql`
-query GetStudyCard($id: ID!) {
-    getStudyCard(id: $id){
-        _id
-        front
-        back
+    query GetStudyCard($id: ID!) {
+        getStudyCard(id: $id){
+            _id
+            front
+            back
+            studyGenreId
+        }
     }
-}`;
+`;
 
 export const GET_HIGH_SNAKE_SCORE = gql`
     query GetHighScoreSnake {
