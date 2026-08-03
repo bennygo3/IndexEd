@@ -4,7 +4,8 @@ import { GET_CURRENT_USER } from '../../utils/queries';
 import { Link } from 'react-router-dom'
 import StickyNote from '../Home/StickyNote/StickyNote';
 import Card from '../../components/Card/Card';
-import Wood from '../../components/MadeWCss/Wood';
+import Clock from '../../components/Clock/Clock';
+// import Wood from '../../components/MadeWCss/Wood';
 import ThoughtBubble from '../../components/MadeWCss/ThoughtBubble';
 import './MyCards.css';
 
@@ -75,11 +76,12 @@ export default function MyCards() {
 
                 <div id="my-cards-chalk"></div>
             </header>
+            <Clock></Clock>
 
             {data.getCurrentUser?.studyGenres.length > 0 ? (
                 data.getCurrentUser.studyGenres.map(genre => (
                     <section key={genre._id} id="my-cards-wood">
-                        <Wood>
+                        {/* <Wood> */}
                             <h2>{genre.title}</h2>
                             <div className="my-cards-carousel">
                                 {genre.studyCards.map(card => (
@@ -96,7 +98,7 @@ export default function MyCards() {
                                     </div>
                                 ))}
                             </div>
-                        </Wood>
+                        {/* </Wood> */}
                     </section>
                 ))
             ) : (
