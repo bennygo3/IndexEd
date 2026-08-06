@@ -28,6 +28,17 @@ a.return-home-link {
     gap: 4rem;
 }
 
+.my-cards-page header {
+    display: flex;
+    flex-direction: row;
+}
+
+/* .mcp-clock-container {
+    height: 30px;
+    width: 30px;
+
+} */
+
 #my-cards-header {
     color: white;
     font-size: 45px;

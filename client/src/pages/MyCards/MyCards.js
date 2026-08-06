@@ -22,17 +22,17 @@ export default function MyCards() {
     const { loading, error, data } = useQuery(GET_CURRENT_USER);
 
     if (loading) return <p>Loading...</p>;
-    if (error) return(
+    if (error) return (
         <StickyNote color="pink" width="100%" height="100vh">
-        <div className="error-message">
-            <h1>My Study Cards</h1>
-            <h2>Your session has expired.</h2>
-            <p>Please sign in again to access this page</p>
-            <span>&#x2B07;</span>
-            <Link to="/" className="return-home-link">
-                Return to Home page
-            </Link>
-        </div>
+            <div className="error-message">
+                <h1>My Study Cards</h1>
+                <h2>Your session has expired.</h2>
+                <p>Please sign in again to access this page</p>
+                <span>&#x2B07;</span>
+                <Link to="/" className="return-home-link">
+                    Return to Home page
+                </Link>
+            </div>
         </StickyNote>
     );
 
@@ -43,7 +43,8 @@ export default function MyCards() {
 
     return (
         <main className="my-cards-page">
-            <header id="my-cards-chalkboard">
+            <header>
+                <div id="my-cards-chalkboard">
                 <div id="my-cards-top-row">
                     <h1 id="my-cards-header">
                         My Study Cards
@@ -75,29 +76,32 @@ export default function MyCards() {
                 </div>
 
                 <div id="my-cards-chalk"></div>
+                </div>
+                <div className="mcp-clock-container">
+                    <Clock></Clock>
+                </div>
             </header>
-            <Clock></Clock>
 
             {data.getCurrentUser?.studyGenres.length > 0 ? (
                 data.getCurrentUser.studyGenres.map(genre => (
                     <section key={genre._id} id="my-cards-wood">
                         {/* <Wood> */}
-                            <h2>{genre.title}</h2>
-                            <div className="my-cards-carousel">
-                                {genre.studyCards.map(card => (
-                                    <div
-                                        key={card._id}
-                                        className="my-cards-container"
-                                        onClick={() => handleFlip(card._id)}
-                                    >
-                                        <Card
-                                            front={card.front}
-                                            back={card.back}
-                                            isFlipped={flippedCard[card._id] || false} // default to false if not flipped yet
-                                        />
-                                    </div>
-                                ))}
-                            </div>
+                        <h2>{genre.title}</h2>
+                        <div className="my-cards-carousel">
+                            {genre.studyCards.map(card => (
+                                <div
+                                    key={card._id}
+                                    className="my-cards-container"
+                                    onClick={() => handleFlip(card._id)}
+                                >
+                                    <Card
+                                        front={card.front}
+                                        back={card.back}
+                                        isFlipped={flippedCard[card._id] || false} // default to false if not flipped yet
+                                    />
+                                </div>
+                            ))}
+                        </div>
                         {/* </Wood> */}
                     </section>
                 ))

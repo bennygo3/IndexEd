@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import "./clock.css";
 
-export default function Clock() {
+export default function Clock({
+    size,
+    className = "",
+    style,
+}) {
     const [time, setTime] = useState(() => new Date());
 
     useEffect(() => {
@@ -22,9 +26,19 @@ export default function Clock() {
     const minuteAngle = minutes * 6;
     const hourAngle = hours * 30;
 
+    const reSize = typeof size === "number" ? `${size}px` : size;
+
+    const clockStyle = {
+        ...(reSize
+            ? { "--clock-size": reSize }
+            : {}),
+        ...style,
+    };
+
     return (
         <div
-            className="clock"
+            className={`clock ${className}`}
+            style={clockStyle}
             role="img"
             aria-label={`Current time: ${time.toLocaleTimeString()}`}
         >
