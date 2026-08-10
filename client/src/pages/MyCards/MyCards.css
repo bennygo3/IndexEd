@@ -1,11 +1,16 @@
+/* session has expired message; could relocate duties to parent container in sticky note */
 .error-message {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: xx-large;
     position: relative;
-    top: 100px;
+    top: 190px;
     gap: 50px;
+}
+
+.error-message h1 {
+    font-size: 120px;
 }
 
 a.return-home-link {
@@ -31,13 +36,21 @@ a.return-home-link {
 .my-cards-page header {
     display: flex;
     flex-direction: row;
+
+    justify-content: center;
+    align-items: flex-start;
+    gap: 54px;
+    padding: 30px 24px 0;
 }
 
-/* .mcp-clock-container {
-    height: 30px;
-    width: 30px;
+.mcp-clock {
+    --clock-size: 180px;
 
-} */
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: var(--clock-size);
+    align-self: center;
+}
 
 #my-cards-header {
     color: white;
@@ -51,15 +64,21 @@ a.return-home-link {
     background-color: rgba(0, 0, 0, 0.866);
     border: 15px solid rgb(193, 154, 107);
     box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.7);
+    box-sizing: border-box;
+
     height: 255px;
     width: 65%;
+
     font-family: "Cedarville Cursive", cursive;
     font-weight: 400;
     font-style: normal;
+
     position: relative;
-    top: 40px;
-    margin-left: auto;
-    margin-right: auto;
+    /* top: 40px; */
+    top: auto;
+    margin: 0;
+    /* margin-left: auto;
+    margin-right: auto; */
 }
 
 #my-cards-top-row {

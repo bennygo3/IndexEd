@@ -77,9 +77,10 @@ export default function MyCards() {
 
                 <div id="my-cards-chalk"></div>
                 </div>
-                <div className="mcp-clock-container">
-                    <Clock></Clock>
-                </div>
+                {/* <Clock /> */}
+                
+                    <Clock className="mcp-clock" />
+                
             </header>
 
             {data.getCurrentUser?.studyGenres.length > 0 ? (

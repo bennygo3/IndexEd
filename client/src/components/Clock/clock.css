@@ -1,6 +1,8 @@
 .clock {
     position: relative;
-    width: min(80vw, 320px);
+    width: min(100%, var(--clock-size, 320px));
+    max-width: 100%;
+    box-sizing: border-box;
     aspect-ratio: 1;
     border: 10px solid #1f2937;
     border-radius: 50%;
