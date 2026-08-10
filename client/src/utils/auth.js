@@ -77,23 +77,32 @@ class AuthService {
         }
     }
 
-    // Using REST API for login
     async login(username, password) {
-        try {
-            const response = await fetch(`${configFront.API_BASE_URL}/login`, {
+        const response = await fetch(
+            `${configFront.API_BASE_URL}/login`,
+            {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, password }),
-                credentials: 'include' // required to send cookies for auth
-            });
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username,
+                    password,
+                }),
+                credentials: 'include',
+            }
+        );
 
-            if (!response.ok) throw new Error('Failed to log in auth front');
+        const data = await response.json().catch(() => null);
 
-            // window.location.assign('/');
-
-        } catch (error) {
-            console.error('Login error:', error);
+        if (!response.ok) {
+            throw new Error(
+                data?.message ||
+                `Login failed with status ${response.status}`
+            );
         }
+
+        return data;
     }
 
     async register(username, email, password, confirmPassword) {
@@ -158,3 +167,19 @@ class AuthService {
 
 const authService = new AuthService();
 export default authService;
+
+ // try {
+        //     const response = await fetch(`${configFront.API_BASE_URL}/login`, {
+        //         method: 'POST',
+        //         headers: { 'Content-Type': 'application/json' },
+        //         body: JSON.stringify({ username, password }),
+        //         credentials: 'include' // required to send cookies for auth
+        //     });
+
+        //     if (!response.ok) throw new Error('Failed to log in auth front');
+
+        //     // window.location.assign('/');
+
+        // } catch (error) {
+        //     console.error('Login error:', error);
+        // }
