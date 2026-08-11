@@ -65,24 +65,32 @@ export default function Login(props) {
                     <label id="formLogin">
                         Username:
                         <input
-                            value={formState.username}
-                            name="username"
-                            onChange={handleChange}
                             type="text"
+                            name="username"
+                            value={formState.username}
+                            onChange={handleChange}
+                            autoComplete="username"
+                            required
                         />
-                        <br></br>
+
+                        <br />
+
                         Password:
                         <input
-                            value={formState.password}
-                            name="password"
-                            onChange={handleChange}
                             type="password"
+                            name="password"
+                            value={formState.password}
+                            onChange={handleChange}
+                            autoComplete="current-password"
+                            required
                         />
-                        <br></br>
+                        
+                        <br />
 
                         <button
                             type='submit'
-                            className='login-btn'>
+                            className='login-btn'
+                        >
                             Enter
                         </button>
 

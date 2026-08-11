@@ -62,43 +62,59 @@ export default function SignUp(props) {
                         <label id="formSignUp">
                             Email:
                             <input
-                                value={formState.email}
+                                type="email"
                                 name="email"
+                                value={formState.email}                            
                                 onChange={handleChange}
-                                type="text"
+                                autoComplete="email"
+                                required
                             />
-                            <br></br>
+
+                            <br />
+
                             Username:
                             <input
-                                value={formState.username}
-                                name="username"
-                                onChange={handleChange}
                                 type="text"
+                                name="username"
+                                value={formState.username}                               
+                                onChange={handleChange}
+                                autoComplete="username"
+                                required
                             />
-                            <br></br>
+
+                            <br />
+
                             Password:
                             <input
-                                value={formState.password}
-                                name="password"
-                                onChange={handleChange}
                                 type="password"
+                                name="password"
+                                value={formState.password}
+                                onChange={handleChange}
+                                autoComplete="new-password"
+                                minLength={8}
+                                required                                
                             />
-                            <br></br>
+
+                            <br />
+
                             Confirm Password:
                             <input
-                                value={formState.confirmPassword}
-                                name="confirmPassword"
-                                onChange={handleChange}
                                 type="password"
+                                name="confirmPassword"
+                                value={formState.confirmPassword}
+                                onChange={handleChange}
+                                autoComplete="new-password"
+                                minLength={8}
+                                required
                             />
 
                             <button
                                 type='submit'
-                                className='submit-btn'>
+                                className='submit-btn'
+                            >
                                 Enter
                             </button>
                         </label>
-
                     </form>
 
                 </div>

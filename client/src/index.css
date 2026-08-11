@@ -54,7 +54,7 @@ input {
   border-image: initial;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=email], input[type=password] {
   background-color: white;
   border: none;
   width: 100%;
