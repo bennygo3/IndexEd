@@ -28,7 +28,6 @@ export default function SignUp(props) {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(`Form State: ${JSON.stringify(formState)}`)
 
         try {
             await Auth.register(
