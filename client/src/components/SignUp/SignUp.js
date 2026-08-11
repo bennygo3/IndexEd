@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../context/AuthContext';
-import Auth from '../../../utils/auth.js';
+import { useAuth } from '../../context/AuthContext.js';
+import Auth from '../../utils/auth.js';
 import StickyNote from '../StickyNote/StickyNote.js';
 
 

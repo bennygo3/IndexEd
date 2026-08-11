@@ -4,8 +4,8 @@ import { useAuth } from '../../context/AuthContext';
 import UserIcon from '../../components/UserIcon/UserIcon';
 import Navbar from '../../components/Navbar/Navbar';
 import LineGenerator from '../../components/Lines/LineGenerator.js';
-import Login from './Login/Login';
-import SignUp from './SignUp/SignUp';
+import Login from '../../components/Login/Login.js';
+import SignUp from '../../components/SignUp/SignUp';
 import LogoutButton from '../../components/Logout/LogoutButton.js';
 
 const AuthButtons = memo(function AuthButtons({

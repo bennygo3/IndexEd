@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_CURRENT_USER } from '../../utils/queries';
 import { Link } from 'react-router-dom'
-import StickyNote from '../Home/StickyNote/StickyNote';
+import StickyNote from '../../components/StickyNote/StickyNote.js';
 import Card from '../../components/Card/Card';
 import Clock from '../../components/Clock/Clock';
 // import Wood from '../../components/MadeWCss/Wood';
