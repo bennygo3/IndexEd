@@ -1,6 +1,5 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
 import config from '../../config.js';
 import Users from '../models/Users.js';
 
@@ -15,38 +14,75 @@ const router = express.Router();
 
 // Register new user
 router.post('/register', async (req, res) => {
+    const username = req.body.username?.trim();
+    const email = req.body.email?.trim().toLowerCase();
+    const { password, confirmPassword } = req.body;
 
-    const { username, email, password, confirmPassword } = req.body;
+    if (!username || !email || !password || !confirmPassword) {
+        return res.status(400).json({
+            message: 'All registration fields are required',
+        });
+    }
 
     if (password !== confirmPassword) {
-        return res.status(400).json({ message: 'Passwords do not match' });
+        return res.status(400).json({
+            message: 'Passwords must match',
+        });
     }
-
-    const existingUser = await Users.findOne({ username });
-    if (existingUser) {
-        return res.status(400).json({ message: 'Username is already taken' });
-    }
-
-    const newUser = new Users({
-        username,
-        email,
-        password,
-    });
 
     try {
-        await newUser.save();
+        const existingUser = await Users.findOne({
+            $or:[{ username }, { email }],
+        });
+
+        if (existingUser) {
+            const duplicateField =
+                existingUser.username === username
+                    ? 'Username'
+                    : 'Email';
+                
+            return res.status(409).json({
+                message: `${duplicateField} is already in use`,
+            });
+        }
+
+        const newUser = await Users.create({
+            username,
+            email,
+            password,
+        });
+
+        const { accessToken, refreshToken } =
+            await issueTokens(newUser);
+
+        setAuthCookies(res, accessToken, refreshToken);
+
+        return res.status(201).json({
+            message: 'Registration successful',
+        });
     } catch (err) {
-        console.error('❌ MongoDB save error:', err);
-        return res.status(500).json({ message: 'Error saving user', error: err.message });
+        if (err?.code === 11000) {
+            const duplicateField =
+                Object.keys(err.keyPattern ?? {})[0] ?? 'Field';
+
+            return res.status(409).json({
+                message: `${duplicateField} is already in use`,
+            });
+        }
+
+        if (err?.name === 'ValidationError') {
+            return res.status(400).json({
+                message: err.message,
+            });
+        }
+
+        console.error('❌ Registration error:', err);
+
+        return res.status(500).json({
+            message: 'Unable to register user',
+        });
     }
-
-    const { accessToken, refreshToken } = await issueTokens(newUser);
-
-    // ✅ Set cookies for auth 
-    setAuthCookies(res, accessToken, refreshToken);
-
-    res.json({ message: "Registration successful" });
-});
+})
 
 // Login Route
 router.post('/login', async (req, res) => {
@@ -158,3 +194,36 @@ router.delete('/logout', async (req, res) => {
 });
 
 export default router;
+
+//router.post('/register', async (req, res) => {
+
+//     const { username, email, password, confirmPassword } = req.body;
+
+//     if (password !== confirmPassword) {
+//         return res.status(400).json({ message: 'Passwords do not match' });
+//     }
+
+//     const existingUser = await Users.findOne({ username });
+//     if (existingUser) {
+//         return res.status(400).json({ message: 'Username is already taken' });
+//     }
+
+//     const newUser = new Users({
+//         username,
+//         email,
+//         password,
+//     });
+
+//     try {
+//         await newUser.save();
+//     } catch (err) {
+//         console.error('❌ MongoDB save error:', err);
+//         return res.status(500).json({ message: 'Error saving user', error: err.message });
+//     }
+
+//     const { accessToken, refreshToken } = await issueTokens(newUser);
+
+//     // ✅ Set cookies for auth 
+//     setAuthCookies(res, accessToken, refreshToken);
+
+//     res.json({ message: "Registration successful" });
