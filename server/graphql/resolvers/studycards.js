@@ -34,7 +34,7 @@ export const Query = {
         return genre;
     },
 
-    async getStudyCard(_, { _id }, context) {
+    async getStudyCard(_, { id }, context) {
         const userId = context.user?._id ?? context.user?.id;
 
         if (!userId) {
@@ -43,7 +43,7 @@ export const Query = {
             });
         }
         
-        const card = await StudyCard.findById({
+        const card = await StudyCard.findOne({
             _id: id,
             authorId: userId,
         });
@@ -148,7 +148,7 @@ export const Mutation = {
         await Users.findByIdAndUpdate(userId, {
             $addToSet: {
                 studyCards: savedCard._id,
-                StudyGenres: genre._id,
+                studyGenres: genre._id,
             },
         });
 
@@ -157,44 +157,3 @@ export const Mutation = {
 };
 
 export default { Query, Mutation };
-
-        // let genre = await StudyGenre.findOne({ title: "General", author: context.user._id });
-    
-
-        //     if (!genre) {
-        //         genre = new StudyGenre({
-        //             title: "General",
-        //             category: "Unsorted",
-        //             description: "Default study genre",
-        //             author: context.user._id,
-        //         });
-
-        //         await genre.save();
-        //     }
-
-
-        // // Create a new StudyCard
-        // const newCard = new StudyCard({ 
-        //     front, 
-        //     back, 
-        //     studyGenreId: genre._id, 
-        //     authorId: context.user._id,
-        //     authorUsername: context.user.username,
-        // });
-        // // const newCard = new StudyCard({ front, back });
-        // const savedCard = await newCard.save();
-
-        // // Add the StudyCard to the group's studycards array
-        // genre.studyCards.push(savedCard._id);
-        // await genre.save();
-
-        // // Update user with newly created study card
-        // await Users.findByIdAndUpdate(
-        //     context.user._id,
-        //     {
-        //         $addToSet: {
-        //             studyCards: savedCard._id,
-        //             studyGenres: genre._id,
-        //         },
-        //     }
-        // );

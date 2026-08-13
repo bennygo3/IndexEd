@@ -191,31 +191,78 @@ class AuthService {
     }
 
     async refreshAccessToken() {
-        try {
-            console.log("🔄 Attempting to refresh access token at", new Date().toLocaleTimeString());
-            const response = await fetch(`${configFront.API_BASE_URL}/token`, {
-                method: 'POST',
-                credentials: 'include'
-            });
+        // If multiple parts of React request a refresh simultaneously,
+        // they all wait for this one shared request.
+        if (this.refreshPromise) {
+            return this.refreshPromise;
+        }
 
-            if (!response.ok) throw new Error('Failed to refresh token');
-            console.log("✅ Access token refreshed successfully");
-            return true;
-        } catch (error) {
-            console.error('Token refresh error:', error);
-            return null;
+        this.refreshPromise = this.requestTokenRefresh();
+
+        try {
+            return await this.refreshPromise;
+        } finally {
+            this.refreshPromise = null;
         }
     }
 
-    async logout(navigate) {
-        await fetch(`${configFront.API_BASE_URL}/logout`, {
-            method: 'DELETE',
-            credentials: 'include'
-        });
+    async requestTokenRefresh() {
+        try {
+            const response = await fetch(
+                `${configFront.API_BASE_URL}/token`,
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                }
+            );
+
+            if (!response.ok) {
+                this.clearAccessToken();
+                return false;
+            }
+
+            // The server has placed a new access-token cookie in the browser.
+            // The next getToken() call will retrieve and cache it. 
+            this.clearAccessToken();
+
+            return true;
+        } catch (error) {
+            this.clearAccessToken();
+            console.error('Token refresh req failed:', error);
+            return false;
+        }
+    }
+
+    async logout() {
+        try {
+            const response = await fetch(
+                `${configFront.API_BASE_URL}/logout`,
+                {
+                    method: 'DELETE',
+                    credentials: 'include',
+                }
+            );
+
+            const data = await response.json().catch(() => null);
+
+            if (!response.ok) {
+                throw new Error(
+                    data?.message ||
+                    `Logout failed with status ${response.status}`
+                );
+            }
+
+            return data;
+        } finally {
+            // Remove the client-side copy even if the req encounters
+            // a network problem.
+            this.clearAccessToken();
+        }
     }
 
     async getUserIdFromToken() {
         const token = await this.getToken();
+        
         if (!token) return null;
 
         try {
