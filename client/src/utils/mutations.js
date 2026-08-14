@@ -9,8 +9,16 @@ export const UPDATE_IS_NEW_USER = gql`
     }
 `;
 export const CREATE_STUDYCARD = gql`
-    mutation createStudyCard($front: String!, $back: String!, $studyGenreId: ID) {
-        createStudyCard(front: $front, back: $back, studyGenreId: $studyGenreId) {
+    mutation createStudyCard(
+        $front: String!, 
+        $back: String!, 
+        $studyGenreId: ID
+    ) {
+        createStudyCard(
+            front: $front, 
+            back: $back, 
+            studyGenreId: $studyGenreId
+        ) {
             _id
             front
             back  
@@ -20,8 +28,16 @@ export const CREATE_STUDYCARD = gql`
 `;
 
 export const CREATE_STUDY_GENRE = gql`
-    mutation CreateStudyGenre($title: String!, $category: String!, $description: String) {
-        createStudyGenre(title: $title, category: $category, description: $description) {
+    mutation CreateStudyGenre(
+        $title: String!, 
+        $category: String!, 
+        $description: String
+    ) {
+        createStudyGenre(
+            title: $title, 
+            category: $category, 
+            description: $description
+        ) {
             _id
             title
             category
@@ -32,9 +48,19 @@ export const CREATE_STUDY_GENRE = gql`
     }
 `;
 
-export const UPDATE_STUDYCARD = gql `
-    mutation updateStudyCard($cardId: ID!, $front: String, $back: String, $studyGenreId: ID) {
-        updateStudyCard(cardId: $cardId, front: $front, back: $back, studyGenreId: $studyGenreId) {
+export const UPDATE_STUDYCARD = gql`
+    mutation updateStudyCard(
+        $cardId: ID!, 
+        $front: String, 
+        $back: String, 
+        $studyGenreId: ID
+    ) {
+        updateStudyCard(
+            cardId: $cardId, 
+            front: $front, 
+            back: $back, 
+            studyGenreId: $studyGenreId
+        ) {
             _id
             front
             back
@@ -43,10 +69,10 @@ export const UPDATE_STUDYCARD = gql `
     }
 `;
 
-export const MOVE_STUDY_CARDS_TO_GENRE = gql `
+export const MOVE_STUDY_CARDS_TO_GENRE = gql`
     mutation MoveStudyCardsToGenre(
         $studyCardIds: [ID!]!
-        $studyGenreId: ID!
+        $studyGenreId: ID
     ) {
         moveStudyCardsToGenre(
             studyCardIds: $studyCardIds

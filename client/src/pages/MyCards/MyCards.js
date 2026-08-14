@@ -85,7 +85,7 @@ export default function MyCards() {
 
             {data.getCurrentUser?.studyGenres.length > 0 ? (
                 data.getCurrentUser.studyGenres.map(genre => (
-                    <section key={genre._id} id="my-cards-wood">
+                    <section key={genre._id} className="my-cards-wood">
                         {/* <Wood> */}
                         <h2>{genre.title}</h2>
                         <div className="my-cards-carousel">
