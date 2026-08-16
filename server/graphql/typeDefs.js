@@ -74,7 +74,7 @@ export const typeDefs = `#graphql
             category: String 
             description: String
         ): StudyGenre!
-        
+
         createStudyCard(
             front: String! 
             back: String!
@@ -85,15 +85,14 @@ export const typeDefs = `#graphql
             cardId: ID! 
             front: String 
             back: String
+            studyGenreId: ID
         ): StudyCard!
 
         moveStudyCardsToGenre(
             studyCardIds: [ID!]!
             studyGenreId: ID!
         ): StudyGenre!
-
         saveTeamGuessScore(league: String!, score: Int!, totalTeams: Int!, timeRemaining: Int!): TeamGuessScore!
         updateHighSnakeScore(newSnakeScore: Int!): UpdatedHighSnakeScore!
     }
-
 `;
