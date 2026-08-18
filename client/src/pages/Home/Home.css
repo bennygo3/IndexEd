@@ -1,6 +1,17 @@
 .home-body {
-  background-color: rgb(164, 255, 125);
+  background-color: rgba(233, 255, 105, 0.82);
   height: 100vh; 
+}
+
+.home-body:before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    height: 145px;
+    background:linear-gradient(to bottom, rgb(239 227 92 / 7%) 10%, rgba(101, 96, 30, 0.069) 100%);
+    z-index: 1;
 }
 
 .home-background {

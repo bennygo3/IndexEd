@@ -251,7 +251,7 @@ export default function CardCreate() {
     };
 
     return (
-        <main>
+        <main className="card-create-page">
             <header className="cardCreate-header">
                 <h1>
                     Create A <br />
@@ -266,241 +266,270 @@ export default function CardCreate() {
             </div>
 
             <div className="form-cc">
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="front" className="label-class">Front of the Studycard:</label>
-                    <textarea
-                        id="front"
-                        name="front"
-                        className="input-class"
-                        value={front}
-                        onChange={(event) => {
-                            setFront(event.target.value);
-                        }}
-                        required
-                    />
+                <div className="card-create-grid">
+                    <form className="card-form" onSubmit={handleSubmit}>
+                        <div className="field-group">
+                            <label htmlFor="front" className="label-class">Front of the Studycard:</label>
+                            <textarea
+                                id="front"
+                                name="front"
+                                className="input-class"
+                                value={front}
+                                onChange={(event) => {
+                                    setFront(event.target.value);
+                                }}
+                                required
+                            />
+                        </div>
+                        <div className="field-group">
+                            <label htmlFor="back" className="label-class">Back of the Studycard:</label>
+                            <textarea
+                                id="back"
+                                name="back"
+                                className="input-class"
+                                value={back}
+                                onChange={(event) => {
+                                    setBack(event.target.value);
+                                }}
+                                required
+                            />
+                        </div>
 
-                    <label htmlFor="back" className="label-class">Back of the Studycard:</label>
-                    <textarea
-                        id="back"
-                        name="back"
-                        className="input-class"
-                        value={back}
-                        onChange={(event) => {
-                            setBack(event.target.value);
-                        }}
-                        required
-                    />
-
-                    <label
-                        htmlFor="study-card-genre"
-                        className="label-class"
-                    >
-                        Category and Genre:
-                    </label>
-
-                    <select
-                        id="study-card-genre"
-                        className="input-class genre-select"
-                        value={selectedGenreId}
-                        onChange={(event) => {
-                            setSelectedGenreId(
-                                event.target.value
-                            );
-
-                            setCardMessage('');
-                        }}
-                        disabled={genresLoading}
-                    >
-                        <option value="">
-                            Misc. -automatic
-                        </option>
-
-                        {Object.entries(genresByCategory)
-                            .sort(([categoryA], [categoryB]) => {
-                                return categoryA.localeCompare(
-                                    categoryB
-                                );
-                            })
-                            .map(([category, categoryGenres]) => (
-                                <optgroup
-                                    key={category}
-                                    label={category}
-                                >
-                                    {[...categoryGenres]
-                                        .sort((genreA, genreB) => {
-                                            return genreA.title.localeCompare(
-                                                genreB.title
-                                            );
-                                        })
-                                        .map((genre) => (
-                                            <option
-                                                key={genre._id}
-                                                value={genre._id}
-                                            >
-                                                {genre.title}
-                                            </option>
-                                        ))
-                                    }
-                                </optgroup>
-                            ))
-                        }
-                    </select>
-
-                    {genresLoading && (
-                        <p>Loading...</p>
-                    )}
-
-                    {genresError && (
-                        <p role="alert">
-                            Unable to load genres:{' '}
-                            {genresError.message}
-                        </p>
-                    )}
-
-                    {!showGenreForm && (
                         <button
-                            type="button"
-                            className="create-genre-button"
-                            onClick={() => {
-                                setShowGenreForm(true);
-                                setGenreMessage('');
-                            }}
+                            className="create-button"
+                            type="submit"
+                            disabled={
+                                creatingStudyCard ||
+                                showGenreForm
+                            }
                         >
-                            + Create a new genre
+                            {creatingStudyCard
+                                ? 'Creating...'
+                                : 'Create!'
+                            }
                         </button>
-                    )}
+                    </form>
 
-                    <button
-                        className="create-button"
-                        type="submit"
-                        disabled={
-                            creatingStudyCard ||
-                            showGenreForm
-                        }
-                    >
-                        {creatingStudyCard
-                            ? 'Creating...'
-                            : 'Create!'
-                        }
-                    </button>
-                </form>
+                    <aside className="genre-panel" aria-labelledby="genre-panel-title">
+                        <h2 id="genre-panel-title">
+                            Category &amp; Genre
+                        </h2>
 
-                {showGenreForm && (
-                    <form 
-                        className="new-genre-form"
-                        onSubmit={handleCreateGenre}
-                    >
-                        <h2>Create a new genre</h2>
-
-                        <p>
-                            Category is the broad subject, such as coding. 
-                            Genre is the specific subject, such as React.
+                        <p className="genre-panel-desc">
+                            Choose a previous genre or let the card go into Misc.
                         </p>
 
-                        <label
-                            htmlFor="new-genre-category"
-                            className="label-class"
-                        >
-                            Category:
-                        </label>
+                        <div className="field-group">
+                            <label
+                                htmlFor="study-card-genre"
+                                className="label-class">
+                                Existing Genre:
+                            </label>
 
-                        <input 
-                            id="new-genre-category"
-                            name="category"
-                            type="text"
-                            className="input-class"
-                            value={newGenre.category}
-                            onChange={handleNewGenreChange}
-                            placeholder="For example: Coding"
-                            required
-                        />
+                            <select
+                                id="study-card-genre"
+                                className="input-class genre-select"
+                                value={selectedGenreId}
+                                onChange={(event) => {
+                                    setSelectedGenreId(
+                                        event.target.value
+                                    );
 
-                        <label 
-                            htmlFor="new-genre-title"
-                            className="label-class"
-                        >
-                            Genre Title:
-                        </label>
-
-                        <input 
-                            id="new-genre-title"
-                            name="title"
-                            type="text"
-                            className="input-class"
-                            value={newGenre.title}
-                            onChange={handleNewGenreChange}
-                            placeholder="For example: React"
-                            required
-                        />
-
-                        <label
-                            htmlFor="new-genre-description"
-                            className="label-class"
-                        >
-                            Description - optional:
-                        </label>
-
-                        <textarea 
-                            id="new-genre-description"
-                            name="description"
-                            className="input-class"
-                            value={newGenre.description}
-                            onChange={handleNewGenreChange}
-                            placeholder="Notes about what belongs in this genre"
-                        />
-
-                        <div className="genre-form-actions">
-                            <button
-                                type="submit"
-                                className="create-button"
-                                disabled={creatingGenre}
+                                    setCardMessage('');
+                                }}
+                                disabled={genresLoading}
                             >
-                                {creatingGenre 
-                                    ? 'Saving...'
-                                    : 'Save'
-                                }
-                            </button>
+                                <option value="">
+                                    Misc. -automatic
+                                </option>
 
+                                {Object.entries(genresByCategory)
+                                    .sort(([categoryA], [categoryB]) => {
+                                        return categoryA.localeCompare(
+                                            categoryB
+                                        );
+                                    })
+                                    .map(([category, categoryGenres]) => (
+                                        <optgroup
+                                            key={category}
+                                            label={category}
+                                        >
+                                            {[...categoryGenres]
+                                                .sort((genreA, genreB) => {
+                                                    return genreA.title.localeCompare(
+                                                        genreB.title
+                                                    );
+                                                })
+                                                .map((genre) => (
+                                                    <option
+                                                        key={genre._id}
+                                                        value={genre._id}
+                                                    >
+                                                        {genre.title}
+                                                    </option>
+                                                ))
+                                            }
+                                        </optgroup>
+                                    ))
+                                }
+                            </select>
+                        </div>
+
+
+                        {genresLoading && (
+                            <p className="form-note">
+                                Loading...
+                            </p>
+                        )}
+
+                        {genresError && (
+                            <p role="alert" className="form-error">
+                                Unable to load genres:{' '}
+                                {genresError.message}
+                            </p>
+                        )}
+
+                        {!showGenreForm && (
                             <button
                                 type="button"
-                                className="cancel-genre-button"
-                                onClick={handleCancelGenre}
-                                disabled={creatingGenre}
+                                className="create-genre-button"
+                                onClick={() => {
+                                    setShowGenreForm(true);
+                                    setGenreMessage('');
+                                }}
                             >
-                                Cancel
+                                + Create a new genre
                             </button>
-                        </div>
-                    </form>
-                )}
+                        )}
 
-                {genreMessage && (
-                    <p role="status">
-                        {genreMessage}
-                    </p>
-                )}
+                        {showGenreForm && (
+                            <form
+                                className="new-genre-form"
+                                onSubmit={handleCreateGenre}
+                            >
+                                <h3>Create a New Genre</h3>
 
-                {cardMessage && (
-                    <p role="status">
-                        {cardMessage}
-                    </p>
-                )}
+                                <p>
+                                    Category is the broad subject, such as coding.
+                                    Genre is the specific subject, such as React.
+                                </p>
 
-                {creatingGenreError && (
-                    <p role="alert">
-                        Error creating genre:{' '}
-                        {creatingGenreError.message}
-                    </p>
-                )}
+                                <div className="field-group">
+                                    <label
+                                        htmlFor="new-genre-category"
+                                        className="label-class"
+                                    >
+                                        Category:
+                                    </label>
 
-                {creatingCardError && (
-                    <p role="alert">
-                        Error creating card: {' '}
-                        {creatingCardError.message}
-                    </p>
-                )}
+                                    <input
+                                        id="new-genre-category"
+                                        name="category"
+                                        type="text"
+                                        className="input-class"
+                                        value={newGenre.category}
+                                        onChange={handleNewGenreChange}
+                                        placeholder="For example: Coding"
+                                        required
+                                    />
+                                </div>
+
+                                <div className="field-group">
+                                    <label
+                                        htmlFor="new-genre-title"
+                                        className="label-class"
+                                    >
+                                        Genre Title:
+                                    </label>
+
+                                    <input
+                                        id="new-genre-title"
+                                        name="title"
+                                        type="text"
+                                        className="input-class"
+                                        value={newGenre.title}
+                                        onChange={handleNewGenreChange}
+                                        placeholder="For example: React"
+                                        required
+                                    />
+                                </div>
+
+                                <div className="field-group">
+                                    <label
+                                        htmlFor="new-genre-description"
+                                        className="label-class"
+                                    >
+                                        Description - optional:
+                                    </label>
+
+                                    <textarea
+                                        id="new-genre-description"
+                                        name="description"
+                                        className="input-class"
+                                        value={newGenre.description}
+                                        onChange={handleNewGenreChange}
+                                        placeholder="Notes about what belongs in this genre"
+                                    />
+
+                                </div>
+
+                                <div className="genre-form-actions">
+                                    <button
+                                        type="submit"
+                                        className="create-button"
+                                        disabled={creatingGenre}
+                                    >
+                                        {creatingGenre
+                                            ? 'Saving...'
+                                            : 'Save'
+                                        }
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        className="cancel-genre-button"
+                                        onClick={handleCancelGenre}
+                                        disabled={creatingGenre}
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </form>
+                        )}
+
+                        {genreMessage && (
+                            <p className="form-success" role="status">
+                                {genreMessage}
+                            </p>
+                        )}
+
+                        {creatingGenreError && (
+                            <p className="form-error" role="alert">
+                                Error creating genre:{' '}
+                                {creatingGenreError.message}
+                            </p>
+                        )}
+
+
+                    </aside>
+                </div>
+
+                <div className="form-feedback" aria-live="polite">
+
+                    {cardMessage && (
+                        <p className="form-success" role="status">
+                            {cardMessage}
+                        </p>
+                    )}
+
+                    {creatingCardError && (
+                        <p className="form-error" role="alert">
+                            Error creating card: {' '}
+                            {creatingCardError.message}
+                        </p>
+                    )}
+                </div>
             </div>
-
         </main>
     );
 }
-
