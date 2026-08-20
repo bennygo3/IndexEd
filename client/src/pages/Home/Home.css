@@ -1,5 +1,5 @@
 .home-body {
-  background-color: rgba(233, 255, 105, 0.82);
+  background-color: rgba(239, 255, 149, 0.82);
   height: 100vh; 
 }
 
@@ -9,7 +9,7 @@
     top: 0px;
     left: 0;
     right: 0;
-    height: 145px;
+    height: 85px;
     background:linear-gradient(to bottom, rgb(239 227 92 / 7%) 10%, rgba(101, 96, 30, 0.069) 100%);
     z-index: 1;
 }
@@ -38,18 +38,15 @@
     font-family: "Playwrite CA", cursive;
     font-style: normal;
     font-weight: 200;
+    font-family: 'Fredericka the Great', cursive;
+    font-weight: 100;
     font-size: 72px;
-    /* text-shadow: 1px 1px 1px yellow; */
+    text-shadow: 1px 1px 1px yellow;
     position: absolute;
     left: 100px;
     letter-spacing: 2px;
     color: rgb(0, 0, 0);
 }
-
-/* landing/home page header font alt:
-    font-family: 'Fredericka the Great', cursive;
-    font-weight: 100; 
-*/
 
 .home-creds {
     position: absolute;

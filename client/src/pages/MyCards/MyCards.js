@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_CURRENT_USER } from '../../utils/queries';
 import { Link } from 'react-router-dom'
-import StickyNote from '../../components/StickyNote/StickyNote.js';
+// import StickyNote from '../../components/StickyNote/StickyNote.js';
 import Card from '../../components/Card/Card';
 import Clock from '../../components/Clock/Clock';
 // import Wood from '../../components/MadeWCss/Wood';
@@ -23,17 +23,17 @@ export default function MyCards() {
 
     if (loading) return <p>Loading...</p>;
     if (error) return (
-        <StickyNote color="pink" width="100%" height="100vh">
+        <main className="session-expired-page">
             <div className="error-message">
                 <h1>My Study Cards</h1>
                 <h2>Your session has expired.</h2>
                 <p>Please sign in again to access this page</p>
-                <span>&#x2B07;</span>
+                <span aria-hidden="true">&#x2B07;</span>
                 <Link to="/" className="return-home-link">
                     Return to Home page
                 </Link>
             </div>
-        </StickyNote>
+        </main>
     );
 
     if (!data?.getCurrentUser?.studyGenres) {
